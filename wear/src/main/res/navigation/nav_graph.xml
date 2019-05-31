@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homePageFragment">
+    <action android:id="@+id/action_global_homePageFragment" app:destination="@id/homePageFragment" />
+    <fragment
+        android:id="@+id/homePageFragment"
+        android:name="com.a_track_it.fitdata.fragment.HomePageFragment"
+        android:label="fragment_home_relative"
+        tools:layout="@layout/fragment_home_relative" >
+        <action
+            android:id="@+id/action_homePageFragment_to_sessionEntryFragment"
+            app:destination="@id/sessionEntryFragment"
+            app:popUpTo="@id/homePageFragment"
+            app:popUpToInclusive="true"
+            app:launchSingleTop="true" />
+        <deepLink
+            android:id="@+id/deepLink3"
+            app:uri="www.a-track-it.com/home" />
+    </fragment>
+    <fragment
+        android:id="@+id/sessionEntryFragment"
+        android:name="com.a_track_it.fitdata.fragment.SessionEntryFragment"
+        android:label="fragment_session_entry"
+        tools:layout="@layout/fragment_session_entry" >
+        <argument
+            android:name="arg_activityid"
+            app:argType="integer"
+            android:defaultValue="8" />
+        <argument
+            android:name="arg_color_id"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="arg_resource_id"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_sessionEntryFragment_to_liveFragment"
+            app:destination="@id/liveFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/homePageFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/liveFragment"
+        android:name="com.a_track_it.fitdata.fragment.LiveFragment"
+        android:label="fragment_live_relative"
+        tools:layout="@layout/fragment_live_relative" >
+        <deepLink
+            android:id="@+id/deepLink2"
+            app:uri="www.a-track-it.com/live/{id}" />
+    </fragment>
+    <dialog
+        android:id="@+id/customListFragment"
+        android:name="com.a_track_it.fitdata.fragment.CustomListFragment"
+        android:label="fragment_customlist"
+        tools:layout="@layout/fragment_customlist" >
+        <argument
+            android:name="ARG_TYPE"
+            app:argType="integer" />
+        <argument
+            android:name="ARG_SET"
+            app:argType="integer" />
+        <argument
+            android:name="ARG_PRESET"
+            app:argType="integer" />
+    </dialog>
+
+    <fragment
+        android:id="@+id/customScoreDialogFragment"
+        android:name="com.a_track_it.fitdata.fragment.CustomScoreDialogFragment"
+        tools:layout="@layout/fragment_customscore"
+        android:label="CustomScoreDialogFragment" >
+        <argument
+            android:name="ARG_TYPE"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="ARG_PRESET"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="ARG_SET"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+    <fragment
+        android:id="@+id/sessionReportFragment"
+        android:name="com.a_track_it.fitdata.fragment.SessionReportFragment"
+        android:label="fragment_session_report"
+        tools:layout="@layout/fragment_session_report" >
+        <argument
+            android:name="ICON_ID"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="COLOR_ID"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="SET_ID"
+            app:argType="long"
+            android:defaultValue="0L" />
+        <argument
+            android:name="WORKOUT_ID"
+            app:argType="long"
+            android:defaultValue="0L" />
+        <argument
+            android:name="TIMED_ID"
+            app:argType="long"
+            android:defaultValue="0L" />
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="www.a-track-it.com/report/{id}" />
+    </fragment>
+    <fragment
+        android:id="@+id/locationFragment"
+        android:name="com.a_track_it.fitdata.fragment.LocationFragment"
+        android:label="fragment_location"
+        tools:layout="@layout/fragment_location" />
+
+</navigation>

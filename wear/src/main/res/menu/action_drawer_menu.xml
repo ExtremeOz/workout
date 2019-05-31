@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+    <item
+        android:id="@+id/action_new_workout"
+        android:icon="@drawable/ic_gym_white"
+        android:title="@string/action_new_workout"/>
+    <item
+        android:id="@+id/action_new_archery"
+        android:icon="@drawable/ic_archer_white"
+        android:title="@string/action_new_archery"/>
+    <item
+        android:id="@+id/action_new_cardio"
+        android:visible="true"
+        android:icon="@drawable/ic_trail_running_shoe_white"
+        android:title="@string/action_new_cardio"/>
+    <item
+        android:id="@+id/action_new_sport"
+        android:visible="true"
+        android:icon="@drawable/ic_basketball_player_with_the_ball_white"
+        android:title="@string/action_new_sport"/>
+    <item
+        android:id="@+id/action_new_other"
+        android:visible="true"
+        android:icon="@drawable/ic_more_white"
+        android:title="@string/action_new_other">
+    </item>
+    </group>
+</menu>

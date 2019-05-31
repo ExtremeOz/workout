@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.wear.widget.BoxInsetLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/active_main_boxinsetlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:boxedEdges="all"
+    tools:context="com.a_track_it.fitdata.activity.MainActivity"
+    tools:deviceIds="wear">
+<androidx.wear.widget.SwipeDismissFrameLayout
+    android:id="@+id/swipe_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.wear.widget.drawer.WearableDrawerLayout
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <FrameLayout
+        android:id="@+id/fragment_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/semiBlack"
+        android:orientation="vertical">
+    </FrameLayout>
+    <androidx.wear.widget.drawer.WearableNavigationDrawerView
+        android:id="@+id/top_navigation_drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top"
+        app:enableAutoPeek="true"
+        android:background="@color/colorAccent"
+        app:navigationStyle="singlePage" />
+    <androidx.wear.widget.drawer.WearableActionDrawerView
+        android:id="@+id/bottom_action_drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:background="@color/colorAccent"
+        app:enableAutoPeek="true"
+        app:peekView="@id/peek_view"
+        app:actionMenu="@menu/action_drawer_menu" >
+    <LinearLayout
+        android:id="@+id/peek_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:orientation="horizontal">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:src="@drawable/ic_more_vert_white"
+            android:id="@+id/peek_icon" />
+    </LinearLayout>
+    </androidx.wear.widget.drawer.WearableActionDrawerView>
+</androidx.wear.widget.drawer.WearableDrawerLayout>
+</androidx.wear.widget.SwipeDismissFrameLayout>
+</androidx.wear.widget.BoxInsetLayout>

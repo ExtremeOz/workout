@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Nested view layout used for animation purposes -->
+<LinearLayout  xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:ignore="AndroidLintUselessParent"
+    android:id="@+id/row_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_horizontal"
+    tools:background="@android:color/white">
+
+    <ImageView
+        android:id="@+id/image"
+        android:alpha="0.5"
+        android:layout_height="@dimen/wear_itemrow_dimension"
+        android:layout_marginStart="@dimen/wear_itemrow_leftspace1"
+        android:layout_width="@dimen/wear_itemrow_dimension"
+        android:background="@android:color/holo_blue_dark"/>
+
+    <TextView
+        android:id="@+id/text"
+        android:alpha="0.5"
+        android:fontFamily="sans-serif-condensed-light"
+        android:gravity="center_vertical"
+        android:layout_height="@dimen/wear_itemrow_dimension"
+        android:layout_marginStart="@dimen/wear_itemrow_leftspace2"
+        android:layout_marginEnd="16dp"
+        android:layout_width="fill_parent"
+        android:textColor="@color/semiBlack"
+        android:textStyle="bold"
+        android:textSize="16sp"/>
+</LinearLayout>

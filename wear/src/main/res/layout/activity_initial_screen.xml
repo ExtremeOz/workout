@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.wear.widget.BoxInsetLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorSplash"
+    tools:context="com.a_track_it.fitdata.activity.InitialActivity"
+    tools:deviceIds="wear">
+    <androidx.wear.widget.SwipeDismissFrameLayout
+        android:id="@+id/initial_swipe_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ImageButton android:id="@+id/image_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:contentDescription="@string/app_name"
+                android:layout_gravity="center"
+                android:background="@color/colorPrimary"
+                android:src="@drawable/logo128"/>
+            <TextView android:id="@+id/load_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="@dimen/text_margin"
+                android:layout_marginEnd="@dimen/text_margin"
+                android:text="@string/permission_rationale"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
+                android:textSize="@dimen/image_button_text_size2"
+                android:textAlignment="center"
+                />
+            <ProgressBar
+            android:id="@+id/progress"
+            android:indeterminate="true"
+            android:layout_width="80dp"
+            android:layout_centerInParent="true"
+            android:layout_height="80dp"
+            android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/progress"
+                android:layout_centerHorizontal="true"
+                android:text="@string/app_name"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Display1"
+                android:textSize="@dimen/recycler_simple_row_text_size"
+                android:textColor="@color/semiWhite"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </androidx.wear.widget.SwipeDismissFrameLayout>
+</androidx.wear.widget.BoxInsetLayout>

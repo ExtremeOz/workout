@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragment.CustomListFragment">
+    <TextView
+        android:id="@+id/activity_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/recycler_title_height"
+        android:background="@drawable/bg_color_green_dark"
+        android:gravity="center_vertical"
+        android:paddingTop="@dimen/title_center_padding"
+        android:text="@string/label_shoot_distance"
+        android:textAlignment="center"
+        android:textColor="@color/semiWhite"
+        android:textSize="@dimen/recycler_simple_title_text_size" />
+    <androidx.wear.widget.WearableRecyclerView
+        android:id="@+id/activity_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/activity_title">
+    </androidx.wear.widget.WearableRecyclerView>
+</RelativeLayout>

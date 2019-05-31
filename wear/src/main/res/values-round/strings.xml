@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">ATrackIt</string>
+    <string name="hello_world">Hello Round World!</string>
+    <string name="confirm_start_toggle_prompt">Confirm start session</string>
+    <string name="confirm_end_toggle_prompt">Confirm finish</string>
+    <string name="confirm_no_sets_prompt">Finished - Repeat or Add to continue</string>
+    <string name="confirm_dismiss_toggle_prompt">Exit?</string>
+    <string name="requesting_data">Finding info...</string>
+    <string name="sensors_location_unavailable"><b>Location Sensors could not be accessed.</b>\nGrant ATrackIt access to your workout location.</string>
+    <string name="sensors_location_unavailable_short"><b>Location Sensors could not be accessed.</b>\nGrant ATrackIt access to your workout location.</string>
+    <string name="sensors_body_unavailable"><b>Body Sensors could not be accessed.</b>\nGrant ATrackIt access to monitor your workouts.</string>
+
+    <plurals name="rest_countdown">
+        <item quantity="one">Rest complete in %1$d sec</item>
+        <item quantity="other">Rest complete in %1$d secs</item>
+    </plurals>
+    <plurals name="rest_count_over">
+        <item quantity="one">Rest finished %1$d sec ago</item>
+        <item quantity="other">Rest finished %1$d secs ago</item>
+    </plurals>
+</resources>

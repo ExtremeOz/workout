@@ -1,0 +1,2714 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="activity_id_names_sorted">
+        <item>9</item>
+        <item>119</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>1</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>113</item>
+        <item>106</item>
+        <item>24</item>
+        <item>102</item>
+        <item>117</item>
+        <item>25</item>
+        <item>103</item>
+        <item>118</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+        <item>32</item>
+        <item>33</item>
+        <item>34</item>
+        <item>35</item>
+        <item>36</item>
+        <item>37</item>
+        <item>38</item>
+        <item>104</item>
+        <item>0</item>
+        <item>115</item>
+        <item>114</item>
+        <item>39</item>
+        <item>40</item>
+        <item>41</item>
+        <item>42</item>
+        <item>69</item>
+        <item>43</item>
+        <item>44</item>
+        <item>46</item>
+        <item>45</item>
+        <item>2</item>
+        <item>108</item>
+        <item>47</item>
+        <item>48</item>
+        <item>49</item>
+        <item>50</item>
+        <item>51</item>
+        <item>52</item>
+        <item>70</item>
+        <item>53</item>
+        <item>54</item>
+        <item>55</item>
+        <item>8</item>
+        <item>56</item>
+        <item>57</item>
+        <item>58</item>
+        <item>59</item>
+        <item>60</item>
+        <item>61</item>
+        <item>62</item>
+        <item>63</item>
+        <item>105</item>
+        <item>64</item>
+        <item>65</item>
+        <item>66</item>
+        <item>67</item>
+        <item>68</item>
+        <item>71</item>
+        <item>72</item>
+        <item>112</item>
+        <item>110</item>
+        <item>109</item>
+        <item>111</item>
+        <item>73</item>
+        <item>74</item>
+        <item>75</item>
+        <item>120</item>
+        <item>76</item>
+        <item>77</item>
+        <item>78</item>
+        <item>79</item>
+        <item>3</item>
+        <item>80</item>
+        <item>81</item>
+        <item>82</item>
+        <item>84</item>
+        <item>83</item>
+        <item>85</item>
+        <item>86</item>
+        <item>87</item>
+        <item>5</item>
+        <item>88</item>
+        <item>4</item>
+        <item>89</item>
+        <item>90</item>
+        <item>91</item>
+        <item>92</item>
+        <item>7</item>
+        <item>93</item>
+        <item>94</item>
+        <item>116</item>
+        <item>95</item>
+        <item>96</item>
+        <item>97</item>
+        <item>98</item>
+        <item>99</item>
+        <item>100</item>
+        <item>101</item>
+    </integer-array>
+    <string-array name="activity_names_sorted">
+        <item>Aerobics</item>
+        <item>Archery</item>
+        <item>Badminton</item>
+        <item>Baseball</item>
+        <item>Basketball</item>
+        <item>Biathlon</item>
+        <item>Biking</item>
+        <item>Biking - handbike</item>
+        <item>Biking - mountain</item>
+        <item>Biking - road</item>
+        <item>Biking - spinning</item>
+        <item>Biking - stationery</item>
+        <item>Biking - utility</item>
+        <item>Boxing</item>
+        <item>Calisthenics</item>
+        <item>Gym- circuit training</item>
+        <item>Cricket</item>
+        <item>Crossfit</item>
+        <item>Curling</item>
+        <item>Dancing</item>
+        <item>Diving</item>
+        <item>Elevator</item>
+        <item>Elliptical</item>
+        <item>Ergometer</item>
+        <item>Escalator</item>
+        <item>Fencing</item>
+        <item>Football (American)</item>
+        <item>Football (Australian)</item>
+        <item>Football (Soccer)</item>
+        <item>Frisbee</item>
+        <item>Gardening</item>
+        <item>Golf</item>
+        <item>Gymnastics</item>
+        <item>Handball</item>
+        <item>Hiking</item>
+        <item>Hockey</item>
+        <item>Horseback riding</item>
+        <item>Housework</item>
+        <item>Ice skating</item>
+        <item>In vehicle</item>
+        <item>Interval Training</item>
+        <item>HIIT</item>
+        <item>Jumping rope</item>
+        <item>Kayaking</item>
+        <item>Kettlebell training</item>
+        <item>Kickboxing</item>
+        <item>Kite skiing</item>
+        <item>Kitesurfing</item>
+        <item>Martial arts</item>
+        <item>Mixed martial arts</item>
+        <item>Meditation</item>
+        <item>On foot</item>
+        <item>Other (unclassified fitness activity)</item>
+        <item>P90X exercises</item>
+        <item>Paragliding</item>
+        <item>Pilates</item>
+        <item>Polo</item>
+        <item>Racquetball</item>
+        <item>Rock climbing</item>
+        <item>Roller skiing</item>
+        <item>Rowing</item>
+        <item>Rowing machine</item>
+        <item>Rugby</item>
+        <item>Running</item>
+        <item>Running (jogging)</item>
+        <item>Running (sand)</item>
+        <item>Running (treadmill)</item>
+        <item>Sailing</item>
+        <item>Scuba diving</item>
+        <item>Skateboarding</item>
+        <item>Skating</item>
+        <item>Cross skating</item>
+        <item>Indoor skating</item>
+        <item>Inline skating (rollerblading)</item>
+        <item>Skiing</item>
+        <item>Back-country skiing</item>
+        <item>Cross-country skiing</item>
+        <item>Downhill skiing</item>
+        <item>Sledding</item>
+        <item>Sleeping</item>
+        <item>Sleeping but awake</item>
+        <item>Sleeping deep</item>
+        <item>Sleeping light</item>
+        <item>Sleeping REM</item>
+        <item>Snowboarding</item>
+        <item>Snowmobile</item>
+        <item>Snowshoeing</item>
+        <item>Softball</item>
+        <item>Squash</item>
+        <item>Stair climbing</item>
+        <item>Stair-climbing machine</item>
+        <item>Stand-up paddleboarding</item>
+        <item>Still (not moving)</item>
+        <item>Strength training</item>
+        <item>Surfing</item>
+        <item>Swimming</item>
+        <item>Swimming (open water)</item>
+        <item>Swimming (swimming pool)</item>
+        <item>Table tennis (+ping pong)</item>
+        <item>Team sports</item>
+        <item>Tennis</item>
+        <item>Tilting (sudden device gravity change)</item>
+        <item>Treadmill (walking or running)</item>
+        <item>Unknown (unable to detect activity)</item>
+        <item>Volleyball</item>
+        <item>Volleyball (beach)</item>
+        <item>Volleyball (indoor)</item>
+        <item>Wakeboarding</item>
+        <item>Walking</item>
+        <item>Walking (fitness)</item>
+        <item>Nordic walking</item>
+        <item>Walking (stroller)</item>
+        <item>Walking (treadmill)</item>
+        <item>Waterpolo</item>
+        <item>Weightlifting</item>
+        <item>Wheelchair</item>
+        <item>Windsurfing</item>
+        <item>Yoga</item>
+        <item>Zumba</item>
+    </string-array>
+    <string-array name="activity_icon_name_sorted">
+        <item>ic_trail_running_shoe</item>
+        <item>ic_shooting_with_arch_silhouette</item>
+        <item>ic_badminton_player</item>
+        <item>ic_baseball_player</item>
+        <item>ic_basketball_player_with_the_ball</item>
+        <item>ic_trail_running_shoe</item>
+        <item>ic_man_cycling</item>
+        <item>ic_man_cycling</item>
+        <item>ic_mountain</item>
+        <item>ic_man_cycling</item>
+        <item>ic_exercisebike</item>
+        <item>ic_exercisebike</item>
+        <item>ic_exercisebike</item>
+        <item>ic_boxing_silhouette</item>
+        <item>ic_trail_running_shoe</item>
+        <item>ic_dumbbell</item>
+        <item>ic_criquet_silhouette</item>
+        <item>ic_olympic_weightlifting_side_silhouette</item>
+        <item>ic_olympic_curling_player</item>
+        <item>ic_flamenco_couple_dancing</item>
+        <item>ic_diver_silhouette</item>
+        <item>ic_man_silhouette_running_on_treadmill_machine</item>
+        <item>ic_man_silhouette_running_on_treadmill_machine</item>
+        <item>ic_man_silhouette_running_on_treadmill_machine</item>
+        <item>ic_man_silhouette_running_on_treadmill_machine</item>
+        <item>ic_tai_chi_chuan_person_silhouette_with_a_fight_sword</item>
+        <item>ic_american_football_helmet_side_view_black_silhouette</item>
+        <item>ic_american_football_ball</item>
+        <item>ic_soccer_shoe</item>
+        <item>ic_frisbee</item>
+        <item>ic_seeding</item>
+        <item>ic_golf_player</item>
+        <item>ic_gymnast_posture_silhouette</item>
+        <item>ic_basketball_player_with_the_ball</item>
+        <item>ic_hiking_person_silhouette_with_a_stick</item>
+        <item>ic_hockey_equipment</item>
+        <item>ic_equestrian_race</item>
+        <item>ic_group</item>
+        <item>ic_speed_skiing</item>
+        <item>ic_motoring_car</item>
+        <item>ic_dumbbell</item>
+        <item>ic_stopwatch</item>
+        <item>ic_jumping_rope_silhouette</item>
+        <item>ic_rowing_silhouette</item>
+        <item>ic_kettlebell</item>
+        <item>ic_kickboxing_equipment</item>
+        <item>ic_sailing_boat</item>
+        <item>ic_sailing_boat</item>
+        <item>ic_martial_arts_clothes</item>
+        <item>ic_martial_arts_clothes</item>
+        <item>ic_meditate</item>
+        <item>ic_trail_running_shoe</item>
+        <item>ic_question_mark_button</item>
+        <item>ic_stretching_exercises</item>
+        <item>ic_paratrooper_falling_silhouette</item>
+        <item>ic_stretching_exercises</item>
+        <item>ic_polo_silhouette</item>
+        <item>ic_squash</item>
+        <item>ic_climbing_silhouette_1</item>
+        <item>ic_roller_skate</item>
+        <item>ic_rafting_rows</item>
+        <item>ic_rowing_silhouette</item>
+        <item>ic_american_football_ball</item>
+        <item>ic_running</item>
+        <item>ic_trail_running_shoe</item>
+        <item>ic_trail_running_shoe</item>
+        <item>ic_man_silhouette_running_on_treadmill_machine</item>
+        <item>ic_sailing_boat</item>
+        <item>ic_scuba_diving</item>
+        <item>ic_skateboard_1</item>
+        <item>ic_skater_silhouette</item>
+        <item>ic_skater_silhouette</item>
+        <item>ic_ice_hockey_player</item>
+        <item>ic_skater_silhouette</item>
+        <item>ic_skiing_silhouette</item>
+        <item>ic_mountain_running_silhouette</item>
+        <item>ic_skiing_equipment</item>
+        <item>ic_winter_snow_flake</item>
+        <item>ic_olympic_skeleton</item>
+        <item>ic_sleep</item>
+        <item>ic_standing_up_man</item>
+        <item>ic_sleep</item>
+        <item>ic_sleep</item>
+        <item>ic_sleep</item>
+        <item>ic_paralympic_alpine_ski_silhouette</item>
+        <item>ic_winter_snow_flake</item>
+        <item>ic_winter_snow_flake</item>
+        <item>ic_baseball_player</item>
+        <item>ic_squash</item>
+        <item>ic_steps</item>
+        <item>ic_man_silhouette_running_on_treadmill_machine</item>
+        <item>ic_paralympic_alpine_ski_silhouette</item>
+        <item>ic_standing_up_man</item>
+        <item>ic_strong_man_silhouette</item>
+        <item>ic_surf_silhouette</item>
+        <item>ic_person_swimming</item>
+        <item>ic_person_swimming</item>
+        <item>ic_swimmer_diving_to_water</item>
+        <item>ic_ping_pong</item>
+        <item>ic_american_football_ball</item>
+        <item>ic_tennis_ball</item>
+        <item>ic_standing_up_man</item>
+        <item>ic_man_silhouette_running_on_treadmill_machine</item>
+        <item>ic_standing_up_man</item>
+        <item>ic_volleyball_net</item>
+        <item>ic_volleyball_silhouette</item>
+        <item>ic_volleyball_silhouette</item>
+        <item>ic_paralympic_alpine_ski_silhouette</item>
+        <item>ic_trail_running_shoe</item>
+        <item>ic_trail_running_shoe</item>
+        <item>ic_hiking_person_silhouette_with_a_stick</item>
+        <item>ic_trail_running_shoe</item>
+        <item>ic_man_silhouette_running_on_treadmill_machine</item>
+        <item>ic_waterpolo_player_with_the_balls_in_the_water</item>
+        <item>ic_weightlifting_silhouette_2</item>
+        <item>ic_disabled</item>
+        <item>ic_sailing_boat</item>
+        <item>ic_yoga_posture</item>
+        <item>ic_dancer_with_music</item>
+    </string-array>
+    <integer-array name="activity_id_sorted">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+        <item>32</item>
+        <item>33</item>
+        <item>34</item>
+        <item>35</item>
+        <item>36</item>
+        <item>37</item>
+        <item>38</item>
+        <item>39</item>
+        <item>40</item>
+        <item>41</item>
+        <item>42</item>
+        <item>43</item>
+        <item>44</item>
+        <item>45</item>
+        <item>46</item>
+        <item>47</item>
+        <item>48</item>
+        <item>49</item>
+        <item>50</item>
+        <item>51</item>
+        <item>52</item>
+        <item>53</item>
+        <item>54</item>
+        <item>55</item>
+        <item>56</item>
+        <item>57</item>
+        <item>58</item>
+        <item>59</item>
+        <item>60</item>
+        <item>61</item>
+        <item>62</item>
+        <item>63</item>
+        <item>64</item>
+        <item>65</item>
+        <item>66</item>
+        <item>67</item>
+        <item>68</item>
+        <item>69</item>
+        <item>70</item>
+        <item>71</item>
+        <item>72</item>
+        <item>73</item>
+        <item>74</item>
+        <item>75</item>
+        <item>76</item>
+        <item>77</item>
+        <item>78</item>
+        <item>79</item>
+        <item>80</item>
+        <item>81</item>
+        <item>82</item>
+        <item>83</item>
+        <item>84</item>
+        <item>85</item>
+        <item>86</item>
+        <item>87</item>
+        <item>88</item>
+        <item>89</item>
+        <item>90</item>
+        <item>91</item>
+        <item>92</item>
+        <item>93</item>
+        <item>94</item>
+        <item>95</item>
+        <item>96</item>
+        <item>97</item>
+        <item>98</item>
+        <item>99</item>
+        <item>100</item>
+        <item>101</item>
+        <item>102</item>
+        <item>103</item>
+        <item>104</item>
+        <item>105</item>
+        <item>106</item>
+        <item>108</item>
+        <item>109</item>
+        <item>110</item>
+        <item>111</item>
+        <item>112</item>
+        <item>113</item>
+        <item>114</item>
+        <item>115</item>
+        <item>116</item>
+        <item>117</item>
+        <item>118</item>
+        <item>119</item>
+        <item>120</item>
+    </integer-array>
+    <string-array name="activity_icon_id_sorted">
+        <item>ic_motoring_car</item>
+        <item>ic_man_cycling</item>
+        <item>ic_trail_running_shoe</item>
+        <item>ic_standing_up_man</item>
+        <item>ic_search</item>
+        <item>ic_standing_up_man</item>
+        <item>ic_trail_running_shoe</item>
+        <item>ic_running</item>
+        <item>ic_trail_running_shoe</item>
+        <item>ic_badminton_player</item>
+        <item>ic_baseball_player</item>
+        <item>ic_basketball_player_with_the_ball</item>
+        <item>ic_trail_running_shoe</item>
+        <item>ic_man_cycling</item>
+        <item>ic_mountain</item>
+        <item>ic_man_cycling</item>
+        <item>ic_exercisebike</item>
+        <item>ic_exercisebike</item>
+        <item>ic_exercisebike</item>
+        <item>ic_boxing_silhouette</item>
+        <item>ic_trail_running_shoe</item>
+        <item>ic_dumbbell</item>
+        <item>ic_criquet_silhouette</item>
+        <item>ic_flamenco_couple_dancing</item>
+        <item>ic_man_silhouette_running_on_treadmill_machine</item>
+        <item>ic_tai_chi_chuan_person_silhouette_with_a_fight_sword</item>
+        <item>ic_american_football_helmet_side_view_black_silhouette</item>
+        <item>ic_american_football_ball</item>
+        <item>ic_soccer_shoe</item>
+        <item>ic_frisbee</item>
+        <item>ic_seeding</item>
+        <item>ic_golf_player</item>
+        <item>ic_gymnast_posture_silhouette</item>
+        <item>ic_basketball_player_with_the_ball</item>
+        <item>ic_hiking_person_silhouette_with_a_stick</item>
+        <item>ic_hockey_equipment</item>
+        <item>ic_equestrian_race</item>
+        <item>ic_group</item>
+        <item>ic_jumping_rope_silhouette</item>
+        <item>ic_rowing_silhouette</item>
+        <item>ic_kettlebell</item>
+        <item>ic_kickboxing_equipment</item>
+        <item>ic_sailing_boat</item>
+        <item>ic_martial_arts_clothes</item>
+        <item>ic_meditate</item>
+        <item>ic_martial_arts_clothes</item>
+        <item>ic_stretching_exercises</item>
+        <item>ic_paratrooper_falling_silhouette</item>
+        <item>ic_stretching_exercises</item>
+        <item>ic_polo_silhouette</item>
+        <item>ic_squash</item>
+        <item>ic_climbing_silhouette_1</item>
+        <item>ic_rafting_rows</item>
+        <item>ic_rowing_silhouette</item>
+        <item>ic_american_football_ball</item>
+        <item>ic_trail_running_shoe</item>
+        <item>ic_trail_running_shoe</item>
+        <item>ic_man_silhouette_running_on_treadmill_machine</item>
+        <item>ic_sailing_boat</item>
+        <item>ic_scuba_diving</item>
+        <item>ic_skateboard_1</item>
+        <item>ic_skater_silhouette</item>
+        <item>ic_skater_silhouette</item>
+        <item>ic_skater_silhouette</item>
+        <item>ic_skiing_silhouette</item>
+        <item>ic_mountain_running_silhouette</item>
+        <item>ic_skiing_equipment</item>
+        <item>ic_winter_snow_flake</item>
+        <item>ic_sailing_boat</item>
+        <item>ic_roller_skate</item>
+        <item>ic_olympic_skeleton</item>
+        <item>ic_sleep</item>
+        <item>ic_paralympic_alpine_ski_silhouette</item>
+        <item>ic_winter_snow_flake</item>
+        <item>ic_winter_snow_flake</item>
+        <item>ic_squash</item>
+        <item>ic_steps</item>
+        <item>ic_man_silhouette_running_on_treadmill_machine</item>
+        <item>ic_paralympic_alpine_ski_silhouette</item>
+        <item>ic_bench</item>
+        <item>ic_surf_silhouette</item>
+        <item>ic_person_swimming</item>
+        <item>ic_swimmer_diving_to_water</item>
+        <item>ic_person_swimming</item>
+        <item>ic_ping_pong</item>
+        <item>ic_american_football_ball</item>
+        <item>ic_tennis_ball</item>
+        <item>ic_man_silhouette_running_on_treadmill_machine</item>
+        <item>ic_volleyball_net</item>
+        <item>ic_volleyball_silhouette</item>
+        <item>ic_volleyball_silhouette</item>
+        <item>ic_paralympic_alpine_ski_silhouette</item>
+        <item>ic_trail_running_shoe</item>
+        <item>ic_hiking_person_silhouette_with_a_stick</item>
+        <item>ic_man_silhouette_running_on_treadmill_machine</item>
+        <item>ic_waterpolo_player_with_the_balls_in_the_water</item>
+        <item>ic_weightlifting</item>
+        <item>ic_disabled</item>
+        <item>ic_sailing_boat</item>
+        <item>ic_yoga_posture</item>
+        <item>ic_dancer_with_music</item>
+        <item>ic_diver_silhouette</item>
+        <item>ic_man_silhouette_running_on_treadmill_machine</item>
+        <item>ic_speed_skiing</item>
+        <item>ic_ice_hockey_player</item>
+        <item>ic_olympic_curling_player</item>
+        <item>ic_question_mark_button</item>
+        <item>ic_sleep</item>
+        <item>ic_sleep</item>
+        <item>ic_sleep</item>
+        <item>ic_standing_up_man</item>
+        <item>ic_olympic_weightlifting_side_silhouette</item>
+        <item>ic_stopwatch</item>
+        <item>ic_dumbbell</item>
+        <item>ic_trail_running_shoe</item>
+        <item>ic_man_silhouette_running_on_treadmill_machine</item>
+        <item>ic_man_silhouette_running_on_treadmill_machine</item>
+        <item>ic_shooting_with_arch_silhouette</item>
+        <item>ic_baseball_player</item>
+    </string-array>
+    <string-array name="activity_name_id_sorted">
+        <item>In vehicle</item>
+        <item>Biking</item>
+        <item>On foot</item>
+        <item>Still (not moving)</item>
+        <item>Unknown (unable to detect activity)</item>
+        <item>Tilting (sudden device gravity change)</item>
+        <item>Walking</item>
+        <item>Running</item>
+        <item>Aerobics</item>
+        <item>Badminton</item>
+        <item>Baseball</item>
+        <item>Basketball</item>
+        <item>Biathlon</item>
+        <item>Biking - handbike</item>
+        <item>Biking - mountain</item>
+        <item>Biking - road</item>
+        <item>Biking - spinning</item>
+        <item>Biking - stationery</item>
+        <item>Biking - utility</item>
+        <item>Boxing</item>
+        <item>Calisthenics</item>
+        <item>Gym - circuit training</item>
+        <item>Cricket</item>
+        <item>Dancing</item>
+        <item>Elliptical</item>
+        <item>Fencing</item>
+        <item>Football (American)</item>
+        <item>Football (Australian)</item>
+        <item>Football (Soccer)</item>
+        <item>Frisbee</item>
+        <item>Gardening</item>
+        <item>Golf</item>
+        <item>Gymnastics</item>
+        <item>Handball</item>
+        <item>Hiking</item>
+        <item>Hockey</item>
+        <item>Horseback riding</item>
+        <item>Housework</item>
+        <item>Jumping rope</item>
+        <item>Kayaking</item>
+        <item>Kettlebell training</item>
+        <item>Kickboxing</item>
+        <item>Kitesurfing</item>
+        <item>Martial arts</item>
+        <item>Meditation</item>
+        <item>Mixed martial arts</item>
+        <item>P90X exercises</item>
+        <item>Paragliding</item>
+        <item>Pilates</item>
+        <item>Polo</item>
+        <item>Racquetball</item>
+        <item>Rock climbing</item>
+        <item>Rowing</item>
+        <item>Rowing machine</item>
+        <item>Rugby</item>
+        <item>Running (jogging)</item>
+        <item>Running (sand)</item>
+        <item>Running (treadmill)</item>
+        <item>Sailing</item>
+        <item>Scuba diving</item>
+        <item>Skateboarding</item>
+        <item>Skating</item>
+        <item>Cross skating</item>
+        <item>Inline skating (rollerblading)</item>
+        <item>Skiing</item>
+        <item>Back-country skiing</item>
+        <item>Cross-country skiing</item>
+        <item>Downhill skiing</item>
+        <item>Kite skiing</item>
+        <item>Roller skiing</item>
+        <item>Sledding</item>
+        <item>Sleeping</item>
+        <item>Snowboarding</item>
+        <item>Snowmobile</item>
+        <item>Snowshoeing</item>
+        <item>Squash</item>
+        <item>Stair climbing</item>
+        <item>Stair-climbing machine</item>
+        <item>Stand-up paddleboarding</item>
+        <item>Strength training</item>
+        <item>Surfing</item>
+        <item>Swimming</item>
+        <item>Swimming (swimming pool)</item>
+        <item>Swimming (open water)</item>
+        <item>Table tennis (+ping pong)</item>
+        <item>Team sports</item>
+        <item>Tennis</item>
+        <item>Treadmill (walking or running)</item>
+        <item>Volleyball</item>
+        <item>Volleyball (beach)</item>
+        <item>Volleyball (indoor)</item>
+        <item>Wakeboarding</item>
+        <item>Walking (fitness)</item>
+        <item>Nordic walking</item>
+        <item>Walking (treadmill)</item>
+        <item>Waterpolo</item>
+        <item>Weightlifting</item>
+        <item>Wheelchair</item>
+        <item>Windsurfing</item>
+        <item>Yoga</item>
+        <item>Zumba</item>
+        <item>Diving</item>
+        <item>Ergometer</item>
+        <item>Ice skating</item>
+        <item>Indoor skating</item>
+        <item>Curling</item>
+        <item>Other (unclassified fitness activity)</item>
+        <item>Sleeping light</item>
+        <item>Sleeping deep</item>
+        <item>Sleeping REM</item>
+        <item>Sleeping but awake</item>
+        <item>Crossfit</item>
+        <item>HIIT</item>
+        <item>Interval Training</item>
+        <item>Walking (stroller)</item>
+        <item>Elevator</item>
+        <item>Escalator</item>
+        <item>Archery</item>
+        <item>Softball</item>
+    </string-array>
+    <string-array name="activity_ident_id_sorted">
+        <item>in_vehicle</item>
+        <item>biking</item>
+        <item>on_foot</item>
+        <item>still</item>
+        <item>unknown</item>
+        <item>tilting</item>
+        <item>walking</item>
+        <item>running</item>
+        <item>aerobics</item>
+        <item>badminton</item>
+        <item>baseball</item>
+        <item>basketball</item>
+        <item>biathlon</item>
+        <item>biking.hand</item>
+        <item>biking.mountain</item>
+        <item>biking.road</item>
+        <item>biking.spinning</item>
+        <item>biking.stationary</item>
+        <item>biking.utility</item>
+        <item>boxing</item>
+        <item>calisthenics</item>
+        <item>circuit_training</item>
+        <item>cricket</item>
+        <item>dancing</item>
+        <item>elliptical</item>
+        <item>fencing</item>
+        <item>football.american</item>
+        <item>football.australian</item>
+        <item>football.soccer</item>
+        <item>frisbee_disc</item>
+        <item>gardening</item>
+        <item>golf</item>
+        <item>gymnastics</item>
+        <item>handball</item>
+        <item>hiking</item>
+        <item>hockey</item>
+        <item>horseback_riding</item>
+        <item>housework</item>
+        <item>jump_rope</item>
+        <item>kayaking</item>
+        <item>kettlebell_training</item>
+        <item>kickboxing</item>
+        <item>kitesurfing</item>
+        <item>martial_arts</item>
+        <item>meditation</item>
+        <item>martial_arts.mixed</item>
+        <item>p90x</item>
+        <item>paragliding</item>
+        <item>pilates</item>
+        <item>polo</item>
+        <item>racquetball</item>
+        <item>rock_climbing</item>
+        <item>rowing</item>
+        <item>rowing.machine</item>
+        <item>rugby</item>
+        <item>running.jogging</item>
+        <item>running.sand</item>
+        <item>running.treadmill</item>
+        <item>sailing</item>
+        <item>scuba_diving</item>
+        <item>skateboarding</item>
+        <item>skating</item>
+        <item>skating.cross</item>
+        <item>skating.inline</item>
+        <item>skiing</item>
+        <item>skiing.back_country</item>
+        <item>skiing.cross_country</item>
+        <item>skiing.downhill</item>
+        <item>kite_skiing</item>
+        <item>roller_skiing</item>
+        <item>sledding</item>
+        <item>sleep</item>
+        <item>snowboarding</item>
+        <item>snowmobile</item>
+        <item>snowshoeing</item>
+        <item>squash</item>
+        <item>stair_climbing</item>
+        <item>stair_climbing.machine</item>
+        <item>standup_paddleboarding</item>
+        <item>strength_training</item>
+        <item>surfing</item>
+        <item>swimming</item>
+        <item>swimming.pool</item>
+        <item>swimming.open_water</item>
+        <item>table_tennis</item>
+        <item>team_sports</item>
+        <item>tennis</item>
+        <item>treadmill</item>
+        <item>volleyball</item>
+        <item>volleyball.beach</item>
+        <item>volleyball.indoor</item>
+        <item>wakeboarding</item>
+        <item>walking.fitness</item>
+        <item>walking.nordic</item>
+        <item>walking.treadmill</item>
+        <item>water_polo</item>
+        <item>weightlifting</item>
+        <item>wheelchair</item>
+        <item>windsurfing</item>
+        <item>yoga</item>
+        <item>zumba</item>
+        <item>diving</item>
+        <item>ergometer</item>
+        <item>ice_skating</item>
+        <item>skating.indoor</item>
+        <item>curling</item>
+        <item>other</item>
+        <item>sleep.light</item>
+        <item>sleep.deep</item>
+        <item>sleep.rem</item>
+        <item>sleep.awake</item>
+        <item>crossfit</item>
+        <item>interval_training.high_intensity</item>
+        <item>interval_training</item>
+        <item>walking.stroller</item>
+        <item>elevator</item>
+        <item>escalator</item>
+        <item>archery</item>
+        <item>softball</item>
+    </string-array>
+    <integer-array name="activity_veryactive_id_sorted">
+        <item>0</item>
+        <item>1</item>
+        <item>1</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>1</item>
+        <item>1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>1</item>
+        <item>1</item>
+        <item>0</item>
+        <item>0</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>0</item>
+        <item>0</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>0</item>
+        <item>0</item>
+        <item>1</item>
+        <item>0</item>
+        <item>0</item>
+        <item>1</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>1</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>0</item>
+        <item>0</item>
+        <item>1</item>
+        <item>1</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>1</item>
+        <item>1</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>1</item>
+        <item>0</item>
+        <item>0</item>
+        <item>1</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>1</item>
+    </integer-array>
+    <string-array name="activity_ident_name_sorted"><item>aerobics</item>
+        <item>archery</item>
+        <item>badminton</item>
+        <item>baseball</item>
+        <item>basketball</item>
+        <item>biathlon</item>
+        <item>biking</item>
+        <item>biking.hand</item>
+        <item>biking.mountain</item>
+        <item>biking.road</item>
+        <item>biking.spinning</item>
+        <item>biking.stationary</item>
+        <item>biking.utility</item>
+        <item>boxing</item>
+        <item>calisthenics</item>
+        <item>circuit_training</item>
+        <item>cricket</item>
+        <item>crossfit</item>
+        <item>curling</item>
+        <item>dancing</item>
+        <item>diving</item>
+        <item>elevator</item>
+        <item>elliptical</item>
+        <item>ergometer</item>
+        <item>escalator</item>
+        <item>fencing</item>
+        <item>football.american</item>
+        <item>football.australian</item>
+        <item>football.soccer</item>
+        <item>frisbee_disc</item>
+        <item>gardening</item>
+        <item>golf</item>
+        <item>gymnastics</item>
+        <item>handball</item>
+        <item>hiking</item>
+        <item>hockey</item>
+        <item>horseback_riding</item>
+        <item>housework</item>
+        <item>ice_skating</item>
+        <item>in_vehicle</item>
+        <item>interval_training</item>
+        <item>interval_training.high_intensity</item>
+        <item>jump_rope</item>
+        <item>kayaking</item>
+        <item>kettlebell_training</item>
+        <item>kickboxing</item>
+        <item>kite_skiing</item>
+        <item>kitesurfing</item>
+        <item>martial_arts</item>
+        <item>martial_arts.mixed</item>
+        <item>meditation</item>
+        <item>on_foot</item>
+        <item>other</item>
+        <item>p90x</item>
+        <item>paragliding</item>
+        <item>pilates</item>
+        <item>polo</item>
+        <item>racquetball</item>
+        <item>rock_climbing</item>
+        <item>roller_skiing</item>
+        <item>rowing</item>
+        <item>rowing.machine</item>
+        <item>rugby</item>
+        <item>running</item>
+        <item>running.jogging</item>
+        <item>running.sand</item>
+        <item>running.treadmill</item>
+        <item>sailing</item>
+        <item>scuba_diving</item>
+        <item>skateboarding</item>
+        <item>skating</item>
+        <item>skating.cross</item>
+        <item>skating.indoor</item>
+        <item>skating.inline</item>
+        <item>skiing</item>
+        <item>skiing.back_country</item>
+        <item>skiing.cross_country</item>
+        <item>skiing.downhill</item>
+        <item>sledding</item>
+        <item>sleep</item>
+        <item>sleep.awake</item>
+        <item>sleep.deep</item>
+        <item>sleep.light</item>
+        <item>sleep.rem</item>
+        <item>snowboarding</item>
+        <item>snowmobile</item>
+        <item>snowshoeing</item>
+        <item>softball</item>
+        <item>squash</item>
+        <item>stair_climbing</item>
+        <item>stair_climbing.machine</item>
+        <item>standup_paddleboarding</item>
+        <item>still</item>
+        <item>strength_training</item>
+        <item>surfing</item>
+        <item>swimming</item>
+        <item>swimming.open_water</item>
+        <item>swimming.pool</item>
+        <item>table_tennis</item>
+        <item>team_sports</item>
+        <item>tennis</item>
+        <item>tilting</item>
+        <item>treadmill</item>
+        <item>unknown</item>
+        <item>volleyball</item>
+        <item>volleyball.beach</item>
+        <item>volleyball.indoor</item>
+        <item>wakeboarding</item>
+        <item>walking</item>
+        <item>walking.fitness</item>
+        <item>walking.nordic</item>
+        <item>walking.stroller</item>
+        <item>walking.treadmill</item>
+        <item>water_polo</item>
+        <item>weightlifting</item>
+        <item>wheelchair</item>
+        <item>windsurfing</item>
+        <item>yoga</item>
+        <item>zumba</item>
+    </string-array>
+    <integer-array name="bodypart_ids">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+    </integer-array>
+    <integer-array name="bodypart_parentids">
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>1</item>
+        <item>1</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>6</item>
+        <item>6</item>
+        <item>2</item>
+    </integer-array>
+    <string-array name="bodypart_parentnames">
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item>Chest</item>
+        <item>Chest</item>
+        <item>Back</item>
+        <item>Back</item>
+        <item>Back</item>
+        <item>Back</item>
+        <item>Legs</item>
+        <item>Legs</item>
+        <item>Legs</item>
+        <item>Legs</item>
+        <item>Legs</item>
+        <item>Shoulders</item>
+        <item>Shoulders</item>
+        <item>Shoulders</item>
+        <item>Arms</item>
+        <item>Arms</item>
+        <item>Arms</item>
+        <item>Core</item>
+        <item>Core</item>
+        <item>Back</item>
+    </string-array>
+    <string-array name="bodypart_fullnames">
+        <item>Pectoralis - Upper and Lower</item>
+        <item>Latissimus Dorsi, Traps and Errectors</item>
+        <item>Quadriceps, Hamstrings, Calves</item>
+        <item>Deltoids - 3 deltoid heads</item>
+        <item>Biceps and Triceps</item>
+        <item>Abs and Obliques</item>
+        <item>Upper Pectoralis</item>
+        <item>Lower Pectoralis</item>
+        <item>Latissimus Dorsi</item>
+        <item>Trapezium</item>
+        <item>Spinal Erectors</item>
+        <item>Rhomboids</item>
+        <item>Gluteus Maximus</item>
+        <item>Biceps Femoris</item>
+        <item>Quadriceps</item>
+        <item>Gastrocnemius</item>
+        <item>Adductor Longus</item>
+        <item>Front Deltoids</item>
+        <item>Side Deltoids</item>
+        <item>Rear Deltoids</item>
+        <item>Biceps Brachii</item>
+        <item>Triceps Brachii</item>
+        <item>Flexor/Extensor Carpi</item>
+        <item>Rectus Abdominus</item>
+        <item>External Oblique</item>
+    </string-array>
+    <string-array name="bodypart_shortnames">
+        <item>Chest</item>
+        <item>Back</item>
+        <item>Legs</item>
+        <item>Shoulders</item>
+        <item>Arms</item>
+        <item>Core</item>
+        <item>Upper Chest</item>
+        <item>Lower Chest</item>
+        <item>Lats</item>
+        <item>Traps</item>
+        <item>Lower Back</item>
+        <item>Upper Back</item>
+        <item>Butt</item>
+        <item>Hamstrings</item>
+        <item>Thighs</item>
+        <item>Calves</item>
+        <item>Adductors</item>
+        <item>Front Delts</item>
+        <item>Side Delts</item>
+        <item>Rear Delts</item>
+        <item>Biceps</item>
+        <item>Triceps</item>
+        <item>Forearms</item>
+        <item>Abs</item>
+        <item>Obliques</item>
+    </string-array>
+    <string-array name="bodyregion_list">
+        <item>Torso</item>
+        <item>Legs</item>
+        <item>Shoulders</item>
+        <item>Arms</item>
+        <item>Core</item>
+    </string-array>
+    <integer-array name="bodypart_regionids">
+        <item>1</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>5</item>
+        <item>5</item>
+        <item>1</item>
+    </integer-array>
+    <string-array name="bodypart_regionnames">
+        <item>Torso</item>
+        <item>Torso</item>
+        <item>Legs</item>
+        <item>Shoulders</item>
+        <item>Arms</item>
+        <item>Torso</item>
+        <item>Torso</item>
+        <item>Torso</item>
+        <item>Torso</item>
+        <item>Torso</item>
+        <item>Torso</item>
+        <item>Torso</item>
+        <item>Legs</item>
+        <item>Legs</item>
+        <item>Legs</item>
+        <item>Legs</item>
+        <item>Legs</item>
+        <item>Torso</item>
+        <item>Torso</item>
+        <item>Torso</item>
+        <item>Torso</item>
+        <item>Torso</item>
+        <item>Torso</item>
+        <item>Core</item>
+        <item>Core</item>
+        <item>Torso</item>
+    </string-array>
+    <integer-array name="bodypart_setmin">
+        <item>3</item>
+        <item>5</item>
+        <item>7</item>
+        <item>3</item>
+        <item>4</item>
+        <item>3</item>
+        <item>1</item>
+        <item>1</item>
+        <item>2</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>0</item>
+        <item>2</item>
+        <item>3</item>
+        <item>3</item>
+        <item>0</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>4</item>
+        <item>0</item>
+        <item>0</item>
+        <item>1</item>
+    </integer-array>
+    <integer-array name="bodypart_setmax">
+        <item>15</item>
+        <item>20</item>
+        <item>20</item>
+        <item>18</item>
+        <item>18</item>
+        <item>12</item>
+        <item>7</item>
+        <item>7</item>
+        <item>12</item>
+        <item>8</item>
+        <item>8</item>
+        <item>8</item>
+        <item>8</item>
+        <item>10</item>
+        <item>12</item>
+        <item>12</item>
+        <item>5</item>
+        <item>8</item>
+        <item>10</item>
+        <item>10</item>
+        <item>10</item>
+        <item>10</item>
+        <item>8</item>
+        <item>10</item>
+        <item>10</item>
+    </integer-array>
+    <integer-array name="bodypart_repmin">
+        <item>6</item>
+        <item>6</item>
+        <item>8</item>
+        <item>6</item>
+        <item>6</item>
+        <item>12</item>
+        <item>6</item>
+        <item>6</item>
+        <item>6</item>
+        <item>6</item>
+        <item>5</item>
+        <item>6</item>
+        <item>10</item>
+        <item>8</item>
+        <item>8</item>
+        <item>10</item>
+        <item>10</item>
+        <item>6</item>
+        <item>8</item>
+        <item>8</item>
+        <item>6</item>
+        <item>8</item>
+        <item>10</item>
+        <item>10</item>
+        <item>10</item>
+    </integer-array>
+    <integer-array name="bodypart_repmax">
+        <item>15</item>
+        <item>20</item>
+        <item>25</item>
+        <item>20</item>
+        <item>20</item>
+        <item>50</item>
+        <item>15</item>
+        <item>15</item>
+        <item>20</item>
+        <item>20</item>
+        <item>30</item>
+        <item>15</item>
+        <item>20</item>
+        <item>20</item>
+        <item>25</item>
+        <item>30</item>
+        <item>30</item>
+        <item>20</item>
+        <item>25</item>
+        <item>25</item>
+        <item>21</item>
+        <item>21</item>
+        <item>21</item>
+        <item>50</item>
+        <item>50</item>
+    </integer-array>
+    <integer-array name="bodypart_power_rating">
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>6</item>
+        <item>8</item>
+        <item>4</item>
+        <item>6</item>
+        <item>6</item>
+        <item>8</item>
+        <item>7</item>
+        <item>9</item>
+        <item>8</item>
+        <item>8</item>
+        <item>7</item>
+        <item>9</item>
+        <item>9</item>
+        <item>4</item>
+        <item>6</item>
+        <item>6</item>
+        <item>6</item>
+        <item>8</item>
+        <item>8</item>
+        <item>4</item>
+        <item>4</item>
+        <item>5</item>
+    </integer-array>
+    <integer-array name="exercise_id">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+        <item>32</item>
+        <item>33</item>
+        <item>34</item>
+        <item>35</item>
+        <item>36</item>
+        <item>37</item>
+        <item>38</item>
+        <item>39</item>
+        <item>40</item>
+        <item>41</item>
+        <item>42</item>
+        <item>43</item>
+        <item>44</item>
+        <item>45</item>
+        <item>46</item>
+        <item>47</item>
+        <item>48</item>
+        <item>49</item>
+        <item>50</item>
+        <item>51</item>
+        <item>52</item>
+        <item>53</item>
+        <item>54</item>
+        <item>55</item>
+        <item>56</item>
+        <item>57</item>
+        <item>58</item>
+        <item>59</item>
+        <item>60</item>
+    </integer-array>
+    <string-array name="exercise_name_list">
+        <item>Dips</item>
+        <item>Bench Press</item>
+        <item>Incline Bench Press</item>
+        <item>Dumbell Fly</item>
+        <item>Incline Dumbell Fly</item>
+        <item>Cable Crossovers</item>
+        <item>Hammersmith ISO-Lateral Decline Press</item>
+        <item>Hammersmith ISO-Lateral Press</item>
+        <item>Hammersmith ISO-Lateral Incline Press</item>
+        <item>Barbell Bentover Row</item>
+        <item>Dumbell Bentover Row</item>
+        <item>Hammersmith ISO-Lateral Row</item>
+        <item>Chinups</item>
+        <item>Pulldowns</item>
+        <item>Deadlifts</item>
+        <item>Hyper Extensions</item>
+        <item>Biceps Curl(Barbell)</item>
+        <item>Biceps Curl(Dumbell)</item>
+        <item>Preacher Bench Machine Curls</item>
+        <item>Triceps Pressdowns</item>
+        <item>Triceps Dumbell Extensions</item>
+        <item>Lying Barbell Triceps Extensions</item>
+        <item>Overhead Barbell Press</item>
+        <item>Overhead Dumbell Press</item>
+        <item>Hammersmith ISO-Lateral Overhead Press</item>
+        <item>Dumbell Side Lateral Raises</item>
+        <item>Hammersmith Lateral Raises</item>
+        <item>Cable Side Lateral Raises</item>
+        <item>Standing Calf Raises</item>
+        <item>Donkey Calf Raises</item>
+        <item>Seated Calf Raises</item>
+        <item>Dumbell Rear Lateral Raises</item>
+        <item>Pec Machine Rear Lateral Raises</item>
+        <item>Situps</item>
+        <item>Leg Raises</item>
+        <item>Thigh Adductor Machine</item>
+        <item>Planking</item>
+        <item>Hip Bridges</item>
+        <item>Alternate Dumbell Curls</item>
+        <item>Concentration Curls</item>
+        <item>2 Arm Dumbell French Press</item>
+        <item>Seated Leg Extensions</item>
+        <item>45 Degree Leg Press</item>
+        <item>Vertical Leg Press</item>
+        <item>Seated Leg Press Machine</item>
+        <item>Leg Press Machine Calf Raises</item>
+        <item>Pushups</item>
+        <item>Decline Barbell Press</item>
+        <item>Decline Dumbell Fly</item>
+        <item>Tbar Rows</item>
+        <item>Seated Cable Rows</item>
+        <item>Superman</item>
+        <item>Stiff-legged Deadlift</item>
+        <item>Upright Cable Rows</item>
+        <item>Barbell Shrugs</item>
+        <item>Dumbell Shrugs</item>
+        <item>Thigh Abductor Machine</item>
+        <item>Windmills</item>
+        <item>Hip Circles</item>
+        <item>Side Leg Raises</item>
+    </string-array>
+    <integer-array name="exercise_resistance_type">
+        <item>6</item>
+        <item>1</item>
+        <item>1</item>
+        <item>3</item>
+        <item>3</item>
+        <item>2</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>1</item>
+        <item>3</item>
+        <item>5</item>
+        <item>6</item>
+        <item>5</item>
+        <item>1</item>
+        <item>6</item>
+        <item>1</item>
+        <item>3</item>
+        <item>5</item>
+        <item>2</item>
+        <item>3</item>
+        <item>1</item>
+        <item>1</item>
+        <item>3</item>
+        <item>5</item>
+        <item>3</item>
+        <item>5</item>
+        <item>2</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>3</item>
+        <item>5</item>
+        <item>6</item>
+        <item>6</item>
+        <item>5</item>
+        <item>6</item>
+        <item>1</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>6</item>
+        <item>1</item>
+        <item>3</item>
+        <item>1</item>
+        <item>2</item>
+        <item>6</item>
+        <item>1</item>
+        <item>2</item>
+        <item>1</item>
+        <item>3</item>
+        <item>5</item>
+        <item>6</item>
+        <item>6</item>
+        <item>6</item>
+    </integer-array>
+    <integer-array name="exercise_bodypart_count">
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>2</item>
+        <item>2</item>
+        <item>1</item>
+        <item>4</item>
+        <item>3</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>3</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>3</item>
+        <item>2</item>
+        <item>2</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>1</item>
+        <item>1</item>
+        <item>3</item>
+        <item>3</item>
+        <item>2</item>
+        <item>2</item>
+        <item>1</item>
+        <item>1</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>1</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>2</item>
+        <item>2</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+    </integer-array>
+    <integer-array name="exercise_bodypart1_id">
+        <item>8</item>
+        <item>8</item>
+        <item>7</item>
+        <item>8</item>
+        <item>7</item>
+        <item>1</item>
+        <item>8</item>
+        <item>1</item>
+        <item>7</item>
+        <item>9</item>
+        <item>9</item>
+        <item>9</item>
+        <item>9</item>
+        <item>9</item>
+        <item>11</item>
+        <item>11</item>
+        <item>21</item>
+        <item>21</item>
+        <item>21</item>
+        <item>22</item>
+        <item>22</item>
+        <item>22</item>
+        <item>18</item>
+        <item>18</item>
+        <item>18</item>
+        <item>19</item>
+        <item>19</item>
+        <item>19</item>
+        <item>16</item>
+        <item>16</item>
+        <item>16</item>
+        <item>20</item>
+        <item>20</item>
+        <item>24</item>
+        <item>24</item>
+        <item>17</item>
+        <item>6</item>
+        <item>6</item>
+        <item>21</item>
+        <item>21</item>
+        <item>22</item>
+        <item>15</item>
+        <item>15</item>
+        <item>15</item>
+        <item>15</item>
+        <item>16</item>
+        <item>1</item>
+        <item>8</item>
+        <item>8</item>
+        <item>9</item>
+        <item>9</item>
+        <item>11</item>
+        <item>11</item>
+        <item>10</item>
+        <item>10</item>
+        <item>10</item>
+        <item>17</item>
+        <item>17</item>
+        <item>17</item>
+        <item>17</item>
+    </integer-array>
+    <integer-array name="exercise_bodypart2_id">
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>4</item>
+        <item>4</item>
+        <item>0</item>
+        <item>1</item>
+        <item>4</item>
+        <item>1</item>
+        <item>12</item>
+        <item>12</item>
+        <item>12</item>
+        <item>12</item>
+        <item>12</item>
+        <item>12</item>
+        <item>13</item>
+        <item>23</item>
+        <item>23</item>
+        <item>23</item>
+        <item>23</item>
+        <item>23</item>
+        <item>23</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>10</item>
+        <item>10</item>
+        <item>10</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>12</item>
+        <item>12</item>
+        <item>25</item>
+        <item>0</item>
+        <item>0</item>
+        <item>24</item>
+        <item>24</item>
+        <item>23</item>
+        <item>23</item>
+        <item>0</item>
+        <item>0</item>
+        <item>14</item>
+        <item>14</item>
+        <item>14</item>
+        <item>0</item>
+        <item>4</item>
+        <item>1</item>
+        <item>1</item>
+        <item>12</item>
+        <item>12</item>
+        <item>13</item>
+        <item>13</item>
+        <item>12</item>
+        <item>12</item>
+        <item>12</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+    </integer-array>
+    <integer-array name="exercise_bodypart3_id">
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>4</item>
+        <item>22</item>
+        <item>4</item>
+        <item>11</item>
+        <item>11</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>10</item>
+        <item>14</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>24</item>
+        <item>0</item>
+        <item>0</item>
+        <item>10</item>
+        <item>10</item>
+        <item>10</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>25</item>
+        <item>25</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>22</item>
+        <item>4</item>
+        <item>4</item>
+        <item>20</item>
+        <item>20</item>
+        <item>14</item>
+        <item>14</item>
+        <item>4</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+    </integer-array>
+    <integer-array name="exercise_bodypart4_id">
+        <item>22</item>
+        <item>22</item>
+        <item>22</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>22</item>
+        <item>0</item>
+        <item>22</item>
+        <item>13</item>
+        <item>13</item>
+        <item>21</item>
+        <item>21</item>
+        <item>21</item>
+        <item>15</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>22</item>
+        <item>22</item>
+        <item>22</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>11</item>
+        <item>22</item>
+        <item>22</item>
+        <item>11</item>
+        <item>11</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+    </integer-array>
+    <string-array name="exercise_power_factor">
+        <item>7</item>
+        <item>7</item>
+        <item>8</item>
+        <item>6</item>
+        <item>5</item>
+        <item>6</item>
+        <item>8</item>
+        <item>7</item>
+        <item>7</item>
+        <item>9</item>
+        <item>9</item>
+        <item>8</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>5</item>
+        <item>8</item>
+        <item>8</item>
+        <item>7</item>
+        <item>8</item>
+        <item>6</item>
+        <item>8</item>
+        <item>7</item>
+        <item>7</item>
+        <item>7</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>9</item>
+        <item>9</item>
+        <item>8</item>
+        <item>5</item>
+        <item>5</item>
+        <item>4</item>
+        <item>4</item>
+        <item>3</item>
+        <item>4</item>
+        <item>4</item>
+        <item>8</item>
+        <item>6</item>
+        <item>7</item>
+        <item>6</item>
+        <item>9</item>
+        <item>9</item>
+        <item>8</item>
+        <item>9</item>
+        <item>5</item>
+        <item>7</item>
+        <item>6</item>
+        <item>8</item>
+        <item>8</item>
+        <item>5</item>
+        <item>6</item>
+        <item>6</item>
+        <item>7</item>
+        <item>7</item>
+        <item>4</item>
+        <item>4</item>
+        <item>3</item>
+        <item>3</item>
+    </string-array>
+    <string-array name="exercise_bodypart1_name">
+        <item>Lower Chest</item>
+        <item>Lower Chest</item>
+        <item>Upper Chest</item>
+        <item>Lower Chest</item>
+        <item>Upper Chest</item>
+        <item>Chest</item>
+        <item>Lower Chest</item>
+        <item>Chest</item>
+        <item>Upper Chest</item>
+        <item>Lats</item>
+        <item>Lats</item>
+        <item>Lats</item>
+        <item>Lats</item>
+        <item>Lats</item>
+        <item>Lower Back</item>
+        <item>Lower Back</item>
+        <item>Biceps</item>
+        <item>Biceps</item>
+        <item>Biceps</item>
+        <item>Triceps</item>
+        <item>Triceps</item>
+        <item>Triceps</item>
+        <item>Front Delts</item>
+        <item>Front Delts</item>
+        <item>Front Delts</item>
+        <item>Side Delts</item>
+        <item>Side Delts</item>
+        <item>Side Delts</item>
+        <item>Calves</item>
+        <item>Calves</item>
+        <item>Calves</item>
+        <item>Rear Delts</item>
+        <item>Rear Delts</item>
+        <item>Abs</item>
+        <item>Abs</item>
+        <item>Abductors &amp; Adductors</item>
+        <item>Core</item>
+        <item>Core</item>
+        <item>Biceps</item>
+        <item>Biceps</item>
+        <item>Triceps</item>
+        <item>Thighs</item>
+        <item>Thighs</item>
+        <item>Thighs</item>
+        <item>Thighs</item>
+        <item>Calves</item>
+        <item>Chest</item>
+        <item>Lower Chest</item>
+        <item>Lower Chest</item>
+        <item>Lats</item>
+        <item>Lats</item>
+        <item>Lower Back</item>
+        <item>Lower Back</item>
+        <item>Traps</item>
+        <item>Traps</item>
+        <item>Traps</item>
+        <item>Abductors &amp; Adductors</item>
+        <item>Abductors &amp; Adductors</item>
+        <item>Abductors &amp; Adductors</item>
+        <item>Abductors &amp; Adductors</item>
+    </string-array>
+    <string-array name="exercise_bodypart2_name">
+        <item>Chest</item>
+        <item>Chest</item>
+        <item>Chest</item>
+        <item>Shoulders</item>
+        <item>Shoulders</item>
+        <item></item>
+        <item>Chest</item>
+        <item>Shoulders</item>
+        <item>Chest</item>
+        <item>Upper Back</item>
+        <item>Upper Back</item>
+        <item>Upper Back</item>
+        <item>Upper Back</item>
+        <item>Upper Back</item>
+        <item>Upper Back</item>
+        <item>Butt</item>
+        <item>Forearms</item>
+        <item>Forearms</item>
+        <item>Forearms</item>
+        <item>Forearms</item>
+        <item>Forearms</item>
+        <item>Forearms</item>
+        <item>Shoulders</item>
+        <item>Shoulders</item>
+        <item>Shoulders</item>
+        <item>Traps</item>
+        <item>Traps</item>
+        <item>Traps</item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item>Upper Back</item>
+        <item>Upper Back</item>
+        <item>Obliques</item>
+        <item></item>
+        <item></item>
+        <item>Abs</item>
+        <item>Abs</item>
+        <item>Forearms</item>
+        <item>Forearms</item>
+        <item></item>
+        <item></item>
+        <item>Hamstrings</item>
+        <item>Hamstrings</item>
+        <item>Hamstrings</item>
+        <item></item>
+        <item>Shoulders</item>
+        <item>Chest</item>
+        <item>Chest</item>
+        <item>Upper Back</item>
+        <item>Upper Back</item>
+        <item>Butt</item>
+        <item>Butt</item>
+        <item>Upper Back</item>
+        <item>Upper Back</item>
+        <item>Upper Back</item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+    <string-array name="exercise_bodypart3_name" >
+        <item>Shoulders</item>
+        <item>Shoulders</item>
+        <item>Shoulders</item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item>Shoulders</item>
+        <item>Triceps</item>
+        <item>Shoulders</item>
+        <item>Lower Back</item>
+        <item>Lower Back</item>
+        <item>Rear Delts</item>
+        <item>Rear Delts</item>
+        <item>Rear Delts</item>
+        <item>Traps</item>
+        <item>Hamstrings</item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item>Abs</item>
+        <item></item>
+        <item></item>
+        <item>Traps</item>
+        <item>Traps</item>
+        <item>Traps</item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item>Obliques</item>
+        <item>Obliques</item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item>Triceps</item>
+        <item>Shoulders</item>
+        <item>Shoulders</item>
+        <item>Rear Delts</item>
+        <item>Rear Delts</item>
+        <item>Hamstrings</item>
+        <item>Hamstrings</item>
+        <item>Shoulders</item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+    <string-array name="exercise_bodypart4_name">
+        <item>Triceps</item>
+        <item>Triceps</item>
+        <item>Triceps</item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item>Triceps</item>
+        <item></item>
+        <item>Triceps</item>
+        <item>Butt</item>
+        <item>Butt</item>
+        <item>Biceps</item>
+        <item>Biceps</item>
+        <item>Biceps</item>
+        <item>Thighs</item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item>Triceps</item>
+        <item>Triceps</item>
+        <item>Triceps</item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item>Lower Back</item>
+        <item>Triceps</item>
+        <item>Triceps</item>
+        <item>Lower Back</item>
+        <item>Lower Back</item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+    <integer-array name="exercise_power_rating"><item>7</item>
+        <item>7</item>
+        <item>8</item>
+        <item>6</item>
+        <item>5</item>
+        <item>6</item>
+        <item>8</item>
+        <item>7</item>
+        <item>7</item>
+        <item>9</item>
+        <item>9</item>
+        <item>8</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>5</item>
+        <item>8</item>
+        <item>8</item>
+        <item>7</item>
+        <item>8</item>
+        <item>6</item>
+        <item>8</item>
+        <item>7</item>
+        <item>7</item>
+        <item>7</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>9</item>
+        <item>9</item>
+        <item>8</item>
+        <item>5</item>
+        <item>5</item>
+        <item>4</item>
+        <item>4</item>
+        <item>3</item>
+        <item>4</item>
+        <item>4</item>
+        <item>8</item>
+        <item>6</item>
+        <item>7</item>
+        <item>6</item>
+        <item>9</item>
+        <item>9</item>
+        <item>8</item>
+        <item>9</item>
+        <item>5</item>
+        <item>7</item>
+        <item>6</item>
+        <item>8</item>
+        <item>8</item>
+        <item>5</item>
+        <item>6</item>
+        <item>6</item>
+        <item>7</item>
+        <item>7</item>
+        <item>4</item>
+        <item>4</item>
+        <item>3</item>
+        <item>3</item>
+    </integer-array>
+    <string-array name="activity_types">
+        <item>Walking</item>
+        <item>Running</item>
+        <item>Biking</item>
+        <item>Archery</item>
+        <item>In Vehicle</item>
+        <item>Video Game</item>
+        <item>Strength Training</item>
+        <item>Sleep</item>
+        <item>Golf</item>
+        <item>Tennis</item>
+        <item>House work</item>
+        <item>Gardening</item>
+    </string-array>
+    <integer-array name="activity_types_ids">
+        <item>7</item>
+        <item>8</item>
+        <item>1</item>
+        <item>119</item>
+        <item>0</item>
+        <item>501</item>
+        <item>80</item>
+        <item>72</item>
+        <item>32</item>
+        <item>87</item>
+        <item>38</item>
+        <item>31</item>
+    </integer-array>
+    <integer-array name="region_ids">
+        <item>1</item><item>2</item><item>3</item><item>4</item><item>5</item>
+    </integer-array>
+    <string-array name="region_names">
+        <item>Torso</item><item>Legs</item><item>Shoulders</item><item>Arms</item><item>Core</item>
+    </string-array>
+    <string-array name="archery_division"><item>indoor</item><item>outdoor</item><item>field</item><item>clout</item></string-array>
+    <string-array name="archery_equipment"><item>Recurve</item><item>Compound</item><item>Barebow Recurve</item><item>Barebow Compound</item><item>Longbow</item><item>Crossbow</item></string-array>
+    <string-array name="archery_distance_indoor"><item>5 m</item><item>10 m</item><item>15 m</item><item>20 m</item><item>25 m</item><item>30 m</item><item>45 m</item><item>40 m</item><item>45 m</item><item>50 m</item><item>55 m</item><item>60 m</item><item>70 m</item><item>90 m</item></string-array>
+    <string-array name="archery_distance_field"><item>20 m</item><item>25 m</item><item>30 m</item><item>35 m</item><item>40 m</item><item>45 m</item><item>50 m</item><item>55 m</item><item>60 m</item><item>70 m</item><item>80 m</item><item>90 m</item></string-array>
+    <string-array name="archery_distance_outdoor"><item>20 m</item><item>25 m</item><item>30 m</item><item>35 m</item><item>40 m</item><item>45 m</item><item>50 m</item><item>55 m</item><item>60 m</item><item>70 m</item><item>80 m</item><item>90 m</item></string-array>
+    <string-array name="archery_distance_clout"><item>20 m</item><item>25 m</item><item>30 m</item><item>35 m</item><item>40 m</item><item>45 m</item><item>50 m</item><item>55 m</item><item>60 m</item><item>70 m</item><item>80 m</item><item>90 m</item></string-array>
+    <string-array name="archery_ends_field"><item>1</item><item>2</item><item>3</item><item>4</item><item>5</item><item>6</item><item>7</item><item>8</item><item>9</item><item>10</item></string-array>
+    <string-array name="archery_target_size_field"><item>20 cm</item><item>40 cm</item><item>60 cm</item><item>80 cm</item><item>122 cm</item></string-array>
+    <string-array name="archery_target_size_indoor"><item>20 cm</item><item>40 cm</item><item>60 cm</item><item>80 cm</item><item>122 cm</item></string-array>
+    <string-array name="archery_target_size_outdoor"><item>20 cm</item><item>40 cm</item><item>60 cm</item><item>80 cm</item><item>122 cm</item></string-array>
+    <string-array name="archery_target_size_clout"><item>20 cm</item><item>40 cm</item><item>60 cm</item><item>80 cm</item><item>122 cm</item></string-array>
+    <string-array name="archery_target_score_clout"><item>X</item><item>10</item><item>9</item><item>8</item><item>7</item><item>6</item><item>5</item><item>4</item><item>3</item><item>2</item><item>1</item><item>M</item></string-array>
+    <string-array name="archery_target_score_field"><item>6</item><item>5</item><item>4</item><item>3</item><item>2</item><item>1</item></string-array>
+    <string-array name="archery_target_score_indoor"><item>X</item><item>10</item><item>9</item><item>8</item><item>7</item><item>6</item><item>5</item><item>4</item><item>3</item><item>2</item><item>1</item><item>M</item></string-array>
+    <string-array name="archery_target_score_outdoor"><item>X</item><item>10</item><item>9</item><item>8</item><item>7</item><item>6</item><item>5</item><item>4</item><item>3</item><item>2</item><item>1</item><item>M</item></string-array>
+    <string-array name="days_of_month">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+    </string-array>
+    <string-array name="month_of_year">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+    <string-array name="array_weights_bodyweight">
+        <item>bodyweight - 40</item>
+        <item>bodyweight - 30</item>
+        <item>bodyweight - 20</item>
+        <item>bodyweight - 10</item>
+        <item>bodyweight - 5</item>
+        <item>bodyweight</item>
+        <item>bodyweight + 5</item>
+        <item>bodyweight + 10</item>
+        <item>bodyweight + 20</item>
+        <item>bodyweight + 30</item>
+        <item>bodyweight + 40</item>
+        <item>bodyweight + 50</item>
+        <item>bodyweight + 60</item>
+        <item>bodyweight + 70</item>
+        <item>bodyweight + 80</item>
+        <item>bodyweight + 90</item>
+        <item>bodyweight + 100</item>
+    </string-array>
+    <string-array name="array_weights_kg">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>12.5</item>
+        <item>15</item>
+        <item>17.5</item>
+        <item>20</item>
+        <item>22.5</item>
+        <item>25</item>
+        <item>27.5</item>
+        <item>30</item>
+        <item>32.5</item>
+        <item>35</item>
+        <item>37.5</item>
+        <item>40</item>
+        <item>42.5</item>
+        <item>45</item>
+        <item>47.5</item>
+        <item>50</item>
+        <item>52.5</item>
+        <item>55</item>
+        <item>57.5</item>
+        <item>60</item>
+        <item>62.5</item>
+        <item>65</item>
+        <item>67.5</item>
+        <item>70</item>
+        <item>72.5</item>
+        <item>75</item>
+        <item>77.5</item>
+        <item>80</item>
+        <item>82.5</item>
+        <item>85</item>
+        <item>87.5</item>
+        <item>90</item>
+        <item>92.5</item>
+        <item>95</item>
+        <item>97.5</item>
+        <item>100</item>
+        <item>105</item>
+        <item>110</item>
+        <item>115</item>
+        <item>120</item>
+        <item>125</item>
+        <item>130</item>
+        <item>135</item>
+        <item>140</item>
+        <item>145</item>
+        <item>150</item>
+        <item>155</item>
+        <item>160</item>
+        <item>165</item>
+        <item>170</item>
+        <item>175</item>
+        <item>180</item>
+        <item>185</item>
+        <item>190</item>
+        <item>195</item>
+        <item>200</item>
+        <item>205</item>
+        <item>210</item>
+        <item>215</item>
+        <item>220</item>
+        <item>225</item>
+        <item>250</item>
+        <item>275</item>
+        <item>300</item>
+        <item>305</item>
+        <item>310</item>
+        <item>315</item>
+        <item>320</item>
+        <item>325</item>
+        <item>350</item>
+        <item>375</item>
+        <item>400</item>
+        <item>405</item>
+        <item>410</item>
+        <item>415</item>
+        <item>420</item>
+        <item>425</item>
+        <item>450</item>
+        <item>475</item>
+        <item>500</item>
+        <item>550</item>
+        <item>600</item>
+        <item>650</item>
+        <item>700</item>
+        <item>750</item>
+        <item>800</item>
+        <item>850</item>
+        <item>900</item>
+        <item>950</item>
+        <item>1000</item>
+    </string-array>
+    <string-array name="array_weights_lbs">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>12.5</item>
+        <item>15</item>
+        <item>17.5</item>
+        <item>20</item>
+        <item>22.5</item>
+        <item>25</item>
+        <item>27.5</item>
+        <item>30</item>
+        <item>32.5</item>
+        <item>35</item>
+        <item>37.5</item>
+        <item>40</item>
+        <item>42.5</item>
+        <item>45</item>
+        <item>47.5</item>
+        <item>50</item>
+        <item>52.5</item>
+        <item>55</item>
+        <item>57.5</item>
+        <item>60</item>
+        <item>62.5</item>
+        <item>65</item>
+        <item>67.5</item>
+        <item>70</item>
+        <item>72.5</item>
+        <item>75</item>
+        <item>77.5</item>
+        <item>80</item>
+        <item>82.5</item>
+        <item>85</item>
+        <item>87.5</item>
+        <item>90</item>
+        <item>92.5</item>
+        <item>95</item>
+        <item>97.5</item>
+        <item>100</item>
+        <item>105</item>
+        <item>110</item>
+        <item>115</item>
+        <item>120</item>
+        <item>125</item>
+        <item>150</item>
+        <item>175</item>
+        <item>200</item>
+        <item>205</item>
+        <item>210</item>
+        <item>215</item>
+        <item>220</item>
+        <item>225</item>
+        <item>250</item>
+        <item>275</item>
+        <item>300</item>
+        <item>305</item>
+        <item>310</item>
+        <item>315</item>
+        <item>320</item>
+        <item>325</item>
+        <item>350</item>
+        <item>375</item>
+        <item>400</item>
+        <item>405</item>
+        <item>410</item>
+        <item>415</item>
+        <item>420</item>
+        <item>425</item>
+        <item>450</item>
+        <item>475</item>
+        <item>500</item>
+        <item>550</item>
+        <item>600</item>
+        <item>650</item>
+        <item>700</item>
+        <item>750</item>
+        <item>800</item>
+        <item>850</item>
+        <item>900</item>
+        <item>950</item>
+        <item>1000</item>
+    </string-array>
+    <string-array name="sets_reps">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+        <item>32</item>
+        <item>33</item>
+        <item>34</item>
+        <item>35</item>
+        <item>36</item>
+        <item>37</item>
+        <item>38</item>
+        <item>39</item>
+        <item>40</item>
+        <item>41</item>
+        <item>42</item>
+        <item>43</item>
+        <item>44</item>
+        <item>45</item>
+        <item>46</item>
+        <item>47</item>
+        <item>48</item>
+        <item>49</item>
+        <item>50</item>
+        <item>55</item>
+        <item>60</item>
+        <item>65</item>
+        <item>70</item>
+        <item>75</item>
+        <item>80</item>
+        <item>85</item>
+        <item>90</item>
+        <item>95</item>
+        <item>100</item>
+    </string-array>
+    <string-array name="array_rest_duration_gym">
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+        <item>25</item>
+        <item>30</item>
+        <item>35</item>
+        <item>40</item>
+        <item>45</item>
+        <item>50</item>
+        <item>55</item>
+        <item>60</item>
+        <item>75</item>
+        <item>90</item>
+        <item>105</item>
+        <item>120</item>
+        <item>180</item>
+        <item>240</item>
+        <item>300</item>
+        <item>360</item>
+        <item>480</item>
+        <item>540</item>
+        <item>600</item>
+    </string-array>
+    <string-array name="array_rest_duration_target">
+        <item>15</item>
+        <item>20</item>
+        <item>25</item>
+        <item>30</item>
+        <item>35</item>
+        <item>40</item>
+        <item>45</item>
+        <item>50</item>
+        <item>55</item>
+        <item>60</item>
+        <item>75</item>
+        <item>90</item>
+        <item>105</item>
+        <item>120</item>
+        <item>180</item>
+        <item>240</item>
+        <item>300</item>
+        <item>360</item>
+        <item>420</item>
+        <item>480</item>
+        <item>540</item>
+        <item>600</item>
+        <item>900</item>
+        <item>1200</item>
+        <item>1800</item>
+    </string-array>
+</resources>

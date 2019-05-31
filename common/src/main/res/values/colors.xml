@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="my_app_primary_color">#8bc34a</color>
+    <color name="colorPrimary">#8bc34a</color>
+    <color name="primaryLightColor">#bef67a</color>
+    <color name="colorPrimaryLight">#bef67a</color>
+    <color name="my_app_color_on_primary">#c0ca33</color>
+    <color name="my_app_color_on_secondary">#D2DD33</color>
+    <color name="my_app_color_on_background">#33DDB5</color>
+    <color name="my_app_color_on_error">#DD3355</color>
+    <color name="my_app_error_color">#DD3355</color>
+    <color name="my_app_color_on_surface">#33DDC3</color>
+    <color name="primaryDarkColor">#5a9216</color>
+    <color name="colorPrimaryDark">#5a9216</color>
+    <color name="my_app_secondary_color">#8bc34a</color>
+    <color name="my_app_primary_variant_color">#8bc34a</color>
+    <color name="my_app_secondary_variant_color">#6BAC1E</color>
+    <color name="colorSplash">#aeea00</color>
+    <color name="my_app_surface_color">#459304</color>
+    <color name="colorAccent">#459304</color>
+    <color name="colorAccentDark">#3B750B</color>
+    <color name="my_app_background_color">#3B750B</color>
+    <color name="mtrl_scrim_color">#3B750B</color>
+    <color name="colorAmbientBackground">#FF183503</color>
+    <color name="colorAmbientForeground">#FFA29518</color>
+    <color name="colorAccentPressed">#64dd17</color>
+    <color name="primaryTextColor">#000000</color>
+    <color name="semiBlack">#aa111111</color>
+    <color name="semiWhite">#CCFFFFFF</color>
+    <color name="semiGray">#CCEEEEEE</color>
+    <color name="colorBarGraph">#77FFFFFF</color>
+    <color name="colorBarGraph2">#35FFFFFF</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="lighterGray">#f2f2f2</color>
+    <color name="lightGray">#eee</color>
+    <color name="darkblue">#3949ab</color>
+    <color name="lightblue">#8AD5F0</color>
+    <color name="darkGrey">#888888</color>
+    <color name="darkerGrey">#444444</color>
+    <color name="blue14" tools:ignore="UnusedResources">#0099CC</color>
+
+    <color name="white">#FAFAFA</color>
+    <color name="white_pressed">#F1F1F1</color>
+
+    <color name="running_graph">#AADE5F8A</color>
+    <color name="biking_graph">#AA76C4C7</color>
+    <color name="walking_graph">#AAFFA55B</color>
+    <color name="lifting_graph">#cabf45</color>
+    <color name="archery_graph">#257a84</color>
+    <color name="other_graph">#7b3ab7</color>
+
+    <color name="steps">#7AC57F</color>
+    <color name="calendar">#77B3D4</color>
+    <color name="driving">#B57DD2</color>
+    <color name="running">#DE5F8A</color>
+    <color name="archery">#269ca9</color>
+    <color name="walking">#FFA55B</color>
+    <color name="golfing">#56AB75</color>
+    <color name="lifting">#afb42b</color>
+    <color name="other">#823ec1</color>
+
+    <color name="running_pressed">#BF5278</color>
+    <color name="archery_pressed">#33d0d9</color>
+    <color name="walking_pressed">#EB984E</color>
+    <color name="lifting_pressed">#ffea00</color>
+    <color name="other_pressed">#5a2b86</color>
+
+    <color name="power_factor_1">#FFE0B2</color>
+    <color name="power_factor_2">#FFCC80</color>
+    <color name="power_factor_3">#FFB74D</color>
+    <color name="power_factor_4">#FFA726</color>
+    <color name="power_factor_5">#FF9800</color>
+    <color name="power_factor_6">#FB8C00</color>
+    <color name="power_factor_7">#F57C00</color>
+    <color name="power_factor_8">#EF6C00</color>
+    <color name="power_factor_9">#E65100</color>
+    <color name="power_factor_10">#BF360C</color>
+
+</resources>

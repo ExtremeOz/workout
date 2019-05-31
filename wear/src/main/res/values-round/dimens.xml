@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="button_icon_padding">4dp</dimen>
+    <dimen name="entry_card_spacing">3dp</dimen>
+    <dimen name="home_button_margin">2dp</dimen>
+</resources>

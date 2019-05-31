@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "720698840782",
+    "firebase_url": "https://a-track-it-fitdata1.firebaseio.com",
+    "project_id": "a-track-it-fitdata1",
+    "storage_bucket": "a-track-it-fitdata1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:720698840782:android:e540125f1a5f0a19",
+        "android_client_info": {
+          "package_name": "com.a_track_it.fitdata"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "720698840782-4s28370pto7l41t9a8aoignohvf6en6t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.a_track_it.fitdata",
+            "certificate_hash": "546aba4ff2db7db4a90c10c289adfbbfb9bd80ba"
+          }
+        },
+        {
+          "client_id": "720698840782-ds1bdc9fh23i9ua7tj3d5rafk0i0r1vf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiCfOZJBbDkCJJPT3tnlv0jf9aQR_7hCI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "720698840782-ds1bdc9fh23i9ua7tj3d5rafk0i0r1vf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

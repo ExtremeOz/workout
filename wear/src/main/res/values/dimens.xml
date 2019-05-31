@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+    Because the window insets on round devices are larger than 15dp, this padding only applies
+    to square screens.
+    -->
+    <dimen name="box_inset_layout_padding">0dp</dimen>
+    <dimen name="button_elevation">4dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!--
+    This padding applies to both square and round screens. The total padding between the buttons
+    and the window insets is box_inset_layout_padding (above variable) on square screens and
+    inner_frame_layout_padding (below variable) on round screens.
+    -->
+    <dimen name="inner_frame_layout_padding">5dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="default_settings_circle_radius">18dp</dimen>
+    <dimen name="selected_settings_circle_radius">24dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="wear_itemrow_dimension">52dp</dimen>
+    <dimen name="wear_itemrow_leftspace1">40dp</dimen>
+    <dimen name="wear_itemrow_leftspace2">96dp</dimen>
+    <dimen name="wear_itemrow_square_small">35dp</dimen>
+    <dimen name="wear_itemrow_square_large">45dp</dimen>
+    <dimen name="activity_main_text_header_height">40dp</dimen>
+    <dimen name="activity_main_text_header_spacing">5dp</dimen>
+    <dimen name="title_image_size">24dp</dimen>
+    <dimen name="title_center_padding">3dp</dimen>
+    <dimen name="recycler_row_padding">7dp</dimen>
+    <dimen name="recycler_row_text_size">16sp</dimen>
+    <dimen name="recycler_workout_text_size1">16sp</dimen>
+    <dimen name="recycler_workout_text_size2">14sp</dimen>
+    <dimen name="recycler_workout_text_size3">12sp</dimen>
+    <dimen name="recycler_row_height">48dp</dimen>
+    <dimen name="recyclerWorkout_row_height">83dp</dimen>
+    <dimen name="recyclerWorkoutSet_row_height">72dp</dimen>
+    <dimen name="recyclerWorkoutSet_col_width">56dp</dimen>
+    <dimen name="bottom_button_height">64dp</dimen>
+    <dimen name="home_button_margin">3dp</dimen>
+    <dimen name="recycler_title_height">54dp</dimen>
+    <dimen name="recycler_simplest_row_height">48dp</dimen>
+    <dimen name="recycler_simple_row_height">36dp</dimen>
+    <dimen name="recycler_simple_title_height">30dp</dimen>
+    <dimen name="recycler_simple_3rows_height">40dp</dimen>
+    <dimen name="recycler_simple_2rows_height">46dp</dimen>
+    <dimen name="recycler_simple_row_text_size">24sp</dimen>
+    <dimen name="recycler_simple_title_text_size">18sp</dimen>
+    <dimen name="recycler_simple_session_height">68dp</dimen>
+    <dimen name="round_side_inset">32dp</dimen>
+    <dimen name="wear_item_text_size">12sp</dimen>
+    <dimen name="wear_msg_text_size">14sp</dimen>
+    <dimen name="confirm_msg_text_size">16sp</dimen>
+    <dimen name="image_button_text_size2">14sp</dimen>
+    <dimen name="image_button_text_size">12sp</dimen>
+    <dimen name="image_button_text_size_less">10sp</dimen>
+    <dimen name="image_button_text_size_lessless">8sp</dimen>
+    <dimen name="home_button_icon_size">18dp</dimen>
+    <dimen name="home_title_text_size">16sp</dimen>
+    <dimen name="home_title_text_size_ambient">20sp</dimen>
+    <dimen name="home_in_progress_size">96dp</dimen>
+    <dimen name="home_button_width">124dp</dimen>
+    <dimen name="home_button_height">62dp</dimen>
+    <dimen name="live_in_progress_size">64dp</dimen>
+    <dimen name="live_circular_size">72dp</dimen>
+    <dimen name="live_image_view_padding">8dp</dimen>
+    <dimen name="button_icon_padding">4dp</dimen>
+    <dimen name="entry_card_spacing">4dp</dimen>
+</resources>

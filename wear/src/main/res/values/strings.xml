@@ -1,0 +1,105 @@
+<resources>
+    <string name="app_name">ATrackIt</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="no_network_connection">No network connection</string>
+    <string name="signing_in_google">Signing in to Google</string>
+    <string name="connecting_google">Connecting to Google Fit</string>
+    <string name="requesting_data">Finding information...</string>
+    <string name="checking_device_permissions">Checking device permissions</string>
+    <string name="no_google_play">Error: No Google Play Services are available - initial setup cannot proceed</string>
+    <string name="toast_no_google_accounts_registered">No google accounts are available to use this app (mandatory)</string>
+    <string name="permission_rationale">Location data is used as part of the Google Fit API</string>
+    <string name="permission_denied_explanation">Permission was denied, but is needed for core functionality</string>
+    <string name="ok">OK</string>
+    <string name="sensors_location_unavailable"><b>Watch Location Sensors could not be accessed.</b>\nGrant ATrackIt access to monitor your workout location.</string>
+    <string name="sensors_location_unavailable_short"><b>Watch Location Sensors could not be accessed.</b>\nGrant ATrackIt access to monitor your workouts.</string>
+    <string name="sensors_body_unavailable"><b>Watch Body Sensors could not be accessed.</b>\nGrant ATrackIt access to monitor your workouts.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="credits_message"><![CDATA[
+Our brilliant Icons are made by Gregor Cresnar from https://www.flaticon.com/ FlatIcons and is licenced by http://creativecommons.org/licenses/by/3.0/
+ATrackIt take your data security very seriously, that is why we use Google technology and abide by their data usage guidelines https://policies.google.com/privacy
+Your personal fitness data is never accessible to anyone except you. It is never shared and you remain in control of everything that happens with your data.
+Visit https://www.a-track-it.com for all product and policy information and feedback.
+]]>
+    </string>
+    <string name="select_account_for_access">Select the Google account to use with ATrackIt</string>
+    <string name="microphone_access_required">Microphone access is required to enable voice commands</string>
+    <string name="no_audio_input">Audio input is not available</string>
+    <string name="location_access_required">Location access is required to monitor your workout performance</string>
+    <string name="sensors_access_required">Sensors access is required to monitor your workout performance</string>
+    <string name="sensors_permission_not_available">Permission is not available. Requesting permission</string>
+    <string name="sensors_permission_available">Sensors permission are available</string>
+    <string name="sensors_permission_granted">Sensors permission was granted</string>
+    <string name="location_permission_granted">Location permission was granted</string>
+    <string name="recording_permission_granted">Recording audio permission was granted</string>
+    <string name="sensors_permission_denied">Sensors permission request was denied</string>
+    <string name="location_permission_denied">Location permission request was denied</string>
+    <string name="recording_permission_denied">Recording audio permission request was denied</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+    <string name="user_pref_1">Confirm details before session start</string>
+    <string name="user_pref_2">Confirm session details before finishing</string>
+    <string name="user_pref_3">Confirm before exiting ATrackIt</string>
+    <string name="user_pref_4">Use watch body sensors with ATrackIt</string>
+    <string name="user_pref_5">Mute sound and vibrate feedback for ATrackIt</string>
+    <string name="user_pref_6">Yes = use KG units X = use lbs units</string>
+    <string name="user_pref_7">Use timed breaks between sets</string>
+    <string name="user_pref_8">Favourite Activity 1</string>
+    <string name="user_pref_9">Favourite Activity 2</string>
+    <string name="user_pref_10">Favourite Activity 3</string>
+    <string name="user_pref_11">Favourite Activity 4</string>
+
+
+    <!-- Example General settings -->
+    <string name="confirm_start_toggle_prompt">Confirm start of new session</string>
+    <string name="confirm_end_toggle_prompt">Confirm finish of session</string>
+    <string name="confirm_no_sets_prompt">Finished - Use repeat or add to continue the session</string>
+    <string name="confirm_dismiss_toggle_prompt">Exit ATrackIt?</string>
+    <string name="confirm_sensors_toggle_prompt">Use body sensors during sessions</string>
+    <string name="confirm_use_kg_prompt">Use KG for weights - No = pounds</string>
+    <string name="confirm_work_offline">Work offline</string>
+    <string name="use_timed_breaks_prompt">Use timed breaks between sets</string>
+    <string name="title_activity_initial">ATrackIt</string>
+    <string name="must_quit">Unable to continue - exiting now</string>
+    <string name="activity_id_not_set">select an activity before commencing</string>
+    <string name="title_activity_permissions">Permissions Activity</string>
+
+    <string name="message_notification_title_template">Message: %1$s</string>
+
+    <!-- TODO: remove this placeholder text -->
+    <string name="message_notification_placeholder_text_template">You said %1$s and lorem ipsum
+        dolor sit amet, consectetur adipiscing elit. Etiam non enim magna. Morbi dictum, velit vel
+        semper venenatis, magna odio volutpat velit, at ullamcorper nulla lacus sed turpis.
+        Pellentesque vitae metus elit, nec tincidunt tellus. Integer sed nisl sem, ullamcorper
+        ornare lacus. Duis ac mauris sed massa congue volutpat. Donec sed erat sit amet turpis
+        viverra rhoncus sit amet nec magna. Donec lacinia ligula at libero volutpat volutpat nec nec
+        tortor.
+    </string>
+
+    <string name="action_share">Share</string>
+    <string name="action_reply">Reply</string>
+    <string name="launch_activity">Launch activity</string>
+    <string name="request_location_updates">Request location updates</string>
+    <string name="remove_location_updates">Remove location updates</string>
+    <string name="location_updated">Location Updated: %1$s</string>
+    <string name="LastLong">LastLong</string>
+    <string name="LastLat">LastLati</string>
+    <string name="label_bpm">BPM</string>
+
+    <string name="label_first_step_value">100</string>
+    <string name="label_steps">steps</string>
+    <string name="label_first_step">firstStep</string>
+    <string name="label_last_step">lastStep</string>
+    <string name="label_last_step_upd">lastStepUpdated</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="label_welcome_back">Welcome back</string>
+    <string name="label_setting_up">Setting up...</string>
+</resources>
