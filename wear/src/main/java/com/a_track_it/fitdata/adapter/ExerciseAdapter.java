@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.a_track_it.fitdata.R;
-import com.a_track_it.fitdata.common.model.Exercise;
-import com.a_track_it.fitdata.common.model.Utilities;
+import com.a_track_it.fitdata.data_model.Exercise;
+import com.a_track_it.fitdata.user_model.Utilities;
 
 import java.util.ArrayList;
 

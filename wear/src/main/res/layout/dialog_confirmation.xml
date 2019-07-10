@@ -18,7 +18,7 @@
         android:layout_height="0dp"
         android:layout_gravity="center"
         android:padding="@dimen/button_icon_padding"
-        android:background="@color/colorAccentDark"
+        android:background="@color/my_app_primary_color"
         android:textSize="@dimen/confirm_msg_text_size"
         tools:text="This is an example message"
         android:textColor="@color/semiWhite"
@@ -37,7 +37,7 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:focusableInTouchMode="true"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/my_app_primary_variant_color"
             android:src="@drawable/ic_outline_check_white"
             android:layout_height="match_parent"><requestFocus/>
         </ImageButton>

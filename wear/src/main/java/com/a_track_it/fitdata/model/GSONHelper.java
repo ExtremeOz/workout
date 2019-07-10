@@ -6,13 +6,13 @@ import android.util.Log;
 
 import com.a_track_it.fitdata.activity.IDataLoaderCallback;
 import com.a_track_it.fitdata.common.Constants;
-import com.a_track_it.fitdata.common.model.Utilities;
-import com.a_track_it.fitdata.common.model.Workout;
-import com.a_track_it.fitdata.common.model.WorkoutSet;
+import com.a_track_it.fitdata.user_model.Utilities;
+import com.a_track_it.fitdata.data_model.Workout;
+import com.a_track_it.fitdata.data_model.WorkoutSet;
 import com.google.gson.Gson;
 
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
@@ -592,10 +592,12 @@ public class GSONHelper {
         final int bufferSize = 1024;
         final char[] buffer = new char[bufferSize];
         final StringBuilder out = new StringBuilder();
-        FileInputStream inputStream;
+        InputStream inputStream;
         String result = "";
         try {
-            inputStream = mContext.openFileInput(filename);
+            //inputStream = mContext.openFileInput(filename);
+
+            inputStream = this.getClass().getClassLoader().getResourceAsStream(filename);
             Reader in = new InputStreamReader(inputStream, "UTF-8");
             for (; ; ) {
                 int rsz = in.read(buffer, 0, buffer.length);

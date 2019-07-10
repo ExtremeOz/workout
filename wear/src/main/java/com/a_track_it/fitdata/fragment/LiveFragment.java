@@ -19,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -29,10 +28,10 @@ import androidx.wear.ambient.AmbientModeSupport;
 
 import com.a_track_it.fitdata.R;
 import com.a_track_it.fitdata.common.Constants;
-import com.a_track_it.fitdata.common.model.Utilities;
-import com.a_track_it.fitdata.common.model.Workout;
-import com.a_track_it.fitdata.common.model.WorkoutSet;
-import com.a_track_it.fitdata.model.MessagesViewModel;
+import com.a_track_it.fitdata.data_model.Workout;
+import com.a_track_it.fitdata.data_model.WorkoutSet;
+import com.a_track_it.fitdata.user_model.MessagesViewModel;
+import com.a_track_it.fitdata.model.SavedStateViewModel;
 import com.a_track_it.fitdata.model.SessionViewModel;
 
 /**
@@ -87,16 +86,15 @@ public class LiveFragment extends Fragment {
     private WorkoutSet mSet;
     private OnLiveFragmentInteractionListener mListener;
     private MessagesViewModel messagesViewModel;
+    private SavedStateViewModel savedStateViewModel;
     private SessionViewModel sessionViewModel;
-
     private int mGoalDuration;
     private int mGoalSteps;
 
     private int mMessageSource = 0;
-    private boolean mIsGym;
-    private boolean mIsShoot;
 
-   // private SessionViewModel sessionViewModel;
+
+
     public LiveFragment() {
         // Required empty public constructor
     }
@@ -133,12 +131,19 @@ public class LiveFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
-        mIsShoot = false; mIsGym = false;
+        try {
+            messagesViewModel = ViewModelProviders.of(requireActivity()).get(MessagesViewModel.class);
+            savedStateViewModel = ViewModelProviders.of(requireActivity()).get(SavedStateViewModel.class);
+            sessionViewModel = ViewModelProviders.of(requireActivity()).get(SessionViewModel.class);
+        }catch (IllegalStateException ise){
+            Log.e(TAG, "illegal state on view models " + ise.getLocalizedMessage());
+        }
+
         if (args != null) {
             if (args.containsKey(ARG_LIVEPAGE_ACTIVITY_ID)) {
                 mActivityID = args.getInt(ARG_LIVEPAGE_ACTIVITY_ID);
-                mIsGym = (mWorkout != null) && Utilities.isGymWorkout(mActivityID);
-                mIsShoot = (mWorkout != null) && Utilities.isShooting(mActivityID);
+                //mIsGym = (mWorkout != null) && Utilities.isGymWorkout(mActivityID);
+                //mIsShoot = (mWorkout != null) && Utilities.isShooting(mActivityID);
             }
             if (args.containsKey(ARG_LIVEPAGE_IMAGE_ID)) mParam1 = args.getInt(ARG_LIVEPAGE_IMAGE_ID);
             if (args.containsKey(ARG_LIVEPAGE_TEXT_ID)) mParam2 = args.getString(ARG_LIVEPAGE_TEXT_ID);
@@ -148,12 +153,7 @@ public class LiveFragment extends Fragment {
             if (args.containsKey(ARG_LIVEPAGE_DURATION_ID)) mGoalDuration = args.getInt(ARG_LIVEPAGE_DURATION_ID);
             if (args.containsKey(ARG_LIVEPAGE_STEPS_ID)) mGoalSteps = args.getInt(ARG_LIVEPAGE_STEPS_ID);
         }
-        try {
-            messagesViewModel = ViewModelProviders.of(requireActivity()).get(MessagesViewModel.class);
-            sessionViewModel = ViewModelProviders.of(requireActivity()).get(SessionViewModel.class);
-        }catch (IllegalStateException ise){
-            Log.e(TAG, "illegal state on view models " + ise.getLocalizedMessage());
-        }
+
     }
 
     @Override
@@ -191,7 +191,7 @@ public class LiveFragment extends Fragment {
             //mImageViewTwo.setImageResource(mParam1);
             //mImageViewTwo.setColorFilter(ContextCompat.getColor(getActivity(), android.R.color.white), PorterDuff.Mode.SRC_IN);
         }
-        if (!mParam2.equals("ATrackIt")) {
+        if ((mParam2!= null) && (!mParam2.equals("ATrackIt"))) {
             if (mParam3 > 0) {
               //  rootView.findViewById(R.id.live_linear_title).setBackgroundColor(getActivity().getColor(mParam3));
             }
@@ -200,10 +200,10 @@ public class LiveFragment extends Fragment {
             if (mParam2.length() > 0) mTextView.setText(mParam2);
 
         } else {
-            mParam3 = ContextCompat.getColor(context, R.color.colorAccent);
+            mParam3 = ContextCompat.getColor(context, R.color.my_app_background_color);
             // crucial setting text
-            if (mParam2.length() > 0) mTextView.setText(mParam2);
-            rootView.findViewById(R.id.live_linear_title).setBackgroundColor(ContextCompat.getColor(context, mParam3));
+            if ((mParam2!= null) && (mParam2.length() > 0)) mTextView.setText(mParam2);
+            rootView.findViewById(R.id.live_linear_title).setBackgroundColor(mParam3);
         }
 
         messagesViewModel.OtherMessage().observe(this, new Observer<String>() {
@@ -349,6 +349,7 @@ public class LiveFragment extends Fragment {
         boolean DoBurnInProtection =
                 ambientDetails.getBoolean(AmbientModeSupport.EXTRA_BURN_IN_PROTECTION, false);
         if (getActivity() == null) return;
+
         Resources resources = getActivity().getResources();
         // Convert image to grayscale for ambient mode.
         mImageViewColorFilter = mImageViewOne.getColorFilter();
@@ -440,8 +441,8 @@ public class LiveFragment extends Fragment {
             mSessionLive = (mWorkout.start > 0);
 
         }
-        mWorkout = sessionViewModel.getWorkout().getValue();
-        mSet = sessionViewModel.getWorkoutSet().getValue();
+        mWorkout = savedStateViewModel.getActiveWorkout().getValue();
+        mSet = savedStateViewModel.getActiveWorkoutSet().getValue();
 
         mSessionLive = (mWorkout.start > 0);
         mRestDuration = (mWorkout == null) ? 0 : mWorkout.rest_duration;
@@ -454,16 +455,4 @@ public class LiveFragment extends Fragment {
 
     }
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt(LiveFragment.ARG_LIVEPAGE_ACTIVITY_ID, mActivityID);
-        outState.putInt(LiveFragment.ARG_LIVEPAGE_IMAGE_ID, mParam1);
-        outState.putString(LiveFragment.ARG_LIVEPAGE_TEXT_ID, mParam2);
-        outState.putInt(LiveFragment.ARG_LIVEPAGE_COLOR_ID, mParam3);
-        outState.putLong(LiveFragment.ARG_LIVEPAGE_WORKOUT_ID, mSessionID);
-        outState.putLong(LiveFragment.ARG_LIVEPAGE_WORKOUTSET_ID, mSetID);
-        outState.putInt(ARG_LIVEPAGE_STEPS_ID, mGoalSteps);
-        outState.putInt(ARG_LIVEPAGE_DURATION_ID, mGoalDuration);
-    }
 }

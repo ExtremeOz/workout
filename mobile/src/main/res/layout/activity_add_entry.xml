@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
     android:id="@+id/container"
-    tools:context=".AddEntryActivity">
+    tools:context=".activity.AddEntryActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:elevation="4dp"
@@ -32,7 +32,7 @@
         <Button
             android:id="@+id/save_button"
             style="@style/ButtonAppearance.BarButton"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/my_app_primary_variant_color"
             android:text="@string/save_button_text" />
     </LinearLayout>
 </RelativeLayout>

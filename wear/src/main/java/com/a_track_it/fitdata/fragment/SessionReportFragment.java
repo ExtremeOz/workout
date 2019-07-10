@@ -17,10 +17,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.a_track_it.fitdata.R;
-import com.a_track_it.fitdata.common.model.Utilities;
-import com.a_track_it.fitdata.common.model.Workout;
-import com.a_track_it.fitdata.common.model.WorkoutSet;
-import com.a_track_it.fitdata.model.MessagesViewModel;
+import com.a_track_it.fitdata.user_model.Utilities;
+import com.a_track_it.fitdata.data_model.Workout;
+import com.a_track_it.fitdata.data_model.WorkoutSet;
+import com.a_track_it.fitdata.user_model.MessagesViewModel;
+import com.a_track_it.fitdata.model.SavedStateViewModel;
 import com.a_track_it.fitdata.model.SessionViewModel;
 
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class SessionReportFragment extends Fragment {
     public static final String ARG_TIMED = "TIMED_ID";
     private SessionViewModel sessionViewModel;
     private MessagesViewModel messagesViewModel;
+    private SavedStateViewModel savedStateViewModel;
     private OnSessionReportInteraction mListener;
     private int mIcon;
     private int mColor;
@@ -91,8 +93,13 @@ public class SessionReportFragment extends Fragment {
             mSetCount = mWorkoutSet.setCount;
             restDuration = bundle.getLong(ARG_TIMED);
 
-            messagesViewModel = ViewModelProviders.of(requireActivity()).get(MessagesViewModel.class);
-            sessionViewModel = ViewModelProviders.of(requireActivity()).get(SessionViewModel.class);
+            try {
+                messagesViewModel = ViewModelProviders.of(requireActivity()).get(MessagesViewModel.class);
+                savedStateViewModel = ViewModelProviders.of(requireActivity()).get(SavedStateViewModel.class);
+                sessionViewModel = ViewModelProviders.of(requireActivity()).get(SessionViewModel.class);
+            }catch (IllegalStateException ise){
+                Log.e(TAG, "illegal state on viewmodels " + ise.getLocalizedMessage());
+            }
         }
     }
 
@@ -111,9 +118,11 @@ public class SessionReportFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Context context = getContext();
+        mWorkout = savedStateViewModel.getActiveWorkout().getValue();
         if (mWorkout != null){
             mSessionTextView.setText(mWorkout.shortText());
         }
+        mWorkoutSet = savedStateViewModel.getActiveWorkoutSet().getValue();
         if (mWorkoutSet != null)
             mSet1TextView.setText(mWorkoutSet.shortText());
 
@@ -132,14 +141,14 @@ public class SessionReportFragment extends Fragment {
             }
         }
         if (mSessionTextView.getText().length() == 0){
-            Workout workout = sessionViewModel.getWorkout().getValue();
+            Workout workout = savedStateViewModel.getActiveWorkout().getValue();
             if (workout != null) {
                 mSessionTextView.setText(workout.shortText());
                 Log.i(TAG, "workout from view model " + workout.setCount);
             }
         }
         if (mSet1TextView.getText().length() == 0){
-            WorkoutSet set = sessionViewModel.getWorkoutSet().getValue();
+            WorkoutSet set = savedStateViewModel.getActiveWorkoutSet().getValue();
             if (set != null){
                 mSet1TextView.setText(set.shortText());
                 Log.i(TAG, "workout from view model " + set.setCount);

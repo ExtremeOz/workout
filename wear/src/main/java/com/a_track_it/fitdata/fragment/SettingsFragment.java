@@ -13,7 +13,7 @@ import android.widget.CompoundButton;
 import android.widget.ToggleButton;
 
 import com.a_track_it.fitdata.R;
-import com.a_track_it.fitdata.model.UserPreferences;
+import com.a_track_it.fitdata.user_model.UserPreferences;
 
 /**
  * to handle interaction events.

@@ -27,9 +27,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <!-- must be API level 22 or greater -->
         <uses-library
-            android:name="com.google.android.wearable"
-            android:required="true" />
+            android:name="com.google.android.wearable" android:required="true" />
         <!--
                Set to true if your app is Standalone, that is, it does not require the handheld
                app to run.
@@ -47,6 +47,12 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.InitialActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.RoomActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.NewWordActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.SplashActivity"
@@ -125,6 +131,9 @@
                     android:scheme="wear" />
             </intent-filter>
         </service>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="66296b93b004277db3a3392eb9ecdef5e5c03210" />
     </application>
 
 </manifest>

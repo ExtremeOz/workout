@@ -5,6 +5,7 @@
     values-round/strings.xml for round devices.
     -->
     <string name="hello_world">Hello Square World!</string>
+    <string name="hint_word">Word…</string>
     <string name="no_network_connection">No network connection</string>
     <string name="signing_in_google">Signing in to Google</string>
     <string name="connecting_google">Connecting to Google Fit</string>
@@ -92,8 +93,10 @@ Visit https://www.a-track-it.com for all product and policy information and feed
     <string name="location_updated">Location Updated: %1$s</string>
     <string name="LastLong">LastLong</string>
     <string name="LastLat">LastLati</string>
+    <string name="label_subs">subs_</string>
+    <string name="label_sensor">sens_</string>
     <string name="label_bpm">BPM</string>
-
+    <string name="label_clock">clock</string>
     <string name="label_first_step_value">100</string>
     <string name="label_steps">steps</string>
     <string name="label_first_step">firstStep</string>
@@ -102,4 +105,8 @@ Visit https://www.a-track-it.com for all product and policy information and feed
     <string name="title_activity_splash">SplashActivity</string>
     <string name="label_welcome_back">Welcome back</string>
     <string name="label_setting_up">Setting up...</string>
+    <string name="new_word">New</string>
+    <string name="hint_text">enter a word</string>
+    <string name="button_save">Save</string>
+    <string name="empty_not_saved">Word not saved because it is empty.</string>
 </resources>

@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="Theme.Wearable">
-        <item name="colorPrimaryDark">@color/colorAccentDark</item>
-        <item name="colorAccent">@color/colorPrimaryLight</item>
-
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
         <item name="android:windowNoTitle">true</item>
-        <item name="windowActionBar">false</item>
-
         <!-- Original AppCompat attributes. -->
         <item name="colorPrimary">@color/my_app_primary_color</item>
         <item name="colorSecondary">@color/my_app_secondary_color</item>
         <item name="android:colorBackground">@color/my_app_background_color</item>
+        <item name="colorPrimaryDark">@color/my_app_primary_variant_color</item>
+
+        <item name="colorAccent">@color/primaryLightColor</item>
         <item name="colorError">@color/my_app_error_color</item>
 
         <!-- For the resting Spinner style -->
@@ -37,9 +35,47 @@
         <item name="textAppearanceCaption">@style/TextAppearance.MaterialComponents.Caption</item>
         <item name="textAppearanceButton">@style/TextAppearance.MaterialComponents.Button</item>
         <item name="textAppearanceOverline">@style/TextAppearance.MaterialComponents.Overline</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.MyApp.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.MyApp.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.MyApp.LargeComponent</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog</item>
+    </style>
+    <style name="Widget.MyApp.MyButton" parent="Widget.MaterialComponents.Button">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">6dp</item>
+        <item name="textAllCaps">false</item>
+        <item name="textSize">@dimen/image_button_text_size2</item>
+    </style>
+    <style name="Widget.MyApp.MyHomeText" parent="Widget.AppCompat.TextView">
+        <item name="textAllCaps">false</item>
+        <item name="android:textAlignment">center</item>
+        <item name="textSize">@dimen/recycler_simple_title_text_size</item>
+    </style>
+    <style name="Widget.MyApp.MyIconButton" parent="Widget.MaterialComponents.Button.Icon">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">6dp</item>
+        <item name="backgroundTint">@color/my_app_primary_color</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">@dimen/button_icon_padding</item>
+        <item name="iconSize">@dimen/home_button_icon_size</item>
+        <item name="iconTint">@color/semiWhite</item>
+        <item name="textAllCaps">false</item>
+        <item name="textSize">@dimen/image_button_text_size2</item>
+    </style>
+    <style name="ShapeAppearance.MyApp.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">6dp</item>
     </style>
 
+    <style name="ShapeAppearance.MyApp.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">8dp</item>
+    </style>
 
+    <style name="ShapeAppearance.MyApp.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">4dp</item>
+    </style>
 
     <style name="AppTheme.myAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:windowNoTitle">true</item>
@@ -48,7 +84,17 @@
         <!-- Used for the title and text -->
         <item name="android:textColorPrimary">#FFFFFF</item>
         <!-- Used for the background -->
-        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:background">@color/my_app_primary_variant_color</item>
+    </style>
+    <!-- The default font for RecyclerView items is too small.
+        The margin is a simple delimiter between the words. -->
+    <style name="word_title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">26dp</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginBottom">6dp</item>
+        <item name="android:paddingLeft">8dp</item>
     </style>
     <style name="Log" parent="Theme.AppCompat.Light">
         <item name="android:typeface">monospace</item>
@@ -71,9 +117,9 @@
     </style>
 
     <!-- The launcher theme. It sets the main window background to the launch_screen drawable -->
-    <style name="AppTheme.Launcher">
+    <style name="AppTheme.Launcher" parent="Theme.MaterialComponents.Light.Bridge">
     <item name="android:windowBackground">@drawable/layer_list</item>
-    <!-- Optional, on Android 5+ you can modify the colorPrimaryDark color to match the windowBackground color for further branding-->
-    <!-- <item name="colorPrimaryDark">@android:color/white</item> -->
+    <!-- Optional, on Android 5+ you can modify the my_app_primary_variant_color color to match the windowBackground color for further branding-->
+    <!-- <item name="my_app_primary_variant_color">@android:color/white</item> -->
     </style>
 </resources>

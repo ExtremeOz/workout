@@ -1,4 +1,4 @@
-package com.a_track_it.fitdata.model;
+package com.a_track_it.fitdata.user_model;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -20,6 +20,10 @@ public class UserPreferences {
         editor.putBoolean(label, value);
         // Commit the edits!
         editor.apply();
+    }
+    public static boolean getPrefByLabel(Context context, String label){
+        SharedPreferences settings = context.getApplicationContext().getSharedPreferences(PREFS_NAME, 0);
+        return settings.getBoolean(label,false);
     }
     public static void setPrefStringByLabel(Context context, String label, String value){
         SharedPreferences settings = context.getApplicationContext().getSharedPreferences(PREFS_NAME, 0);

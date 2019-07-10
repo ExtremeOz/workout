@@ -5,20 +5,20 @@ import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 import com.a_track_it.fitdata.activity.IDataLoaderCallback;
 import com.a_track_it.fitdata.common.Constants;
-import com.a_track_it.fitdata.common.model.Bodypart;
-import com.a_track_it.fitdata.common.model.Exercise;
-import com.a_track_it.fitdata.common.model.FitnessActivity;
-import com.a_track_it.fitdata.common.model.Utilities;
-import com.a_track_it.fitdata.common.model.Workout;
-import com.a_track_it.fitdata.common.model.WorkoutSet;
+import com.a_track_it.fitdata.data_model.Bodypart;
+import com.a_track_it.fitdata.data_model.Exercise;
+import com.a_track_it.fitdata.data_model.FitnessActivity;
+import com.a_track_it.fitdata.user_model.Utilities;
+import com.a_track_it.fitdata.data_model.Workout;
+import com.a_track_it.fitdata.data_model.WorkoutSet;
 import com.a_track_it.fitdata.service.AsyncLoadReferencesTask;
 
 import java.util.ArrayList;
-
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 
 public class DataRepository implements IDataLoaderCallback {

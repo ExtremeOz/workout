@@ -9,10 +9,10 @@ import com.a_track_it.fitdata.activity.IInitialActivityCallback;
 import com.a_track_it.fitdata.common.Constants;
 import com.a_track_it.fitdata.common.R;
 import com.a_track_it.fitdata.common.ReferencesTools;
-import com.a_track_it.fitdata.common.model.Bodypart;
-import com.a_track_it.fitdata.common.model.Exercise;
-import com.a_track_it.fitdata.common.model.FitnessActivity;
-import com.a_track_it.fitdata.common.model.Utilities;
+import com.a_track_it.fitdata.data_model.Bodypart;
+import com.a_track_it.fitdata.data_model.Exercise;
+import com.a_track_it.fitdata.data_model.FitnessActivity;
+import com.a_track_it.fitdata.user_model.Utilities;
 import com.google.gson.Gson;
 
 import java.io.FileOutputStream;

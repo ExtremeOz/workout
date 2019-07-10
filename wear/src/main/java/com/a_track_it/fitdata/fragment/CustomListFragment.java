@@ -28,13 +28,13 @@ import com.a_track_it.fitdata.adapter.UserPreferencesAdapter;
 import com.a_track_it.fitdata.adapter.WorkoutAdapter;
 import com.a_track_it.fitdata.common.Constants;
 import com.a_track_it.fitdata.common.ReferencesTools;
-import com.a_track_it.fitdata.common.model.Bodypart;
-import com.a_track_it.fitdata.common.model.Exercise;
-import com.a_track_it.fitdata.common.model.FitnessActivity;
-import com.a_track_it.fitdata.common.model.Utilities;
-import com.a_track_it.fitdata.common.model.Workout;
-import com.a_track_it.fitdata.common.model.WorkoutSet;
-import com.a_track_it.fitdata.model.UserPreferences;
+import com.a_track_it.fitdata.data_model.Bodypart;
+import com.a_track_it.fitdata.data_model.Exercise;
+import com.a_track_it.fitdata.data_model.FitnessActivity;
+import com.a_track_it.fitdata.user_model.Utilities;
+import com.a_track_it.fitdata.data_model.Workout;
+import com.a_track_it.fitdata.data_model.WorkoutSet;
+import com.a_track_it.fitdata.user_model.UserPreferences;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -81,11 +81,10 @@ public class CustomListFragment extends DialogFragment {
     public CustomListFragment() {
         // Required empty public constructor
     }
-    public static CustomListFragment create(int iType, int iSetIndex, int iPreset) {
+    public static CustomListFragment create(int iType, int iPreset) {
         final CustomListFragment fragment = new CustomListFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_TYPE, iType);
-        args.putInt(ARG_SET, iSetIndex);
         args.putInt(ARG_PRESET, iPreset);
         fragment.setArguments(args);
         return fragment;
@@ -100,7 +99,7 @@ public class CustomListFragment extends DialogFragment {
     }
 
     public interface OnCustomListItemSelectedListener {
-        void onCustomItemSelected(int type, long position, String title, int resid, int set_index, String identifer);
+        void onCustomItemSelected(int type, long position, String title, int resid, String identifer);
     }
 
     @Override
@@ -108,12 +107,10 @@ public class CustomListFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mLoadType = getArguments().getInt(ARG_TYPE);
-            mSetIndex = getArguments().getInt(ARG_SET);
             mPreset = getArguments().getInt(ARG_PRESET);
         }else {
             if ((savedInstanceState != null) && (savedInstanceState.containsKey(ARG_TYPE))) {
                 mLoadType = savedInstanceState.getInt(ARG_TYPE);
-                mSetIndex = savedInstanceState.getInt(ARG_SET);
                 mPreset = savedInstanceState.getInt(ARG_PRESET);
             }
         }
@@ -125,7 +122,6 @@ public class CustomListFragment extends DialogFragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putInt(ARG_TYPE, mLoadType);
-        outState.putInt(ARG_SET, mSetIndex);
         outState.putInt(ARG_PRESET, mPreset);
         super.onSaveInstanceState(outState);
 
@@ -146,7 +142,7 @@ public class CustomListFragment extends DialogFragment {
             mList_Title1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mCallback.onCustomItemSelected(mLoadType, mSetIndex, null, mDay, mMonth, null);
+                    mCallback.onCustomItemSelected(mLoadType,  mDay, null, mMonth, null);
                 }
             });
 
@@ -178,7 +174,8 @@ public class CustomListFragment extends DialogFragment {
             mList_Title2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mCallback.onCustomItemSelected(mLoadType, mSetIndex, null, mDay, mMonth, null);
+                    mCallback.onCustomItemSelected(mLoadType,  mDay, "", mMonth,null);
+                    CustomListFragment.this.dismiss();
                 }
             });
             mWearableRecyclerView2 = rootView.findViewById(R.id.month_list);
@@ -201,6 +198,7 @@ public class CustomListFragment extends DialogFragment {
                 public void onItemClick(View view, String value, int pos) {
                     Log.d(TAG, "MONTH Set value " + value);
                     mMonth = Integer.parseInt(value);
+                    CustomListFragment.this.dismiss();
                 }
             });
             Log.d(TAG, "Month size " + Integer.toString(monthAdapter.getItemCount()));
@@ -237,7 +235,8 @@ public class CustomListFragment extends DialogFragment {
                     public void onItemClick(View view, FitnessActivity viewModel) {
                         //  callback to MainActivity interface
                         Log.d(TAG, "OnCustomItemSelected " + viewModel.toString());
-                        mCallback.onCustomItemSelected(mLoadType, viewModel._id, viewModel.name, viewModel.resource_id, viewModel.color, viewModel.identifier);
+                        mCallback.onCustomItemSelected(mLoadType, viewModel._id, viewModel.name, viewModel.resource_id, viewModel.identifier);
+                        CustomListFragment.this.dismiss();
                     }
                 });
          //   }
@@ -250,7 +249,8 @@ public class CustomListFragment extends DialogFragment {
             workoutAdapter.setOnItemClickListener(new WorkoutAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, Workout viewModel) {
-                    mCallback.onCustomItemSelected(mLoadType, viewModel._id, viewModel.activityName, 0,mSetIndex, "");
+                    mCallback.onCustomItemSelected(mLoadType, viewModel._id, viewModel.activityName, 0, "");
+                    CustomListFragment.this.dismiss();
                 }
             });
             mWearableRecyclerView.setAdapter(workoutAdapter);
@@ -262,7 +262,8 @@ public class CustomListFragment extends DialogFragment {
                     @Override
                     public void onItemClick(View view, Bodypart viewModel) {
                         //  callback to MainActivity interface
-                        mCallback.onCustomItemSelected(mLoadType, viewModel._id, viewModel.shortName, 0,mSetIndex, "");
+                        mCallback.onCustomItemSelected(mLoadType, viewModel._id, viewModel.shortName, 0, "");
+                        CustomListFragment.this.dismiss();
                     }
                 });
             }
@@ -275,7 +276,8 @@ public class CustomListFragment extends DialogFragment {
                     @Override
                     public void onItemClick(View view, Exercise viewModel) {
                         //  callback to MainActivity interface
-                        mCallback.onCustomItemSelected(mLoadType, viewModel._id, viewModel.name, 0,mSetIndex, "");
+                        mCallback.onCustomItemSelected(mLoadType, viewModel._id, viewModel.name, 0, "");
+                        CustomListFragment.this.dismiss();
                     }
                 });
             }
@@ -290,9 +292,10 @@ public class CustomListFragment extends DialogFragment {
                     public void onItemClick(View view, UserPreferencesAdapter.UserPreferenceItem viewModel) {
                         //  callback to MainActivity interface
                         if (viewModel.value)
-                            mCallback.onCustomItemSelected(mLoadType, viewModel._id, viewModel.label, 1,0, "");
+                            mCallback.onCustomItemSelected(mLoadType, viewModel._id, viewModel.label, 1, "");
                         else
-                            mCallback.onCustomItemSelected(mLoadType, viewModel._id, viewModel.label, 0,0, "");
+                            mCallback.onCustomItemSelected(mLoadType, viewModel._id, viewModel.label, 0, "");
+                        CustomListFragment.this.dismiss();
                     }
                 });
             }
@@ -303,7 +306,8 @@ public class CustomListFragment extends DialogFragment {
               setsRepsWeightAdapter.setOnItemClickListener(new SetsRepsWeightAdapter.OnItemClickListener() {
                   @Override
                   public void onItemClick(View view, String value, int pos) {
-                      mCallback.onCustomItemSelected(mLoadType, Integer.parseInt(value), value, 0,mSetIndex, "");
+                      mCallback.onCustomItemSelected(mLoadType, Integer.parseInt(value), value, 0, "");
+                      CustomListFragment.this.dismiss();
                 }
             });
             mWearableRecyclerView.setAdapter(setsRepsWeightAdapter);
@@ -313,7 +317,8 @@ public class CustomListFragment extends DialogFragment {
             setsRepsWeightAdapter.setOnItemClickListener(new SetsRepsWeightAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, String value, int pos) {
-                    mCallback.onCustomItemSelected(mLoadType,++pos, value, 0,mSetIndex, "");
+                    mCallback.onCustomItemSelected(mLoadType,++pos, value, 0, "");
+                    CustomListFragment.this.dismiss();
                 }
             });
             mWearableRecyclerView.setAdapter(setsRepsWeightAdapter);
@@ -323,7 +328,8 @@ public class CustomListFragment extends DialogFragment {
             setsRepsWeightAdapter.setOnItemClickListener(new SetsRepsWeightAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, String value, int pos) {
-                    mCallback.onCustomItemSelected(mLoadType,++pos, value, 0,mSetIndex, "");
+                    mCallback.onCustomItemSelected(mLoadType,++pos, value, 0, "");
+                    CustomListFragment.this.dismiss();
                 }
             });
             mWearableRecyclerView.setAdapter(setsRepsWeightAdapter);
@@ -336,7 +342,8 @@ public class CustomListFragment extends DialogFragment {
             setsRepsWeightAdapter.setOnItemClickListener(new SetsRepsWeightAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, String value, int pos) {
-                    mCallback.onCustomItemSelected(mLoadType, ++pos, value, 0,mSetIndex, "");
+                    mCallback.onCustomItemSelected(mLoadType, ++pos, value, 0, "");
+                    CustomListFragment.this.dismiss();
                 }
             });
             mWearableRecyclerView.setAdapter(setsRepsWeightAdapter);

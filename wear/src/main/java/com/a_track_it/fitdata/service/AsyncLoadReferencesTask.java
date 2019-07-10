@@ -6,9 +6,9 @@ import android.util.Log;
 
 import com.a_track_it.fitdata.activity.IDataLoaderCallback;
 import com.a_track_it.fitdata.common.Constants;
-import com.a_track_it.fitdata.common.model.Bodypart;
-import com.a_track_it.fitdata.common.model.Exercise;
-import com.a_track_it.fitdata.common.model.FitnessActivity;
+import com.a_track_it.fitdata.data_model.Bodypart;
+import com.a_track_it.fitdata.data_model.Exercise;
+import com.a_track_it.fitdata.data_model.FitnessActivity;
 import com.google.gson.Gson;
 
 import java.io.FileInputStream;

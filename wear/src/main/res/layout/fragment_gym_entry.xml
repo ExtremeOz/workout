@@ -17,16 +17,14 @@
             android:layout_height="@dimen/bottom_button_height"
             android:layout_gravity="center"
             android:orientation="horizontal">
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:id="@+id/gym_activity_button"
                 android:layout_margin="@dimen/button_icon_padding"
-                android:background="@drawable/bg_selector"
                 android:text="@string/label_activity"
-                style="?android:attr/buttonBarButtonStyle"
+                style="@style/ShapeAppearance.MyApp.SmallComponent"
                 android:textSize="@dimen/image_button_text_size"
-                android:textColor="@color/white"
                 android:textAllCaps="false"
                 android:drawableBottom="@drawable/ic_strong_man_silhouette"
                 android:drawableTint="@color/semiWhite"
@@ -35,23 +33,21 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/recycler_row_height"
+            android:layout_height="@dimen/recycler_title_height"
             android:id="@+id/gym_row2_container"
             style="?android:attr/buttonBarStyle"
             android:layout_gravity="center"
             android:orientation="horizontal">
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/bodypart_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:layout_margin="@dimen/button_icon_padding"
-                style="?android:attr/buttonBarButtonStyle"
-                android:background="@drawable/bg_selector"
+                style="@style/ShapeAppearance.MyApp.SmallComponent"
                 android:contentDescription="@string/label_bodypart"
                 android:textAllCaps="true"
                 android:textSize="@dimen/image_button_text_size"
-                android:textColor="@color/white"
                 android:text="@string/label_bodypart"/>
         </LinearLayout>
         <LinearLayout
@@ -61,116 +57,103 @@
             android:layout_height="@dimen/recycler_title_height"
             android:layout_gravity="center"
             android:orientation="horizontal">
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/exercise_button"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:contentDescription="@string/label_exercise"
                 android:drawableBottom="@drawable/ic_microphone_white"
-                style="?android:attr/buttonBarButtonStyle"
-                android:background="@drawable/bg_selector"
+                style="@style/ShapeAppearance.MyApp.SmallComponent"
                 android:textAllCaps="true"
                 android:layout_margin="@dimen/button_icon_padding"
                 android:gravity="center"
                 android:text="@string/label_exercise"
-                android:textColor="@color/white"
                 android:textSize="@dimen/image_button_text_size_lessless" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/weight_button"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/bg_selector"
                 android:contentDescription="@string/label_weight"
                 android:gravity="center"
                 android:layout_margin="@dimen/button_icon_padding"
                 android:drawableBottom="@drawable/ic_microphone_white"
-
-                style="?android:attr/buttonBarButtonStyle"
+                style="@style/ShapeAppearance.MyApp.SmallComponent"
                 android:text="@string/label_weight_units_kg"
                 android:textAllCaps="true"
-                android:textColor="@color/semiWhite"
                 android:textSize="@dimen/image_button_text_size_less" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/recycler_row_height"
+            android:layout_height="@dimen/recycler_title_height"
             android:id="@+id/gym_row5_container"
             style="?android:attr/buttonBarStyle"
             android:layout_gravity="center"
             android:orientation="horizontal">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/sets_button"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/button_icon_padding"
                 android:layout_weight="1"
-                style="?android:attr/buttonBarButtonStyle"
-                android:background="@drawable/bg_selector"
+                style="@style/ShapeAppearance.MyApp.SmallComponent"
                 android:contentDescription="@string/label_set"
                 android:gravity="center"
                 android:text="@string/label_set"
                 android:textAllCaps="true"
-                android:textColor="@color/white"
                 android:textSize="@dimen/image_button_text_size_less" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/reps_button"
-                style="?android:attr/buttonBarButtonStyle"
+                style="@style/ShapeAppearance.MyApp.SmallComponent"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/button_icon_padding"
                 android:layout_weight="1"
-                android:background="@drawable/bg_selector"
                 android:contentDescription="@string/label_rep"
                 android:gravity="center"
                 android:text="@string/label_rep"
                 android:textAllCaps="true"
-                android:textColor="@color/white"
                 android:textSize="@dimen/image_button_text_size_less" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/recycler_row_height"
+            android:layout_height="@dimen/recycler_title_height"
             android:id="@+id/gym_row6_container"
             style="?android:attr/buttonBarStyle"
             android:layout_gravity="center"
             android:orientation="horizontal">
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/gym_build_button"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/button_icon_padding"
                 android:gravity="center"
-                android:background="@drawable/bg_selector"
                 android:contentDescription="@string/label_build"
-                style="?android:attr/buttonBarButtonStyle"
+                style="@style/ShapeAppearance.MyApp.SmallComponent"
                 android:textAllCaps="true"
                 android:textSize="@dimen/image_button_text_size_less"
-                android:textColor="@color/white"
                 android:text="@string/label_build"/>
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/gym_rest_button"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/button_icon_padding"
                 android:gravity="center"
-                android:background="@drawable/bg_selector"
                 android:contentDescription="@string/label_rest_countdown"
-                style="?android:attr/buttonBarButtonStyle"
+                style="@style/ShapeAppearance.MyApp.SmallComponent"
                 android:textAllCaps="true"
                 android:textSize="@dimen/image_button_text_size_less"
-                android:textColor="@color/white"
                 android:text="@string/label_rest_countdown"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/recycler_row_height"
+            android:layout_height="@dimen/recycler_title_height"
             android:id="@+id/gym_row8_container"
             style="?android:attr/buttonBarStyle"
             android:layout_gravity="center"
@@ -185,7 +168,7 @@
                 android:layout_margin="1dp"
                 android:text="@string/app_name"
                 android:textAlignment="center"
-                android:textColor="@color/white"
+
                 android:background="@drawable/bg_color_green_dark"
                 android:textAllCaps="false"
                 android:textSize="@dimen/image_button_text_size" />
@@ -199,7 +182,7 @@
                 android:layout_margin="1dp"
                 android:background="@drawable/bg_color_green_dark"
                 android:textAlignment="center"
-                android:textColor="@color/white"
+
                 android:textAllCaps="false"
                 android:textSize="@dimen/image_button_text_size" />
         </LinearLayout>
@@ -210,20 +193,18 @@
             style="?android:attr/buttonBarStyle"
             android:layout_gravity="center"
             android:orientation="horizontal">
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/gym_start_button"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:background="@drawable/bg_selector"
                 android:contentDescription="@string/session_start"
                 android:layout_margin="@dimen/button_icon_padding"
-                style="?android:attr/buttonBarButtonStyle"
+                style="@style/ShapeAppearance.MyApp.SmallComponent"
                 android:drawableEnd="@drawable/ic_forward_white"
                 android:drawableTint="@color/white"
                 android:textAllCaps="true"
-                android:textColor="@color/white"
                 android:textSize="@dimen/image_button_text_size"
                 android:text="@string/session_start"/>
         </LinearLayout>

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:boxedEdges="all"
+    tools:context=".activity.RoomActivity"
+    tools:deviceIds="wear">
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_room_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="@string/app_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:icon="@drawable/ic_home_page"
+        style="@style/Widget.MyApp.MyIconButton"/>
+    <TextView
+        android:id="@+id/textViewMsgLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_bpm"
+        android:textAlignment="center"
+        android:textColor="@color/my_app_color_on_primary"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewMsgCenter" />
+
+    <TextView
+        android:id="@+id/textViewMsgCenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_clock"
+        android:textAlignment="center"
+        android:textColor="@color/my_app_color_on_primary"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/button_room_home"
+        app:layout_constraintEnd_toEndOf="@+id/button_room_home"
+        app:layout_constraintStart_toStartOf="@+id/button_room_home" />
+
+    <TextView
+        android:id="@+id/textViewMsgRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_steps"
+        android:textAlignment="center"
+        android:textColor="@color/my_app_color_on_primary"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMsgCenter" />
+
+    <TextView
+        android:id="@+id/textViewCenter2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_new"
+        android:textColor="@color/my_app_color_on_primary"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMsgLeft" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCenter2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/home_image_view"
+                android:layout_width="@dimen/live_in_progress_size"
+                android:layout_height="@dimen/live_in_progress_size"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_launcher" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/home_action1_image"
+                android:layout_width="@dimen/home_button_width"
+                android:layout_height="@dimen/diag_button_size"
+                android:layout_gravity="center_horizontal"
+                android:hint="@string/action_homebtn_long_press"
+                android:text="@string/action_new_workout"
+                app:icon="@drawable/ic_gym_white"
+                style="@style/Widget.MyApp.MyIconButton" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/home_action2_image"
+                android:layout_width="@dimen/home_button_width"
+                android:layout_height="@dimen/diag_button_size"
+                android:hint="@string/action_homebtn_long_press"
+                android:text="@string/action_new_archery"
+                app:icon="@drawable/ic_archer_white"
+                android:layout_gravity="center_horizontal"
+                style="@style/Widget.MyApp.MyIconButton" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/home_action3_image"
+                android:layout_width="@dimen/home_button_width"
+                android:layout_height="@dimen/diag_button_size"
+                android:layout_gravity="center_horizontal"
+                android:hint="@string/action_homebtn_long_press"
+                android:text="@string/action_new_cardio"
+                app:icon="@drawable/ic_trail_running_shoe_white"
+                style="@style/Widget.MyApp.MyIconButton" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/home_action4_image"
+                android:layout_width="@dimen/home_button_width"
+                android:layout_height="@dimen/diag_button_size"
+                android:layout_margin="@dimen/home_button_margin"
+                android:layout_gravity="center_horizontal"
+                android:hint="@string/action_homebtn_long_press"
+                android:text="@string/action_new_run"
+                app:icon="@drawable/ic_running_white"
+                style="@style/Widget.MyApp.MyIconButton"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/home_action5_image"
+                android:layout_width="@dimen/home_button_width"
+                android:layout_height="@dimen/diag_button_size"
+                android:layout_margin="@dimen/home_button_margin"
+                android:gravity="center"
+                android:text="@string/action_new_sport"
+                android:hint="@string/action_homebtn_long_press"
+                app:icon="@drawable/ic_basketball_player_with_the_ball_white"
+                android:layout_gravity="center_horizontal"
+                style="@style/Widget.MyApp.MyIconButton"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/home_action6_image"
+                style="@style/Widget.MyApp.MyIconButton"
+                android:layout_width="@dimen/home_button_width"
+                android:layout_height="@dimen/diag_button_size"
+                android:layout_gravity="center_horizontal"
+                android:hint="@string/action_homebtn_long_press"
+                android:gravity="center"
+                android:text="@string/action_new_winter"
+                app:icon="@drawable/ic_winter_snow_flake_white"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/home_action7_image"
+                android:layout_width="@dimen/home_button_width"
+                android:layout_height="@dimen/diag_button_size"
+                android:layout_gravity="center_horizontal"
+                android:contentDescription="@string/action_new_water"
+                android:text="@string/action_new_water"
+                app:icon="@drawable/ic_swimmer_diving_to_water_white"
+                style="@style/Widget.MyApp.MyIconButton"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/home_action8_image"
+                style="@style/Widget.MyApp.MyIconButton"
+                android:layout_width="@dimen/home_button_width"
+                android:layout_height="@dimen/diag_button_size"
+                android:layout_gravity="center_horizontal"
+                android:contentDescription="@string/action_new_bike"
+                android:text="@string/action_new_bike"
+                app:icon="@drawable/ic_bike_white" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/home_action9_image"
+                style="@style/Widget.MyApp.MyIconButton"
+                android:layout_width="@dimen/home_button_width"
+                android:layout_height="@dimen/diag_button_size"
+                android:layout_gravity="center_horizontal"
+                android:contentDescription="@string/action_new_misc"
+                android:text="@string/action_new_misc"
+                app:icon="@drawable/ic_dancer_with_music_white" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/home_action10_image"
+                style="@style/Widget.MyApp.MyIconButton"
+                android:layout_width="@dimen/home_button_width"
+                android:layout_height="@dimen/diag_button_size"
+                android:layout_gravity="center_horizontal"
+                android:contentDescription="@string/action_new_misc"
+                android:text="@string/label_activity"
+                app:icon="@drawable/ic_sort_a_to_z_white" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/home_action11_image"
+                style="@style/Widget.MyApp.MyIconButton"
+                android:layout_width="@dimen/home_button_width"
+                android:layout_height="@dimen/diag_button_size"
+                android:layout_gravity="center_horizontal"
+                android:contentDescription="@string/nav_setting"
+                android:text="@string/nav_setting"
+                app:icon="@drawable/ic_settings_white" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

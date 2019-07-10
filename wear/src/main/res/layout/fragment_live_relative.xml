@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:id="@+id/live_linear_title"
         android:layout_height="@dimen/recycler_row_height"
-        android:background="@color/colorAccentDark"
+        android:background="@color/my_app_primary_variant_color"
         android:orientation="horizontal"
         android:baselineAligned="false">
         <RelativeLayout
@@ -56,7 +56,7 @@
         android:layout_height="@dimen/recycler_simple_row_height"
         android:layout_below="@id/live_linear_title"
         android:layout_centerHorizontal="true"
-        android:background="@color/colorAccentDark"
+        android:background="@color/my_app_primary_variant_color"
         android:drawableStart="@drawable/ic_clock"
         android:drawablePadding="2dp"
         android:drawableTint="@color/white"

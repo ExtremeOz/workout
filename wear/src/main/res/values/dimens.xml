@@ -39,7 +39,7 @@
     <dimen name="recyclerWorkoutSet_row_height">72dp</dimen>
     <dimen name="recyclerWorkoutSet_col_width">56dp</dimen>
     <dimen name="bottom_button_height">64dp</dimen>
-    <dimen name="home_button_margin">3dp</dimen>
+    <dimen name="home_button_margin">2dp</dimen>
     <dimen name="recycler_title_height">54dp</dimen>
     <dimen name="recycler_simplest_row_height">48dp</dimen>
     <dimen name="recycler_simple_row_height">36dp</dimen>
@@ -57,6 +57,7 @@
     <dimen name="image_button_text_size">12sp</dimen>
     <dimen name="image_button_text_size_less">10sp</dimen>
     <dimen name="image_button_text_size_lessless">8sp</dimen>
+    <dimen name="home_message_height">32dp</dimen>
     <dimen name="home_button_icon_size">18dp</dimen>
     <dimen name="home_title_text_size">16sp</dimen>
     <dimen name="home_title_text_size_ambient">20sp</dimen>
@@ -68,4 +69,6 @@
     <dimen name="live_image_view_padding">8dp</dimen>
     <dimen name="button_icon_padding">4dp</dimen>
     <dimen name="entry_card_spacing">4dp</dimen>
+    <dimen name="small_padding">6dp</dimen>
+    <dimen name="big_padding">16dp</dimen>
 </resources>

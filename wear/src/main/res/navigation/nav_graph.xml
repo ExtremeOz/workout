@@ -5,6 +5,8 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/homePageFragment">
     <action android:id="@+id/action_global_homePageFragment" app:destination="@id/homePageFragment" />
+    <action android:id="@+id/action_global_liveFragment"
+        app:popUpTo="@id/homePageFragment" />
     <fragment
         android:id="@+id/homePageFragment"
         android:name="com.a_track_it.fitdata.fragment.HomePageFragment"
@@ -13,9 +15,9 @@
         <action
             android:id="@+id/action_homePageFragment_to_sessionEntryFragment"
             app:destination="@id/sessionEntryFragment"
+            app:launchSingleTop="false"
             app:popUpTo="@id/homePageFragment"
-            app:popUpToInclusive="true"
-            app:launchSingleTop="true" />
+            app:popUpToInclusive="true" />
         <deepLink
             android:id="@+id/deepLink3"
             app:uri="www.a-track-it.com/home" />
@@ -25,24 +27,12 @@
         android:name="com.a_track_it.fitdata.fragment.SessionEntryFragment"
         android:label="fragment_session_entry"
         tools:layout="@layout/fragment_session_entry" >
-        <argument
-            android:name="arg_activityid"
-            app:argType="integer"
-            android:defaultValue="8" />
-        <argument
-            android:name="arg_color_id"
-            app:argType="integer"
-            android:defaultValue="0" />
-        <argument
-            android:name="arg_resource_id"
-            app:argType="integer"
-            android:defaultValue="0" />
         <action
             android:id="@+id/action_sessionEntryFragment_to_liveFragment"
             app:destination="@id/liveFragment"
-            app:launchSingleTop="true"
+            app:launchSingleTop="false"
             app:popUpTo="@+id/homePageFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/liveFragment"
@@ -52,40 +42,12 @@
         <deepLink
             android:id="@+id/deepLink2"
             app:uri="www.a-track-it.com/live/{id}" />
-    </fragment>
-    <dialog
-        android:id="@+id/customListFragment"
-        android:name="com.a_track_it.fitdata.fragment.CustomListFragment"
-        android:label="fragment_customlist"
-        tools:layout="@layout/fragment_customlist" >
-        <argument
-            android:name="ARG_TYPE"
-            app:argType="integer" />
-        <argument
-            android:name="ARG_SET"
-            app:argType="integer" />
-        <argument
-            android:name="ARG_PRESET"
-            app:argType="integer" />
-    </dialog>
-
-    <fragment
-        android:id="@+id/customScoreDialogFragment"
-        android:name="com.a_track_it.fitdata.fragment.CustomScoreDialogFragment"
-        tools:layout="@layout/fragment_customscore"
-        android:label="CustomScoreDialogFragment" >
-        <argument
-            android:name="ARG_TYPE"
-            app:argType="integer"
-            android:defaultValue="0" />
-        <argument
-            android:name="ARG_PRESET"
-            app:argType="integer"
-            android:defaultValue="0" />
-        <argument
-            android:name="ARG_SET"
-            app:argType="integer"
-            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_liveFragment_to_endOfSetFragment"
+            app:destination="@id/endOfSetFragment" />
+        <action
+            android:id="@+id/action_liveFragment_to_sessionReportFragment"
+            app:destination="@id/sessionReportFragment" />
     </fragment>
     <fragment
         android:id="@+id/sessionReportFragment"
@@ -101,10 +63,6 @@
             app:argType="integer"
             android:defaultValue="0" />
         <argument
-            android:name="SET_ID"
-            app:argType="long"
-            android:defaultValue="0L" />
-        <argument
             android:name="WORKOUT_ID"
             app:argType="long"
             android:defaultValue="0L" />
@@ -117,9 +75,50 @@
             app:uri="www.a-track-it.com/report/{id}" />
     </fragment>
     <fragment
-        android:id="@+id/locationFragment"
-        android:name="com.a_track_it.fitdata.fragment.LocationFragment"
-        android:label="fragment_location"
-        tools:layout="@layout/fragment_location" />
+        android:id="@+id/endOfSetFragment"
+        android:name="com.a_track_it.fitdata.fragment.EndOfSetFragment"
+        android:label="fragment_session_finalise"
+        tools:layout="@layout/fragment_session_finalise" >
+        <action
+            android:id="@+id/action_endOfSetFragment_to_liveFragment"
+            app:destination="@id/liveFragment"
+            app:launchSingleTop="false" />
+        <action
+            android:id="@+id/action_endOfSetFragment_to_sessionReportFragment"
+            app:destination="@id/sessionReportFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/customListFragment"
+        android:name="com.a_track_it.fitdata.fragment.CustomListFragment"
+        android:label="fragment_customlist"
+        tools:layout="@layout/fragment_customlist" >
+        <argument
+            android:name="ARG_TYPE"
+            app:argType="integer" />
+        <argument
+            android:name="ARG_PRESET"
+            app:argType="integer" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/customScoreDialogFragment"
+        android:name="com.a_track_it.fitdata.fragment.CustomScoreDialogFragment"
+        tools:layout="@layout/fragment_customscore"
+        android:label="CustomScoreDialogFragment" >
+        <argument
+            android:name="ARG_TYPE"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="ARG_PRESET"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </dialog>
+    <dialog
+        android:id="@+id/customConfirmDialog"
+        android:name="com.a_track_it.fitdata.fragment.CustomConfirmDialog"
+        android:label="dialog_confirmation"
+        tools:layout="@layout/dialog_confirmation" />
+
 
 </navigation>

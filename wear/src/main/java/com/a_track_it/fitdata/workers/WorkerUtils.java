@@ -32,7 +32,7 @@ import androidx.renderscript.ScriptIntrinsicBlur;
 
 import com.a_track_it.fitdata.R;
 import com.a_track_it.fitdata.common.Constants;
-import com.a_track_it.fitdata.model.UserPreferences;
+import com.a_track_it.fitdata.user_model.UserPreferences;
 
 import java.io.File;
 import java.io.FileNotFoundException;

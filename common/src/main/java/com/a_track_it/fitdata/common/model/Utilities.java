@@ -5,11 +5,9 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.util.Log;
 
-import com.a_track_it.fitdata.common.R;
 import com.a_track_it.fitdata.common.Constants;
 import com.google.android.gms.fitness.data.Field;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,9 +16,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
-
-import static com.a_track_it.fitdata.common.Constants.SELECTION_ACTIVITY_CARDIO;
-import static com.a_track_it.fitdata.common.Constants.SELECTION_FITNESS_ACTIVITY;
 
 
 public class Utilities {
@@ -47,147 +42,6 @@ public class Utilities {
     private static final String DATE_FORMAT = "dd/MM/yyy";
 
     private static final String TIME_FORMAT = "h:mm";
-
-    public static String SelectionTypeToString(Context context, int type){
-        String sRet = "";
-        switch (type){
-            case Constants.WORKOUT_TYPE_ARCHERY:
-                sRet = context.getString(R.string.action_new_archery);
-                break;
-            case SELECTION_FITNESS_ACTIVITY:
-                sRet = context.getString(R.string.label_activity);
-                break;
-            case SELECTION_ACTIVITY_CARDIO:
-                sRet = context.getString(R.string.action_new_cardio);
-                break;
-            case Constants.SELECTION_ACTIVITY_SPORT:
-                sRet = context.getString(R.string.action_new_sport);
-                break;
-            case Constants.SELECTION_ACTIVITY_GYM :
-                sRet = context.getString(R.string.action_new_workout);
-                break;
-            case Constants.SELECTION_ACTIVITY_RUN:
-                sRet = context.getString(R.string.action_new_run);
-                break;
-            case Constants.SELECTION_ACTIVITY_WATER:
-                sRet = context.getString(R.string.action_new_water);
-                break;
-            case Constants.SELECTION_ACTIVITY_WINTER:
-                sRet = context.getString(R.string.action_new_winter);
-                break;
-            case Constants.SELECTION_ACTIVITY_BIKE:
-                sRet = context.getString(R.string.action_new_bike);
-                break;
-            case Constants.SELECTION_ACTIVITY_MISC:
-                sRet = context.getString(R.string.action_new_misc);
-                break;
-            case Constants.SELECTION_BODYPART:
-                sRet = context.getString(R.string.label_bodypart);
-                break;
-            case Constants.SELECTION_EXERCISE:
-                sRet = context.getString(R.string.label_exercise);
-                break;
-            case Constants.SELECTION_USER_PREFS:
-                sRet = context.getString(R.string.label_user_prefs);
-                break;
-            case Constants.SELECTION_WEIGHT_KG:
-                sRet = context.getString(R.string.label_weight) + " " + context.getString(R.string.label_weight_units_kg);
-                break;
-            case Constants.SELECTION_WEIGHT_LBS:
-                sRet = context.getString(R.string.label_weight) + " " + context.getString(R.string.label_weight_units_lbs);
-                break;
-            case Constants.SELECTION_WEIGHT_BODYWEIGHT:
-                sRet = context.getString(R.string.label_weight_bodyweight);
-                break;
-            case Constants.SELECTION_SETS:
-                sRet = context.getString(R.string.label_set);
-                break;
-            case Constants.SELECTION_REPS:
-                sRet = context.getString(R.string.label_rep);
-                break;
-            case Constants.SELECTION_TARGET_FIELD:
-                sRet = context.getString(R.string.label_shoot_format);
-                break;
-            case Constants.SELECTION_TARGET_EQUIPMENT:
-                sRet = context.getString(R.string.label_shoot_equipment);
-                break;
-            case Constants.SELECTION_TARGET_DISTANCE_FIELD:
-            case Constants.SELECTION_TARGET_DISTANCE_TARGET:
-                sRet = context.getString(R.string.label_shoot_distance);
-                break;
-            case Constants.SELECTION_TARGET_TARGET_SIZE_FIELD:
-            case Constants.SELECTION_TARGET_TARGET_SIZE_TARGET:
-                sRet = context.getString(R.string.label_shoot_target_size);
-                break;
-            case Constants.SELECTION_TARGET_ENDS:
-                sRet = context.getString(R.string.label_shoot_ends);
-                break;
-            case Constants.SELECTION_TARGET_SHOTS_PER_END:
-                sRet = context.getString(R.string.label_shoot_per_end);
-                break;
-            case Constants.SELECTION_TARGET_POSSIBLE_SCORE:
-                sRet = context.getString(R.string.label_shoot_possible_score);
-                break;
-            case Constants.SELECTION_REST_DURATION_GYM:
-                sRet = context.getString(R.string.label_rest_countdown);
-                break;
-            case Constants.SELECTION_REST_DURATION_TARGET:
-                sRet = context.getString(R.string.label_target_duration);
-                break;
-            case Constants.SELECTION_WORKOUT_HISTORY:
-                sRet = context.getString(R.string.label_workout_history);
-                break;
-            case Constants.SELECTION_WORKOUT_SET_HISTORY:
-                sRet = context.getString(R.string.label_workout_sets_history);
-                break;
-            case Constants.SELECTION_GOOGLE_HISTORY:
-                sRet = context.getString(R.string.label_google_sets_history);
-                break;
-            case Constants.SELECTION_TO_DO_SETS:
-                sRet = context.getString(R.string.label_to_do_sets_gym);
-                break;
-            case Constants.SELECTION_ACTIVE_SESSION:
-                sRet = context.getString(R.string.label_active_session);
-                break;
-            case Constants.SELECTION_ACTIVE_SET:
-                sRet = context.getString(R.string.label_active_sets);
-                break;
-            case Constants.SELECTION_DAYS:
-                sRet = context.getString(R.string.label_day_selector);
-                break;
-            case Constants.SELECTION_MONTHS:
-                sRet = context.getString(R.string.label_month_selector);
-                break;
-            case Constants.SELECTION_GOAL_STEPS:
-                sRet = context.getString(R.string.label_goal_steps);
-                break;
-            case Constants.SELECTION_GOAL_DURATION:
-                sRet = context.getString(R.string.label_goal_duration);
-                break;
-            case Constants.CHOOSE_REPEAT_SET:
-                sRet = context.getString(R.string.label_repeat);
-                break;
-        }
-
-        return sRet;
-    }
-
-
-    public static boolean fileExist(Context context, String filename){
-        try {
-            File file = context.getFileStreamPath(filename);
-            return file.exists();
-        }catch(Exception e){
-            return false;
-        }
-    }
-    public static boolean deleteFile(Context context, String filename){
-        try{
-            return context.deleteFile(filename);
-        }catch (Exception ioe){
-            return false;
-        }
-    }
     public static String getDayString(Long ms) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(DAY_FORMAT, Locale.getDefault());
         return dateFormat.format(ms);

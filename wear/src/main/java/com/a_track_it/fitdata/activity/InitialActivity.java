@@ -18,9 +18,9 @@ import com.a_track_it.fitdata.BuildConfig;
 import com.a_track_it.fitdata.R;
 import com.a_track_it.fitdata.common.Constants;
 import com.a_track_it.fitdata.common.ReferencesTools;
-import com.a_track_it.fitdata.common.model.Utilities;
+import com.a_track_it.fitdata.user_model.Utilities;
 import com.a_track_it.fitdata.fragment.CustomConfirmDialog;
-import com.a_track_it.fitdata.model.UserPreferences;
+import com.a_track_it.fitdata.user_model.UserPreferences;
 import com.a_track_it.fitdata.service.AsyncSetupTask;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -300,10 +300,10 @@ public class InitialActivity extends androidx.fragment.app.FragmentActivity impl
     }
 
     private void startMainActivity(){
-        Intent myMainIntent = new Intent(getApplicationContext(), MainActivity.class);
+        Intent myMainIntent = new Intent(getApplicationContext(), RoomActivity.class);
         myMainIntent.putExtra("MSG", getString(R.string.action_setup_complete));
         startActivity(myMainIntent);
-        Log.i(TAG, "started main finishing InitialActivity");
+        Log.i(TAG, "started room finishing InitialActivity");
         finish();
     }
 
@@ -362,18 +362,18 @@ public class InitialActivity extends androidx.fragment.app.FragmentActivity impl
         if (!authInProgress) {
             mGoogleAccount =  GoogleSignIn.getLastSignedInAccount(this);
             if (mGoogleAccount != null) {
-                String PersonName = mGoogleAccount.getDisplayName();
-                String PersonId = mGoogleAccount.getId();
-                Uri PersonPhotoUri = mGoogleAccount.getPhotoUrl();
-                Log.i(TAG, "mGoogleAccount is " + PersonName );
-                UserPreferences.setLastUserID(this, PersonId);
-                UserPreferences.setLastUserPhotoUri(this, PersonPhotoUri.toString());
-                UserPreferences.setLastUserName(this, PersonName);
                 if (hasOAuthPermission()) {
-                    if (!GoogleSignIn.hasPermissions(mGoogleAccount, new Scope(Scopes.DRIVE_APPFOLDER), new Scope(Scopes.FITNESS_LOCATION_READ_WRITE) ,new Scope(Scopes.FITNESS_ACTIVITY_READ_WRITE))) {
+                    String PersonName = mGoogleAccount.getDisplayName();
+                    String PersonId = mGoogleAccount.getId();
+                    Uri PersonPhotoUri = mGoogleAccount.getPhotoUrl();
+                    Log.i(TAG, "mGoogleAccount is " + PersonName );
+                    UserPreferences.setLastUserID(this, PersonId);
+                    UserPreferences.setLastUserPhotoUri(this, PersonPhotoUri.toString());
+                    UserPreferences.setLastUserName(this, PersonName);
+                    if (!GoogleSignIn.hasPermissions(mGoogleAccount, new Scope(Scopes.DRIVE_APPFOLDER), new Scope(Scopes.FITNESS_LOCATION_READ) ,new Scope(Scopes.FITNESS_ACTIVITY_READ_WRITE))) {
                         authInProgress = true;
                         Log.i(TAG, "Requesting permissions for extra permissions " + PersonName);
-                        GoogleSignIn.requestPermissions(InitialActivity.this, REQUEST_OAUTH_REQUEST_CODE, mGoogleAccount, new Scope(Scopes.DRIVE_APPFOLDER), new Scope(Scopes.FITNESS_LOCATION_READ_WRITE), new Scope(Scopes.FITNESS_ACTIVITY_READ_WRITE));
+                        GoogleSignIn.requestPermissions(InitialActivity.this, REQUEST_OAUTH_REQUEST_CODE, mGoogleAccount, new Scope(Scopes.DRIVE_APPFOLDER), new Scope(Scopes.FITNESS_LOCATION_READ), new Scope(Scopes.FITNESS_ACTIVITY_READ_WRITE));
                         return;
                     }
                     if (!Utilities.fileExist(this, Constants.BODYPART_FILENAME)) {
@@ -459,7 +459,7 @@ public class InitialActivity extends androidx.fragment.app.FragmentActivity impl
                 .addApi(Fitness.HISTORY_API)
                 .addApi(Fitness.RECORDING_API)
                 .addScope(new Scope(Scopes.PROFILE))
-                .addScope(new Scope(Scopes.FITNESS_BODY_READ_WRITE))
+                .addScope(new Scope(Scopes.FITNESS_BODY_READ))
                 .addScope(new Scope(Scopes.FITNESS_LOCATION_READ))
                 .addScope(new Scope(Scopes.FITNESS_ACTIVITY_READ_WRITE))
                 .addConnectionCallbacks(this)
@@ -520,18 +520,19 @@ public class InitialActivity extends androidx.fragment.app.FragmentActivity impl
                 loadMessage.setText("Welcome " + PersonName);
                 authInProgress = false;
                 if (hasOAuthPermission()) {
-                    if (!GoogleSignIn.hasPermissions(mGoogleAccount, new Scope(Scopes.DRIVE_APPFOLDER), new Scope(Scopes.FITNESS_LOCATION_READ_WRITE), new Scope(Scopes.FITNESS_ACTIVITY_READ_WRITE))) {
+                    if (!GoogleSignIn.hasPermissions(mGoogleAccount, new Scope(Scopes.DRIVE_APPFOLDER), new Scope(Scopes.FITNESS_LOCATION_READ), new Scope(Scopes.FITNESS_ACTIVITY_READ_WRITE))) {
                         authInProgress = true;
                         Log.i(TAG, "Requesting permissions for extra permissions " + PersonName);
-                        GoogleSignIn.requestPermissions(InitialActivity.this, REQUEST_OAUTH_REQUEST_CODE, mGoogleAccount, new Scope(Scopes.DRIVE_APPFOLDER), new Scope(Scopes.FITNESS_LOCATION_READ_WRITE), new Scope(Scopes.FITNESS_ACTIVITY_READ_WRITE));
+                        GoogleSignIn.requestPermissions(InitialActivity.this, REQUEST_OAUTH_REQUEST_CODE, mGoogleAccount, new Scope(Scopes.DRIVE_APPFOLDER), new Scope(Scopes.FITNESS_LOCATION_READ), new Scope(Scopes.FITNESS_ACTIVITY_READ_WRITE));
                         return;
-                    }
-                    if (!Utilities.fileExist(this, Constants.BODYPART_FILENAME)) {
+                    }else
+                        connect();
+/*                    if (!Utilities.fileExist(this, Constants.BODYPART_FILENAME)) {
                         // immediately start the async setup task
                         myAsyncSetupTask = new AsyncSetupTask(InitialActivity.this, getApplicationContext());
                         myAsyncSetupTask.execute();
 
-                    }
+                    }*/
                 } else {
                     requestOAuthPermission();  // don't have permission - request it - callback
                 }

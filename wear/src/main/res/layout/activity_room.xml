@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.wear.widget.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_grey"
+    android:padding="@dimen/box_inset_layout_padding"
+    app:boxedEdges="all"
+    tools:context=".activity.RoomActivity"
+    tools:deviceIds="wear">
+    <LinearLayout android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        tools:context=".activity.MainActivity"
+        tools:showIn="@layout/activity_main">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_new"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/diag_button_size"
+            style="@style/Widget.MyApp.MyButton"
+            android:text="@string/label_new"             />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_new2"
+            android:layout_width="wrap_content"
+            style="@style/Widget.MyApp.MyButton"
+            android:layout_height="@dimen/diag_button_size"
+            android:text="@string/label_activity"             />
+        <androidx.wear.widget.WearableRecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/darker_gray"
+            tools:listitem="@layout/recyclerview_item" />
+    </LinearLayout>
+</androidx.wear.widget.BoxInsetLayout>

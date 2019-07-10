@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -24,13 +23,15 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.a_track_it.fitdata.R;
 import com.a_track_it.fitdata.common.Constants;
-import com.a_track_it.fitdata.common.model.Exercise;
-import com.a_track_it.fitdata.common.model.Utilities;
-import com.a_track_it.fitdata.common.model.Workout;
-import com.a_track_it.fitdata.common.model.WorkoutSet;
-import com.a_track_it.fitdata.model.MessagesViewModel;
+import com.a_track_it.fitdata.data_model.Exercise;
+import com.a_track_it.fitdata.user_model.Utilities;
+import com.a_track_it.fitdata.data_model.Workout;
+import com.a_track_it.fitdata.data_model.WorkoutSet;
+import com.a_track_it.fitdata.user_model.MessagesViewModel;
+import com.a_track_it.fitdata.model.SavedStateViewModel;
 import com.a_track_it.fitdata.model.SessionViewModel;
-import com.a_track_it.fitdata.model.UserPreferences;
+import com.a_track_it.fitdata.user_model.UserPreferences;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -66,8 +67,8 @@ public class EndOfSetFragment extends Fragment {
     private ArrayList<Exercise> exercises;
     private OnEndOfSetInteraction mListener;
     private MessagesViewModel messagesViewModel;
+    private SavedStateViewModel savedStateViewModel;
     private SessionViewModel sessionViewModel;
-
     private LinearLayout mLinear;
     private TextView textView_message1;
     private TextView textView_message2;
@@ -109,14 +110,13 @@ public class EndOfSetFragment extends Fragment {
             mIsArchery = Utilities.isShooting(mActivityID);
 
             restDuration = bundle.getLong(ARG_TIMED);
-            messagesViewModel = ViewModelProviders.of(requireActivity()).get(MessagesViewModel.class);
-            sessionViewModel = ViewModelProviders.of(requireActivity()).get(SessionViewModel.class);
-            sessionViewModel.getToDoSets().observe(this, new Observer<ArrayList<WorkoutSet>>() {
-                @Override
-                public void onChanged(ArrayList<WorkoutSet> workoutSets) {
-                    updateUI();
-                }
-            });
+            try{
+                messagesViewModel = ViewModelProviders.of(requireActivity()).get(MessagesViewModel.class);
+                savedStateViewModel = ViewModelProviders.of(requireActivity()).get(SavedStateViewModel.class);
+                sessionViewModel = ViewModelProviders.of(requireActivity()).get(SessionViewModel.class);
+            }catch (IllegalStateException ise){
+                Log.e(TAG, "illegal state on viewmodels " + ise.getLocalizedMessage());
+            }
         }
     }
 
@@ -130,21 +130,21 @@ public class EndOfSetFragment extends Fragment {
         if (mIsGym){
             rootView = inflater.inflate(R.layout.fragment_gym_confirm, container, false);
             mLinear = rootView.findViewById(R.id.linear_gym_confirm);
-            final Button exercise_btn = rootView.findViewById(R.id.exercise_confirm_button);
+            final com.google.android.material.button.MaterialButton exercise_btn = rootView.findViewById(R.id.exercise_confirm_button);
             exercise_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     mListener.onEndOfSetRequest(Constants.CHOOSE_EXERCISE, mCurrentSet, defaultValue);
                 }
             });
-            final Button reps_btn = rootView.findViewById(R.id.reps_confirm_button);
+            final com.google.android.material.button.MaterialButton reps_btn = rootView.findViewById(R.id.reps_confirm_button);
             reps_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     mListener.onEndOfSetRequest(Constants.CHOOSE_REPS, mCurrentSet, defaultValue);
                 }
             });
-            final Button weight_btn = rootView.findViewById(R.id.weight_confirm_button);
+            final com.google.android.material.button.MaterialButton weight_btn = rootView.findViewById(R.id.weight_confirm_button);
             weight_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -152,7 +152,7 @@ public class EndOfSetFragment extends Fragment {
                 }
             });
 
-            final Button next_btn = rootView.findViewById(R.id.gym_confirm_next_set_button);
+            final com.google.android.material.button.MaterialButton next_btn = rootView.findViewById(R.id.gym_confirm_next_set_button);
             next_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -161,49 +161,49 @@ public class EndOfSetFragment extends Fragment {
             });
             textView_rest_duration = rootView.findViewById(R.id.gym_rest_duration_text);
 
-            final Button repeat_btn = rootView.findViewById(R.id.set_repeat_button);
+            final com.google.android.material.button.MaterialButton repeat_btn = rootView.findViewById(R.id.set_repeat_button);
             repeat_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mListener.onEndOfSetMethod(Constants.CHOOSE_REPEAT_SET, mCurrentSet);
                 }
             });
-            final Button add_btn = rootView.findViewById(R.id.set_add_button);
+            final com.google.android.material.button.MaterialButton add_btn = rootView.findViewById(R.id.set_add_button);
             add_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mListener.onEndOfSetMethod(Constants.CHOOSE_ADD_SET, mCurrentSet);
                 }
             });
-            final Button next_exercise = rootView.findViewById(R.id.exercise_next_button);
+            final com.google.android.material.button.MaterialButton next_exercise = rootView.findViewById(R.id.exercise_next_button);
             next_exercise.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mListener.onEndOfSetRequest(Constants.SELECTION_EXERCISE, mCurrentSet+1,defaultValue);
                 }
             });
-            final Button next_weight = rootView.findViewById(R.id.weight_next_button);
+            final com.google.android.material.button.MaterialButton next_weight = rootView.findViewById(R.id.weight_next_button);
             next_weight.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mListener.onEndOfSetRequest(Constants.SELECTION_WEIGHT_KG, mCurrentSet+1,defaultValue);
                 }
             });
-            final Button next_reps = rootView.findViewById(R.id.reps_next_button);
+            final com.google.android.material.button.MaterialButton next_reps = rootView.findViewById(R.id.reps_next_button);
             next_reps.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mListener.onEndOfSetRequest(Constants.SELECTION_REPS, mCurrentSet+1,defaultValue);
                 }
             });
-            final Button confirm_next = rootView.findViewById(R.id.gym_confirm_next_set_button);
+            final com.google.android.material.button.MaterialButton confirm_next = rootView.findViewById(R.id.gym_confirm_next_set_button);
             confirm_next.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mListener.onEndOfSetMethod(Constants.CHOOSE_CONTINUE_SESSION, mCurrentSet+1);
                 }
             });
-            final Button exit_btn  = rootView.findViewById(R.id.gym_confirm_start_confirm_button);
+            final com.google.android.material.button.MaterialButton exit_btn  = rootView.findViewById(R.id.gym_confirm_start_confirm_button);
             exit_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -290,14 +290,14 @@ public class EndOfSetFragment extends Fragment {
                         ShowAlertDialogScores(view, 10);
                     }
                 });
-                final Button exit_btn  = rootView.findViewById(R.id.archery_confirm_exit_button);
+                final com.google.android.material.button.MaterialButton exit_btn  = rootView.findViewById(R.id.archery_confirm_exit_button);
                 exit_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         mListener.onEndOfSetExit();
                     }
                 });
-                final Button next_btn = rootView.findViewById(R.id.archery_confirm_next_end_button);
+                final com.google.android.material.button.MaterialButton next_btn = rootView.findViewById(R.id.archery_confirm_next_end_button);
                 next_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -311,14 +311,14 @@ public class EndOfSetFragment extends Fragment {
             }else {
                 rootView = inflater.inflate(R.layout.fragment_session_finalise, container, false);
                 mLinear = rootView.findViewById(R.id.linear_session_confirm);
-                final Button exit_btn  = rootView.findViewById(R.id.confirm_finish_confirm_button);
+                final com.google.android.material.button.MaterialButton exit_btn  = rootView.findViewById(R.id.confirm_finish_confirm_button);
                 exit_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         mListener.onEndOfSetExit();
                     }
                 });
-                final Button next_btn = rootView.findViewById(R.id.confirm_add_confirm_button);
+                final com.google.android.material.button.MaterialButton next_btn = rootView.findViewById(R.id.confirm_add_confirm_button);
                 next_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -332,7 +332,7 @@ public class EndOfSetFragment extends Fragment {
 
             }
         }
-        sessionViewModel.getWorkout().observe(this, new Observer<Workout>() {
+        savedStateViewModel.getActiveWorkout().observe(this, new Observer<Workout>() {
             @Override
             public void onChanged(Workout workout) {
                 Log.d(TAG, "getWorkout onChanged updateUI");
@@ -340,13 +340,21 @@ public class EndOfSetFragment extends Fragment {
             }
         });
 
-        sessionViewModel.getWorkoutSet().observe(this, new Observer<WorkoutSet>() {
+        savedStateViewModel.getActiveWorkoutSet().observe(this, new Observer<WorkoutSet>() {
             @Override
             public void onChanged(WorkoutSet workoutSet) {
                 Log.d(TAG, "getWorkoutSet onChanged updateUI");
                 updateUI();
             }
         });
+
+        sessionViewModel.getToDoSets().observe(this, new Observer<ArrayList<WorkoutSet>>() {
+            @Override
+            public void onChanged(ArrayList<WorkoutSet> workoutSets) {
+                updateUI();
+            }
+        });
+
         // observe the live data changes
         if (textView_message1 != null)
             messagesViewModel.CurrentMessage().observe(this, new Observer<String>() {
@@ -375,17 +383,18 @@ public class EndOfSetFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mWorkout = sessionViewModel.getWorkout().getValue();
-        mWorkoutSet = sessionViewModel.getWorkoutSet().getValue();
-        Integer i = sessionViewModel.getCurrentSetIndex().getValue();
+        mWorkout = savedStateViewModel.getActiveWorkout().getValue();
+        mIsGym = savedStateViewModel.getIsGym().getValue();
+        mIsArchery = savedStateViewModel.getIsShoot().getValue();
+
+        mWorkoutSet = savedStateViewModel.getActiveWorkoutSet().getValue();
+        Integer i = savedStateViewModel.getSetIndex().getValue();
         if (i.intValue() != mCurrentSet){
             Log.e(TAG,"current set discrepancy " + Integer.toString(i) + " current " + Integer.toString(mCurrentSet));
             mCurrentSet = i.intValue();
         }
 
         if (mWorkout != null) {
-            mIsGym = Utilities.isGymWorkout(mWorkout.activityID);
-            mIsArchery = Utilities.isShooting(mWorkout.activityID);
             if (mIsArchery){
                 if ((mWorkoutSet.score_card.length() > 0)) {
                     String itemsEnds[] = mWorkoutSet.score_card.split(",");
@@ -416,12 +425,12 @@ public class EndOfSetFragment extends Fragment {
         View rootView = mLinear.getRootView() ; String sTemp;
         Context context = getContext();
         ArrayList<WorkoutSet> todo = sessionViewModel.getToDoSets().getValue();
-        mWorkout = sessionViewModel.getWorkout().getValue();
-        mWorkoutSet = sessionViewModel.getWorkoutSet().getValue();
+        mWorkout = savedStateViewModel.getActiveWorkout().getValue();
+        mWorkoutSet = savedStateViewModel.getActiveWorkoutSet().getValue();
         mSetCount = (todo != null) ? todo.size() : 0;
 
-        mIsGym = Utilities.isGymWorkout(mWorkout.activityID);
-        mIsArchery = Utilities.isShooting(mWorkout.activityID);
+        mIsGym = savedStateViewModel.getIsGym().getValue();
+        mIsArchery = savedStateViewModel.getIsShoot().getValue();
         if (mIsGym){
             int nextIndex = mCurrentSet + 1;
             // check if we have another set to go... update
@@ -429,13 +438,13 @@ public class EndOfSetFragment extends Fragment {
                 if ((todo != null) && (nextIndex < todo.size())){
                     WorkoutSet nextSet = todo.get(nextIndex-1);
 
-                    Button next_exercise = rootView.findViewById(R.id.exercise_next_button);
+                    com.google.android.material.button.MaterialButton next_exercise = rootView.findViewById(R.id.exercise_next_button);
                     if (nextSet.exerciseID == 0)
                         sTemp = context.getString(R.string.default_select) + " " + context.getString(R.string.label_exercise);
                     else
                         sTemp = nextSet.exerciseName;
                     next_exercise.setText(sTemp);
-                    Button next_weight = rootView.findViewById(R.id.weight_next_button);
+                    com.google.android.material.button.MaterialButton next_weight = rootView.findViewById(R.id.weight_next_button);
                     if (nextSet.weightTotal == 0) {
                         sTemp = context.getString(R.string.default_select) + " " + context.getString(R.string.label_weight);
                     }else {
@@ -445,7 +454,7 @@ public class EndOfSetFragment extends Fragment {
                             sTemp = Float.toString(nextSet.weightTotal) + " " + context.getString(R.string.label_weight_units_lbs);
                     }
                     next_weight.setText(sTemp);
-                    Button next_reps = rootView.findViewById(R.id.reps_confirm_button);
+                    com.google.android.material.button.MaterialButton next_reps = rootView.findViewById(R.id.reps_confirm_button);
                     if (nextSet.repCount == 0)
                         sTemp = context.getString(R.string.default_select) + " " + context.getString(R.string.label_rep);
                     else
@@ -465,19 +474,19 @@ public class EndOfSetFragment extends Fragment {
                 rootView.findViewById(R.id.gym_confirm_row6_container).setVisibility(View.GONE); // no continue button avail
             }
 
-            Button exercise_btn = rootView.findViewById(R.id.exercise_confirm_button);
+            com.google.android.material.button.MaterialButton exercise_btn = rootView.findViewById(R.id.exercise_confirm_button);
             if (mWorkoutSet.exerciseID == 0)
                 sTemp = context.getString(R.string.default_select) + " " + context.getString(R.string.label_exercise);
             else
                 sTemp = mWorkoutSet.exerciseName;
             exercise_btn.setText(sTemp);
-            Button reps_btn = rootView.findViewById(R.id.reps_confirm_button);
+            com.google.android.material.button.MaterialButton reps_btn = rootView.findViewById(R.id.reps_confirm_button);
             if (mWorkoutSet.repCount == 0)
                 sTemp = context.getString(R.string.default_select) + " " + context.getString(R.string.label_rep);
             else
                 sTemp = Integer.toString(mWorkoutSet.repCount) + " " + context.getString(R.string.label_rep);
             reps_btn.setText(sTemp);
-            Button weight_btn = rootView.findViewById(R.id.weight_confirm_button);
+            com.google.android.material.button.MaterialButton weight_btn = rootView.findViewById(R.id.weight_confirm_button);
             if (mWorkoutSet.weightTotal == 0) {
                 sTemp = context.getString(R.string.default_select) + " " + context.getString(R.string.label_weight);
             }else {
@@ -691,7 +700,7 @@ public class EndOfSetFragment extends Fragment {
 
     }
     private void ShowAlertDialogExerciseList(final View parent_view){
-        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext(), R.style.AppTheme_myAlertDialog);
+        final MaterialAlertDialogBuilder dialogBuilder = new MaterialAlertDialogBuilder(parent_view.getContext(), R.style.Theme_AppCompat_DayNight_Dialog_Alert);
         String[] items = new String[exercises.size()]; int i = 0;
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(parent_view.getContext(), R.layout.item_alertlist);
         int selectedPos = -1;
@@ -716,7 +725,7 @@ public class EndOfSetFragment extends Fragment {
                 mWorkoutSet.exerciseID = (int) e._id;
                 mWorkoutSet.exerciseName = e.name;
                 Log.i(TAG, "selected " + e.name);
-                Button ex = parent_view.findViewById(R.id.exercise_confirm_button);
+                com.google.android.material.button.MaterialButton ex = parent_view.findViewById(R.id.exercise_confirm_button);
                 if(ex != null) ex.setText(e.name);
                 dialog.dismiss();
             }
@@ -728,7 +737,8 @@ public class EndOfSetFragment extends Fragment {
     }
 
     private void ShowAlertDialogRepsList(final View parent_view){
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext(),  R.style.AppTheme_myAlertDialog);
+        //AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext(),  R.style.AppTheme_myAlertDialog);
+        final MaterialAlertDialogBuilder dialogBuilder = new MaterialAlertDialogBuilder(parent_view.getContext(), R.style.Theme_AppCompat_DayNight_Dialog_Alert);
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(parent_view.getContext(), R.layout.item_alertlist);
         int selectedPos = -1;
         for (int i = 0; i < 50 ; i++){
@@ -747,7 +757,7 @@ public class EndOfSetFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 mWorkoutSet.repCount = i;
-                Button repBtn = parent_view.findViewById(R.id.reps_confirm_button);
+                com.google.android.material.button.MaterialButton repBtn = parent_view.findViewById(R.id.reps_confirm_button);
                 if (repBtn != null) repBtn.setText(Integer.toString(mWorkoutSet.repCount) + " reps");
                 dialog.dismiss();
             }
@@ -826,7 +836,7 @@ public class EndOfSetFragment extends Fragment {
                         repBtn.setImageResource(ic_resource_id);
                     }
                 }
-                sessionViewModel.setActiveWorkoutSet(mWorkoutSet);
+                savedStateViewModel.setActiveWorkoutSet(mWorkoutSet);
                 dialog.dismiss();
             }
         });
@@ -876,7 +886,7 @@ public class EndOfSetFragment extends Fragment {
                     sTemp = weights[i] + " " + getContext().getString(R.string.label_weight_units_lbs);
                 }
 
-                Button weightBtn = parent_view.findViewById(R.id.weight_confirm_button);
+                com.google.android.material.button.MaterialButton weightBtn = parent_view.findViewById(R.id.weight_confirm_button);
                 if (weightBtn != null) weightBtn.setText(sTemp);
                 dialog.dismiss();
             }

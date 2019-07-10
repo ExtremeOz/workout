@@ -15,7 +15,6 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -30,8 +29,8 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.wear.ambient.AmbientModeSupport;
 
 import com.a_track_it.fitdata.R;
-import com.a_track_it.fitdata.model.MessagesViewModel;
-import com.a_track_it.fitdata.model.UserPreferences;
+import com.a_track_it.fitdata.user_model.MessagesViewModel;
+import com.a_track_it.fitdata.user_model.UserPreferences;
 
 /**
  * Activities that contain this fragment must implement the
@@ -59,7 +58,7 @@ public class HomePageFragment extends Fragment {
 
     private TextView mTextView;
     private ColorFilter mImageViewColorFilter;
-    private int mBackColor;
+    private ColorFilter mBackgroundColorFilter;
     private TextView mMessageText;
     private int mParam1;
     private String mParam2;
@@ -112,7 +111,7 @@ public class HomePageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_home_relative, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_home_material, container, false);
        // mLinearTitle = rootView.findViewById(R.id.linear_title);
         mRelative = rootView.findViewById(R.id.home_relative);
         mScrollView = rootView.findViewById(R.id.observable_scrollview);
@@ -143,8 +142,8 @@ public class HomePageFragment extends Fragment {
             }
         });
         mImageViewColorFilter = mHomeImageView.getColorFilter();
-        Button btn1 = rootView.findViewById(R.id.home_action1_image);
-        mBackColor = btn1.getHighlightColor();
+        com.google.android.material.button.MaterialButton btn1 = rootView.findViewById(R.id.home_action1_image);
+        mBackgroundColorFilter = btn1.getBackground().getColorFilter();
         rootView.findViewById(R.id.home_action1_image).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -293,7 +292,7 @@ public class HomePageFragment extends Fragment {
         });*/
         return rootView;
     }
-/*    private void updateIcon(Button btn){
+/*    private void updateIcon(com.google.android.material.button.MaterialButton btn){
         if (btn.getIcon() != null) {
             Drawable icon = btn.getIcon();
             btn.setCompoundDrawables(null, icon, null, null);
@@ -302,15 +301,15 @@ public class HomePageFragment extends Fragment {
 
     public void onEnterAmbientInFragment(Bundle ambientDetails) {
        // Log.d(TAG, "HomepageFragment.onEnterAmbient() " + ambientDetails);
-        int bgColor = getResources().getColor(R.color.colorAmbientBackground, null);
+        int backColor = getResources().getColor(R.color.colorAmbientBackground, null);
         int foreColor = getResources().getColor(R.color.colorAmbientForeground, null);
         boolean IsLowBitAmbient =
                 ambientDetails.getBoolean(AmbientModeSupport.EXTRA_LOWBIT_AMBIENT, false);
         boolean DoBurnInProtection =
                 ambientDetails.getBoolean(AmbientModeSupport.EXTRA_BURN_IN_PROTECTION, false);
 
-        mRelative.setBackgroundColor(bgColor);
-        //mLinearTitle.setBackgroundColor(bgColor);
+        mRelative.setBackgroundColor(backColor);
+        //mLinearTitle.getBackground().setColorFilter(mBackgroundColorFilter);
         TextView textView =  mRelative.findViewById(R.id.home_text);
         if (textView != null){
             textView.setText(R.string.app_name);
@@ -326,38 +325,38 @@ public class HomePageFragment extends Fragment {
         matrix.setSaturation(0);
         ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
         mHomeImageView.setColorFilter(filter);
-        Button imageHome1 = mRelative.findViewById(R.id.home_action1_image);
-        imageHome1.setBackgroundColor(bgColor);
+        com.google.android.material.button.MaterialButton imageHome1 = mRelative.findViewById(R.id.home_action1_image);
+        imageHome1.setBackgroundColor(backColor);
         imageHome1.setTextColor(foreColor);
-        Button buttonHome2 = mRelative.findViewById(R.id.home_action2_image);
-        buttonHome2.setBackgroundColor(bgColor);
+        com.google.android.material.button.MaterialButton buttonHome2 = mRelative.findViewById(R.id.home_action2_image);
+        buttonHome2.setBackgroundColor(backColor);
         buttonHome2.setTextColor(foreColor);
-        Button buttonHome3 = mRelative.findViewById(R.id.home_action3_image);
-        buttonHome3.setBackgroundColor(bgColor);
+        com.google.android.material.button.MaterialButton buttonHome3 = mRelative.findViewById(R.id.home_action3_image);
+        buttonHome3.setBackgroundColor(backColor);
         buttonHome3.setTextColor(foreColor);
-        Button buttonHome4 = mRelative.findViewById(R.id.home_action4_image);
-        buttonHome4.setBackgroundColor(bgColor);
+        com.google.android.material.button.MaterialButton buttonHome4 = mRelative.findViewById(R.id.home_action4_image);
+        buttonHome4.setBackgroundColor(backColor);
         buttonHome4.setTextColor(foreColor);
-        Button buttonHome5 = mRelative.findViewById(R.id.home_action5_image);
-        buttonHome5.setBackgroundColor(bgColor);
+        com.google.android.material.button.MaterialButton buttonHome5 = mRelative.findViewById(R.id.home_action5_image);
+        buttonHome5.setBackgroundColor(backColor);
         buttonHome5.setTextColor(foreColor);
-        Button buttonHome6 = mRelative.findViewById(R.id.home_action6_image);
-        buttonHome6.setBackgroundColor(bgColor);
+        com.google.android.material.button.MaterialButton buttonHome6 = mRelative.findViewById(R.id.home_action6_image);
+        buttonHome6.setBackgroundColor(backColor);
         buttonHome6.setTextColor(foreColor);
-        Button buttonHome7 = mRelative.findViewById(R.id.home_action7_image);
-        buttonHome7.setBackgroundColor(bgColor);
+        com.google.android.material.button.MaterialButton buttonHome7 = mRelative.findViewById(R.id.home_action7_image);
+        buttonHome7.setBackgroundColor(backColor);
         buttonHome7.setTextColor(foreColor);
-        Button buttonHome8 = mRelative.findViewById(R.id.home_action8_image);
-        buttonHome8.setBackgroundColor(bgColor);
+        com.google.android.material.button.MaterialButton buttonHome8 = mRelative.findViewById(R.id.home_action8_image);
+        buttonHome8.setBackgroundColor(backColor);
         buttonHome8.setTextColor(foreColor);
-        Button buttonHome9 = mRelative.findViewById(R.id.home_action9_image);
-        buttonHome9.setBackgroundColor(bgColor);
+        com.google.android.material.button.MaterialButton buttonHome9 = mRelative.findViewById(R.id.home_action9_image);
+        buttonHome9.setBackgroundColor(backColor);
         buttonHome9.setTextColor(foreColor);
-        Button buttonHome10 = mRelative.findViewById(R.id.home_action10_image);
-        buttonHome10.setBackgroundColor(bgColor);
+        com.google.android.material.button.MaterialButton buttonHome10 = mRelative.findViewById(R.id.home_action10_image);
+        buttonHome10.setBackgroundColor(backColor);
         buttonHome10.setTextColor(foreColor);
-        Button buttonHome11 = mRelative.findViewById(R.id.home_action11_image);
-        buttonHome11.setBackgroundColor(bgColor);
+        com.google.android.material.button.MaterialButton buttonHome11 = mRelative.findViewById(R.id.home_action11_image);
+        buttonHome11.setBackgroundColor(backColor);
         buttonHome11.setTextColor(foreColor);
         mMessageText.setTextColor(foreColor);
         mMessageText.getPaint().setAntiAlias(false);
@@ -369,10 +368,11 @@ public class HomePageFragment extends Fragment {
     public void onExitAmbientInFragment() {
         Log.d(TAG, "HomepageFragment.onExitAmbient()");
         Context context = getContext();
-        int bgColor = ContextCompat.getColor(context, R.color.colorAccent);
+       
         int foreColor = ContextCompat.getColor(context, R.color.semiWhite);
-        Drawable bgDrawable = ContextCompat.getDrawable(context, R.drawable.bg_selector);
-        mRelative.setBackgroundColor(bgColor);
+        int backColor= ContextCompat.getColor(context, R.color.my_app_primary_color);
+      //  Drawable bgDrawable = ContextCompat.getDrawable(context, R.drawable.bg_selector);
+        mRelative.setBackgroundColor(backColor);
 
         //mLinearTitle.findViewById(R.id.home_text).setVisibility(View.VISIBLE);
         TextView textView =  mRelative.findViewById(R.id.home_text);
@@ -391,38 +391,38 @@ public class HomePageFragment extends Fragment {
         mTextView.setTextColor(foreColor);
         mTextView.getPaint().setAntiAlias(true);
 
-        Button imageHome1 = mRelative.findViewById(R.id.home_action1_image);
-        imageHome1.setBackground(bgDrawable);
+        com.google.android.material.button.MaterialButton imageHome1 = mRelative.findViewById(R.id.home_action1_image);
+        imageHome1.setBackgroundColor(backColor);
         imageHome1.setTextColor(foreColor);
-        Button buttonHome2 = mRelative.findViewById(R.id.home_action2_image);
-        buttonHome2.setBackground(bgDrawable);
+        com.google.android.material.button.MaterialButton buttonHome2 = mRelative.findViewById(R.id.home_action2_image);
+        buttonHome2.setBackgroundColor(backColor);
         buttonHome2.setTextColor(foreColor);
-        Button buttonHome3 = mRelative.findViewById(R.id.home_action3_image);
-        buttonHome3.setBackground(bgDrawable);
+        com.google.android.material.button.MaterialButton buttonHome3 = mRelative.findViewById(R.id.home_action3_image);
+        buttonHome3.setBackgroundColor(backColor);
         buttonHome3.setTextColor(foreColor);
-        Button buttonHome4 = mRelative.findViewById(R.id.home_action4_image);
-        buttonHome4.setBackground(bgDrawable);
+        com.google.android.material.button.MaterialButton buttonHome4 = mRelative.findViewById(R.id.home_action4_image);
+        buttonHome4.setBackgroundColor(backColor);
         buttonHome4.setTextColor(foreColor);
-        Button buttonHome5 = mRelative.findViewById(R.id.home_action5_image);
-        buttonHome5.setBackground(bgDrawable);
+        com.google.android.material.button.MaterialButton buttonHome5 = mRelative.findViewById(R.id.home_action5_image);
+        buttonHome5.setBackgroundColor(backColor);
         buttonHome5.setTextColor(foreColor);
-        Button buttonHome6 = mRelative.findViewById(R.id.home_action6_image);
-        buttonHome6.setBackground(bgDrawable);
+        com.google.android.material.button.MaterialButton buttonHome6 = mRelative.findViewById(R.id.home_action6_image);
+        buttonHome6.setBackgroundColor(backColor);
         buttonHome6.setTextColor(foreColor);
-        Button buttonHome7 = mRelative.findViewById(R.id.home_action7_image);
-        buttonHome7.setBackground(bgDrawable);
+        com.google.android.material.button.MaterialButton buttonHome7 = mRelative.findViewById(R.id.home_action7_image);
+        buttonHome7.setBackgroundColor(backColor);
         buttonHome7.setTextColor(foreColor);
-        Button buttonHome8 = mRelative.findViewById(R.id.home_action8_image);
-        buttonHome8.setBackground(bgDrawable);
+        com.google.android.material.button.MaterialButton buttonHome8 = mRelative.findViewById(R.id.home_action8_image);
+        buttonHome8.setBackgroundColor(backColor);
         buttonHome8.setTextColor(foreColor);
-        Button buttonHome9 = mRelative.findViewById(R.id.home_action9_image);
-        buttonHome9.setBackground(bgDrawable);
+        com.google.android.material.button.MaterialButton buttonHome9 = mRelative.findViewById(R.id.home_action9_image);
+        buttonHome9.setBackgroundColor(backColor);
         buttonHome9.setTextColor(foreColor);
-        Button buttonHome10 = mRelative.findViewById(R.id.home_action10_image);
-        buttonHome10.setBackground(bgDrawable);
+        com.google.android.material.button.MaterialButton buttonHome10 = mRelative.findViewById(R.id.home_action10_image);
+        buttonHome10.setBackgroundColor(backColor);
         buttonHome10.setTextColor(foreColor);
-        Button buttonHome11 = mRelative.findViewById(R.id.home_action11_image);
-        buttonHome11.setBackground(bgDrawable);
+        com.google.android.material.button.MaterialButton buttonHome11 = mRelative.findViewById(R.id.home_action11_image);
+        buttonHome11.setBackgroundColor(backColor);
         buttonHome11.setTextColor(foreColor);
     }
 

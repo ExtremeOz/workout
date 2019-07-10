@@ -1,11 +1,10 @@
 package com.a_track_it.fitdata.activity;
 
-import com.a_track_it.fitdata.common.model.ActiveWorkoutSet;
-import com.a_track_it.fitdata.common.model.Bodypart;
-import com.a_track_it.fitdata.common.model.Exercise;
-import com.a_track_it.fitdata.common.model.FitnessActivity;
-import com.a_track_it.fitdata.common.model.Workout;
-import com.a_track_it.fitdata.common.model.WorkoutSet;
+import com.a_track_it.fitdata.data_model.Bodypart;
+import com.a_track_it.fitdata.data_model.Exercise;
+import com.a_track_it.fitdata.data_model.FitnessActivity;
+import com.a_track_it.fitdata.data_model.Workout;
+import com.a_track_it.fitdata.data_model.WorkoutSet;
 
 import java.util.ArrayList;
 

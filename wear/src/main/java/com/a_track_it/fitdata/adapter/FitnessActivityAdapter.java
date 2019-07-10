@@ -11,8 +11,8 @@ import androidx.core.content.ContextCompat;
 
 import com.a_track_it.fitdata.R;
 import com.a_track_it.fitdata.common.Constants;
-import com.a_track_it.fitdata.common.model.FitnessActivity;
-import com.a_track_it.fitdata.common.model.Utilities;
+import com.a_track_it.fitdata.data_model.FitnessActivity;
+import com.a_track_it.fitdata.user_model.Utilities;
 
 import java.util.ArrayList;
 

@@ -2,19 +2,17 @@ package com.a_track_it.fitdata.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Paint;
 import android.os.Bundle;
-import android.support.wearable.activity.WearableActivity;
-import android.util.TypedValue;
-import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
 
 import com.a_track_it.fitdata.R;
-import com.a_track_it.fitdata.model.UserPreferences;
+import com.a_track_it.fitdata.user_model.UserPreferences;
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 
-public class SplashActivity extends WearableActivity {
+public class SplashActivity extends AppCompatActivity {
     private ConstraintLayout mLayout;
     private void doStartUp(){
         Context context = getApplicationContext();
@@ -24,8 +22,8 @@ public class SplashActivity extends WearableActivity {
             Intent myInitialIntent = new Intent(context, InitialActivity.class);
             startActivity(myInitialIntent);
         }else{
-            Intent myMainIntent = new Intent(context, MainActivity.class);
-            startActivity(myMainIntent);
+            Intent myRoomIntent = new Intent(context, RoomActivity.class);
+            startActivity(myRoomIntent);
         }
         finish();
     }
@@ -44,8 +42,9 @@ public class SplashActivity extends WearableActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        this.setTheme(R.style.AppTheme_Launcher);
+     //   this.setTheme(R.style.);
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         Context context = getApplicationContext();
         if (!UserPreferences.getAppSetupCompleted(context)){
             Intent myInitialIntent = new Intent(context, InitialActivity.class);
@@ -55,18 +54,18 @@ public class SplashActivity extends WearableActivity {
         }else {
             setContentView(R.layout.activity_splash);
             androidx.constraintlayout.widget.ConstraintLayout mLayout = this.findViewById(R.id.splash_constraintLayout);
-            TextView textView = this.findViewById(R.id.splash_message);
+/*            TextView textView = this.findViewById(R.id.splash_message);
             if (UserPreferences.getLastUserName(context) != null){
                 textView.setText(context.getString(R.string.label_welcome_back) + UserPreferences.getLastUserName(context));
             }else{
                 textView.setText(context.getString(R.string.label_setting_up));
-            }
+            }*/
             // Enables Always-on
-            setAmbientEnabled();
-            setAutoResumeEnabled(true);
+            //setAmbientEnabled();
+          //  setAutoResumeEnabled(true);
         }
     }
-
+/*
     @Override
     public void onEnterAmbient(Bundle ambientDetails) {
         super.onEnterAmbient(ambientDetails);
@@ -75,7 +74,7 @@ public class SplashActivity extends WearableActivity {
         int foreColor = ContextCompat.getColor(context,R.color.colorAmbientForeground);
         if (mLayout != null) {
             mLayout.setBackgroundColor(bgColor);
-            TextView textView = mLayout.findViewById(R.id.splash_message);
+*//*            TextView textView = mLayout.findViewById(R.id.splash_message);
             if (textView != null) {
                 if (UserPreferences.getLastUserName(context) != null){
                     textView.setText(getResources().getString(R.string.label_welcome_back) + UserPreferences.getLastUserName(context));
@@ -88,7 +87,7 @@ public class SplashActivity extends WearableActivity {
                 textPaint.setAntiAlias(false);
                 textPaint.setStyle(Paint.Style.STROKE);
                 textPaint.setStrokeWidth(2);
-            }
+            }*//*
         }
     }
 
@@ -100,7 +99,7 @@ public class SplashActivity extends WearableActivity {
         int foreColor = ContextCompat.getColor(context, R.color.semiWhite);
         if (mLayout != null) {
             mLayout.setBackgroundColor(bgColor);
-            TextView textView = mLayout.findViewById(R.id.splash_message);
+*//*            TextView textView = mLayout.findViewById(R.id.splash_message);
             if (textView != null) {
                 textView.setTextColor(foreColor);
                 textView.getPaint().setAntiAlias(true);
@@ -109,7 +108,7 @@ public class SplashActivity extends WearableActivity {
                 }else{
                     textView.setText(getResources().getString(R.string.label_setting_up));
                 }
-            }
+            }*//*
         }
-    }
+    }*/
 }

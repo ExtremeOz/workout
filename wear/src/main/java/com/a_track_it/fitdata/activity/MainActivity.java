@@ -11,7 +11,6 @@ import android.content.ServiceConnection;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -23,7 +22,6 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
-import android.os.ResultReceiver;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.provider.Settings;
@@ -40,6 +38,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
@@ -48,6 +47,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.wear.ambient.AmbientModeSupport;
 import androidx.wear.widget.SwipeDismissFrameLayout;
 import androidx.work.Constraints;
@@ -61,15 +61,15 @@ import com.a_track_it.fitdata.R;
 import com.a_track_it.fitdata.common.BuildConfig;
 import com.a_track_it.fitdata.common.Constants;
 import com.a_track_it.fitdata.common.ReferencesTools;
-import com.a_track_it.fitdata.common.model.Bodypart;
-import com.a_track_it.fitdata.common.model.Exercise;
-import com.a_track_it.fitdata.common.model.FitnessActivity;
-import com.a_track_it.fitdata.common.model.PeakDetProcessor;
-import com.a_track_it.fitdata.common.model.Processor;
-import com.a_track_it.fitdata.common.model.SystemOutProcessor;
-import com.a_track_it.fitdata.common.model.Utilities;
-import com.a_track_it.fitdata.common.model.Workout;
-import com.a_track_it.fitdata.common.model.WorkoutSet;
+import com.a_track_it.fitdata.data_model.Bodypart;
+import com.a_track_it.fitdata.data_model.Exercise;
+import com.a_track_it.fitdata.data_model.FitnessActivity;
+import com.a_track_it.fitdata.data_model.PeakDetProcessor;
+import com.a_track_it.fitdata.data_model.Processor;
+import com.a_track_it.fitdata.data_model.SystemOutProcessor;
+import com.a_track_it.fitdata.user_model.Utilities;
+import com.a_track_it.fitdata.data_model.Workout;
+import com.a_track_it.fitdata.data_model.WorkoutSet;
 import com.a_track_it.fitdata.fragment.CustomConfirmDialog;
 import com.a_track_it.fitdata.fragment.CustomListFragment;
 import com.a_track_it.fitdata.fragment.CustomScoreDialogFragment;
@@ -79,11 +79,13 @@ import com.a_track_it.fitdata.fragment.LiveFragment;
 import com.a_track_it.fitdata.fragment.SessionEntryFragment;
 import com.a_track_it.fitdata.fragment.SessionReportFragment;
 import com.a_track_it.fitdata.model.GSONHelper;
-import com.a_track_it.fitdata.model.MessagesViewModel;
+import com.a_track_it.fitdata.user_model.MessagesViewModel;
 import com.a_track_it.fitdata.model.SavedStateViewModel;
 import com.a_track_it.fitdata.model.SessionViewModel;
-import com.a_track_it.fitdata.model.UserPreferences;
+import com.a_track_it.fitdata.user_model.UserPreferences;
 import com.a_track_it.fitdata.service.FITAPIManager;
+import com.a_track_it.fitdata.workers.BoundFusedLocationClient;
+import com.a_track_it.fitdata.workers.BoundSensorManager;
 import com.a_track_it.fitdata.workers.ImageWorker;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -102,11 +104,15 @@ import com.google.android.gms.fitness.data.Device;
 import com.google.android.gms.fitness.data.Field;
 import com.google.android.gms.fitness.request.DataSourcesRequest;
 import com.google.android.gms.fitness.request.SensorRequest;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -115,8 +121,6 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import static com.a_track_it.fitdata.common.Constants.KEY_IMAGE_URI;
-import static com.a_track_it.fitdata.common.Constants.STATE_15DIALOG;
-import static com.a_track_it.fitdata.common.Constants.STATE_DIALOG;
 import static com.a_track_it.fitdata.common.Constants.STATE_END_SET;
 import static com.a_track_it.fitdata.common.Constants.STATE_ENTRY;
 import static com.a_track_it.fitdata.common.Constants.STATE_HOME;
@@ -125,9 +129,8 @@ import static com.a_track_it.fitdata.common.Constants.STATE_SETTINGS;
 import static com.a_track_it.fitdata.service.FITAPIManager.EXTRA_LOCATION;
 
 
-public class MainActivity extends androidx.fragment.app.FragmentActivity implements
+public class MainActivity extends AppCompatActivity implements
         AmbientModeSupport.AmbientCallbackProvider,
-        FragmentManager.OnBackStackChangedListener,
         com.google.android.gms.fitness.request.OnDataPointListener,
         HomePageFragment.OnHomePageFragmentInteractionListener,
         LiveFragment.OnLiveFragmentInteractionListener,
@@ -173,8 +176,7 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
     private static final int ACTION_EXITING = 4;
     private static final int ACTION_QUICK_STOP = 5;
     private static final int ACTION_STOP_QUIT = 6;
-    private int mSetFavouritePos;
-    private int currentState = ACTION_INTIALISING;
+    //private int currentState = ACTION_INTIALISING;
 
 
 
@@ -203,28 +205,27 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
     private WorkManager mWorkManager;
     private boolean mNetworkConnected;
    // private CacheResultReceiver mReceiver;
-    private ResultReceiver mReceiver;
+   // private ResultReceiver mReceiver;
     private SwipeDismissFrameLayout mSwipeDismissFrameLayout;
     private int mActivityIcon;
     private int mActivityColor;
     private Location mLocation;
+    private LocationCallback mLocationListener;
+    private SensorEventListener mSensorListener = new xSensorListener(1);
+
     private boolean authInProgress = false;
     private boolean isRecordingAPIRunning = false;
-    private int intSensorDataListenerCount = 0;
-    private int intAccelermeterCount = 0;
     private boolean muteFeedback = false;
-    private boolean mFragmentComplete = false;
+
     //
     // parcelable model classes with state retained
     //
     //
 
     private long mPauseDuration = 0L;
-    private long mCurrentRestStart = 0L;                 // set when active part of set completed.
     private long mExpectedRestDuration = 0L;              // the expected rest duration
     private int mCurrentSetIndex = 0;
-    private int mStepTarget = 0;
-    private int mDurationTarget = 0;
+
     private CountDownTimer mCountDownTimer;
     private boolean mIsGymWorkout = false;
     private boolean mIsShooting = false;
@@ -277,7 +278,7 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
     private NavController mNavigationController;
 
     private int mRepetitionCount;
-    private SensorManager mSensorManager;
+
     private final Processor mProcessor = new PeakDetProcessor(Constants.DELTA);
     private final SystemOutProcessor systemOutProcessor = new SystemOutProcessor();
     private FragmentManager fragmentManager;
@@ -411,10 +412,8 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
             finish();
             return;
         }
-        mLocation = new Location(LocationManager.GPS_PROVIDER);
-        currentState = ACTION_INTIALISING;
-        fragmentManager = this.getSupportFragmentManager();
-        fragmentManager.addOnBackStackChangedListener(this);
+
+
         // these next 3 are only save as parcelable on saveInstance
 /*
         if (savedInstanceState != null) {
@@ -481,6 +480,8 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
         }
         mSwipeDismissFrameLayout = findViewById(R.id.swipe_layout);
         mSwipeDismissFrameLayout.addCallback(new MySwipeDismissCallback());
+        NavHostFragment navHostFragment = (NavHostFragment)getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        fragmentManager = navHostFragment.getFragmentManager();
 
         mAmbientController = AmbientModeSupport.attach(this);
         mAmbientUpdateAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -530,28 +531,28 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
         long timeMs = System.currentTimeMillis();
         mNetworkConnected = mRefTools.isNetworkConnected();
       //  mReceiver = new CacheResultReceiver(new Handler());
-        mReceiver = new ResultReceiver(new Handler()){
-            @Override
-            protected void onReceiveResult(int resultCode, Bundle resultData) {
-                if (resultCode == 200){
-                    final Workout data = resultData.getParcelable("Workout");
-                    final WorkoutSet set = resultData.getParcelable("WorkoutSet");
-                    final WorkoutSet set2 = resultData.getParcelable("Watts");
-                    if (data != null)
-                        Log.d(TAG, "received result " + data.shortText());
-                    else
-                        Log.d(TAG, "received result is okay");
-                    if (set != null)
-                        Log.d(TAG, "received resultset " + set.shortText());
-                }else
-                    Log.e(TAG, "receiver " + resultCode);
-
-                super.onReceiveResult(resultCode, resultData);
-            }
-        };
+//        mReceiver = new ResultReceiver(new Handler()){
+//            @Override
+//            protected void onReceiveResult(int resultCode, Bundle resultData) {
+//                if (resultCode == 200){
+//                    final Workout data = resultData.getParcelable("Workout");
+//                    final WorkoutSet set = resultData.getParcelable("WorkoutSet");
+//                    final WorkoutSet set2 = resultData.getParcelable("Watts");
+//                    if (data != null)
+//                        Log.d(TAG, "received result " + data.shortText());
+//                    else
+//                        Log.d(TAG, "received result is okay");
+//                    if (set != null)
+//                        Log.d(TAG, "received resultset " + set.shortText());
+//                }else
+//                    Log.e(TAG, "receiver " + resultCode);
+//
+//                super.onReceiveResult(resultCode, resultData);
+//            }
+//        };
         muteFeedback = UserPreferences.getFeedbackMute(context);
         mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+
         mRepetitionCount = 0;
         // When permissions are revoked the app is restarted so onCreate is sufficient to check for
         // permissions core to the Activity's functionality.
@@ -566,12 +567,14 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
         mMessagesViewModel.addMessage(getString(R.string.app_name));
         mMessagesViewModel.addOtherMessage(Utilities.getDateString(timeMs));
         mWorkManager = WorkManager.getInstance(this);
+
         mSessionViewModel = ViewModelProviders.of(MainActivity.this).get(SessionViewModel.class);
 
         // Obtain the ViewModel, passing in an optional
         // SavedStateVMFactory so that you can use SavedStateHandle
         mSavedStateViewModel = ViewModelProviders.of(this, new SavedStateVMFactory(this))
                 .get(SavedStateViewModel.class);
+
 
         mNavigationController = Navigation.findNavController(this, R.id.nav_host_fragment);
 
@@ -583,11 +586,11 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
         });
 
         int imageId;
-        if (SessionInProgress && ((mWorkout.activityID > 0) && (mWorkout._id != 0)) && currentState == STATE_LIVE){
+        if (SessionInProgress && ((mWorkout.activityID > 0) && (mWorkout._id != 0)) && (mSavedStateViewModel.getCurrentState().getValue() == STATE_LIVE)){
             Log.d(TAG, "Starting activity session continue onCreate");
-            currentState = STATE_ENTRY;
+            mSavedStateViewModel.setCurrentState(STATE_ENTRY);
 
-            mFragmentComplete = false;
+
             mSessionEntryFragment = SessionEntryFragment.newInstance(mWorkout.activityID, mActivityIcon, mActivityColor);
             FragmentTransaction ft = fragmentManager.beginTransaction();
             ft.add(R.id.fragment_content, mSessionEntryFragment, SessionEntryFragment.TAG).addToBackStack(SessionEntryFragment.TAG).commit();
@@ -600,6 +603,7 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                 imageId = mActivityIcon;
             else
                 imageId = getResources().getIdentifier("ic_launcher","mipmap", getPackageName());
+
             mSessionViewModel.getCompletedSets().observe(this, new Observer<ArrayList<WorkoutSet>>() {
                 @Override
                 public void onChanged(@Nullable ArrayList<WorkoutSet> workoutSets) {
@@ -642,9 +646,6 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                     }
                 }
             });
-            currentState = STATE_HOME;
-
-            mFragmentComplete = false;
         }
     }
 
@@ -652,11 +653,6 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
     protected void onDestroy() {
         super.onDestroy();
         Log.i(TAG,"onDestroy");
-        if (intAccelermeterCount > 0){
-            mSensorManager.unregisterListener(mSensorEventListener);
-            intAccelermeterCount=0;
-        }
-        if (intSensorDataListenerCount > 0) removeSensorDataListener();
         if (mServiceBound){
             if (mService != null) mService.removeListener(MainActivity.this);
             if (mServiceConnection != null) unbindService(mServiceConnection);
@@ -672,6 +668,7 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
         Log.d(TAG,"onStart");
 
         mNetworkConnected = mRefTools.isNetworkConnected();
+        if (mSavedStateViewModel != null) mSavedStateViewModel.initialise();
 
         // Bind to FITAPIManager Service!
         if (mNetworkConnected && !authInProgress) {
@@ -694,11 +691,6 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
     protected void onStop() {
         super.onStop();
         Log.d(TAG,"onStop");
-        if (intAccelermeterCount > 0){
-            mSensorManager.unregisterListener(mSensorEventListener);
-            intAccelermeterCount=0;
-        }
-        if (intSensorDataListenerCount > 0) removeSensorDataListener();
         if (mServiceBound){
             if (mService != null) mService.removeListener(this);
             if (mServiceConnection != null) unbindService(mServiceConnection);
@@ -713,18 +705,6 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
         super.onPause();
         Log.d(TAG,"onPause");
         unregisterReceiver(mAmbientUpdateBroadcastReceiver);
-        if (UserPreferences.requestingLocationUpdates(getApplicationContext())) {
-          if (mLocationUpdateBroadcastReceiver != null) {
-              try {
-                  unregisterReceiver(mLocationUpdateBroadcastReceiver);
-                  Log.i(TAG, "unregistering location - ok");
-              } catch (Exception e) {
-                  Log.e(TAG, " unreg LocationBroadcast error " + e.getMessage());
-              }
-          }else
-              Log.i(TAG, "NOT unregistering location - NULL receiver");
-        }else
-            Log.i(TAG, "NOT unregistering location updates");
 
         mActiveModeUpdateHandler.removeMessages(MSG_UPDATE_SCREEN);
         mAmbientUpdateAlarmManager.cancel(mAmbientUpdatePendingIntent);
@@ -743,94 +723,15 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                 bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
             }
         }
-        startSensors();
-
         IntentFilter filter = new IntentFilter(AMBIENT_UPDATE_ACTION);
         registerReceiver(mAmbientUpdateBroadcastReceiver, filter);
-        if (UserPreferences.requestingLocationUpdates(getApplicationContext())){
-            Log.i(TAG, "registering location updates");
-            IntentFilter filterLocations = new IntentFilter(LOCATION_UPDATE_ACTION);
-            registerReceiver(mLocationUpdateBroadcastReceiver, filterLocations);
-            if (UserPreferences.getConfirmUseLocation(this) && (mMessagesViewModel.getLocationMsg().getValue() == null)) {
-                Log.i(TAG, "FIT API Manager is connected getting location");
-                if (mServiceBound) mService.getLastLocation(true);
-            }
-
-        }else
-            Log.i(TAG, "NOT registering location updates");
 
         refreshDisplayAndSetNextUpdate();
     }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-		super.onRestoreInstanceState(savedInstanceState);
-        Log.d(TAG, "onRestoreInstanceState");
-        if (savedInstanceState != null) {
-            Log.d(TAG, "WOW onRestoreInstanceState with savedInstanceState");
-            if (savedInstanceState.containsKey(Constants.LABEL_WORKOUT)) {
-                mWorkout = savedInstanceState.getParcelable(Constants.LABEL_WORKOUT);
-                Log.d(TAG, "onRestoreInstanceState workout restored");
-            }
-            if (savedInstanceState.containsKey(Constants.LABEL_SET)) {
-                mWorkoutSet = savedInstanceState.getParcelable(Constants.LABEL_SET);
-            }
-            if (savedInstanceState.containsKey(Constants.LABEL_CURRENT_SET)){
-                int iSet = savedInstanceState.getInt(Constants.LABEL_CURRENT_SET);
-                if (mCurrentSetIndex != iSet){
-                    Log.w(TAG,"restoreInstanceState changed current set " + Integer.toString(mCurrentSetIndex) + " to " + Integer.toString(iSet));
-                    mCurrentSetIndex = iSet;
-                }
-            }
-            if (savedInstanceState.containsKey(Constants.LABEL_FRAG_STATE)){
-                int iState = savedInstanceState.getInt(Constants.LABEL_FRAG_STATE);
-                if (currentState != iState){
-                    Log.w(TAG,"restoreInstanceState changed current state " + Integer.toString(currentState) + " to " + Integer.toString(iState));
-                    currentState = iState;
-                }
-            }
-            String sKey = getString(R.string.LastLong);
-            if (savedInstanceState.containsKey(sKey)){
-                Float fPickup = savedInstanceState.getFloat(sKey, 0F);
-                sKey = getString(R.string.LastLat);
-                Float fPickup2 = savedInstanceState.getFloat(sKey, 0F);
-                if ((fPickup > 0) && (fPickup2 > 0)){
-                    mLocation.setLongitude(fPickup);
-                    mLocation.setLatitude(fPickup2);
-                }
-            }
-            sKey = getString(R.string.label_last_step);
-            if (savedInstanceState.containsKey(sKey)){
-                mLastStep.LastCount = savedInstanceState.getLong(sKey);
-                sKey = getString(R.string.label_first_step);
-                mLastStep.FirstCount = savedInstanceState.getLong(sKey);
-                sKey = getString(R.string.label_last_step_upd);
-                mLastStep.LastUpdated = savedInstanceState.getLong(sKey);
-            }
-
-        }        
-    }
-
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         Log.d(TAG, "onSaveInstanceState ");
-        if (mWorkout != null) outState.putParcelable(Constants.LABEL_WORKOUT, mWorkout);
-        if (mWorkoutSet != null) outState.putParcelable(Constants.LABEL_SET, mWorkoutSet);
-        if (mWorkout != null)
-            outState.putBoolean(Constants.STATE_IN_PROGRESS,((mWorkout.start != 0) && (mWorkout.end == 0)));
-        else
-            outState.putBoolean(Constants.STATE_IN_PROGRESS, false);
-        outState.putInt(Constants.LABEL_FRAG_STATE, currentState);
-        outState.putInt(Constants.LABEL_CURRENT_SET, mCurrentSetIndex);
         String sKey;
-        if ((mLocation != null) && (mLocation.getLatitude() > 0F)) {
-            sKey = getString(R.string.LastLong);
-            outState.putFloat(sKey, (float) mLocation.getLongitude());
-            UserPreferences.setLastLong(getApplicationContext(),(float) mLocation.getLongitude());
-            sKey = getString(R.string.LastLat);
-            outState.putFloat(sKey, (float) mLocation.getLatitude());
-            UserPreferences.setLastLati(this, (float) mLocation.getLatitude());
-        }
         if (mLastStep.LastUpdated > 0){
             sKey = getString(R.string.label_first_step);
             outState.putLong(sKey, mLastStep.FirstCount);
@@ -841,45 +742,6 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
         }
 
         super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onRestart() {
-        Log.d(TAG, "onRestart");
-        super.onRestart();
-    }
-
-    @Override
-    public void onBackStackChanged()
-    {
-        if (fragmentManager == null) return;
-        int iStackCount = fragmentManager.getBackStackEntryCount();
-        Log.d(TAG, "WOW onBackStackChanged : " + Integer.toString(iStackCount));
-        if (iStackCount > 0)
-            for(int entry = 0; entry < iStackCount  ; entry++){
-                FragmentManager.BackStackEntry backEntry = fragmentManager.getBackStackEntryAt(entry);
-                String tag = backEntry.getName();
-                Log.d(TAG, "onBackStackChanged found fragment: " + Integer.toString(entry) + " tag " + tag);
-            }
-
-        if (iStackCount == 0) {
-            if ((currentState == STATE_HOME) || (currentState == STATE_LIVE)) {
-                if (UserPreferences.getConfirmDismissSession(getApplicationContext())) {
-                    final androidx.constraintlayout.widget.ConstraintLayout frameLayout = findViewById(R.id.main_constraintLayout);
-                    if (frameLayout != null) {
-                        if (currentState == STATE_HOME)
-                            showAlertDialogConfirm(frameLayout,  ACTION_EXITING);
-                        else
-                            showAlertDialogConfirm(frameLayout,  ACTION_QUICK_STOP);
-
-                    }
-                   // mCustomConfirmDialog = CustomConfirmDialog.newInstance(0, getString(R.string.confirm_dismiss_toggle_prompt), MainActivity.this);
-                   // mCustomConfirmDialog.show(fragmentManager, "confirmDialog");
-                } else
-                    quitApp();
-            }else
-                startHomePageFragment();
-        }
     }
 
     @Override
@@ -905,6 +767,7 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        int currentState = mSavedStateViewModel.getCurrentState().getValue();
         switch (requestCode){
             case RC_SIGN_IN:
                 Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
@@ -925,7 +788,7 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                             RecognizerIntent.EXTRA_RESULTS);
                         String spokenText = results.get(0);
                         if (currentState == STATE_ENTRY) {
-                            WorkoutSet set = mSessionViewModel.getWorkoutSet().getValue();
+                            WorkoutSet set =  mSavedStateViewModel.getActiveWorkoutSet().getValue();
                             if ((set != null) && (spokenText.length() > 0)) {
                                 set.exerciseName = spokenText;
                                 Exercise exercise = getExerciseByName(spokenText);
@@ -933,15 +796,7 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                                     set.exerciseID = (int) exercise._id;
                                 else
                                     set.exerciseID = (mRefTools.getExerciseNames().length + 1);
-                                mSessionViewModel.setActiveWorkoutSet(set);
-                                final String sGiven = spokenText;
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        mSessionEntryFragment.updateUI();
-                                        Toast.makeText(getApplicationContext(), sGiven, Toast.LENGTH_LONG);
-                                    }
-                                });
+                                mSavedStateViewModel.setActiveWorkoutSet(set);
                             }
 
                         }
@@ -974,41 +829,8 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
     public void onHomePageFragmentInteraction(int src, int id, String text, int color) {
         String sLabel;
         String defaultValue = "";
-        int i;
+        int i; int selectionType = 0;
         if (src == 0){
-          //  startCustomList(Constants.SELECTION_TO_DO_SETS, mCurrentSetIndex, defaultValue);
-            Toast.makeText(this, "read live intent", Toast.LENGTH_SHORT).show();
-/*            if (mServiceBound) {
-               // if (mWorkoutSet == null) mWorkoutSet = mSessionViewModel.getWorkoutSet().getValue();
-              //  if (mWorkoutSet == null){
-                    mWorkoutSet = new WorkoutSet();
-                    Calendar cal = Calendar.getInstance();
-                    Date now = new Date();
-                    cal.setTime(now);
-                    Log.d(TAG, "Start reading seg " + cal.getTimeInMillis());
-                    mWorkoutSet.end = cal.getTimeInMillis();
-                    cal.set(Calendar.HOUR_OF_DAY, 0);
-                    cal.set(Calendar.MINUTE, 1);
-                    cal.set(Calendar.SECOND, 0);
-                    cal.set(Calendar.MILLISECOND, 0);
-                    mWorkoutSet.start = cal.getTimeInMillis();
-                    mWorkoutSet._id = mWorkoutSet.start;
-              //  }
-                Log.d(TAG, "reading seg " + mWorkoutSet.shortText());
-                mService.readHistory(mWorkoutSet);
-*//*                Intent intentService = new Intent(getApplicationContext(), ReadHistoryIntentService.class);
-                intentService.setAction(ACTION_READ);
-                intentService.putExtra(EXTRA_START, mWorkoutSet.start);
-                intentService.putExtra(EXTRA_END, mWorkoutSet.end);
-                intentService.putExtra(EXTRA_REC, mReceiver);
-                intentService.putExtra(EXTRA_ACT, UserPreferences.getUserEmail(this));
-                Log.d(TAG, "intent service started");
-                startService(intentService);*//*
-
-                now = new Date();
-                cal.setTime(now);
-                Log.d(TAG, "Done reading seg " + cal.getTimeInMillis());
-            }*/
             return;
         }
         if (src >=1 && src <= 10){   // new item.
@@ -1025,18 +847,17 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                         mActivityColor = mRefTools.getFitnessActivityColorById(i);
                         mWorkoutSet.activityID = mWorkout.activityID;
                         mWorkoutSet.activityName =  mWorkout.activityName;
-                        startSessionEntry();
                     }else {
                         mWorkout.activityID = Constants.WORKOUT_TYPE_STRENGTH;
                         mWorkout.activityName = mRefTools.getFitnessActivityTextById(Constants.SELECTION_ACTIVITY_GYM);
                         mActivityIcon = mRefTools.getFitnessActivityIconResById(Constants.WORKOUT_TYPE_STRENGTH);
                         mActivityColor = mRefTools.getFitnessActivityColorById(Constants.WORKOUT_TYPE_STRENGTH);
+                        mSavedStateViewModel.setSetIsGym(true);
+                        mSavedStateViewModel.setSetIsShoot(false);
                         mWorkout.identifier = FitnessActivities.STRENGTH_TRAINING;
-                        mIsGymWorkout = true;
-                        mIsShooting = false;
                         sLabel = getString(R.string.default_loadtype) + Integer.toString(Constants.WORKOUT_TYPE_STRENGTH);
                         defaultValue = UserPreferences.getPrefStringByLabel(getApplicationContext(), sLabel);
-                        startCustomList(Constants.SELECTION_ACTIVITY_GYM, mCurrentSetIndex, defaultValue);
+                        selectionType = Constants.SELECTION_ACTIVITY_GYM;
                     }
                     break;
                 case 2:
@@ -1047,7 +868,10 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                         mWorkout.identifier = mRefTools.getFitnessActivityIdentifierById(i);
                         mActivityIcon = mRefTools.getFitnessActivityIconResById(i);
                         mActivityColor = mRefTools.getFitnessActivityColorById(i);
-                        startSessionEntry();
+                        mSavedStateViewModel.setSetIsGym(Utilities.isGymWorkout(i));
+                        mSavedStateViewModel.setSetIsShoot(Utilities.isShooting(i));
+                        mWorkoutSet.activityID = mWorkout.activityID;
+                        mWorkoutSet.activityName =  mWorkout.activityName;
                     }else {
                         mWorkout.activityID = Constants.WORKOUT_TYPE_ARCHERY;
                         mWorkout.activityName = Utilities.SelectionTypeToString(this, Constants.WORKOUT_TYPE_ARCHERY);
@@ -1055,13 +879,12 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                         mWorkout.setCount = 10;   // 10 ends
                         mWorkout.repCount = 3;
                         mWorkout.shotsPerEnd = 3;
-                        mIsGymWorkout = false;
-                        mIsShooting = true;
+                        mSavedStateViewModel.setSetIsShoot(true);
+                        mSavedStateViewModel.setSetIsGym(false);
                         mWorkoutSet.activityID = mWorkout.activityID;
                         mWorkoutSet.activityName = mWorkout.activityName;
                         mActivityIcon = mRefTools.getFitnessActivityIconResById(Constants.WORKOUT_TYPE_ARCHERY);
                         mActivityColor = mRefTools.getFitnessActivityColorById(Constants.WORKOUT_TYPE_ARCHERY);
-                        startSessionEntry();
                     }
                     break;
                 case 3:
@@ -1072,19 +895,25 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                         mWorkout.identifier = mRefTools.getFitnessActivityIdentifierById(i);
                         mActivityIcon = mRefTools.getFitnessActivityIconResById(i);
                         mActivityColor = mRefTools.getFitnessActivityColorById(i);
+                        mActivityIcon = mRefTools.getFitnessActivityIconResById(i);
+                        mActivityColor = mRefTools.getFitnessActivityColorById(i);
+                        mSavedStateViewModel.setSetIsGym(Utilities.isGymWorkout(i));
+                        mSavedStateViewModel.setSetIsShoot(Utilities.isShooting(i));
+
                         mWorkoutSet.activityID = mWorkout.activityID;
                         mWorkoutSet.activityName =  mWorkout.activityName;
-                        startSessionEntry();
                     }else {
                         mWorkout.activityID = 0;
                         mWorkout.activityName = "";
                         mActivityIcon = mRefTools.getFitnessActivityIconResById(Constants.WORKOUT_TYPE_AEROBICS);
                         mActivityColor = mRefTools.getFitnessActivityColorById(Constants.WORKOUT_TYPE_AEROBICS);
+                        mSavedStateViewModel.setSetIsGym(false);
+                        mSavedStateViewModel.setSetIsShoot(false);
                         mWorkoutSet.activityID = mWorkout.activityID;
                         mWorkoutSet.activityName = mWorkout.activityName;
                         sLabel = getString(R.string.default_loadtype) + Integer.toString(Constants.WORKOUT_TYPE_AEROBICS);
                         defaultValue = UserPreferences.getPrefStringByLabel(getApplicationContext(), sLabel);
-                        startCustomList(Constants.SELECTION_ACTIVITY_CARDIO, mCurrentSetIndex, defaultValue);
+                        selectionType = Constants.SELECTION_ACTIVITY_CARDIO;
                     }
                     break;
                 case 4:
@@ -1095,9 +924,10 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                         mWorkout.identifier = mRefTools.getFitnessActivityIdentifierById(i);
                         mActivityIcon = mRefTools.getFitnessActivityIconResById(i);
                         mActivityColor = mRefTools.getFitnessActivityColorById(i);
+                        mSavedStateViewModel.setSetIsGym(Utilities.isGymWorkout(i));
+                        mSavedStateViewModel.setSetIsShoot(Utilities.isShooting(i));
                         mWorkoutSet.activityID = mWorkout.activityID;
                         mWorkoutSet.activityName =  mWorkout.activityName;
-                        startSessionEntry();
                     }else {
                         mWorkout.activityID = 0;
                         mWorkout.activityName = "";
@@ -1105,9 +935,12 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                         mActivityColor = mRefTools.getFitnessActivityColorById(Constants.WORKOUT_TYPE_RUNNING);
                         mWorkoutSet.activityID = mWorkout.activityID;
                         mWorkoutSet.activityName = mWorkout.activityName;
+                        mSavedStateViewModel.setSetIsGym(false);
+                        mSavedStateViewModel.setSetIsShoot(false);
+
                         sLabel = getString(R.string.default_loadtype) + Integer.toString(Constants.SELECTION_ACTIVITY_RUN);
                         defaultValue = UserPreferences.getPrefStringByLabel(getApplicationContext(), sLabel);
-                        startCustomList(Constants.SELECTION_ACTIVITY_RUN,mCurrentSetIndex, defaultValue);
+                        selectionType = Constants.SELECTION_ACTIVITY_RUN;
                     }
                     break;
                 case 5:
@@ -1120,7 +953,9 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                         mActivityColor = mRefTools.getFitnessActivityColorById(i);
                         mWorkoutSet.activityID = mWorkout.activityID;
                         mWorkoutSet.activityName =  mWorkout.activityName;
-                        startSessionEntry();
+                        mSavedStateViewModel.setSetIsGym(Utilities.isGymWorkout(i));
+                        mSavedStateViewModel.setSetIsShoot(Utilities.isShooting(i));
+
                     }else {
                         mWorkout.activityID = 0;
                         mWorkout.activityName = "";
@@ -1128,9 +963,11 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                         mActivityColor = mRefTools.getFitnessActivityColorById(Constants.WORKOUT_TYPE_KAYAKING);
                         mWorkoutSet.activityID = mWorkout.activityID;
                         mWorkoutSet.activityName = mWorkout.activityName;
+                        mSavedStateViewModel.setSetIsGym(false);
+                        mSavedStateViewModel.setSetIsShoot(false);
                         sLabel = getString(R.string.default_loadtype) + Integer.toString(Constants.SELECTION_ACTIVITY_SPORT);
                         defaultValue = UserPreferences.getPrefStringByLabel(getApplicationContext(), sLabel);
-                        startCustomList(Constants.SELECTION_ACTIVITY_SPORT, mCurrentSetIndex, defaultValue);
+                        selectionType = Constants.SELECTION_ACTIVITY_SPORT;
                     }
                     break;
                 case 6:
@@ -1140,9 +977,12 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                     mActivityColor = mRefTools.getFitnessActivityColorById(68); //downhill skiing
                     mWorkoutSet.activityID = mWorkout.activityID;
                     mWorkoutSet.activityName = mWorkout.activityName;
+                    mSavedStateViewModel.setSetIsGym(false);
+                    mSavedStateViewModel.setSetIsShoot(false);
+
                     sLabel = getString(R.string.default_loadtype) + Integer.toString(Constants.SELECTION_ACTIVITY_SPORT);
                     defaultValue = UserPreferences.getPrefStringByLabel(getApplicationContext(), sLabel);
-                    startCustomList(Constants.SELECTION_ACTIVITY_WINTER,mCurrentSetIndex, defaultValue);
+                    selectionType = Constants.SELECTION_ACTIVITY_WINTER;
                     break;
                 case 7:
                     mWorkout.activityID = 0;
@@ -1151,9 +991,11 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                     mActivityColor = mRefTools.getFitnessActivityColorById(83); //swimmer diving into water
                     mWorkoutSet.activityID = mWorkout.activityID;
                     mWorkoutSet.activityName = mWorkout.activityName;
+                    mSavedStateViewModel.setSetIsGym(false);
+                    mSavedStateViewModel.setSetIsShoot(false);
                     sLabel = getString(R.string.default_loadtype) + Integer.toString(Constants.SELECTION_ACTIVITY_SPORT);
                     defaultValue = UserPreferences.getPrefStringByLabel(getApplicationContext(), sLabel);
-                    startCustomList(Constants.SELECTION_ACTIVITY_WATER,mCurrentSetIndex, defaultValue);
+                    selectionType = Constants.SELECTION_ACTIVITY_WATER;
                     break;
                 case 8:
                     mWorkout.activityID = 0;
@@ -1162,7 +1004,9 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                     mActivityColor = mRefTools.getFitnessActivityColorById(16); //man cycling
                     mWorkoutSet.activityID = mWorkout.activityID;
                     mWorkoutSet.activityName = mWorkout.activityName;
-                    startCustomList(Constants.SELECTION_ACTIVITY_BIKE,mCurrentSetIndex, defaultValue);
+                    mSavedStateViewModel.setSetIsGym(false);
+                    mSavedStateViewModel.setSetIsShoot(false);
+                    selectionType = Constants.SELECTION_ACTIVITY_BIKE;
                     break;
                 case 9:
                     mWorkout.activityID = 0;
@@ -1171,7 +1015,9 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                     mActivityColor = mRefTools.getFitnessActivityColorById(24); //dancing
                     mWorkoutSet.activityID = mWorkout.activityID;
                     mWorkoutSet.activityName = mWorkout.activityName;
-                    startCustomList(Constants.SELECTION_ACTIVITY_MISC, mCurrentSetIndex, defaultValue);
+                    mSavedStateViewModel.setSetIsGym(false);
+                    mSavedStateViewModel.setSetIsShoot(false);
+                    selectionType = Constants.SELECTION_ACTIVITY_MISC;
                     break;
                 case 10:
                     mWorkout.activityID = 0;
@@ -1180,13 +1026,26 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                     mActivityColor = mRefTools.getFitnessActivityColorById(24); //dancing
                     mWorkoutSet.activityID = mWorkout.activityID;
                     mWorkoutSet.activityName = mWorkout.activityName;
-                    startCustomList(Constants.SELECTION_FITNESS_ACTIVITY, mCurrentSetIndex, defaultValue);
+                    mSavedStateViewModel.setSetIsGym(false);
+                    mSavedStateViewModel.setSetIsShoot(false);
+                    selectionType = 24;
                     break;
             }
+            mSavedStateViewModel.setIconID(mActivityIcon);
+            mSavedStateViewModel.setColorID(mActivityColor);
+            mSavedStateViewModel.setActiveWorkout(mWorkout);
+            mSavedStateViewModel.setActiveWorkoutSet(mWorkoutSet);
+
+
+            if (selectionType == 0)
+                mNavigationController.navigate(R.id.action_homePageFragment_to_sessionEntryFragment);
+            else
+                startCustomList(selectionType, defaultValue);
+
         }
         if (src == 11){ // settings
-            currentState = STATE_SETTINGS;
-            startCustomList(Constants.SELECTION_USER_PREFS, 0, defaultValue);
+            mSavedStateViewModel.setCurrentState(STATE_SETTINGS);
+            startCustomList(Constants.SELECTION_USER_PREFS,  defaultValue);
         }
         if (src == 13){
             if (id == HomePageFragment.MSG_LOCATION){
@@ -1199,7 +1058,7 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
         if (id == 0) {
             Toast.makeText(this, "read live", Toast.LENGTH_SHORT).show();
             if (mServiceBound) {
-                if (mWorkoutSet == null) mWorkoutSet = mSessionViewModel.getWorkoutSet().getValue();
+                WorkoutSet set = mSavedStateViewModel.getActiveWorkoutSet().getValue();
                 if (mWorkoutSet == null){
                     mWorkoutSet = new WorkoutSet();
                     Calendar cal = Calendar.getInstance();
@@ -1220,14 +1079,14 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
         // home_action1_image
         if (id == 1)
             if (!mCompletedWorkouts.isEmpty())
-                startCustomList(Constants.SELECTION_WORKOUT_HISTORY, mCurrentSetIndex, "");
+                startCustomList(Constants.SELECTION_WORKOUT_HISTORY,  "");
             else
-                startCustomList(Constants.SELECTION_ACTIVE_SESSION, mCurrentSetIndex, "");
+                startCustomList(Constants.SELECTION_ACTIVE_SESSION, "");
     }
     @Override
     public void onHomePageFragmentComplete(int id) {
         Log.d(TAG, "oHomePageFragmentComplete");
-        mFragmentComplete = true;
+        mSavedStateViewModel.setCurrentState(STATE_HOME);
         if (mSessionViewModel != null && ((mSessionViewModel.getBodypartArrayList() == null)
                 || (mSessionViewModel.getBodypartArrayList().size() == 0))) {
             Log.d(TAG, "loading reference data onLiveFragmentComplete isLoading " + Boolean.toString(mSessionViewModel.isLoadingRefs()));
@@ -1236,13 +1095,14 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                 mSessionViewModel.getReferenceData();
             }
         }
+
     }
 
     @Override
     public void onLiveFragmentInteraction(int src, int id, String text, int color) {
         switch (src){
             case 1:
-                if (mSessionViewModel.getPauseStart().getValue() == 0) {
+                if (mSavedStateViewModel.getPauseStart().getValue() == 0) {
                     pauseSession();
                     Toast.makeText(this, getString(R.string.label_session_paused), Toast.LENGTH_SHORT).show();
                 }else{
@@ -1251,14 +1111,14 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                 }
                 break;
             case 2:
-                if (text.equals("long")) {  // long click 2
+                if ((text != null) && (text.equals("long"))) {  // long click 2
                     Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
                 }else {
 
                 }
                 break;
             case 3:   // end this set
-                if (text.equals("long")){  // long click 3
+                if ((text != null) && text.equals("long")){  // long click 3
                     if (UserPreferences.getConfirmEndSession(getApplicationContext())){
                         mCustomConfirmDialog = CustomConfirmDialog.newInstance(5,getString(R.string.confirm_end_toggle_prompt), MainActivity.this);
                         mCustomConfirmDialog.show(fragmentManager, "confirmDialog");
@@ -1269,26 +1129,21 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                         }
                     }
                 }else {
-                    mWorkoutSet = mSessionViewModel.getWorkoutSet().getValue();
+                    mWorkoutSet = mSavedStateViewModel.getActiveWorkoutSet().getValue();
                     if (mWorkoutSet != null) {
                         if ((mRepetitionCount > 0) && (mWorkoutSet != null)) {
                             mWorkoutSet.repCount = mRepetitionCount;
                             mRepetitionCount = 0;
                         }
-                        // mWorkoutSet.end = timeMs;   // not tracking rest
-                        // mWorkoutSet.duration = mWorkoutSet.end - mWorkoutSet.start;
-                        //mCurrentRestStart = timeMs;
                     }
-                    mSessionViewModel.setActiveWorkoutSet(mWorkoutSet);
+                    mSavedStateViewModel.setActiveWorkoutSet(mWorkoutSet);
+                    mIsGymWorkout = (mSavedStateViewModel.getIsGym().getValue() != null) ? mSavedStateViewModel.getIsGym().getValue() : false;
+                    mIsShooting = (mSavedStateViewModel.getIsShoot().getValue() != null) ? mSavedStateViewModel.getIsShoot().getValue() : false;
                     if (mIsGymWorkout || mIsShooting) {
                         long timeMs = System.currentTimeMillis();
                         completeActiveSet(timeMs);
-                        startEndOfSetFragment();
+                        mNavigationController.navigate(R.id.action_global_liveFragment);
                     } else {
-                        if (intAccelermeterCount > 0) {
-                            mSensorManager.unregisterListener(mSensorEventListener);
-                            intAccelermeterCount--;
-                        }
                         if (UserPreferences.getConfirmEndSession(getApplicationContext())) {
                             mCustomConfirmDialog = CustomConfirmDialog.newInstance(5, getString(R.string.confirm_end_toggle_prompt), MainActivity.this);
                             mCustomConfirmDialog.show(fragmentManager, "confirmDialog");
@@ -1318,8 +1173,9 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
 
     @Override
     public void onLiveFragmentComplete(int id) {
-        // start counting reps
-        mFragmentComplete = true;
+        Log.i(TAG, "LiveFragment complete");
+        mSavedStateViewModel.setCurrentState(STATE_LIVE);
+        // in case of deep linking load references now
         if (mSessionViewModel != null && ((mSessionViewModel.getBodypartArrayList() == null)
                 || (mSessionViewModel.getBodypartArrayList().size() == 0))) {
             Log.d(TAG, "loading reference data onLiveFragmentComplete isLoading " + Boolean.toString(mSessionViewModel.isLoadingRefs()));
@@ -1332,6 +1188,7 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
     // custom score  fragment interactions
     @Override
     public void onCustomScoreSelected(int type, long id, String title, int setIndex) {
+        mWorkoutSet = mSavedStateViewModel.getActiveWorkoutSet().getValue();
         if (type == Constants.SELECTION_SETS){
             if (mWorkoutSet != null) mWorkoutSet.setCount = (int)id;
         }
@@ -1339,39 +1196,38 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
             if (mWorkoutSet != null) mWorkoutSet.repCount = (int)id;
         }
         if (type == Constants.SELECTION_GOAL_DURATION){
-            mDurationTarget = (int)id;
-            mSessionViewModel.setGoalDuration(mDurationTarget);
+            mSavedStateViewModel.setGoalDuration((int)id);
         }
         if (type == Constants.SELECTION_GOAL_STEPS){
-            mStepTarget = (int)id;
-            mSessionViewModel.setGoalSteps(mStepTarget);
+            mSavedStateViewModel.setGoalSteps((int)id);
         }
-        mSessionViewModel.setActiveWorkout(mWorkout);
-        mSessionViewModel.setActiveWorkoutSet(mWorkoutSet);
+
+        if (mWorkoutSet != null) mSavedStateViewModel.setActiveWorkoutSet(mWorkoutSet);
 
         if (mCustomScoreDialogFragment != null) {
             mCustomScoreDialogFragment.dismiss();
             mCustomScoreDialogFragment = null;
-            fragmentManager.popBackStack(CustomScoreDialogFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            mNavigationController.popBackStack();
+           // fragmentManager.popBackStack(CustomScoreDialogFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
         if (mCustomListFragment != null) {
             mCustomListFragment.dismiss();
             mCustomListFragment = null;
-            fragmentManager.popBackStack(CustomListFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            mNavigationController.popBackStack();
+            //fragmentManager.popBackStack(CustomListFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
-        if (currentState == STATE_ENTRY)
-            startSessionEntry();
-
-        if (currentState == STATE_END_SET)
-            startEndOfSetFragment();
 
     }
 
     /***  CustomListFragment callbacks   **/
     @Override
-    public void onCustomItemSelected(int type, long id, String name, int resid, int set_index, String identifier) {
+    public void onCustomItemSelected(int type, long id, String name, int resid, String identifier) {
         WorkoutSet privateSet;
-        Log.d(TAG, "current state at custom item selected " + Integer.toString(currentState));
+        mWorkout = mSavedStateViewModel.getActiveWorkout().getValue();
+        mWorkoutSet = mSavedStateViewModel.getActiveWorkoutSet().getValue();
+        if (mWorkout == null) createWorkout();
+        if (mWorkoutSet == null) createWorkoutSet();
+
         if ((type == Constants.SELECTION_FITNESS_ACTIVITY) || (type == Constants.SELECTION_ACTIVITY_BIKE)
                 || (type == Constants.SELECTION_ACTIVITY_GYM) || (type == Constants.SELECTION_ACTIVITY_CARDIO)
                 || (type == Constants.SELECTION_ACTIVITY_SPORT) || (type == Constants.SELECTION_ACTIVITY_RUN)
@@ -1381,31 +1237,34 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
             String sLabel = getString(R.string.default_loadtype) + Integer.toString(type);
             String sTarget = Long.toString(id);
             UserPreferences.setPrefStringByLabel(getApplicationContext(),sLabel,sTarget);
-//            if (mSetFavouritePos == 0) {
-                mWorkout.activityID = (int) id;
-                mWorkout.activityName = name;
-                mWorkout.identifier = identifier;
-                mWorkoutSet.activityID = mWorkout.activityID;
-                mWorkoutSet.activityName = mWorkout.activityName;
-                mIsGymWorkout = Utilities.isGymWorkout(mWorkout.activityID);
-                mIsShooting = Utilities.isShooting(mWorkout.activityID);
-                mActivityIcon = (resid > 0) ? resid : mRefTools.getFitnessActivityIconResById(mWorkout.activityID);
-                mActivityColor = (set_index > 0) ? set_index : mRefTools.getFitnessActivityColorById(mWorkout.activityID);
-/*            }else{
-                if (mSetFavouritePos == 1) UserPreferences.setActivityID1(this, (int)id);
-                if (mSetFavouritePos == 2) UserPreferences.setActivityID2(this, (int)id);
-                if (mSetFavouritePos == 3) UserPreferences.setActivityID3(this, (int)id);
-                mCustomListFragment.dismiss();
-                getSupportFragmentManager().popBackStack(CustomListFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                
-            }*/
+            mWorkout.activityID = (int) id;
+            mWorkout.activityName = name;
+            mWorkout.identifier = identifier;
+            mWorkoutSet.activityID = mWorkout.activityID;
+            mWorkoutSet.activityName = mWorkout.activityName;
+            mSavedStateViewModel.setSetIsGym(Utilities.isGymWorkout(mWorkout.activityID));
+            mSavedStateViewModel.setSetIsShoot(Utilities.isShooting(mWorkout.activityID));
+            mActivityIcon = (resid > 0) ? resid : mRefTools.getFitnessActivityIconResById(mWorkout.activityID);
+            mSavedStateViewModel.setIconID(mActivityIcon);
+            mActivityColor = mRefTools.getFitnessActivityColorById(mWorkout.activityID);
+            mSavedStateViewModel.setColorID(mActivityColor);
+            mSavedStateViewModel.setActiveWorkout(mWorkout);
+            mSavedStateViewModel.setActiveWorkoutSet(mWorkoutSet);
+
+            Bundle bundle = new Bundle();
+            bundle.putInt(SessionEntryFragment.ARG_ACTIVITYID, mWorkout.activityID);
+            bundle.putInt(SessionEntryFragment.ARG_COLORID, mActivityColor);
+            bundle.putInt(SessionEntryFragment.ARG_RESID, mActivityIcon);
+            mNavigationController.navigate(R.id.action_homePageFragment_to_sessionEntryFragment, bundle);
+            return;
         }
         //TODO: day and month selection for FIT queries & results
         if ((type == Constants.SELECTION_DAYS) || (type == Constants.SELECTION_MONTHS)) {
-            Log.d(TAG, "CustomItemSelected got " + Integer.toString(resid));
+            Log.d(TAG, "CustomItemSelected got " + Long.toString(id) + " months " + Integer.toString(resid));
         }
+        int set_index = mSavedStateViewModel.getSetIndex().getValue();
         privateSet =  ((set_index > 0) && (mSessionViewModel.getToDoSetSize() >= set_index)) ? mSessionViewModel.getToDoSets().getValue().get(set_index-1) : null;
-        if (privateSet == null) privateSet = mWorkoutSet;
+        if (privateSet == null) privateSet = mSavedStateViewModel.getActiveWorkoutSet().getValue();
         if (type == Constants.SELECTION_EXERCISE) {
          //   if (set_index == 0) {
                 privateSet.exerciseID = (int) id;
@@ -1544,63 +1403,52 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
             UserPreferences.setArcheryRestDuration(this, Integer.parseInt(name));
             mExpectedRestDuration = (Integer.parseInt(name) * 1000);
         }
-        if (mWorkout != null) mSessionViewModel.setActiveWorkout(mWorkout);
-        if (privateSet != null) mSessionViewModel.setActiveWorkoutSet(privateSet);
+        if (mWorkout != null) mSavedStateViewModel.setActiveWorkout(mWorkout);
+        if (privateSet != null) mSavedStateViewModel.setActiveWorkoutSet(privateSet);
 
         if (mCustomScoreDialogFragment != null) {
             mCustomScoreDialogFragment.dismiss();
             mCustomScoreDialogFragment = null;
-            fragmentManager.popBackStack(CustomScoreDialogFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
         if (mCustomListFragment != null) {
             mCustomListFragment.dismiss();
             mCustomListFragment = null;
-            fragmentManager.popBackStack(CustomListFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
-        if ((currentState == STATE_ENTRY) || (currentState == STATE_HOME))
-            startSessionEntry();
-        else
-            if (currentState == STATE_END_SET) startEndOfSetFragment();
+
 
     }
-    //I FIT API Manager callbacks
-    @Override
-    public void insertWorkout(Workout workout) {
-
-    }
-
-    @Override
-    public void removeWorkout(Workout workout) {
-
-    }
-
     @Override
     public void onConnected() {
             //Toast.makeText(this,"FIT API Manager service connected!",Toast.LENGTH_LONG);
             // We can now safely use the API we requested access to
             if (UserPreferences.getConfirmUseSensors(this) && UserPreferences.getAppSetupCompleted(this)
                     && (mGoogleAccount != null)){
-                if (mWorkout == null) mWorkout = mSessionViewModel.getWorkout().getValue();
-                if (intSensorDataListenerCount == 0) {
-                 try{
-                        if ((mWorkout != null) && ((mWorkout.start != 0) && (mWorkout.end == 0))) { // in-progress
-                            listSensorDataSources(DataType.TYPE_HEART_RATE_BPM);
-                            listSensorDataSources(DataType.TYPE_STEP_COUNT_CUMULATIVE);
-                            listSensorDataSources(DataType.TYPE_LOCATION_SAMPLE);
-                            listSensorDataSources(DataType.TYPE_ACTIVITY_SAMPLES);
-                            listSensorDataSources(DataType.TYPE_WORKOUT_EXERCISE);
-                            listSensorDataSources(DataType.TYPE_CALORIES_EXPENDED);
-                            listSensorDataSources(DataType.TYPE_MOVE_MINUTES);
-                        } else {
-                            listSensorDataSources(DataType.TYPE_HEART_RATE_BPM);
-                            listSensorDataSources(DataType.TYPE_STEP_COUNT_CUMULATIVE);
-                            listSensorDataSources(DataType.TYPE_CALORIES_EXPENDED);
-                            listSensorDataSources(DataType.TYPE_MOVE_MINUTES);
-                        }
-                    }catch (Exception e){
-                        Log.w(TAG, "Sensory setup error: " + e.getMessage());
-                    }
+                try {
+                    if ((mSavedStateViewModel != null) && (mSavedStateViewModel.getActiveWorkout().getValue() != null))
+                        mWorkout = mSavedStateViewModel.getActiveWorkout().getValue();
+                }catch (Exception e){
+                    Log.e(TAG, "onConnected getActiveWorkout error " + e.getLocalizedMessage());
                 }
+
+             try{
+                    if ((mWorkout != null) && ((mWorkout.start != 0) && (mWorkout.end == 0))) { // in-progress
+                        listSensorDataSources(DataType.TYPE_HEART_RATE_BPM);
+                        listSensorDataSources(DataType.TYPE_STEP_COUNT_CUMULATIVE);
+                        listSensorDataSources(DataType.TYPE_LOCATION_SAMPLE);
+                        listSensorDataSources(DataType.TYPE_ACTIVITY_SAMPLES);
+                        listSensorDataSources(DataType.TYPE_WORKOUT_EXERCISE);
+                        listSensorDataSources(DataType.TYPE_CALORIES_EXPENDED);
+                        listSensorDataSources(DataType.TYPE_MOVE_MINUTES);
+                    } else {
+                        listSensorDataSources(DataType.TYPE_HEART_RATE_BPM);
+                        listSensorDataSources(DataType.TYPE_STEP_COUNT_CUMULATIVE);
+                        listSensorDataSources(DataType.TYPE_CALORIES_EXPENDED);
+                        listSensorDataSources(DataType.TYPE_MOVE_MINUTES);
+                    }
+                }catch (Exception e){
+                    Log.w(TAG, "Sensory setup error: " + e.getMessage());
+                }
+
             }
 
 
@@ -1631,24 +1479,23 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
         long lSessionID = Long.parseLong(sessionID.substring(3));
         // start session change type 0 = successful
         if (changeType == 0){
-            mWorkout = mSessionViewModel.getWorkout().getValue();
+            if (mSavedStateViewModel.getActiveWorkout().getValue() != null) mWorkout = mSavedStateViewModel.getActiveWorkout().getValue();
             if ((mWorkout != null) && (mWorkout._id == lSessionID)){
                 if (result == 1) {
                     long timeMs = System.currentTimeMillis();
                     mWorkout.last_sync = timeMs;
                     Log.d(TAG, "last_sync mWorkouts " + mWorkout.toString());
                     Log.d(TAG, "last_sync mWorkoutSet " + mWorkoutSet.toString());
-                    mSessionViewModel.setActiveWorkout(mWorkout);
-                    mSessionViewModel.saveSingleType(true, GSONHelper.LOAD_ACTIVE_WORKOUTS);
-                    mSessionViewModel.setActiveWorkoutSet(mWorkoutSet);
-                    mSessionViewModel.saveSingleType(true, GSONHelper.LOAD_ACTIVE_SETS);
+                    mSavedStateViewModel.setActiveWorkout(mWorkout);
+                    mSavedStateViewModel.setActiveWorkoutSet(mWorkoutSet);
+                    //mSessionViewModel.saveSingleType(true, GSONHelper.LOAD_ACTIVE_SETS);
                 }
             }
             mMessagesViewModel.addMessage(getString(R.string.session_start));
         }
         // Stop session
         if (changeType == 1) {
-            mCompletedWorkouts = mSessionViewModel.getCompletedWorkouts().getValue();
+            if (mSessionViewModel.getCompletedWorkouts().getValue() != null) mCompletedWorkouts = mSessionViewModel.getCompletedWorkouts().getValue();
             if (mCompletedWorkouts != null) {
                 for (Workout workout : mCompletedWorkouts) {
                     if (workout._id == lSessionID) {
@@ -1666,7 +1513,7 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
         // insert segment // insert exercise
         if ((changeType == 2)||(changeType == 3)){
             boolean foundSet = false;
-            mCompletedSets = mSessionViewModel.getCompletedSets().getValue();
+            if (mSessionViewModel.getCompletedSets().getValue() != null) mCompletedSets = mSessionViewModel.getCompletedSets().getValue();
             if (mCompletedSets != null)
                 for (WorkoutSet activeSet : mCompletedSets){
                     if (activeSet.start  == lSessionID){
@@ -1683,10 +1530,6 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
         }
     }
 
-    @Override
-    public void onDataFailure() {
-
-    }
 
     @Override
     public void onDataChanged(Utilities.TimeFrame timeFrame) {
@@ -1755,67 +1598,6 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
 
     }
 
-    private void startSessionEntry(){
-        currentState = STATE_ENTRY;
-        //mSessionEntryFragment = SessionEntryFragment.newInstance(mWorkout.activityID, mActivityIcon, mActivityColor);
-
-        mNavigationController.navigate(R.id.action_homePageFragment_to_sessionEntryFragment);
-        // don't add to back stack - only home page !
-        //FragmentManager fragmentManager = getSupportFragmentManager();
-/*        if ((fragmentManager.findFragmentByTag(SessionEntryFragment.TAG) == null)
-                || (mSessionEntryFragment == null)){
-            fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);  // all of them!
-            mSessionEntryFragment = SessionEntryFragment.newInstance(mWorkout.activityID, mActivityIcon, mActivityColor);
-            FragmentTransaction ft = fragmentManager.beginTransaction();
-            ft.replace(R.id.fragment_content, mSessionEntryFragment, SessionEntryFragment.TAG).addToBackStack(SessionEntryFragment.TAG).commit();
-        }else{
-            if (mSessionEntryFragment == null) mSessionEntryFragment = (SessionEntryFragment) fragmentManager.findFragmentByTag(SessionEntryFragment.TAG);
-        }*/
-    }
-
-    private void startLiveFragment(){
-        if (currentState == STATE_LIVE) return;
-/*        //FragmentManager fragmentManager = getSupportFragmentManager();
-        if (fragmentManager.getBackStackEntryCount() > 0)
-            fragmentManager.popBackStack(null,FragmentManager.POP_BACK_STACK_INCLUSIVE);  // all of them!
-        if (mWorkout == null) mWorkout = mSessionViewModel.getWorkout().getValue();
-        if (mWorkoutSet == null) mWorkoutSet = mSessionViewModel.getWorkoutSet().getValue();
-        if ((mWorkout == null) || (mWorkoutSet == null)){
-            Log.e(TAG, "null workout or set");
-        }else{
-            mActivityIcon = mRefTools.getFitnessActivityIconResById(mWorkout.activityID);
-            mActivityColor = mRefTools.getFitnessActivityColorById(mWorkout.activityID);
-           mStepTarget = mSessionViewModel.getGoalSteps().getValue();
-            mDurationTarget = mSessionViewModel.getGoalDuration().getValue();
-            mLiveFragment = LiveFragment.newInstance(mWorkout.activityID, mActivityIcon,mWorkout.activityName,mActivityColor,mWorkout._id,mWorkoutSet._id, mStepTarget, mDurationTarget);
-            if (mIsGymWorkout)
-                mMessagesViewModel.addOtherMessage(mWorkoutSet.exerciseName);
-            currentState = STATE_LIVE;
-            FragmentTransaction ft = fragmentManager.beginTransaction();
-            ft.replace(R.id.fragment_content, mLiveFragment,LiveFragment.TAG).addToBackStack(LiveFragment.TAG).commit();
-        }*/
-
-    }
-
-    private void startEndOfSetFragment(){
-      //  mSessionViewModel.setActiveWorkout(mWorkout);
-        currentState = STATE_END_SET;
-        //FragmentManager fragmentManager = getSupportFragmentManager();
-/*        if (mWorkout == null) mWorkout = mSessionViewModel.getWorkout().getValue();
-        mActivityIcon = mRefTools.getFitnessActivityIconResById(mWorkout.activityID);
-        mActivityColor = mRefTools.getFitnessActivityColorById(mWorkout.activityID);
-        if ((fragmentManager.findFragmentByTag(SessionEntryFragment.TAG) == null)
-                || (mEndOfSetFragment == null)){
-            fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);  // all of them!
-            mEndOfSetFragment = EndOfSetFragment.newInstance(mActivityIcon, mActivityColor, mWorkout.activityID, mExpectedRestDuration, mCurrentSetIndex, mWorkout.setCount);
-            FragmentTransaction ft = fragmentManager.beginTransaction();
-            ft.replace(R.id.fragment_content, mEndOfSetFragment, EndOfSetFragment.TAG).addToBackStack(EndOfSetFragment.TAG).commit();
-        }else{
-            if (mEndOfSetFragment == null) mEndOfSetFragment = (EndOfSetFragment) fragmentManager.findFragmentByTag(EndOfSetFragment.TAG);
-            if (!mEndOfSetFragment.isVisible()) mEndOfSetFragment.setUserVisibleHint(true);
-        }*/
-
-    }
 
     private void startReportSessionFragment(){
 /*
@@ -1824,29 +1606,6 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
         SessionReportFragment sessionReportFragment = SessionReportFragment.newInstance(mActivityIcon,mActivityColor,mWorkoutSet._id,mWorkout._id,mExpectedRestDuration);
         sessionReportFragment.show(fragmentManager, SessionReportFragment.TAG);
 */
-
-    }
-    private void startHomePageFragment(){
-        int imageId = getResources().getIdentifier("ic_launcher","drawable", getPackageName());
-        if (mWorkout == null) mWorkout = mSessionViewModel.getWorkout().getValue();
-
-        if (mWorkout != null) {
-            mActivityIcon = mRefTools.getFitnessActivityIconResById(mWorkout.activityID);
-            mActivityColor = mRefTools.getFitnessActivityColorById(mWorkout.activityID);
-        }else{
-            mActivityIcon = mRefTools.getFitnessActivityIconResById(8);  // running
-            mActivityColor = mRefTools.getFitnessActivityColorById(8);
-        }
-
-/*        //FragmentManager fragmentManager = getSupportFragmentManager();
-        if (fragmentManager.getBackStackEntryCount() > 0)
-           fragmentManager.popBackStack(null,FragmentManager.POP_BACK_STACK_INCLUSIVE);
-
-        if (mActivityIcon > 0) imageId = mActivityIcon;
-        mHomepageFragment = HomePageFragment.newInstance(imageId,getString(R.string.app_name),mActivityColor, getString(R.string.app_name),0);
-        FragmentTransaction ft2 = fragmentManager.beginTransaction();
-        ft2.replace(R.id.fragment_content, mHomepageFragment).addToBackStack(HomePageFragment.TAG).commit();*/
-        currentState = STATE_HOME;
 
     }
 
@@ -1949,7 +1708,7 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
         }
     }
     private void startSession(){
-        mWorkout = mSessionViewModel.getWorkout().getValue();
+        mWorkout = mSavedStateViewModel.getActiveWorkout().getValue();
         if ((mWorkout == null) || (mWorkout.activityID == 0)) return;  // invalid - just in case
         try {
             mWorkout.offline_recording = !mNetworkConnected ? 1 : 0;
@@ -1967,11 +1726,14 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
             mWorkout._id = timeMs;
             mWorkout.start_steps = mLastStep.LastCount;
 
-            WorkoutSet privateSet = mSessionViewModel.getWorkoutSet().getValue();
-            if (privateSet != null) mWorkoutSet = privateSet;
+            mWorkoutSet = mSavedStateViewModel.getActiveWorkoutSet().getValue();
 
-            if (mToDoSets.size() == 0 && mWorkoutSet.isValid())
-                addToDoSet(mWorkoutSet); // finalise the current edited set
+            if (mSavedStateViewModel.getActiveWorkoutSet() != null){
+                WorkoutSet workoutSet = mSavedStateViewModel.getActiveWorkoutSet().getValue();
+                if (mToDoSets.size() == 0 && workoutSet.isValid())
+                    addToDoSet(workoutSet); // finalise the current edited set
+            }
+
 
             // initialise the current set to the first item in toGo list
             mWorkoutSet = mToDoSets.get(mCurrentSetIndex-1);
@@ -1983,12 +1745,12 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
             mWorkoutSet.setCount = mCurrentSetIndex;
             mWorkoutSet.start = timeMs;  // same as workout start
 
-            mSessionViewModel.setPauseStart(0L);  // no active pause
-            mCurrentRestStart = 0;
+            mSavedStateViewModel.setPauseStart(0L);  // no active pause
+
             mExpectedRestDuration = mWorkoutSet.rest_duration; // pick up the expected rest duration.
 
-            mSessionViewModel.setActiveWorkout(mWorkout);
-            mSessionViewModel.setActiveWorkoutSet(mWorkoutSet);
+            mSavedStateViewModel.setActiveWorkout(mWorkout);
+            mSavedStateViewModel.setActiveWorkoutSet(mWorkoutSet);
             mSessionViewModel.setToDoWorkoutSets(mToDoSets);
             mSessionViewModel.setCompletedWorkoutSets(mCompletedSets);
 
@@ -2006,118 +1768,68 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
         }
     }
 
-    private void startSensors(){
-        if (!authInProgress) {
-            Log.i(TAG, "start Sensors listener count 0");
-            if ( UserPreferences.getConfirmUseSensors(this) && UserPreferences.getAppSetupCompleted(this)
-                    && (mGoogleAccount != null)) {
-                if (intAccelermeterCount == 0) {
-                    Log.i(TAG, "intAccelermeterCount 0");
-                    if (mWorkout != null)
-                        if ((mWorkout.start != 0) && (mWorkout.end == 0)){  // in-progress
-                            List<Sensor> sensors = mSensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER);
-                            if (sensors.size() > 0)
-                                mSensorManager.registerListener(mSensorEventListener, sensors.get(0), SensorManager.SENSOR_DELAY_UI);
-                            intAccelermeterCount++;
-                        }
-                    List<Sensor> stepSensor = mSensorManager.getSensorList(Sensor.TYPE_STEP_COUNTER);
-                    if (stepSensor.size() > 0) mSensorManager.registerListener(mSensorEventListener, stepSensor.get(0), SensorManager.SENSOR_DELAY_UI);
-                    intAccelermeterCount++;
-                    List<Sensor> heartSensor = mSensorManager.getSensorList(Sensor.TYPE_HEART_RATE);
-                    if (heartSensor.size() > 0)
-                        mSensorManager.registerListener(mSensorEventListener, heartSensor.get(0), SensorManager.SENSOR_DELAY_UI);
-                    intAccelermeterCount++;
-
-                    if (mWorkout != null)
-                        if ((mWorkout.start != 0) && (mWorkout.end == 0)){ // in-progress
-                            List<Sensor> gyroSensor = mSensorManager.getSensorList(Sensor.TYPE_GYROSCOPE);
-                            if (gyroSensor.size() > 0) mSensorManager.registerListener(mSensorEventListener, gyroSensor.get(0), SensorManager.SENSOR_DELAY_UI);
-                            intAccelermeterCount++;
-                        }
-                    Log.i(TAG, "intAccelermeterCount now " + intAccelermeterCount);
-                }
-                Log.i(TAG, "intAccelermeterCount is " + intAccelermeterCount);
-            }
-        }
-    }
-    //TODO: check this out !
-    private void markActiveDuration(){
-        long timeMs = System.currentTimeMillis();
-        if (mWorkoutSet.end == 0) mWorkoutSet.end = timeMs;
-        mCurrentRestStart = timeMs;
-        mExpectedRestDuration = mWorkoutSet.rest_duration;
-        mWorkoutSet.rest_duration = 0L;
-    }
-
     private void completeActiveSet(long end){
-        mCurrentSetIndex = mSessionViewModel.getCurrentSetIndex().getValue();
-        WorkoutSet privateSet =  ((mCurrentSetIndex > 0) && (mSessionViewModel.getToDoSetSize() >= mCurrentSetIndex)) ? mSessionViewModel.getToDoSets().getValue().get(mCurrentSetIndex-1) : null;
-        if (privateSet != null){
-            Log.i(TAG, "completeActiveSet setting the set " + privateSet.activityName + " " + Utilities.getTimeDateString(privateSet.start));
-            mWorkoutSet = privateSet;
-        }
         if (mServiceBound && mNetworkConnected){
             if (!mService.isClientConnected() && mService.isNetworkConnected()){
                 Log.d(TAG, "getConnected");
                 mService.getConnected();
             }
         }
-
-        if (mWorkoutSet != null) {
-            if (mWorkoutSet.start == 0){
+        int currentSetIndex = mSavedStateViewModel.getSetIndex().getValue();
+        WorkoutSet privateSet =  ((currentSetIndex > 0) && (mSessionViewModel.getToDoSetSize() >= currentSetIndex)) ? mSessionViewModel.getToDoSets().getValue().get(currentSetIndex-1) : null;
+        if (privateSet != null){
+            Log.i(TAG, "completeActiveSet setting the set " + privateSet.activityName + " " + Utilities.getTimeDateString(privateSet.start));
+            if (privateSet.start == 0){
                 long start = 0;
-                start = mSessionViewModel.getWorkout().getValue().start;
+                start = mSavedStateViewModel.getActiveWorkout().getValue().start;
                 if ((start != mWorkout.start) && (start > 0)) Log.e(TAG, "not matching workout starts ");
                 Log.e(TAG, "set with not start - using workout " + Utilities.getTimeDateString(start));
-                if (start > 0) mWorkoutSet.start = start;
+                if (start > 0) privateSet.start = start;
             }
-            mWorkoutSet.end = end;
-            mCurrentRestStart = end;
-            if (mWorkoutSet.end - (mWorkoutSet.start - mWorkoutSet.pause_duration) > 0)
-                mWorkoutSet.duration = mWorkoutSet.end - (mWorkoutSet.start - mWorkoutSet.pause_duration);
+            privateSet.end = end;
+            mSavedStateViewModel.setPauseStart(end);
+
+            if (privateSet.end - (privateSet.start - privateSet.pause_duration) > 0)
+                privateSet.duration = privateSet.end - (privateSet.start - privateSet.pause_duration);
             else
-                mWorkoutSet.duration = mWorkoutSet.end - mWorkoutSet.start;  //wrong pause duration
-        }
-        if (mCompletedSets == null){
-            Log.e(TAG, "mCompletedSets was null ");
+                privateSet.duration = privateSet.end - privateSet.start;  //wrong pause duration
             mCompletedSets = mSessionViewModel.getCompletedSets().getValue();
-            if (mCompletedSets == null) Log.e(TAG, "mCompletedSets is still null ");
-        }
-        if (mCompletedSets != null){
-            boolean bFound = false; int i=0;
-            for (WorkoutSet s : mCompletedSets){
-                if (s._id == mWorkoutSet._id){
-                    mCompletedSets.set(i, mWorkoutSet);
-                    bFound = true;
-                    break;
+            if (mCompletedSets == null){
+                mCompletedSets = new ArrayList<>();
+                mCompletedSets.add(privateSet);
+            }else {
+                boolean bFound = false; int i=0;
+                for (WorkoutSet s : mCompletedSets){
+                    if (s._id == privateSet._id){
+                        mCompletedSets.set(i, privateSet);
+                        bFound = true;
+                        break;
+                    }
+                    i++;
                 }
-                i++;
+                if (!bFound) mCompletedSets.add(privateSet);
             }
-            if (!bFound) mCompletedSets.add(mWorkoutSet);
-        }else {
-            mCompletedSets = new ArrayList<>();
-            mCompletedSets.add(mWorkoutSet);
+           mSessionViewModel.setCompletedWorkoutSets(mCompletedSets);
+           if (mWorkout.offline_recording == 0) {
+               if (Utilities.isGymWorkout(mWorkoutSet.activityID)) {
+                   if (mNetworkConnected && mServiceBound) {
+                       Device device = Device.getLocalDevice(getApplicationContext());
+                       mService.insertExerciseSet(mWorkoutSet.start, mWorkoutSet.exerciseName, mWorkoutSet.resistance_type, mWorkoutSet.repCount,
+                               mWorkoutSet.weightTotal, getPackageName(), device, mGoogleAccount);
+                   }
+               }else
+                   if (mNetworkConnected && mServiceBound) {
+                       Device device = Device.getLocalDevice(getApplicationContext());
+                       String segName = mWorkoutSet.activityName;
+                       if (Utilities.isShooting(mWorkoutSet.activityID))
+                           segName = getString(R.string.label_shoot_end) + getString(R.string.my_space_string) + mWorkoutSet.setCount;
+                       mService.insertSegmentSet(mWorkoutSet.start, segName,
+                               end, mWorkoutSet.activityName, getPackageName(), device, mGoogleAccount);
+
+                    }
+           }
         }
 
-       mSessionViewModel.setCompletedWorkoutSets(mCompletedSets);
-       if (mWorkout.offline_recording == 0) {
-           if (Utilities.isGymWorkout(mWorkoutSet.activityID)) {
-               if (mNetworkConnected && mServiceBound) {
-                   Device device = Device.getLocalDevice(getApplicationContext());
-                   mService.insertExerciseSet(mWorkoutSet.start, mWorkoutSet.exerciseName, mWorkoutSet.resistance_type, mWorkoutSet.repCount,
-                           mWorkoutSet.weightTotal, getPackageName(), device, mGoogleAccount);
-               }
-           }else
-               if (mNetworkConnected && mServiceBound) {
-                   Device device = Device.getLocalDevice(getApplicationContext());
-                   String segName = mWorkoutSet.activityName;
-                   if (Utilities.isShooting(mWorkoutSet.activityID))
-                       segName = getString(R.string.label_shoot_end) + getString(R.string.my_space_string) + mWorkoutSet.setCount;
-                   mService.insertSegmentSet(mWorkoutSet.start, segName,
-                           end, mWorkoutSet.activityName, getPackageName(), device, mGoogleAccount);
-
-                }
-       }
 
     }
 
@@ -2127,8 +1839,8 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
         if (mServiceBound && mNetworkConnected){
             if (!mService.isClientConnected() && mService.isNetworkConnected()) mService.getConnected();
         }
-        if (mWorkout == null) mWorkout = mSessionViewModel.getWorkout().getValue();
-        if (mWorkoutSet == null) mWorkoutSet = mSessionViewModel.getWorkoutSet().getValue();
+        mWorkout = mSavedStateViewModel.getActiveWorkout().getValue();
+        mWorkoutSet = mSavedStateViewModel.getActiveWorkoutSet().getValue();
 
         if ((mWorkout == null) || (mWorkoutSet == null)){
             Log.e(TAG, "mWorkout or Set is NULL on stopSession");
@@ -2166,8 +1878,8 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
             }
             mSessionViewModel.setCompletedWorkoutSets(mCompletedSets);
             mSessionViewModel.setCompletedWorkouts(mCompletedWorkouts);
-            mSessionViewModel.setActiveWorkout(mWorkout);
-            mSessionViewModel.setActiveWorkoutSet(mWorkoutSet);
+            mSavedStateViewModel.setActiveWorkout(mWorkout);
+            mSavedStateViewModel.setActiveWorkoutSet(mWorkoutSet);
 
             Intent intent = new Intent(this, ConfirmationActivity.class);
             intent.putExtra(ConfirmationActivity.EXTRA_ANIMATION_TYPE,
@@ -2183,19 +1895,21 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
 
     private void pauseSession(){
         long timeMs = System.currentTimeMillis();
-        mSessionViewModel.setPauseStart(timeMs);
+        mSavedStateViewModel.setPauseStart(timeMs);
     }
 
 
     private void resumeSession(){
-        if (mSessionViewModel.getPauseStart().getValue() == 0L) return;  //not under pause should not be here!
         long timeMs = System.currentTimeMillis();
-        long pauseStart = mSessionViewModel.getPauseStart().getValue();
+        long pauseStart = mSavedStateViewModel.getPauseStart().getValue();
+        if (pauseStart == 0L) return;  //not under pause should not be here!
+
         //if (mWorkout == null) mWorkout = mSessionViewModel.getWorkout().getValue();
-        if (mWorkoutSet == null) mWorkoutSet = mSessionViewModel.getWorkoutSet().getValue();
+        if (mWorkoutSet == null) mWorkoutSet = mSavedStateViewModel.getActiveWorkoutSet().getValue();
         mPauseDuration += (timeMs - pauseStart);
         mWorkoutSet.pause_duration = mWorkoutSet.pause_duration + (timeMs - pauseStart);
-        mSessionViewModel.setPauseStart(0L);  // not under pause now
+        mSavedStateViewModel.setActiveWorkoutSet(mWorkoutSet);
+        mSavedStateViewModel.setPauseStart(0L);  // not under pause now
 
     }
 
@@ -2225,9 +1939,11 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
     private void loadDataAndUpdateScreen() {
         long currentTimeMs = System.currentTimeMillis();
         String newMessage = ""; String sOtherMessage = "";
-        if (mWorkout == null) mWorkout = mSessionViewModel.getWorkout().getValue();
-        if (mWorkoutSet == null) mWorkoutSet = mSessionViewModel.getWorkoutSet().getValue();
-        if (mWorkout != null){
+
+        int currentState = mSavedStateViewModel.getCurrentState().getValue();
+        if (mSavedStateViewModel.getActiveWorkout() != null){
+            mWorkout = mSavedStateViewModel.getActiveWorkout().getValue();
+            mWorkoutSet = mSavedStateViewModel.getActiveWorkoutSet().getValue();
             if (currentState == STATE_LIVE) {
                 if (mWorkoutSet.start > 0) {
                     newMessage = Utilities.getDurationBreakdown(currentTimeMs - mWorkoutSet.start);
@@ -2302,7 +2018,7 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
     }
 
     private void showAlertDialogConfirm(final View parent_view, final int action){
-        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this, R.style.AppTheme_myAlertDialog);
+        final MaterialAlertDialogBuilder dialogBuilder = new MaterialAlertDialogBuilder(this, R.style.Theme_MaterialComponents_Dialog_Alert);
         String message_text = getString(R.string.my_empty_string);
         switch (action){
             case ACTION_STARTING:
@@ -2328,8 +2044,10 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View customView = inflater.inflate(R.layout.dialog_circularconfirm_cancel, (androidx.constraintlayout.widget.ConstraintLayout) parent_view,false);
         dialogBuilder.setView(customView);
+
         TextView tv = customView.findViewById(R.id.circular_text_message);
         if (tv != null) tv.setText(message_text);
+       // dialogBuilder.setTitle(message_text);
         final androidx.wear.widget.CircularProgressLayout circularProgressLayout = customView.findViewById(R.id.circular_progress);
         final AlertDialog dialog = dialogBuilder.create();
 		if (circularProgressLayout != null){
@@ -2343,13 +2061,27 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                 // start
                 if (action == ACTION_STARTING) {
                     startSession();
-                    startLiveFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt(LiveFragment.ARG_LIVEPAGE_ACTIVITY_ID, mWorkout.activityID);
+                    bundle.putInt(LiveFragment.ARG_LIVEPAGE_COLOR_ID, mActivityColor);
+                    bundle.putInt(LiveFragment.ARG_LIVEPAGE_IMAGE_ID, mActivityIcon);
+                    bundle.putLong(LiveFragment.ARG_LIVEPAGE_WORKOUT_ID, mWorkout._id);
+                    bundle.putLong(LiveFragment.ARG_LIVEPAGE_WORKOUTSET_ID, mWorkoutSet._id);
+                    mNavigationController.navigate(R.id.action_global_liveFragment, bundle);
                 }
                 // end
                 if (action == ACTION_STOPPING){
                     //Toast.makeText(getApplicationContext(), "Exit Session", Toast.LENGTH_SHORT).show();
                     stopSession();
-                    startReportSessionFragment();
+                    Bundle argsBundle = new Bundle();
+                    argsBundle.putInt(SessionReportFragment.ARG_ICON_ID, mRefTools.getFitnessActivityIconResById(mWorkout.activityID));
+                    argsBundle.putInt(SessionReportFragment.ARG_COLOR_ID, mRefTools.getFitnessActivityColorById(mWorkout.activityID));
+                    argsBundle.putLong(SessionReportFragment.ARG_SET, mWorkoutSet._id);
+                    argsBundle.putLong(SessionReportFragment.ARG_WORKOUT, mWorkout._id);
+                    argsBundle.putLong(LiveFragment.ARG_LIVEPAGE_WORKOUTSET_ID, mWorkoutSet._id);
+                    mNavigationController.navigate(R.id.action_liveFragment_to_sessionReportFragment, argsBundle);
+
+                    //startReportSessionFragment();
                 }
                 if (action == ACTION_STOP_QUIT){
                     stopSession();
@@ -2357,11 +2089,18 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                 }
                 if (action == ACTION_QUICK_STOP){
                     stopSession();
+                    Bundle argsBundle = new Bundle();
+                    argsBundle.putInt(SessionReportFragment.ARG_ICON_ID, mRefTools.getFitnessActivityIconResById(mWorkout.activityID));
+                    argsBundle.putInt(SessionReportFragment.ARG_COLOR_ID, mRefTools.getFitnessActivityColorById(mWorkout.activityID));
+                    argsBundle.putLong(SessionReportFragment.ARG_SET, mWorkoutSet._id);
+                    argsBundle.putLong(SessionReportFragment.ARG_WORKOUT, mWorkout._id);
+                    argsBundle.putLong(LiveFragment.ARG_LIVEPAGE_WORKOUTSET_ID, mWorkoutSet._id);
+                    mNavigationController.navigate(R.id.action_liveFragment_to_sessionReportFragment, argsBundle);
                 }
                 // resume
                 if (action == ACTION_RESUMING){
                     startSession();
-                    startLiveFragment();
+                    mNavigationController.navigate(R.id.action_global_liveFragment);
                 }
                 if (action == ACTION_EXITING)
                     quitApp();
@@ -2370,7 +2109,7 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                 circularProgressLayout.stopTimer();
                 dialog.dismiss();
                 if (action == ACTION_QUICK_STOP){
-                    startLiveFragment();
+                    mNavigationController.navigate(R.id.action_global_liveFragment);
                 }
             });
             circularProgressLayout.startTimer();
@@ -2392,7 +2131,13 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                     showAlertDialogConfirm(frameLayout, ACTION_STARTING);
                 } else {
                     startSession();
-                    startLiveFragment();
+                    Bundle argsBundle = new Bundle();
+                    argsBundle.putInt(LiveFragment.ARG_LIVEPAGE_ACTIVITY_ID, mWorkout.activityID);
+                    argsBundle.putInt(LiveFragment.ARG_LIVEPAGE_COLOR_ID, mRefTools.getFitnessActivityColorById(mWorkout.activityID));
+                    argsBundle.putInt(LiveFragment.ARG_LIVEPAGE_IMAGE_ID, mRefTools.getFitnessActivityIconResById(mWorkout.activityID));
+                    argsBundle.putLong(LiveFragment.ARG_LIVEPAGE_WORKOUT_ID, mWorkout._id);
+                    argsBundle.putLong(LiveFragment.ARG_LIVEPAGE_WORKOUTSET_ID, mWorkoutSet._id);
+                    mNavigationController.navigate(R.id.action_sessionEntryFragment_to_liveFragment, argsBundle);
                 }
             }
         }else {
@@ -2403,28 +2148,40 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                 set.rest_duration = timeMs - set.end;
                 mCompletedSets.set(mCompletedSets.size() - 1, set);
             }
-            startLiveFragment();
+            startSession();
+            mWorkout = mSavedStateViewModel.getActiveWorkout().getValue();
+            if (mWorkout != null) {
+                Bundle argsBundle = new Bundle();
+                argsBundle.putInt(LiveFragment.ARG_LIVEPAGE_ACTIVITY_ID, mWorkout.activityID);
+                argsBundle.putInt(LiveFragment.ARG_LIVEPAGE_COLOR_ID, mRefTools.getFitnessActivityColorById(mWorkout.activityID));
+                argsBundle.putInt(LiveFragment.ARG_LIVEPAGE_IMAGE_ID, mRefTools.getFitnessActivityIconResById(mWorkout.activityID));
+                argsBundle.putLong(LiveFragment.ARG_LIVEPAGE_WORKOUT_ID, mWorkout._id);
+                argsBundle.putLong(LiveFragment.ARG_LIVEPAGE_WORKOUTSET_ID, mWorkoutSet._id);
+                mNavigationController.navigate(R.id.action_sessionEntryFragment_to_liveFragment, argsBundle);
+                Log.d(TAG, "starting live bundle " + argsBundle.toString());
+            }else
+                mNavigationController.navigate(R.id.action_sessionEntryFragment_to_liveFragment);
         }
 
     }
 
 
 
-    private void startCustomList(int selectionType, int setIndex, String defaultValue){
+    private void startCustomList(int selectionType, String defaultValue){
         if ((selectionType == Constants.SELECTION_SETS) || (selectionType == Constants.SELECTION_REPS)
                 || (selectionType == Constants.SELECTION_GOAL_DURATION) || (selectionType == Constants.SELECTION_GOAL_STEPS)){
             Integer iPreset = (selectionType == Constants.SELECTION_SETS) ? 3 : 10 ;
             if (defaultValue.length() > 0)
                 iPreset = Integer.parseInt(defaultValue);
 
-            mCustomScoreDialogFragment = CustomScoreDialogFragment.newInstance(selectionType,iPreset, setIndex);
+            mCustomScoreDialogFragment = CustomScoreDialogFragment.newInstance(selectionType,iPreset);
             mCustomScoreDialogFragment.show(fragmentManager, CustomScoreDialogFragment.TAG);
         }else {
-            Integer iPreset = (selectionType == Constants.SELECTION_SETS) ? 3 : 10 ;
+            Integer iPreset = 10 ;
             if (defaultValue.length() > 0)
                 iPreset = Integer.parseInt(defaultValue);
 
-            mCustomListFragment = CustomListFragment.create(selectionType, setIndex, iPreset);
+            mCustomListFragment = CustomListFragment.create(selectionType,  iPreset);
 
             if (mWorkout != null) mCustomListFragment.setWorkout(mWorkout);
             if (mWorkoutSet != null) mCustomListFragment.setWorkoutSet(mWorkoutSet);
@@ -2495,7 +2252,7 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                     }
                 }
                 if (selectionType == Constants.SELECTION_ACTIVE_SESSION) {
-                    Workout currently = mSessionViewModel.getWorkout().getValue();
+                    Workout currently = mSavedStateViewModel.getActiveWorkout().getValue();
                     if (currently == null) {
                         if (mWorkout != null)
                             mCustomListFragment.setWorkout(mWorkout);
@@ -2509,7 +2266,7 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                     }
                 }
                 if (selectionType == Constants.SELECTION_ACTIVE_SET) {
-                    WorkoutSet currently = mSessionViewModel.getWorkoutSet().getValue();
+                    WorkoutSet currently = mSavedStateViewModel.getActiveWorkoutSet().getValue();
                     if (currently == null) {
                         if (mWorkout != null)
                             mCustomListFragment.setWorkoutSet(mWorkoutSet);
@@ -2530,12 +2287,12 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
             if ((selectionType == Constants.SELECTION_WEIGHT_KG) || (selectionType == Constants.SELECTION_WEIGHT_LBS)) {
                 sTag = getString(R.string.label_weight);
             }
-            if (selectionType == Constants.SELECTION_SETS) {
+/*            if (selectionType == Constants.SELECTION_SETS) {
                 sTag = getString(R.string.label_set);
             }
             if (selectionType == Constants.SELECTION_REPS) {
                 sTag = getString(R.string.label_rep);
-            }
+            }*/
             if (selectionType == Constants.SELECTION_USER_PREFS) {
                 sTag = getString(R.string.nav_setting);
             }
@@ -2639,85 +2396,83 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
 
     @Override
     public void onSessionEntryRequest(int index, String defaultValue) {
+        mWorkout =  mSavedStateViewModel.getActiveWorkout().getValue();
+        mWorkoutSet =  mSavedStateViewModel.getActiveWorkoutSet().getValue();
+
         switch (index){
             case Constants.CHOOSE_ACTIIVITY:
-                startCustomList(Constants.SELECTION_FITNESS_ACTIVITY, mCurrentSetIndex, defaultValue);
+                startCustomList(Constants.SELECTION_FITNESS_ACTIVITY,  defaultValue);
                 break;
             case Constants.CHOOSE_BODYPART:
-                startCustomList(Constants.SELECTION_BODYPART, mCurrentSetIndex, defaultValue);
+                startCustomList(Constants.SELECTION_BODYPART,  defaultValue);
                 break;
             case Constants.CHOOSE_DISTANCE:
-                startCustomList(mWorkout.shootFormat.equals("target") ? Constants.SELECTION_TARGET_DISTANCE_TARGET : Constants.SELECTION_TARGET_DISTANCE_FIELD, mCurrentSetIndex, defaultValue);
+                startCustomList(mWorkout.shootFormat.equals("target") ? Constants.SELECTION_TARGET_DISTANCE_TARGET : Constants.SELECTION_TARGET_DISTANCE_FIELD,  defaultValue);
                 break;
             case Constants.CHOOSE_ENDS:
-                startCustomList(Constants.SELECTION_TARGET_ENDS, mCurrentSetIndex, defaultValue);
+                startCustomList(Constants.SELECTION_TARGET_ENDS,  defaultValue);
                 break;
             case Constants.CHOOSE_EQUIPMENT:
-                startCustomList(Constants.SELECTION_TARGET_EQUIPMENT, mCurrentSetIndex, defaultValue);
+                startCustomList(Constants.SELECTION_TARGET_EQUIPMENT,  defaultValue);
                 break;
             case Constants.CHOOSE_EXERCISE:
-                startCustomList(Constants.SELECTION_EXERCISE, mCurrentSetIndex, defaultValue);
+                startCustomList(Constants.SELECTION_EXERCISE,  defaultValue);
                 break;
             case Constants.CHOOSE_PER_END:
-                startCustomList(Constants.SELECTION_TARGET_SHOTS_PER_END, mCurrentSetIndex, defaultValue);
+                startCustomList(Constants.SELECTION_TARGET_SHOTS_PER_END, defaultValue);
                 break;
             case Constants.CHOOSE_POSSIBLE_SCORE:
-                startCustomList(Constants.SELECTION_TARGET_POSSIBLE_SCORE, mCurrentSetIndex, defaultValue);
+                startCustomList(Constants.SELECTION_TARGET_POSSIBLE_SCORE, defaultValue);
                 break;
             case Constants.CHOOSE_REPS:
-                startCustomList(Constants.SELECTION_REPS, mCurrentSetIndex, defaultValue);
+                startCustomList(Constants.SELECTION_REPS, defaultValue);
                 break;
             case Constants.CHOOSE_SETS:
-                startCustomList(Constants.SELECTION_SETS, mCurrentSetIndex, defaultValue);
+                startCustomList(Constants.SELECTION_SETS, defaultValue);
                 break;
             case Constants.CHOOSE_TARGET_FIELD:
-                startCustomList(Constants.SELECTION_TARGET_FIELD, mCurrentSetIndex, defaultValue);
+                startCustomList(Constants.SELECTION_TARGET_FIELD, defaultValue);
                 break;
             case Constants.CHOOSE_TARGET_SIZE:
-                startCustomList(mWorkout.shootFormat.equals("target") ? Constants.SELECTION_TARGET_TARGET_SIZE_TARGET: Constants.SELECTION_TARGET_TARGET_SIZE_FIELD, mCurrentSetIndex, defaultValue);
+                startCustomList(mWorkout.shootFormat.equals("target") ? Constants.SELECTION_TARGET_TARGET_SIZE_TARGET: Constants.SELECTION_TARGET_TARGET_SIZE_FIELD, defaultValue);
                 break;
             case Constants.CHOOSE_WEIGHT:
-                WorkoutSet set = mSessionViewModel.getWorkoutSet().getValue();
+                WorkoutSet set = mSavedStateViewModel.getActiveWorkoutSet().getValue();
                 if ((set != null) && (set.resistance_type == Field.RESISTANCE_TYPE_BODY))
-                    startCustomList(Constants.SELECTION_WEIGHT_BODYWEIGHT, mCurrentSetIndex, defaultValue);
+                    startCustomList(Constants.SELECTION_WEIGHT_BODYWEIGHT, defaultValue);
                 else
                     if (UserPreferences.getUseKG(this))
-                        startCustomList(Constants.SELECTION_WEIGHT_KG, mCurrentSetIndex, defaultValue);
+                        startCustomList(Constants.SELECTION_WEIGHT_KG, defaultValue);
                     else
-                        startCustomList(Constants.SELECTION_WEIGHT_LBS, mCurrentSetIndex, defaultValue);
+                        startCustomList(Constants.SELECTION_WEIGHT_LBS, defaultValue);
                 break;
             case Constants.CHOOSE_NEW_EXERCISE:
                 displaySpeechRecognizer();
                 break;
 
             case Constants.CHOOSE_CONTINUE_SESSION:
-                mWorkout =  mSessionViewModel.getWorkout().getValue();
-                mWorkoutSet =  mSessionViewModel.getWorkoutSet().getValue();
-                if (currentState == STATE_ENTRY){
-                    if (mWorkout != null) {
-                        if ((mWorkout.activityID > 0) && (mWorkout._id != 0)) {
-                            startActivitySession();
-                        }else
-                            Toast.makeText(this, R.string.activity_id_not_set, Toast.LENGTH_LONG).show();
+                if (mWorkout != null) {
+                    if ((mWorkout.activityID > 0) && (mWorkout._id != 0)) {
+                        startActivitySession();
                     }else
                         Toast.makeText(this, R.string.activity_id_not_set, Toast.LENGTH_LONG).show();
-                }
+                }else
+                    Toast.makeText(this, R.string.activity_id_not_set, Toast.LENGTH_LONG).show();
                 // set the rest duration for the previous set
                 if (mCompletedSets.size() > 0 && (mCurrentSetIndex > 1)) {
                     WorkoutSet last_set = mCompletedSets.get(mCompletedSets.size() - 1);
                     long timeMs = System.currentTimeMillis();
                     last_set.rest_duration = timeMs - last_set.end;
                     mCompletedSets.set(mCompletedSets.size() - 1, last_set);
-                    startLiveFragment();
+                    mNavigationController.navigate(R.id.action_global_liveFragment);
                 }
                 break;
 
             case Constants.CHOOSE_START_SESSION:
-                mWorkout =  mSessionViewModel.getWorkout().getValue();
-                mWorkoutSet = mSessionViewModel.getWorkoutSet().getValue();
                 if (mWorkout != null) {
                     if ((mWorkout.activityID > 0) && (mWorkout._id != 0)) {
-                        if (!mSessionEntryFragment.getBuildClicked() && ((mWorkoutSet != null) && (mWorkoutSet.isValid()))) {
+                        Boolean bBuildClicked = Boolean.parseBoolean(defaultValue);
+                        if (!bBuildClicked && ((mWorkoutSet != null) && (mWorkoutSet.isValid()))) {
                             addToDoSet(mWorkoutSet);
                         }
                         startActivitySession();
@@ -2728,12 +2483,10 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                 break;
 
             case Constants.CHOOSE_BUILD_LONGCLICK:
-                startCustomList(Constants.SELECTION_TO_DO_SETS, mCurrentSetIndex, defaultValue);
+                startCustomList(Constants.SELECTION_TO_DO_SETS, defaultValue);
                 break;
 
             case Constants.CHOOSE_BUILD_SESSION:
-                mWorkout =  mSessionViewModel.getWorkout().getValue();
-                mWorkoutSet =  mSessionViewModel.getWorkoutSet().getValue();
                 addToDoSet(mWorkoutSet);
                 createWorkoutSet();
                 String sTemp = UserPreferences.getLastBodyPartID(this);
@@ -2745,15 +2498,14 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                     mWorkoutSet.bodypartID = 0;
                     mWorkoutSet.bodypartName = sTemp; // clearing it
                 }
-                mSessionViewModel.setActiveWorkoutSet(mWorkoutSet);
-                mSessionViewModel.setActiveWorkout(mWorkout);
-                mSessionEntryFragment.updateUI();
+                mSavedStateViewModel.setActiveWorkoutSet(mWorkoutSet);
+                mSavedStateViewModel.setActiveWorkout(mWorkout);
                 break;
             case Constants.CHOOSE_GOAL_1:
-                startCustomList(Constants.SELECTION_GOAL_DURATION, mCurrentSetIndex, defaultValue);
+                startCustomList(Constants.SELECTION_GOAL_DURATION, defaultValue);
                 break;
             case Constants.CHOOSE_GOAL_2:
-                startCustomList(Constants.SELECTION_GOAL_STEPS, mCurrentSetIndex, defaultValue);
+                startCustomList(Constants.SELECTION_GOAL_STEPS, defaultValue);
                 break;
         }
     }
@@ -2769,7 +2521,7 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                     quitApp();
                     break;
                 case -1:
-                    startHomePageFragment();
+                    mNavigationController.navigate(R.id.action_global_homePageFragment);
                     break;
             }
         }
@@ -2778,7 +2530,7 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
             switch (button){
                 case 1:
                     startSession();
-                    startLiveFragment();
+                    mNavigationController.navigate(R.id.action_global_liveFragment);
                     break;
                 case -1:
                     break;
@@ -2789,10 +2541,16 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
             switch (button) {
                 case 1:
                     stopSession();
-                    startReportSessionFragment();
+                    Bundle argsBundle = new Bundle();
+                    argsBundle.putInt(SessionReportFragment.ARG_ICON_ID, mRefTools.getFitnessActivityIconResById(mWorkout.activityID));
+                    argsBundle.putInt(SessionReportFragment.ARG_COLOR_ID, mRefTools.getFitnessActivityColorById(mWorkout.activityID));
+                    argsBundle.putLong(SessionReportFragment.ARG_SET, mWorkoutSet._id);
+                    argsBundle.putLong(SessionReportFragment.ARG_WORKOUT, mWorkout._id);
+                    argsBundle.putLong(LiveFragment.ARG_LIVEPAGE_WORKOUTSET_ID, mWorkoutSet._id);
+                    mNavigationController.navigate(R.id.action_liveFragment_to_sessionReportFragment, argsBundle);
                     break;
                 case -1:
-                    startLiveFragment();
+                    mNavigationController.navigate(R.id.action_global_liveFragment);
                     break;
             }
         }
@@ -2804,7 +2562,7 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                     quitApp();
                     break;
                 case -1:
-                    startLiveFragment();
+                    mNavigationController.navigate(R.id.action_global_liveFragment);
                     break;
             }
         }
@@ -2818,29 +2576,29 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
     public void onEndOfSetRequest(int index, int setIndex, String defaultValue) {
         switch (index){
             case Constants.CHOOSE_ACTIIVITY:
-                startCustomList(Constants.SELECTION_FITNESS_ACTIVITY, setIndex, defaultValue);
+                startCustomList(Constants.SELECTION_FITNESS_ACTIVITY, defaultValue);
                 break;
             case Constants.CHOOSE_BODYPART:
-                startCustomList(Constants.SELECTION_BODYPART, setIndex, defaultValue);
+                startCustomList(Constants.SELECTION_BODYPART, defaultValue);
                 break;
             case Constants.CHOOSE_EXERCISE:
-                startCustomList(Constants.SELECTION_EXERCISE, setIndex, defaultValue);
+                startCustomList(Constants.SELECTION_EXERCISE, defaultValue);
                 break;
             case Constants.CHOOSE_REPS:
-                startCustomList(Constants.SELECTION_REPS, setIndex, defaultValue);
+                startCustomList(Constants.SELECTION_REPS, defaultValue);
                 break;
             case Constants.CHOOSE_SETS:
-                startCustomList(Constants.SELECTION_SETS, setIndex, defaultValue);
+                startCustomList(Constants.SELECTION_SETS, defaultValue);
                 break;
             case Constants.CHOOSE_WEIGHT:
-                WorkoutSet set = mSessionViewModel.getWorkoutSet().getValue();
+                WorkoutSet set = mSavedStateViewModel.getActiveWorkoutSet().getValue();
                 if ((set != null) && (set.resistance_type == Field.RESISTANCE_TYPE_BODY))
-                    startCustomList(Constants.SELECTION_WEIGHT_BODYWEIGHT, setIndex, defaultValue);
+                    startCustomList(Constants.SELECTION_WEIGHT_BODYWEIGHT, defaultValue);
                 else
                     if (UserPreferences.getUseKG(this))
-                        startCustomList(Constants.SELECTION_WEIGHT_KG, setIndex, defaultValue);
+                        startCustomList(Constants.SELECTION_WEIGHT_KG, defaultValue);
                     else
-                        startCustomList(Constants.SELECTION_WEIGHT_LBS, setIndex, defaultValue);
+                        startCustomList(Constants.SELECTION_WEIGHT_LBS, defaultValue);
                 break;
             case Constants.CHOOSE_REPEAT_SET:
                 if (setIndex <= mToDoSets.size()) {
@@ -2859,13 +2617,11 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
     @Override
     public void onEndOfSetMethod(int index, int setIndex) {
         long timeMs = System.currentTimeMillis();
-        mCurrentSetIndex = mSessionViewModel.getCurrentSetIndex().getValue();
-        if (mWorkout == null) mWorkout = mSessionViewModel.getWorkout().getValue();
-        if (mWorkoutSet == null) mWorkoutSet = mSessionViewModel.getWorkoutSet().getValue();
+        mCurrentSetIndex = (mSavedStateViewModel.getSetIndex().getValue() == null) ? 0 : mSavedStateViewModel.getSetIndex().getValue();
+        mWorkout = mSavedStateViewModel.getActiveWorkout().getValue();
+        mWorkoutSet = mSavedStateViewModel.getActiveWorkoutSet().getValue();
         switch (index){
             case Constants.CHOOSE_CONTINUE_SESSION:
-                mCurrentSetIndex = mSessionViewModel.getCurrentSetIndex().getValue();
-                mWorkout = mSessionViewModel.getWorkout().getValue();
                 if (setIndex == mCurrentSetIndex){
                     completeActiveSet(timeMs);
                 }
@@ -2903,13 +2659,12 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                     mWorkoutSet = null;
                 }
                 mExpectedRestDuration = 0;
-                mSessionViewModel.setPauseStart(0L);  // no active pause
-                mCurrentRestStart = 0;
-                mSessionViewModel.setCurrentSetIndex(mCurrentSetIndex);
-                mSessionViewModel.setActiveWorkoutSet(mWorkoutSet);
+                mSavedStateViewModel.setPauseStart(0L);  // no active pause
+                mSavedStateViewModel.setSetIndex(mCurrentSetIndex);
+                mSavedStateViewModel.setActiveWorkoutSet(mWorkoutSet);
                 mSessionViewModel.setCompletedWorkoutSets(mCompletedSets);
+                mNavigationController.navigate(R.id.action_global_liveFragment);
 
-                startLiveFragment();
                 break;
             //TODO: update repeat functionality
             case Constants.CHOOSE_REPEAT_SET:
@@ -2946,8 +2701,9 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
 
     @Override
     public void onSessionReportExit() {
-        startHomePageFragment();
-    }
+            }
+
+
 
     private class MyAmbientCallback extends AmbientModeSupport.AmbientCallback {
         /** Prepares the UI for ambient mode. */
@@ -2955,22 +2711,59 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
         public void onEnterAmbient(Bundle ambientDetails) {
             super.onEnterAmbient(ambientDetails);
           //  android.util.Log.d(TAG, "onEnterAmbient() " + ambientDetails);
-
+            int currentState = mSavedStateViewModel.getCurrentState().getValue();
             mIsLowBitAmbient =
                     ambientDetails.getBoolean(AmbientModeSupport.EXTRA_LOWBIT_AMBIENT, false);
             mDoBurnInProtection =
                     ambientDetails.getBoolean(AmbientModeSupport.EXTRA_BURN_IN_PROTECTION, false);
             /* Clears Handler queue (only needed for updates in active mode). */
             mActiveModeUpdateHandler.removeMessages(MSG_UPDATE_SCREEN);
+            NavHostFragment navHostFragment = (NavHostFragment)getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+            if (mNavigationController.getCurrentDestination() != null) {
+                if (mNavigationController.getCurrentDestination().getId() == R.id.homePageFragment) {
+                    mHomepageFragment = (HomePageFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
+                    if (mHomepageFragment != null) {
+                        mHomepageFragment.onEnterAmbientInFragment(ambientDetails);
+                    }
+                }
+                if (mNavigationController.getCurrentDestination().getId() == R.id.liveFragment) {
+                    mLiveFragment = (LiveFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
+                    if (mLiveFragment != null) {
+                        mLiveFragment.onEnterAmbientInFragment(ambientDetails);
+                    }
+                }
+                if (mNavigationController.getCurrentDestination().getId() == R.id.endOfSetFragment) {
+                    mEndOfSetFragment = (EndOfSetFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
+                    if (mEndOfSetFragment != null) {
+                        mEndOfSetFragment.onEnterAmbientInFragment(ambientDetails);
+                    }
+                }
+                if (mNavigationController.getCurrentDestination().getId() == R.id.sessionEntryFragment) {
+                    mSessionEntryFragment = (SessionEntryFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
+                    if (mSessionEntryFragment != null) {
+                        mSessionEntryFragment.onEnterAmbientInFragment(ambientDetails);
+                    }
+                }
+                if (mNavigationController.getCurrentDestination().getId() == R.id.customListFragment) {
+                    mCustomListFragment = (CustomListFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
+                    if (mCustomListFragment != null) {
+                        mCustomListFragment.onEnterAmbientInFragment(ambientDetails);
+                    }
+                }
+                if (mNavigationController.getCurrentDestination().getId() == R.id.customScoreDialogFragment) {
+                    mCustomScoreDialogFragment = (CustomScoreDialogFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
+                    if (mCustomScoreDialogFragment != null) {
+                        mCustomScoreDialogFragment.onEnterAmbientInFragment(ambientDetails);
+                    }
+                }
 
-            if ((mHomepageFragment != null) && (currentState == STATE_HOME)) mHomepageFragment.onEnterAmbientInFragment(ambientDetails);
-            if ((mLiveFragment != null) && (currentState == STATE_LIVE)) mLiveFragment.onEnterAmbientInFragment(ambientDetails);
-            if ((mSessionEntryFragment != null) && (currentState == STATE_ENTRY)) mSessionEntryFragment.onEnterAmbientInFragment(ambientDetails);
-            if ((mEndOfSetFragment != null) && (currentState == STATE_END_SET)) mEndOfSetFragment.onEnterAmbientInFragment(ambientDetails);
-            //if ((m != null) && (currentState == STATE_DIALOG)) mCustomListFragment.onEnterAmbientInFragment(ambientDetails);
-            if ((mCustomListFragment != null) && (currentState == STATE_DIALOG)) mCustomListFragment.onEnterAmbientInFragment(ambientDetails);
-            if ((mCustomScoreDialogFragment != null) && (currentState == STATE_15DIALOG)) mCustomScoreDialogFragment.onEnterAmbientInFragment(ambientDetails);
-            if (mCustomConfirmDialog != null) mCustomConfirmDialog.onEnterAmbientInFragment(ambientDetails);
+                if (mNavigationController.getCurrentDestination().getId() == R.id.customConfirmDialog) {
+                    mCustomConfirmDialog = (CustomConfirmDialog) navHostFragment.getChildFragmentManager().getFragments().get(0);
+                    if (mCustomConfirmDialog != null) {
+                        mCustomConfirmDialog.onEnterAmbientInFragment(ambientDetails);
+                    }
+                }
+            }
             refreshDisplayAndSetNextUpdate();
 
         }
@@ -3000,20 +2793,58 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
         public void onExitAmbient() {
             super.onExitAmbient();
             android.util.Log.d(TAG, "onExitAmbient()");
-
+            int currentState = mSavedStateViewModel.getCurrentState().getValue();
             /* Clears out Alarms since they are only used in ambient mode. */
             mAmbientUpdateAlarmManager.cancel(mAmbientUpdatePendingIntent);
             /* Reset any random offset applied for burn-in protection. */
             if (mDoBurnInProtection) {
                if (mSwipeDismissFrameLayout != null)  mSwipeDismissFrameLayout.setPadding(0, 0, 0, 0);
             }
-            if ((mHomepageFragment != null) && (currentState == STATE_HOME)) mHomepageFragment.onExitAmbientInFragment();
-            if ((mLiveFragment != null) && (currentState == STATE_LIVE)) mLiveFragment.onExitAmbientInFragment();
-            if ((mSessionEntryFragment != null) && (currentState == STATE_ENTRY)) mSessionEntryFragment.onExitAmbientInFragment();
-            if ((mEndOfSetFragment != null) && (currentState == STATE_END_SET)) mEndOfSetFragment.onExitAmbientInFragment();
-            if ((mCustomListFragment != null) && (currentState == STATE_DIALOG)) mCustomListFragment.onExitAmbientInFragment();
-            if ((mCustomScoreDialogFragment != null) && (currentState == STATE_15DIALOG)) mCustomScoreDialogFragment.onExitAmbientInFragment();
-            if (mCustomConfirmDialog != null) mCustomConfirmDialog.onExitAmbientInFragment();
+
+            NavHostFragment navHostFragment = (NavHostFragment)getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+            if (mNavigationController.getCurrentDestination().getId() == R.id.homePageFragment){
+                mHomepageFragment = (HomePageFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
+                if (mHomepageFragment != null) {
+                    mHomepageFragment.onExitAmbientInFragment();
+                }
+            }
+
+            if (mNavigationController.getCurrentDestination().getId() == R.id.liveFragment){
+                mLiveFragment = (LiveFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
+                if (mLiveFragment != null) {
+                    mLiveFragment.onExitAmbientInFragment();
+                }
+            }
+            if (mNavigationController.getCurrentDestination().getId() == R.id.endOfSetFragment){
+                mEndOfSetFragment = (EndOfSetFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
+                if (mEndOfSetFragment != null) {
+                    mEndOfSetFragment.onExitAmbientInFragment();
+                }
+            }
+            if (mNavigationController.getCurrentDestination().getId() == R.id.sessionEntryFragment){
+                mSessionEntryFragment = (SessionEntryFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
+                if (mSessionEntryFragment != null) {
+                    mSessionEntryFragment.onExitAmbientInFragment();
+                }
+            }
+            if (mNavigationController.getCurrentDestination().getId() == R.id.customListFragment){
+                mCustomListFragment = (CustomListFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
+                if (mCustomListFragment != null) {
+                    mCustomListFragment.onExitAmbientInFragment();
+                }
+            }
+            if (mNavigationController.getCurrentDestination().getId() == R.id.customScoreDialogFragment){
+                mCustomScoreDialogFragment = (CustomScoreDialogFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
+                if (mCustomScoreDialogFragment != null) {
+                    mCustomScoreDialogFragment.onExitAmbientInFragment();
+                }
+            }
+            if (mNavigationController.getCurrentDestination().getId() == R.id.customConfirmDialog){
+                mCustomConfirmDialog = (CustomConfirmDialog) navHostFragment.getChildFragmentManager().getFragments().get(0);
+                if (mCustomConfirmDialog != null) {
+                    mCustomConfirmDialog.onExitAmbientInFragment();
+                }
+            }
             refreshDisplayAndSetNextUpdate();
         }
     }
@@ -3022,46 +2853,37 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
         @Override
         public void onSwipeStarted(SwipeDismissFrameLayout layout) {
             super.onSwipeStarted(layout);
-            Log.i(TAG, "onSwipeStart state " + Integer.toString(currentState));
         }
 
         @Override
         public void onDismissed(SwipeDismissFrameLayout layout) {
-            if (fragmentManager != null)  {
-                int iStackCount = fragmentManager.getBackStackEntryCount();
-                Log.d(TAG, "WOW onBackStackChanged : " + Integer.toString(iStackCount));
-                if (iStackCount > 1) {
-                    fragmentManager.popBackStackImmediate();
-                    iStackCount = fragmentManager.getBackStackEntryCount();
-                    for (int entry = 0; entry < iStackCount; entry++) {
-                        FragmentManager.BackStackEntry backEntry = fragmentManager.getBackStackEntryAt(entry);
-                        String tag = backEntry.getName();
-                        Log.d(TAG, "onBackStackChanged found fragment: " + Integer.toString(entry) + " tag " + tag);
-                    }
-                }else {
-                    if (currentState == STATE_HOME) {
-                        final androidx.constraintlayout.widget.ConstraintLayout frameLayout = findViewById(R.id.main_constraintLayout);
-                        if (UserPreferences.getConfirmDismissSession(getApplicationContext())) {
-                            mCustomConfirmDialog = CustomConfirmDialog.newInstance(0, getString(R.string.confirm_dismiss_toggle_prompt), MainActivity.this);
-                            mCustomConfirmDialog.show(fragmentManager, "confirmDialog");
-                        } else
-                            if (frameLayout != null)
-                                showAlertDialogConfirm(frameLayout, ACTION_EXITING);
+            NavHostFragment navHostFragment = (NavHostFragment)getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+            int iStackCount = navHostFragment.getChildFragmentManager().getBackStackEntryCount();
+            if (iStackCount > 1) {
+                mNavigationController.popBackStack();
+            }else {
+                if (mNavigationController.getCurrentDestination().getId() == R.id.homePageFragment) {
+                    final androidx.constraintlayout.widget.ConstraintLayout frameLayout = findViewById(R.id.main_constraintLayout);
+                    if (UserPreferences.getConfirmDismissSession(getApplicationContext())) {
+                        mCustomConfirmDialog = CustomConfirmDialog.newInstance(0, getString(R.string.confirm_dismiss_toggle_prompt), MainActivity.this);
+                        mCustomConfirmDialog.show(fragmentManager, "confirmDialog");
+                    } else
+                        if (frameLayout != null)
+                            showAlertDialogConfirm(frameLayout, ACTION_EXITING);
 
-                    }else{
-                        if (currentState == STATE_LIVE) {
-                            if (UserPreferences.getConfirmEndSession(getApplicationContext())) {
-                                mCustomConfirmDialog = CustomConfirmDialog.newInstance(6, getString(R.string.confirm_end_toggle_prompt), MainActivity.this);
-                                mCustomConfirmDialog.show(fragmentManager, "confirmDialog");
-                            } else {
-                                final androidx.constraintlayout.widget.ConstraintLayout frameLayout = findViewById(R.id.main_constraintLayout);
-                                if (frameLayout != null) {
-                                    showAlertDialogConfirm(frameLayout, ACTION_STOP_QUIT);
-                                }
+                }else{
+                    if (mNavigationController.getCurrentDestination().getId() == R.id.liveFragment){
+                        if (UserPreferences.getConfirmEndSession(getApplicationContext())) {
+                            mCustomConfirmDialog = CustomConfirmDialog.newInstance(6, getString(R.string.confirm_end_toggle_prompt), MainActivity.this);
+                            mCustomConfirmDialog.show(fragmentManager, "confirmDialog");
+                        } else {
+                            final androidx.constraintlayout.widget.ConstraintLayout frameLayout = findViewById(R.id.main_constraintLayout);
+                            if (frameLayout != null) {
+                                showAlertDialogConfirm(frameLayout, ACTION_STOP_QUIT);
                             }
-                        }else
-                            startHomePageFragment();
-                    }
+                        }
+                    }else
+                        mNavigationController.navigate(R.id.action_global_homePageFragment);
                 }
             }
         }
@@ -3184,7 +3006,6 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
 
     // [START quitApp]
     private void quitApp() {
-        if (intSensorDataListenerCount > 0) removeSensorDataListener();
         if (mServiceBound){
             if (mService.isClientConnected()) mService.FIT_Disconnect();
             if (mService.mustStopSelf()) mService.StopService();
@@ -3406,7 +3227,6 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    intSensorDataListenerCount += 1;
                                     Log.i(TAG, "Listener registered!");
                                 } else {
                                     // intSensorDataListenerCount not added
@@ -3427,7 +3247,6 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
                             @Override
                             public void onComplete(@NonNull Task<Boolean> task) {
                                 if (task.isSuccessful() && task.getResult()) {
-                                    intSensorDataListenerCount -=1;
                                     Log.i(TAG, "Listener was removed!");
                                 } else {
                                     // intSensorDataListenerCount not subtracted
@@ -3463,6 +3282,72 @@ public class MainActivity extends androidx.fragment.app.FragmentActivity impleme
             });
 
     }
+
+    private void bindLocationListener(){
+        if (mLocationListener == null){
+            mLocationListener = new LocationCallback() {
+                @Override
+                public void onLocationResult(LocationResult locationResult) {
+                    super.onLocationResult(locationResult);
+                    if (locationResult.getLastLocation() != null) {
+                        Location loc = locationResult.getLastLocation();
+                        Log.d(TAG, "loc lat " + loc.getLatitude() + " lng " + loc.getLongitude());
+                        if (!loc.equals(mLocation))
+                            onNewLocation(locationResult.getLastLocation());
+                    }
+                }
+            };
+        }
+        BoundFusedLocationClient.bindFusedLocationListenerIn(this, mLocationListener,getApplicationContext());
+    }
+
+    private void bindSensorListener(int iActiveType){
+        if (mSensorListener == null){
+            mSensorListener = new xSensorListener(iActiveType);
+        }
+        BoundSensorManager.bindSensorListenerIn(this, mSensorListener, getApplicationContext());
+    }
+
+    public class xSensorListener implements SensorEventListener {
+        int ActiveType = 0;
+
+        public xSensorListener(int iActiveType){
+            ActiveType = iActiveType;
+        }
+
+        public int getActiveType(){ return ActiveType;}
+        public void setActiveType(int type){ ActiveType = type; return; }
+
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            int iType = event.sensor.getType();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd HH:mm", Locale.US);
+
+            switch (iType) {
+                case Sensor.TYPE_ACCELEROMETER:
+                    Log.d(TAG, "sensor accel " + event.timestamp + " 0: " +event.values[0] + " 1 " + event.values[1] + " 2 " + event.values[2]);
+                    break;
+                case Sensor.TYPE_LINEAR_ACCELERATION:
+                    Log.d(TAG, "sensor linear accel " + event.timestamp + " 0: " +event.values[0] + " 1 " + event.values[1] + " 2 " + event.values[2]);
+                    break;
+                case Sensor.TYPE_GYROSCOPE:
+                    Log.d(TAG, "sensor gyro " + event.timestamp + " 0: " +event.values[0] + " 1 " + event.values[1] + " 2 " + event.values[2]);
+                    break;
+                case Sensor.TYPE_STEP_COUNTER:
+                    Log.d(TAG, "sensor step " + event.timestamp + " " +event.values[0]);
+                    break;
+                case Sensor.TYPE_HEART_RATE:
+                    Log.d(TAG, "sensor bpm " + event.timestamp + " " +event.values[0]);
+                    break;
+            }
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+            Log.d(TAG, "sensor changed accuracy " + sensor.getName());
+        }
+    }
+
     private void onNewLocation(Location location) {
         boolean newLocation;
         if (mLocation != null){

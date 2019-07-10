@@ -27,8 +27,7 @@ import androidx.wear.widget.SwipeDismissFrameLayout;
 import androidx.work.WorkManager;
 
 import com.a_track_it.fitdata.R;
-import com.a_track_it.fitdata.common.model.Utilities;
-import com.a_track_it.fitdata.common.model.Workout;
+import com.a_track_it.fitdata.user_model.Utilities;
 import com.a_track_it.fitdata.fragment.CustomConfirmDialog;
 import com.a_track_it.fitdata.fragment.CustomListFragment;
 import com.a_track_it.fitdata.fragment.CustomScoreDialogFragment;
@@ -37,10 +36,10 @@ import com.a_track_it.fitdata.fragment.HomePageFragment;
 import com.a_track_it.fitdata.fragment.LiveFragment;
 import com.a_track_it.fitdata.fragment.SessionEntryFragment;
 import com.a_track_it.fitdata.fragment.SessionReportFragment;
-import com.a_track_it.fitdata.model.MessagesViewModel;
+import com.a_track_it.fitdata.user_model.MessagesViewModel;
 import com.a_track_it.fitdata.model.SavedStateViewModel;
 import com.a_track_it.fitdata.model.SessionViewModel;
-import com.a_track_it.fitdata.model.UserPreferences;
+import com.a_track_it.fitdata.user_model.UserPreferences;
 import com.a_track_it.fitdata.service.FITAPIManager;
 
 import java.util.Calendar;
@@ -260,7 +259,7 @@ public class WearMainActivity extends FragmentActivity implements
     }
 
     @Override
-    public void onCustomItemSelected(int type, long position, String title, int resid, int set_index, String identifer) {
+    public void onCustomItemSelected(int type, long position, String title, int resid, String identifer) {
 
     }
 
@@ -320,16 +319,6 @@ public class WearMainActivity extends FragmentActivity implements
     }
 
     @Override
-    public void insertWorkout(Workout workout) {
-
-    }
-
-    @Override
-    public void removeWorkout(Workout workout) {
-
-    }
-
-    @Override
     public void onConnected() {
 
     }
@@ -354,10 +343,6 @@ public class WearMainActivity extends FragmentActivity implements
 
     }
 
-    @Override
-    public void onDataFailure() {
-
-    }
 
     @Override
     public void onDataComplete(Bundle resultData) {

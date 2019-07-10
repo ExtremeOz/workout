@@ -17,17 +17,16 @@
         android:paddingTop="3dp"
         android:paddingBottom="3dp"
         android:orientation="horizontal">
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/arrow1_10_button"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            style="?android:attr/borderlessButtonStyle"
             android:gravity="center"
             android:drawablePadding="-25sp"
             android:contentDescription="@string/label_shoot_shot_results"
             android:background="@drawable/bg_selector_archery"
             android:textSize="@dimen/image_button_text_size_less"
-            android:textColor="@color/white"
+           style="@style/ShapeAppearance.MyApp.SmallComponent"
             android:text="@string/label_shoot_shot_results"
             />
     </LinearLayout>
@@ -40,9 +39,9 @@
         android:paddingBottom="3dp"
         android:orientation="horizontal">
 
-        <ImageButton
+        <Imagecom.google.android.material.button.MaterialButton
             android:id="@+id/arrow1_button"
-            style="?android:attr/borderlessButtonStyle"
+            style="@style/ShapeAppearance.MyApp.SmallComponent"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -52,9 +51,9 @@
             android:gravity="center"
             android:src="@drawable/ic_number_one_white" />
 
-        <ImageButton
+        <Imagecom.google.android.material.button.MaterialButton
             android:id="@+id/arrow2_button"
-            style="?android:attr/borderlessButtonStyle"
+            style="@style/ShapeAppearance.MyApp.SmallComponent"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -63,12 +62,12 @@
             android:drawablePadding="-25sp"
             android:gravity="center"
             android:src="@drawable/ic_number_two_white" />
-        <ImageButton
+        <Imagecom.google.android.material.button.MaterialButton
             android:id="@+id/arrow3_button"
             android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_weight="1"
-            style="?android:attr/borderlessButtonStyle"
+            style="@style/ShapeAppearance.MyApp.SmallComponent"
             android:src="@drawable/ic_number_three_white"
             android:gravity="center"
             android:drawablePadding="-25sp"
@@ -84,46 +83,46 @@
         android:paddingTop="3dp"
         android:paddingBottom="3dp"
         android:orientation="horizontal">
-        <ImageButton
+        <Imagecom.google.android.material.button.MaterialButton
             android:id="@+id/arrow4_button"
             android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_weight="1"
-            style="?android:attr/borderlessButtonStyle"
+            style="@style/ShapeAppearance.MyApp.SmallComponent"
             android:src="@drawable/ic_number_four_white"
             android:gravity="center"
             android:drawablePadding="-25sp"
             android:contentDescription="@string/buttonCD"
             android:background="@drawable/bg_selector_archery"/>
-        <ImageButton
+        <Imagecom.google.android.material.button.MaterialButton
             android:id="@+id/arrow5_button"
             android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_weight="1"
-            style="?android:attr/borderlessButtonStyle"
+            style="@style/ShapeAppearance.MyApp.SmallComponent"
             android:src="@drawable/ic_number_five_white"
             android:gravity="center"
             android:drawablePadding="-25sp"
             android:contentDescription="@string/buttonCD"
             android:background="@drawable/bg_selector_archery" />
-        <ImageButton
+        <Imagecom.google.android.material.button.MaterialButton
             android:id="@+id/arrow6_button"
             android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_weight="1"
-            style="?android:attr/borderlessButtonStyle"
+            style="@style/ShapeAppearance.MyApp.SmallComponent"
             android:src="@drawable/ic_number_six_white"
             android:gravity="center"
             android:drawablePadding="-25sp"
             android:contentDescription="@string/buttonCD"
             android:background="@drawable/bg_selector_archery"
             />
-        <ImageButton
+        <Imagecom.google.android.material.button.MaterialButton
             android:id="@+id/arrow7_button"
             android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_weight="1"
-            style="?android:attr/borderlessButtonStyle"
+            style="@style/ShapeAppearance.MyApp.SmallComponent"
             android:src="@drawable/ic_number_seven_white"
             android:gravity="center"
             android:drawablePadding="-25sp"
@@ -139,34 +138,34 @@
         android:paddingTop="3dp"
         android:paddingBottom="3dp"
         android:orientation="horizontal">
-        <ImageButton
+        <Imagecom.google.android.material.button.MaterialButton
             android:id="@+id/arrow8_button"
             android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_weight="1"
-            style="?android:attr/borderlessButtonStyle"
+            style="@style/ShapeAppearance.MyApp.SmallComponent"
             android:src="@drawable/ic_number_eight_white"
             android:gravity="center"
             android:drawablePadding="-25sp"
             android:contentDescription="@string/buttonCD"
             android:background="@drawable/bg_selector_archery"/>
-        <ImageButton
+        <Imagecom.google.android.material.button.MaterialButton
             android:id="@+id/arrow9_button"
             android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_weight="1"
-            style="?android:attr/borderlessButtonStyle"
+            style="@style/ShapeAppearance.MyApp.SmallComponent"
             android:src="@drawable/ic_number_nine_white"
             android:gravity="center"
             android:drawablePadding="-25sp"
             android:contentDescription="@string/buttonCD"
             android:background="@drawable/bg_selector_archery" />
-        <ImageButton
+        <Imagecom.google.android.material.button.MaterialButton
             android:id="@+id/arrow10_button"
             android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_weight="1"
-            style="?android:attr/borderlessButtonStyle"
+            style="@style/ShapeAppearance.MyApp.SmallComponent"
             android:src="@drawable/ic_number_ten_white"
             android:gravity="center"
             android:drawablePadding="-25sp"
@@ -233,17 +232,16 @@
         android:paddingTop="3dp"
         android:paddingBottom="3dp"
         android:orientation="horizontal">
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/archery_confirm_next_end_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:contentDescription="@string/buttonCD"
             android:background="@drawable/bg_selector_archery"
-            style="?android:attr/borderlessButtonStyle"
             android:drawablePadding="-25sp"
             android:textSize="@dimen/image_button_text_size_less"
-            android:textColor="@color/white"
+           style="@style/ShapeAppearance.MyApp.SmallComponent"
             android:text="@string/label_next_end"/>
     </LinearLayout>
     <LinearLayout
@@ -255,9 +253,8 @@
         android:paddingBottom="3dp"
         android:orientation="horizontal">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/archery_confirm_exit_button"
-            style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/bg_selector_archery"
@@ -265,7 +262,7 @@
             android:drawableTop="@drawable/ic_checkered_flag_white"
             android:gravity="center"
             android:text="@string/session_end"
-            android:textColor="@color/white"
+           style="@style/ShapeAppearance.MyApp.SmallComponent"
             android:textSize="@dimen/image_button_text_size_lessless" />
     </LinearLayout>
 </LinearLayout>

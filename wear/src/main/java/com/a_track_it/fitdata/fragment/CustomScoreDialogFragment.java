@@ -7,10 +7,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
+import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
@@ -18,7 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.a_track_it.fitdata.R;
 import com.a_track_it.fitdata.common.Constants;
-import com.a_track_it.fitdata.common.model.Utilities;
+import com.a_track_it.fitdata.user_model.Utilities;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -73,13 +72,12 @@ public class CustomScoreDialogFragment extends DialogFragment {
      * @return A new instance of fragment CustomScoreDialogFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CustomScoreDialogFragment newInstance(int iType, int iPreset, int iSet) {
+    public static CustomScoreDialogFragment newInstance(int iType, int iPreset) {
         final CustomScoreDialogFragment fragment = new CustomScoreDialogFragment();
 
         Bundle args = new Bundle();
         args.putInt(ARG_TYPE, iType);
         args.putInt(ARG_PRESET, iPreset);
-        args.putInt(ARG_SET, iSet);
         fragment.setArguments(args);
         return fragment;
     }
@@ -90,12 +88,10 @@ public class CustomScoreDialogFragment extends DialogFragment {
         if (getArguments() != null) {
             mLoadType = getArguments().getInt(ARG_TYPE);
             mPresetValue = getArguments().getInt(ARG_PRESET);
-            mSetIndex = getArguments().getInt(ARG_SET);
         }else {
             if ((savedInstanceState != null) && (savedInstanceState.containsKey(ARG_TYPE))) {
                 mLoadType = savedInstanceState.getInt(ARG_TYPE);
                 mPresetValue = savedInstanceState.getInt(ARG_PRESET);
-                mSetIndex = savedInstanceState.getInt(ARG_SET);
             }
         }
     }
@@ -103,7 +99,6 @@ public class CustomScoreDialogFragment extends DialogFragment {
     public void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putInt(ARG_TYPE, mLoadType);
         outState.putInt(ARG_PRESET, mPresetValue);
-        outState.putInt(ARG_SET, mSetIndex);
         super.onSaveInstanceState(outState);
 
     }

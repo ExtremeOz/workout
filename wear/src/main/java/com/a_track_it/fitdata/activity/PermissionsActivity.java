@@ -2,6 +2,7 @@ package com.a_track_it.fitdata.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -10,14 +11,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.wear.ambient.AmbientModeSupport;
 
 import com.a_track_it.fitdata.R;
 import com.a_track_it.fitdata.fragment.CustomConfirmDialog;
-import com.a_track_it.fitdata.model.UserPreferences;
+import com.a_track_it.fitdata.user_model.UserPreferences;
+import com.google.android.gms.fitness.data.DataType;
 
-public class PermissionsActivity extends androidx.fragment.app.FragmentActivity implements CustomConfirmDialog.ICustomConfirmDialog,
+public class PermissionsActivity extends AppCompatActivity implements CustomConfirmDialog.ICustomConfirmDialog,
         ActivityCompat.OnRequestPermissionsResultCallback, AmbientModeSupport.AmbientCallbackProvider {
     public static final String TAG = PermissionsActivity.class.getSimpleName();
     private static final int PERMISSION_REQUEST_BODY_SENSORS = 5005;
@@ -111,14 +114,15 @@ public class PermissionsActivity extends androidx.fragment.app.FragmentActivity 
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         // BEGIN_INCLUDE(onRequestPermissionsResult)
+        Context context = this.getApplicationContext();
         if (requestCode == PERMISSION_REQUEST_LOCATION){
-            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission has been granted.
                 String sMsg = getResources().getString(R.string.location_permission_granted);
-                Toast.makeText(this, sMsg, Toast.LENGTH_SHORT).show();
-                UserPreferences.setConfirmUseLocation(this, true);
+                Toast.makeText(context, sMsg, Toast.LENGTH_SHORT).show();
+                UserPreferences.setConfirmUseLocation(context, true);
                 if (bRequestAll)
-                    permissions_Ok = (ActivityCompat.checkSelfPermission(this, Manifest.permission.BODY_SENSORS) == PackageManager.PERMISSION_GRANTED);
+                    permissions_Ok = (ActivityCompat.checkSelfPermission(context, Manifest.permission.BODY_SENSORS) == PackageManager.PERMISSION_GRANTED);
                 else
                     permissions_Ok = true;
                 if (!permissions_Ok) {
@@ -143,10 +147,24 @@ public class PermissionsActivity extends androidx.fragment.app.FragmentActivity 
             if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission has been granted.
                 String sMsg = getResources().getString(R.string.sensors_permission_granted);
-                Toast.makeText(this, sMsg, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, sMsg, Toast.LENGTH_SHORT).show();
                 permissionsInProgress = false;
                 permissions_Ok = true;
-                UserPreferences.setConfirmUseSensors(this, true);
+                String sLabel = getString(R.string.label_sensor) + DataType.TYPE_HEART_RATE_BPM.getName();
+                UserPreferences.setPrefByLabel(context, sLabel, true);
+                sLabel = getString(R.string.label_sensor) + DataType.TYPE_STEP_COUNT_CUMULATIVE.getName();
+                UserPreferences.setPrefByLabel(context, sLabel, true);
+                sLabel = getString(R.string.label_sensor) + DataType.TYPE_LOCATION_SAMPLE.getName();
+                UserPreferences.setPrefByLabel(context, sLabel, true);
+                sLabel = getString(R.string.label_sensor) + DataType.TYPE_ACTIVITY_SAMPLES.getName();
+                UserPreferences.setPrefByLabel(context, sLabel, true);
+                sLabel = getString(R.string.label_sensor) + DataType.TYPE_WORKOUT_EXERCISE.getName();
+                UserPreferences.setPrefByLabel(context, sLabel, true);
+                sLabel = getString(R.string.label_sensor) + DataType.TYPE_CALORIES_EXPENDED.getName();
+                UserPreferences.setPrefByLabel(context, sLabel, true);
+                sLabel = getString(R.string.label_sensor) + DataType.TYPE_MOVE_MINUTES.getName();
+                UserPreferences.setPrefByLabel(context, sLabel, true);
+                UserPreferences.setConfirmUseSensors(context, true);
                 Intent result = new Intent();
                 result.putExtra("permission_result", 1);
                 setResult(Activity.RESULT_OK, result);
@@ -165,8 +183,8 @@ public class PermissionsActivity extends androidx.fragment.app.FragmentActivity 
             if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission has been granted.
                 String sMsg = getResources().getString(R.string.recording_permission_granted);
-                Toast.makeText(this, sMsg, Toast.LENGTH_SHORT).show();
-                UserPreferences.setConfirmUseRecord(this, true);
+                Toast.makeText(context, sMsg, Toast.LENGTH_SHORT).show();
+                UserPreferences.setConfirmUseRecord(context, true);
                 permissionsInProgress = false;
                 permissions_Ok = true;
                 Intent result = new Intent();
@@ -265,7 +283,14 @@ public class PermissionsActivity extends androidx.fragment.app.FragmentActivity 
         // Permission has not been granted and must be requested.
         Log.i(TAG, "requestSensorsPermission");
         if (mTextView != null) mTextView.setText(R.string.sensors_access_required);
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BODY_SENSORS)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.BODY_SENSORS},
+                    PERMISSION_REQUEST_BODY_SENSORS);
+        }
+/*        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                 Manifest.permission.BODY_SENSORS)) {
             // Provide an additional rationale to the user if the permission was not granted
             // and the user would benefit from additional context for the use of the permission.
@@ -277,7 +302,7 @@ public class PermissionsActivity extends androidx.fragment.app.FragmentActivity 
         } else {
             mCustomConfirmDialog = CustomConfirmDialog.newInstance(2,getString(R.string.sensors_body_unavailable), PermissionsActivity.this);
             mCustomConfirmDialog.show(getSupportFragmentManager(), "confirmDialog");
-        }
+        }*/
     }
     /**
      * Requests the {@link android.Manifest.permission#ACCESS_FINE_LOCATION} permission.
@@ -286,8 +311,17 @@ public class PermissionsActivity extends androidx.fragment.app.FragmentActivity 
      */
     private void requestLocationPermission() {
         // Permission has not been granted and must be requested.
-        Log.i(TAG, "requestSensorsPermission");
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+        Log.i(TAG, "requestLocationPermission");
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION},
+                    PERMISSION_REQUEST_LOCATION);
+        }
+/*        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)) {
             // Provide an additional rationale to the user if the permission was not granted
             // and the user would benefit from additional context for the use of the permission.
@@ -298,7 +332,7 @@ public class PermissionsActivity extends androidx.fragment.app.FragmentActivity 
         } else {
             mCustomConfirmDialog = CustomConfirmDialog.newInstance(3,getString(R.string.sensors_location_unavailable), PermissionsActivity.this);
             mCustomConfirmDialog.show(getSupportFragmentManager(), "confirmDialog");
-        }
+        }*/
     }
 
     /**
@@ -309,7 +343,14 @@ public class PermissionsActivity extends androidx.fragment.app.FragmentActivity 
     private void requestMicroPhonePermission() {
         // Permission has not been granted and must be requested.
         Log.i(TAG, "requestSensorsPermission");
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.RECORD_AUDIO},
+                    PERMISSION_REQUEST_RECORD_AUDIO);
+        }
+/*        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                 Manifest.permission.RECORD_AUDIO)) {
             // Provide an additional rationale to the user if the permission was not granted
             // and the user would benefit from additional context for the use of the permission.
@@ -320,7 +361,7 @@ public class PermissionsActivity extends androidx.fragment.app.FragmentActivity 
         } else {
             mCustomConfirmDialog = CustomConfirmDialog.newInstance(4,getString(R.string.microphone_access_required), PermissionsActivity.this);
             mCustomConfirmDialog.show(getSupportFragmentManager(), "confirmDialog");
-        }
+        }*/
     }
 
     

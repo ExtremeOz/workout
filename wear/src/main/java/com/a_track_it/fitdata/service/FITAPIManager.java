@@ -15,7 +15,6 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
-import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -41,14 +40,14 @@ import com.a_track_it.fitdata.activity.MainActivity;
 import com.a_track_it.fitdata.common.Constants;
 import com.a_track_it.fitdata.common.DataQueries;
 import com.a_track_it.fitdata.common.ReferencesTools;
-import com.a_track_it.fitdata.common.model.Bodypart;
-import com.a_track_it.fitdata.common.model.Exercise;
-import com.a_track_it.fitdata.common.model.FitnessActivity;
-import com.a_track_it.fitdata.common.model.Utilities;
-import com.a_track_it.fitdata.common.model.Workout;
-import com.a_track_it.fitdata.common.model.WorkoutSet;
+import com.a_track_it.fitdata.data_model.Bodypart;
+import com.a_track_it.fitdata.data_model.Exercise;
+import com.a_track_it.fitdata.data_model.FitnessActivity;
+import com.a_track_it.fitdata.user_model.Utilities;
+import com.a_track_it.fitdata.data_model.Workout;
+import com.a_track_it.fitdata.data_model.WorkoutSet;
 import com.a_track_it.fitdata.model.GSONHelper;
-import com.a_track_it.fitdata.model.UserPreferences;
+import com.a_track_it.fitdata.user_model.UserPreferences;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.ConnectionResult;
@@ -72,10 +71,6 @@ import com.google.android.gms.fitness.request.DataReadRequest;
 import com.google.android.gms.fitness.result.DataReadResponse;
 import com.google.android.gms.fitness.result.DataReadResult;
 import com.google.android.gms.fitness.result.ListSubscriptionsResult;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -152,11 +147,6 @@ public class FITAPIManager extends IntentService implements IDataLoaderCallback,
     public static final int ACTION_UNSUBSCRIBE_RECORDING = 3;
 
 
-    private static final long UPDATE_INTERVAL_IN_MILLISECONDS = (1000 * 30);
-    private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = (1000 * 60);
-    private static final long UPDATE_INTERVAL_IN_MILLISECONDS_IDLE = (1000 * 60 * 5);
-    private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS_IDLE = (1000 * 60);
-
 
     /**
      * Used to check whether the bound activity has really gone away and not unbound as part of an
@@ -182,19 +172,7 @@ public class FITAPIManager extends IntentService implements IDataLoaderCallback,
     private String mSessionID;
     private int retryCount;
     private boolean mGetImageInProgress = false;
-    private boolean mGetLocationOverride = false;
-    /**
-     * Provides access to the Fused Location Provider API.
-     */
-    private FusedLocationProviderClient mFusedLocationClient;
-    /**
-     * Contains parameters used by {@link com.google.android.gms.location.FusedLocationProviderApi}.
-     */
-    private LocationRequest mLocationRequest;
-    /**
-     * Callback for changes in location.
-     */
-    private LocationCallback mLocationCallback;
+
     private Handler mServiceHandler;
     /**
      * The current location.
@@ -330,46 +308,6 @@ public class FITAPIManager extends IntentService implements IDataLoaderCallback,
     public void actionCompleted(boolean saved, int index, int type) {
 
     }
-    public void getLastLocation(boolean override) {
-        try {
-            mGetLocationOverride = override;
-            mFusedLocationClient.getLastLocation()
-                    .addOnCompleteListener(new OnCompleteListener<Location>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Location> task) {
-                            if (task.isSuccessful() && task.getResult() != null) {
-                                onNewLocation(task.getResult());
-                            } else {
-                                Log.w(TAG, "Failed to get location.");
-                            }
-                        }
-                    });
-        } catch (SecurityException unlikely) {
-            Log.e(TAG, "Lost location permission." + unlikely);
-        }
-    }
-
-    private void onNewLocation(Location location) {
-        Log.i(TAG, "New location: " + location);
-        boolean newLocation;
-        if (mLocation != null){
-            newLocation = (mLocation.getLatitude() != location.getLatitude())
-                    && (mLocation.getLongitude() != location.getLongitude());
-        }else
-            newLocation = true;
-
-        if (newLocation || mGetLocationOverride) {
-            mLocation.set(location);  // so we wont send the same next time!
-            // Notify anyone listening for broadcasts about the new location.
-            Intent intent = new Intent(LOCATION_UPDATE_ACTION);
-            intent.putExtra(EXTRA_LOCATION, location);
-            sendBroadcast(intent);
-        }
-        // Update notification content if running as a foreground service.
-        if (serviceIsRunningInForeground(this)) {
-          //  mNotificationManager.notify(NOTIFICATION_ID, getNotification());
-        }
-    }
 
     /**
      * Returns the {@link NotificationCompat} used as part of the foreground service.
@@ -442,23 +380,6 @@ public class FITAPIManager extends IntentService implements IDataLoaderCallback,
                 DateFormat.getDateTimeInstance().format(new Date()));
     }
 
-    /**
-     * Sets the location request parameters.
-     */
-    private LocationRequest createLocationRequest(int iRequestType) {
-        LocationRequest mLocationRequest = new LocationRequest();
-        if (iRequestType == 0){
-            mLocationRequest.setInterval(UPDATE_INTERVAL_IN_MILLISECONDS_IDLE);
-            mLocationRequest.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS_IDLE);
-            mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-        }
-        if (iRequestType == 1){
-            mLocationRequest.setInterval(UPDATE_INTERVAL_IN_MILLISECONDS);
-            mLocationRequest.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
-            mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        }
-        return mLocationRequest;
-    }
 
     @Override
     public void onCapabilityChanged(@NonNull CapabilityInfo capabilityInfo) {
@@ -494,18 +415,6 @@ public class FITAPIManager extends IntentService implements IDataLoaderCallback,
 
         if (mContext == null){
             mContext = getApplicationContext();
-            mGetLocationOverride = true;
-            mLocation = new Location(LocationManager.GPS_PROVIDER);
-            mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-            mLocationCallback = new LocationCallback() {
-                @Override
-                public void onLocationResult(LocationResult locationResult) {
-                    super.onLocationResult(locationResult);
-                    if (locationResult.getLastLocation() != null) {
-                        onNewLocation(locationResult.getLastLocation());
-                    }
-                }
-            };
             HandlerThread handlerThread = new HandlerThread(TAG);
             handlerThread.start();
             mServiceHandler = new Handler(handlerThread.getLooper());
@@ -525,17 +434,7 @@ public class FITAPIManager extends IntentService implements IDataLoaderCallback,
         mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         Log.i(TAG, "Service OnStartCommand");
         if (mContext == null){
-            mGetLocationOverride = true;
             mContext = getApplicationContext();
-            mLocation = new Location(LocationManager.GPS_PROVIDER);
-            mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-            mLocationCallback = new LocationCallback() {
-                @Override
-                public void onLocationResult(LocationResult locationResult) {
-                    super.onLocationResult(locationResult);
-                    if (locationResult.getLastLocation() != null) onNewLocation(locationResult.getLastLocation());
-                }
-            };
             HandlerThread handlerThread = new HandlerThread(TAG);
             handlerThread.start();
             mServiceHandler = new Handler(handlerThread.getLooper());
@@ -585,7 +484,6 @@ public class FITAPIManager extends IntentService implements IDataLoaderCallback,
         boolean startedFromNotification = intent.getBooleanExtra(EXTRA_STARTED_FROM_NOTIFICATION,
                 false);
         if (startedFromNotification) {
-            removeLocationUpdates();
             stopSelf();
         }else {
             mustStopSelf = true;
@@ -593,8 +491,6 @@ public class FITAPIManager extends IntentService implements IDataLoaderCallback,
         if (intent.hasExtra(Constants.LABEL_USER)){
             String sUser = intent.getStringExtra(Constants.LABEL_USER);
             FIT_Connect(sUser);
-            requestLocationUpdates();
-
         }
         return Service.START_NOT_STICKY;
     }
@@ -652,43 +548,6 @@ public class FITAPIManager extends IntentService implements IDataLoaderCallback,
     }
 
     /**
-     * Makes a request for location updates. Note that in this sample we merely log the
-     * {@link SecurityException}.
-     */
-    public void requestLocationUpdates() {
-        Log.i(TAG, "Requesting location updates");
-        UserPreferences.setRequestingLocationUpdates(getApplicationContext(), true);
-        //startService(new Intent(getApplicationContext(), FITAPIManager.class));
-
-        try {
-            if (mLocationRequest == null)
-                mLocationRequest = createLocationRequest(0);
-
-            mFusedLocationClient.requestLocationUpdates(mLocationRequest,
-                    mLocationCallback, Looper.myLooper());
-        } catch (SecurityException unlikely) {
-            UserPreferences.setRequestingLocationUpdates(getApplicationContext(), false);
-            Log.e(TAG, "Lost location permission. Could not request updates. " + unlikely);
-        }
-    }
-
-    /**
-     * Removes location updates. Note that in this sample we merely log the
-     * {@link SecurityException}.
-     */
-    public void removeLocationUpdates() {
-        Log.i(TAG, "Removing location updates");
-        try {
-
-            mFusedLocationClient.removeLocationUpdates(mLocationCallback);
-            UserPreferences.setRequestingLocationUpdates(getApplicationContext(), false);
-        } catch (SecurityException unlikely) {
-            UserPreferences.setRequestingLocationUpdates(getApplicationContext(), true);
-            Log.e(TAG, "Lost location permission. Could not remove updates. " + unlikely);
-        }
-    }
-
-    /**
      * Returns true if this is a foreground service.
      *
      * @param context The {@link Context}.
@@ -708,14 +567,11 @@ public class FITAPIManager extends IntentService implements IDataLoaderCallback,
     }
 
     public interface IFITAPIManager {
-        void insertWorkout(Workout workout);
-        void removeWorkout(Workout workout);
         void onConnected();
         void onConnectionFailure();
         void onDisconnected(int reasonCode);
         void onSessionChanged(int ChangeType, String SessionID, int result);
         void onDataChanged(Utilities.TimeFrame timeFrame);
-        void onDataFailure();
         void onDataComplete(Bundle resultData);
     }
 
@@ -870,7 +726,7 @@ public class FITAPIManager extends IntentService implements IDataLoaderCallback,
                 .addApi(Fitness.RECORDING_API)
                 .addApi(LocationServices.API)
                 .addScope(new Scope(Scopes.PROFILE))
-                .addScope(new Scope(Scopes.FITNESS_BODY_READ_WRITE))
+                .addScope(new Scope(Scopes.FITNESS_BODY_READ))
                 .addScope(new Scope(Scopes.FITNESS_LOCATION_READ))
                 .addScope(new Scope(Scopes.FITNESS_ACTIVITY_READ_WRITE))
                 .addConnectionCallbacks(this)

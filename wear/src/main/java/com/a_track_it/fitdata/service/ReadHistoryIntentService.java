@@ -11,9 +11,9 @@ import android.os.IBinder;
 import android.os.ResultReceiver;
 import android.util.Log;
 
-import com.a_track_it.fitdata.common.model.Utilities;
-import com.a_track_it.fitdata.common.model.Workout;
-import com.a_track_it.fitdata.common.model.WorkoutSet;
+import com.a_track_it.fitdata.user_model.Utilities;
+import com.a_track_it.fitdata.data_model.Workout;
+import com.a_track_it.fitdata.data_model.WorkoutSet;
 
 import java.lang.ref.WeakReference;
 
@@ -80,15 +80,6 @@ public class ReadHistoryIntentService extends IntentService implements FITAPIMan
         context.startService(intent);
     }
 
-    @Override
-    public void insertWorkout(Workout workout) {
-
-    }
-
-    @Override
-    public void removeWorkout(Workout workout) {
-
-    }
 
     @Override
     public void onConnected() {
@@ -112,11 +103,6 @@ public class ReadHistoryIntentService extends IntentService implements FITAPIMan
 
     @Override
     public void onDataChanged(Utilities.TimeFrame timeFrame) {
-
-    }
-
-    @Override
-    public void onDataFailure() {
 
     }
 

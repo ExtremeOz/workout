@@ -6,6 +6,7 @@
         android:id="@+id/circular_linear"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/my_app_primary_variant_color"
         android:padding="@dimen/box_inset_layout_padding"
         tools:deviceIds="wear">
         <TextView
@@ -13,17 +14,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginTop="@dimen/live_in_progress_size"
-            android:paddingStart="12dp"
-            android:paddingBottom="12dp"
+            android:layout_marginTop="48dp"
+            android:paddingBottom="18dp"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Wearable.Small"
             android:textColor="@color/card_default_background"
             tools:text="@string/action_starting" />
         <androidx.wear.widget.CircularProgressLayout
             android:id="@+id/circular_progress"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_below="@id/circular_text_message"
             android:layout_marginTop="4dp"
             android:layout_centerHorizontal="true"

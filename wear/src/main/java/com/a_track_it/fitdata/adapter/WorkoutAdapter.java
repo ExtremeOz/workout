@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 
 import com.a_track_it.fitdata.R;
 import com.a_track_it.fitdata.common.ReferencesTools;
-import com.a_track_it.fitdata.common.model.Utilities;
-import com.a_track_it.fitdata.common.model.Workout;
-import com.a_track_it.fitdata.common.model.WorkoutSet;
+import com.a_track_it.fitdata.user_model.Utilities;
+import com.a_track_it.fitdata.data_model.Workout;
+import com.a_track_it.fitdata.data_model.WorkoutSet;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;

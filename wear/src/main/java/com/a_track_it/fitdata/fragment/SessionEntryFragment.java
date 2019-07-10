@@ -2,6 +2,7 @@ package com.a_track_it.fitdata.fragment;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.ColorFilter;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.drawable.Drawable;
@@ -11,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -28,12 +28,14 @@ import androidx.wear.ambient.AmbientModeSupport;
 
 import com.a_track_it.fitdata.R;
 import com.a_track_it.fitdata.common.Constants;
-import com.a_track_it.fitdata.common.model.Utilities;
-import com.a_track_it.fitdata.common.model.Workout;
-import com.a_track_it.fitdata.common.model.WorkoutSet;
-import com.a_track_it.fitdata.model.MessagesViewModel;
+import com.a_track_it.fitdata.user_model.Utilities;
+import com.a_track_it.fitdata.data_model.Workout;
+import com.a_track_it.fitdata.data_model.WorkoutSet;
+import com.a_track_it.fitdata.user_model.MessagesViewModel;
+import com.a_track_it.fitdata.model.SavedStateViewModel;
 import com.a_track_it.fitdata.model.SessionViewModel;
-import com.a_track_it.fitdata.model.UserPreferences;
+import com.a_track_it.fitdata.user_model.UserPreferences;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Locale;
 
@@ -41,9 +43,9 @@ import java.util.Locale;
 
 public class SessionEntryFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_RESID = "arg_resource_id";
-    private static final String ARG_COLORID = "arg_color_id";
-    private static final String ARG_ACTIVITYID = "arg_activityid";
+    public static final String ARG_RESID = "arg_resource_id";
+    public static final String ARG_COLORID = "arg_color_id";
+    public static final String ARG_ACTIVITYID = "arg_activityid";
     public static final String TAG = "SessionEntryFragment";
     private boolean mIsGymWorkout;
     private boolean mIsShootWorkout;
@@ -53,11 +55,12 @@ public class SessionEntryFragment extends Fragment {
     private int mGoalDuration;
     private int mGoalSteps;
     private boolean mBuildClicked;
-    private int mBackgroundColor;
+    private ColorFilter mBackgroundColorFilter;
     private Workout mWorkout;
     private WorkoutSet mWorkoutSet;
     private OnSessionEntryFragmentListener mListener;
     private MessagesViewModel messagesViewModel;
+    private SavedStateViewModel savedStateViewModel;
     private SessionViewModel sessionViewModel;
     private LinearLayout mLinear;
 
@@ -112,6 +115,7 @@ public class SessionEntryFragment extends Fragment {
         mIsShootWorkout = (mActivityID > 0) && Utilities.isShooting(mActivityID);
         try {
             messagesViewModel = ViewModelProviders.of(requireActivity()).get(MessagesViewModel.class);
+            savedStateViewModel = ViewModelProviders.of(requireActivity()).get(SavedStateViewModel.class);
             sessionViewModel = ViewModelProviders.of(requireActivity()).get(SessionViewModel.class);
         }catch (IllegalStateException ise){
             Log.e(TAG, "illegal state on viewmodels " + ise.getLocalizedMessage());
@@ -121,8 +125,8 @@ public class SessionEntryFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mWorkout = sessionViewModel.getWorkout().getValue();
-        mWorkoutSet = sessionViewModel.getWorkoutSet().getValue();
+        mWorkout = savedStateViewModel.getActiveWorkout().getValue();
+        mWorkoutSet = savedStateViewModel.getActiveWorkoutSet().getValue();
 
     }
 
@@ -137,8 +141,8 @@ public class SessionEntryFragment extends Fragment {
         if (!mIsGymWorkout && !mIsShootWorkout) {
             rootView =  inflater.inflate(R.layout.fragment_session_entry, container, false);
             mLinear = rootView.findViewById(R.id.linear_session);
-            Button session_activity_button = rootView.findViewById(R.id.session_activity_button);
-           // mBackgroundColor = session_activity_button.getHighlightColor();
+            com.google.android.material.button.MaterialButton session_activity_button = rootView.findViewById(R.id.session_activity_button);
+           // mBackgroundColor = session_activity_button.getBackground().get;
             if ((mResourceID > 0) && (session_activity_button != null)){
                 Drawable d = ContextCompat.getDrawable(rootView.getContext(), mResourceID);
                 if (d != null) session_activity_button.setCompoundDrawables(null, null, null, d);
@@ -158,22 +162,22 @@ public class SessionEntryFragment extends Fragment {
                     }
                 }
             });*/
-            final Button goal1_button = rootView.findViewById(R.id.session_goal_1_button);
+            final com.google.android.material.button.MaterialButton goal1_button = rootView.findViewById(R.id.session_goal_1_button);
             goal1_button.setOnClickListener(v -> {
                 if (mListener != null){ mListener.onSessionEntryRequest(Constants.CHOOSE_GOAL_1, "");}
             });
-            final Button goal2_button = rootView.findViewById(R.id.session_goal_2_button);
+            final com.google.android.material.button.MaterialButton goal2_button = rootView.findViewById(R.id.session_goal_2_button);
             goal2_button.setOnClickListener(v -> {
                 if (mListener != null){ mListener.onSessionEntryRequest(Constants.CHOOSE_GOAL_2, "");}
             });
-            final Button start_button = rootView.findViewById(R.id.session_start_button);
+            final com.google.android.material.button.MaterialButton start_button = rootView.findViewById(R.id.session_start_button);
             start_button.setOnClickListener(view -> {
                 if (mListener != null) {
                     if (mWorkout.activityID > 0) {
                         mIsGymWorkout = Utilities.isGymWorkout(mWorkout.activityID);
-                        sessionViewModel.setActiveWorkout(mWorkout);
-                        sessionViewModel.setActiveWorkoutSet(mWorkoutSet);
-                        mListener.onSessionEntryRequest(Constants.CHOOSE_START_SESSION, "");
+                        savedStateViewModel.setActiveWorkout(mWorkout);
+                        savedStateViewModel.setActiveWorkoutSet(mWorkoutSet);
+                        mListener.onSessionEntryRequest(Constants.CHOOSE_START_SESSION, Boolean.toString(mBuildClicked));
                     } else{
                         session_activity_button.requestFocus();
                         String sMsg = getString(R.string.session_prompt) + getString(R.string.my_space_string) + getString(R.string.label_activity);
@@ -186,19 +190,26 @@ public class SessionEntryFragment extends Fragment {
             // observe the live data changes
             messagesViewModel.CurrentMessage().observe(this, s -> message1.setText(s));
             messagesViewModel.getBpmMsg().observe(this, s -> message2.setText(s));
-            sessionViewModel.getWorkout().observe(this, workout -> {
-                Log.d(TAG, "getWorkout onChanged updateUI");
-                updateUI();
+            savedStateViewModel.getActiveWorkout().observe(this, new Observer<Workout>() {
+                @Override
+                public void onChanged(Workout workout) {
+                    Log.d(TAG, "getWorkout onChanged updateUI");
+                    updateWorkoutUI(workout);
+                }
             });
-            sessionViewModel.getWorkoutSet().observe(this, workoutSet -> {
-                Log.d(TAG, "getWorkoutSet onChanged updateUI");
-                updateUI();
+            savedStateViewModel.getActiveWorkoutSet().observe(this, new Observer<WorkoutSet>() {
+                @Override
+                public void onChanged(WorkoutSet workoutSet) {
+                    Log.d(TAG, "getWorkoutSet onChanged updateUI");
+                    updateWorkoutSetUI(workoutSet);
+                }
             });
+
         }
-        if (mIsGymWorkout) {
+        if (savedStateViewModel.getIsGym().getValue()) {
             rootView = inflater.inflate(R.layout.fragment_gym_entry, container, false);
             mLinear = rootView.findViewById(R.id.linear_gym);
-            Button activity_button = rootView.findViewById(R.id.gym_activity_button);
+            com.google.android.material.button.MaterialButton activity_button = rootView.findViewById(R.id.gym_activity_button);
             if ((mResourceID > 0) && (activity_button != null)){
                 Drawable d = ContextCompat.getDrawable(getContext(), mResourceID);
                 if (d != null) activity_button.setCompoundDrawables(null, null, null, d);
@@ -208,14 +219,14 @@ public class SessionEntryFragment extends Fragment {
                     mListener.onSessionEntryRequest(Constants.CHOOSE_ACTIIVITY, Integer.toString(mActivityID));
                 }
             });
-            final Button bodypart_btn = rootView.findViewById(R.id.bodypart_button);
-            mBackgroundColor = bodypart_btn.getHighlightColor();
+            final com.google.android.material.button.MaterialButton bodypart_btn = rootView.findViewById(R.id.bodypart_button);
+
             bodypart_btn.setOnClickListener(view -> {
                 if (mListener != null) {
                     mListener.onSessionEntryRequest(Constants.CHOOSE_BODYPART, "");
                 }
             });
-            final Button exercise_btn = rootView.findViewById(R.id.exercise_button);
+            final com.google.android.material.button.MaterialButton exercise_btn = rootView.findViewById(R.id.exercise_button);
             exercise_btn.setOnClickListener(view -> {
                 if (mListener != null) {
                     mListener.onSessionEntryRequest(Constants.CHOOSE_EXERCISE, "");
@@ -225,26 +236,26 @@ public class SessionEntryFragment extends Fragment {
                 if (mListener != null) mListener.onSessionEntryRequest(Constants.CHOOSE_NEW_EXERCISE, "");
                 return (mListener != null);
             });
-            final Button weight_button = rootView.findViewById(R.id.weight_button);
+            final com.google.android.material.button.MaterialButton weight_button = rootView.findViewById(R.id.weight_button);
             weight_button.setOnClickListener(view -> {
                 if (mListener != null) {
                     mListener.onSessionEntryRequest(Constants.CHOOSE_WEIGHT, "");
                 }
             });
-            final Button sets_button = rootView.findViewById(R.id.sets_button);
+            final com.google.android.material.button.MaterialButton sets_button = rootView.findViewById(R.id.sets_button);
             sets_button.setOnClickListener(view -> {
                 if (mListener != null) {
                     mListener.onSessionEntryRequest(Constants.CHOOSE_SETS, "");
                 }
             });
-            final Button reps_button = rootView.findViewById(R.id.reps_button);
+            final com.google.android.material.button.MaterialButton reps_button = rootView.findViewById(R.id.reps_button);
             reps_button.setOnClickListener(view -> {
                 if (mListener != null) {
                     mListener.onSessionEntryRequest(Constants.CHOOSE_REPS, "");
                 }
             });
 
-            final Button build_button = rootView.findViewById(R.id.gym_build_button);
+            final com.google.android.material.button.MaterialButton build_button = rootView.findViewById(R.id.gym_build_button);
             build_button.setOnClickListener(view -> {
                 if (mListener != null) {
                     if (mWorkoutSet.activityID > 0) {
@@ -266,13 +277,13 @@ public class SessionEntryFragment extends Fragment {
                     }
                 return false;
             });
-            final Button start_button = rootView.findViewById(R.id.gym_start_button);
+            final com.google.android.material.button.MaterialButton start_button = rootView.findViewById(R.id.gym_start_button);
             start_button.setOnClickListener(view -> {
                 if (mListener != null) {
                     if (mWorkout.activityID > 0) {
                         mIsGymWorkout = Utilities.isGymWorkout(mWorkout.activityID);
-                        sessionViewModel.setActiveWorkout(mWorkout);
-                        sessionViewModel.setActiveWorkoutSet(mWorkoutSet);
+                        savedStateViewModel.setActiveWorkout(mWorkout);
+                        savedStateViewModel.setActiveWorkoutSet(mWorkoutSet);
 
                         if ((mWorkoutSet.exerciseID > 0) || mBuildClicked){
                             mListener.onSessionEntryRequest(Constants.CHOOSE_START_SESSION, "");
@@ -288,7 +299,7 @@ public class SessionEntryFragment extends Fragment {
 
 
             if (rootView.findViewById(R.id.gym_rest_button) != null) {
-                final Button rest_button = rootView.findViewById(R.id.gym_rest_button);
+                final com.google.android.material.button.MaterialButton rest_button = rootView.findViewById(R.id.gym_rest_button);
                 rest_button.setOnClickListener(view -> ShowAlertDialogRestDuration(rest_button.getRootView(), mWorkout.activityID));
 
             }
@@ -297,26 +308,27 @@ public class SessionEntryFragment extends Fragment {
             messagesViewModel.CurrentMessage().observe(this, s -> message1.setText(s));
             final TextView message2  = rootView.findViewById(R.id.gym_message2);
             messagesViewModel.getBpmMsg().observe(this, s -> message2.setText(s));
-            sessionViewModel.getWorkout().observe(this, workout -> {
-                Log.d(TAG, "getWorkout onChanged updateUI");
-                updateUI();
+            savedStateViewModel.getActiveWorkout().observe(this, new Observer<Workout>() {
+                @Override
+                public void onChanged(Workout workout) {
+                    Log.d(TAG, "getWorkout onChanged updateUI");
+                    updateWorkoutUI(workout);
+                }
             });
-            sessionViewModel.getWorkoutSet().observe(this, workoutSet -> {
-                Log.d(TAG, "getWorkoutSet onChanged updateUI");
-                updateUI();
+            savedStateViewModel.getActiveWorkoutSet().observe(this, new Observer<WorkoutSet>() {
+                @Override
+                public void onChanged(WorkoutSet workoutSet) {
+                    Log.d(TAG, "getWorkoutSet onChanged updateUI");
+                    updateWorkoutSetUI(workoutSet);
+                }
             });
-            sessionViewModel.getToDoSets().observe(this, toDoSets -> {
-                Log.d(TAG, "getWorkoutSet onChanged updateUI");
-                updateUI();
-            });
-
         }
-        if (mIsShootWorkout){
+        if (savedStateViewModel.getIsShoot().getValue()){
             rootView = inflater.inflate(R.layout.fragment_archery_entry, container, false);
             mLinear = rootView.findViewById(R.id.linear_archery);
 
-            final Button field_btn = rootView.findViewById(R.id.archery_field_button);
-            mBackgroundColor = field_btn.getHighlightColor();
+            final com.google.android.material.button.MaterialButton field_btn = rootView.findViewById(R.id.archery_field_button);
+
             field_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -325,7 +337,7 @@ public class SessionEntryFragment extends Fragment {
                     }
                 }
             });
-            final Button target_size_btn = rootView.findViewById(R.id.archery_target_size);
+            final com.google.android.material.button.MaterialButton target_size_btn = rootView.findViewById(R.id.archery_target_size);
             target_size_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -334,7 +346,7 @@ public class SessionEntryFragment extends Fragment {
                     }
                 }
             });
-            final Button equipment_btn = rootView.findViewById(R.id.archery_equipment_button);
+            final com.google.android.material.button.MaterialButton equipment_btn = rootView.findViewById(R.id.archery_equipment_button);
             equipment_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -343,7 +355,7 @@ public class SessionEntryFragment extends Fragment {
                     }
                 }
             });
-            final Button distance_btn = rootView.findViewById(R.id.archery_distance_button);
+            final com.google.android.material.button.MaterialButton distance_btn = rootView.findViewById(R.id.archery_distance_button);
             distance_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -352,7 +364,7 @@ public class SessionEntryFragment extends Fragment {
                     }
                 }
             });
-            final Button ends_btn = rootView.findViewById(R.id.archery_ends_button);
+            final com.google.android.material.button.MaterialButton ends_btn = rootView.findViewById(R.id.archery_ends_button);
             ends_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -362,7 +374,7 @@ public class SessionEntryFragment extends Fragment {
                 }
             });
             if (rootView.findViewById(R.id.archery_rest_button) != null) {
-                final Button rest_button = rootView.findViewById(R.id.archery_rest_button);
+                final com.google.android.material.button.MaterialButton rest_button = rootView.findViewById(R.id.archery_rest_button);
                 rest_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -372,7 +384,7 @@ public class SessionEntryFragment extends Fragment {
 
             }
             if (rootView.findViewById(R.id.archery_per_end_button) != null) {
-                final Button perend_btn = rootView.findViewById(R.id.archery_per_end_button);
+                final com.google.android.material.button.MaterialButton perend_btn = rootView.findViewById(R.id.archery_per_end_button);
                 perend_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -382,7 +394,7 @@ public class SessionEntryFragment extends Fragment {
                     }
                 });
             }
-            final Button start_button = rootView.findViewById(R.id.archery_start_button);
+            final com.google.android.material.button.MaterialButton start_button = rootView.findViewById(R.id.archery_start_button);
             if (start_button != null)
                 start_button.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -429,22 +441,41 @@ public class SessionEntryFragment extends Fragment {
                     message2.setText(s);
                 }
             });
-            sessionViewModel.getWorkout().observe(this, new Observer<Workout>() {
+            savedStateViewModel.getActiveWorkout().observe(this, new Observer<Workout>() {
                 @Override
                 public void onChanged(Workout workout) {
                     Log.d(TAG, "getWorkout onChanged updateUI");
-                    updateUI();
+                    updateWorkoutUI(workout);
                 }
             });
-            sessionViewModel.getWorkoutSet().observe(this, new Observer<WorkoutSet>() {
+            savedStateViewModel.getActiveWorkoutSet().observe(this, new Observer<WorkoutSet>() {
                 @Override
                 public void onChanged(WorkoutSet workoutSet) {
                     Log.d(TAG, "getWorkoutSet onChanged updateUI");
-                    updateUI();
+                    updateWorkoutSetUI(workoutSet);
                 }
             });
         }
         return rootView;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        boolean isGym = (savedStateViewModel.getIsGym().getValue() != null) ? savedStateViewModel.getIsGym().getValue() : false;
+        boolean isShoot = (savedStateViewModel.getIsShoot().getValue() != null) ? savedStateViewModel.getIsShoot().getValue() : false;
+        if (!isGym && !isShoot) {
+            com.google.android.material.button.MaterialButton session_activity_button = view.findViewById(R.id.session_activity_button);
+            mBackgroundColorFilter = session_activity_button.getBackground().getColorFilter();
+        }
+        if (isGym && !isShoot) {
+            com.google.android.material.button.MaterialButton session_start_button = view.findViewById(R.id.gym_start_button);
+            mBackgroundColorFilter = session_start_button.getBackground().getColorFilter();
+        }
+        if (!isGym && isShoot) {
+            com.google.android.material.button.MaterialButton session_start_button = view.findViewById(R.id.archery_start_button);
+            mBackgroundColorFilter = session_start_button.getBackground().getColorFilter();
+        }
     }
 
     @Override
@@ -464,32 +495,20 @@ public class SessionEntryFragment extends Fragment {
         mListener = null;
     }
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        if (mWorkout != null) outState.putInt(ARG_ACTIVITYID, mWorkout.activityID); else outState.putInt(ARG_ACTIVITYID,mActivityID);
-        outState.putInt(ARG_RESID, mResourceID);
-        outState.putInt(ARG_COLORID, mColorID);
-        super.onSaveInstanceState(outState);
-    }
-
-    public void updateUI(){
-        // Inflate the layout for this fragment
+    public void updateWorkoutUI(Workout workout){
         View rootView = mLinear.getRootView(); String sTemp;
         Context context= getContext();
-        mWorkout = sessionViewModel.getWorkout().getValue();
-        mWorkoutSet = sessionViewModel.getWorkoutSet().getValue();
-        if ((mWorkout == null) || (mWorkoutSet == null)) return;
-        mIsGymWorkout = Utilities.isGymWorkout(mWorkout.activityID);
-        mIsShootWorkout = Utilities.isShooting(mWorkout.activityID);
-        mGoalDuration = sessionViewModel.getGoalDuration().getValue() == null ? 0 : sessionViewModel.getGoalDuration().getValue();
-        mGoalSteps = sessionViewModel.getGoalSteps().getValue() == null ? 0 : sessionViewModel.getGoalSteps().getValue();
-        if (!mIsGymWorkout && !mIsShootWorkout) {
-            Button session_activity_button = rootView.findViewById(R.id.session_activity_button);
-            if (mWorkout.activityName.length() == 0) {
+        mGoalDuration = savedStateViewModel.getGoalDuration().getValue() == null ? 0 : savedStateViewModel.getGoalDuration().getValue();
+        mGoalSteps = savedStateViewModel.getGoalSteps().getValue() == null ? 0 : savedStateViewModel.getGoalSteps().getValue();
+        boolean isGym = (savedStateViewModel.getIsGym().getValue() != null) ? savedStateViewModel.getIsGym().getValue() : false;
+        boolean isShoot = (savedStateViewModel.getIsShoot().getValue() != null) ? savedStateViewModel.getIsShoot().getValue() : false;
+        if (!isGym && !isShoot) {
+            com.google.android.material.button.MaterialButton session_activity_button = rootView.findViewById(R.id.session_activity_button);
+            if (workout.activityName.length() == 0) {
                 sTemp = context.getString(R.string.default_select) + context.getString(R.string.my_space_string) + context.getString(R.string.label_activity);
                 sTemp = sTemp.toUpperCase(Locale.getDefault());
             }else
-                sTemp = mWorkout.activityName;
+                sTemp = workout.activityName;
             if (session_activity_button != null) {
                 session_activity_button.setText(sTemp);
 
@@ -498,174 +517,222 @@ public class SessionEntryFragment extends Fragment {
                     if (d != null) session_activity_button.setCompoundDrawables(null, null,null,d);
                 }
             }
-
             if (mGoalDuration > 0){
-                Button btn = rootView.findViewById(R.id.session_goal_1_button);
+                com.google.android.material.button.MaterialButton btn = rootView.findViewById(R.id.session_goal_1_button);
                 String sTemp1 = Integer.toString(mGoalDuration) + getString(R.string.my_space_string) + getString(R.string.label_mins);
                 if (btn != null) btn.setText(sTemp1);
             }
             if (mGoalSteps > 0){
-                Button btn2 = rootView.findViewById(R.id.session_goal_2_button);
+                com.google.android.material.button.MaterialButton btn2 = rootView.findViewById(R.id.session_goal_2_button);
                 String sTemp2 = Integer.toString(mGoalSteps) + getString(R.string.my_space_string) + getString(R.string.label_steps);
                 if (btn2 != null) btn2.setText(sTemp2);
             }
-        }else
-            if (mIsGymWorkout) {
-                boolean bUseKgs = UserPreferences.getUseKG(context);
-                Button activity_btn = rootView.findViewById(R.id.gym_activity_button);
-                if ((activity_btn != null) && (mResourceID > 0)) {
-                    Drawable d = ContextCompat.getDrawable(getContext(), mResourceID);
-                    if (d != null) activity_btn.setCompoundDrawables(null, null,null,d);
-                }
+        }
+        if (isGym) {
+            boolean bUseKgs = UserPreferences.getUseKG(context);
+            com.google.android.material.button.MaterialButton activity_btn = rootView.findViewById(R.id.gym_activity_button);
+            if ((activity_btn != null) && (mResourceID > 0)) {
+                Drawable d = ContextCompat.getDrawable(getContext(), mResourceID);
+                if (d != null) activity_btn.setCompoundDrawables(null, null,null,d);
+            }
 
-                Button bodypart_btn = rootView.findViewById(R.id.bodypart_button);
-                if ((mWorkoutSet == null) || (mWorkoutSet.bodypartID == 0))
-                    sTemp = context.getString(R.string.default_select) + context.getString(R.string.my_space_string) + context.getString(R.string.label_bodypart);
-                else
-                    sTemp = mWorkoutSet.bodypartName;
-                if (bodypart_btn != null) bodypart_btn.setText(sTemp);
-
-                Button exercise_btn = rootView.findViewById(R.id.exercise_button);
-                if ((mWorkoutSet == null) || (mWorkoutSet.exerciseID == 0))
-                    sTemp = context.getString(R.string.default_select) + context.getString(R.string.my_space_string) + context.getString(R.string.label_exercise);
-                else
-                    sTemp = mWorkoutSet.exerciseName;
-                if (exercise_btn != null) exercise_btn.setText(sTemp);
-
-                Button weight_button = rootView.findViewById(R.id.weight_button);
-                if ((mWorkoutSet == null) || (mWorkoutSet.weightTotal == 0))
-                    sTemp = context.getString(R.string.default_select) + context.getString(R.string.my_space_string) + context.getString(R.string.label_weight);
-                else {
-                    if (bUseKgs)
-                        sTemp = Float.toString(mWorkoutSet.weightTotal) + context.getString(R.string.my_space_string) + context.getString(R.string.label_weight_units_kg);
-                    else
-                        sTemp = Float.toString(mWorkoutSet.weightTotal) + context.getString(R.string.my_space_string) + context.getString(R.string.label_weight_units_lbs);
-                }
-                if (weight_button != null) weight_button.setText(sTemp);
-                Button sets_button = rootView.findViewById(R.id.sets_button);
-                if ((mWorkoutSet == null) || (mWorkoutSet.setCount == 0))
-                    sTemp = context.getString(R.string.default_select) + context.getString(R.string.my_space_string) + context.getString(R.string.label_set);
-                else
-                    sTemp = Integer.toString(mWorkoutSet.setCount) + context.getString(R.string.my_space_string) + context.getString(R.string.label_set);
-                if (sets_button != null) sets_button.setText(sTemp);
-                Button reps_button = rootView.findViewById(R.id.reps_button);
-                if ((mWorkoutSet == null) || (mWorkoutSet.repCount == 0))
-                    sTemp = context.getString(R.string.default_select) + context.getString(R.string.my_space_string) + context.getString(R.string.label_rep);
-                else
-                    sTemp = Integer.toString(mWorkoutSet.repCount) + context.getString(R.string.my_space_string) + context.getString(R.string.label_rep);
-                if (reps_button != null) reps_button.setText(sTemp);
-                Button build_button = rootView.findViewById(R.id.gym_build_button);
-                if ((build_button != null) && (mWorkout.start > 0)){
-                    //build_button.setVisibility(View.GONE);
-                    Button btn = rootView.findViewById(R.id.gym_start_button);
-                    if (btn != null) btn.setText(getString(R.string.session_continue));
-                }
-                if (sessionViewModel.getToDoSetSize() > 0){
-                    sTemp = getString(R.string.label_build2) + getString(R.string.my_space_string) + Character.toString((char)40) + Integer.toString(sessionViewModel.getToDoSetSize()) + Character.toString((char)41);
-                }else
-                    sTemp = getString(R.string.label_build);
-                if (build_button != null) build_button.setText(sTemp);
-
-                if (rootView.findViewById(R.id.gym_rest_button) != null) {
-                    Button rest_button = rootView.findViewById(R.id.gym_rest_button);
-                    long milliseconds = (UserPreferences.getWeightsRestDuration(context) * 1000);
-
-                    if (milliseconds == 0)
-                        rest_button.setText(context.getString(R.string.action_rest));
-                    else {
-                        int seconds = (int) (milliseconds / 1000) % 60 ;
-                        int minutes = (int) ((milliseconds / (1000*60)) % 60);
-                        int hours   = (int) ((milliseconds / (1000*60*60)) % 24);
-                        sTemp = context.getString(R.string.label_rest_countdown) + context.getString(R.string.my_space_string);
-                        if (hours > 0) {
-                            sTemp += String.format("%02d", hours) + context.getString(R.string.my_space_string) + context.getString(R.string.label_hours);
-                            if (hours == 1)
-                                sTemp = sTemp.substring(0,sTemp.length()-1);
-                            if (minutes > 1)
-                                sTemp += context.getString(R.string.my_space_string);
-                        }
-                        if (minutes > 0) {
-                            sTemp += String.format(" %02d", minutes) + context.getString(R.string.my_space_string) + context.getString(R.string.label_mins);
-                            if (minutes == 1)
-                                sTemp = sTemp.substring(0,sTemp.length()-1);
-                        }else
-                            sTemp += String.format(" %02d", seconds) + context.getString(R.string.my_space_string) + context.getString(R.string.label_secs);
-                        if (rest_button != null) rest_button.setText(sTemp);
-                    }
-                }
+            com.google.android.material.button.MaterialButton build_button = rootView.findViewById(R.id.gym_build_button);
+            if ((build_button != null) && (workout.start > 0)){
+                //build_button.setVisibility(View.GONE);
+                com.google.android.material.button.MaterialButton btn = rootView.findViewById(R.id.gym_start_button);
+                if (btn != null) btn.setText(getString(R.string.session_continue));
+            }
+            if (sessionViewModel.getToDoSetSize() > 0){
+                sTemp = getString(R.string.label_build2) + getString(R.string.my_space_string) + Character.toString((char)40) + Integer.toString(sessionViewModel.getToDoSetSize()) + Character.toString((char)41);
             }else
-            if (mIsShootWorkout) {
-    /*            Button activity_button = rootView.findViewById(R.id.archery_activity_button);
-                if (mWorkout.activityName.length() == 0)
-                    sTemp = context.getString(R.string.default_select) + context.getString(R.string.my_space_string) + context.getString(R.string.label_activity);
-                else
-                    sTemp = mWorkout.activityName;
-                activity_button.setText(sTemp); */
-                Button field_btn = rootView.findViewById(R.id.archery_field_button);
-                if (mWorkout.shootFormatID == 0)
-                    sTemp = context.getString(R.string.default_select) + context.getString(R.string.my_space_string) + context.getString(R.string.label_shoot_field).toLowerCase();
-                else
-                    sTemp = mWorkout.shootFormat;
-                if (field_btn != null) field_btn.setText(sTemp);
-                Button target_size_btn = rootView.findViewById(R.id.archery_target_size);
-                if (mWorkout.targetSizeID == 0)
-                    sTemp = context.getString(R.string.default_select) + context.getString(R.string.my_space_string) + context.getString(R.string.label_shoot_target_size).toLowerCase();
-                else
-                    sTemp = mWorkout.targetSizeName;
-                if (target_size_btn != null) target_size_btn.setText(sTemp);
-                Button equipment_btn = rootView.findViewById(R.id.archery_equipment_button);
-                if (mWorkout.equipmentID == 0)
-                    sTemp = context.getString(R.string.default_select) + context.getString(R.string.my_space_string) + context.getString(R.string.label_shoot_equipment1).toLowerCase();
-                else
-                    sTemp = mWorkout.equipmentName;
-                if (equipment_btn != null) equipment_btn.setText(sTemp);
-                Button distance_btn = rootView.findViewById(R.id.archery_distance_button);
-                if (mWorkout.distanceID == 0)
-                    sTemp = context.getString(R.string.default_select) + context.getString(R.string.my_space_string) + context.getString(R.string.label_shoot_distance).toLowerCase();
-                else
-                    sTemp = mWorkout.distanceName;
-                if (distance_btn != null) distance_btn.setText(sTemp);
-                Button ends_btn = rootView.findViewById(R.id.archery_ends_button);
-                if (mWorkout.setCount == 0)
-                    sTemp = context.getString(R.string.default_select) + context.getString(R.string.my_space_string) + context.getString(R.string.label_shoot_ends).toLowerCase();
-                else
-                    sTemp = Integer.toString(mWorkout.setCount) + context.getString(R.string.my_space_string) + context.getString(R.string.label_shoot_ends).toLowerCase();
-                if (ends_btn != null) ends_btn.setText(sTemp);
+                sTemp = getString(R.string.label_build);
+            if (build_button != null) build_button.setText(sTemp);
 
-                Button perend_btn = rootView.findViewById(R.id.archery_per_end_button);
-                if (mWorkout.repCount == 0)
-                    sTemp = context.getString(R.string.default_select) + context.getString(R.string.my_space_string) + context.getString(R.string.label_shoot_per_end).toLowerCase();
-                else
-                    sTemp = Integer.toString(mWorkout.repCount) + context.getString(R.string.my_space_string) + context.getString(R.string.label_shoot_per_end).toLowerCase();
-    /*            if (mWorkout.shotsPerEnd == 0)
-                    sTemp = context.getString(R.string.default_select) + context.getString(R.string.my_space_string) + context.getString(R.string.label_shoot_per_end).toLowerCase();
-                else
-                    sTemp = Integer.toString(mWorkout.shotsPerEnd) + context.getString(R.string.my_space_string) + context.getString(R.string.label_shoot_per_end).toLowerCase();*/
-                if (perend_btn != null) perend_btn.setText(sTemp);
+            if (rootView.findViewById(R.id.gym_rest_button) != null) {
+                com.google.android.material.button.MaterialButton rest_button = rootView.findViewById(R.id.gym_rest_button);
+                long milliseconds = (UserPreferences.getWeightsRestDuration(context) * 1000);
 
-                if (rootView.findViewById(R.id.archery_rest_button) != null) {
-                    Button rest_button = rootView.findViewById(R.id.archery_rest_button);
-                    long milliseconds = (UserPreferences.getArcheryRestDuration(context) * 1000);
-
-                    if (milliseconds == 0)
-                        rest_button.setText(context.getString(R.string.label_rest_per_end));
-                    else {
-                        int seconds = (int) (milliseconds / 1000) % 60;
-                        int minutes = (int) ((milliseconds / (1000 * 60)) % 60);
-                        int hours = (int) ((milliseconds / (1000 * 60 * 60)) % 24);
-                        sTemp = context.getString(R.string.my_empty_string);
-                        if (hours > 0)
-                            sTemp += String.format("%02d", hours) + context.getString(R.string.my_space_string) + context.getString(R.string.label_hours);
-                        if (minutes > 0) {
-                            sTemp += String.format(" %02d", minutes) + context.getString(R.string.my_space_string) + context.getString(R.string.label_mins);
-                        } else
-                            sTemp += String.format(" %02d", seconds) + context.getString(R.string.my_space_string) + context.getString(R.string.label_secs);
-                        sTemp += getString(R.string.my_space_string) + getString(R.string.label_append_per_end);
-                        rest_button.setText(sTemp);
+                if (milliseconds == 0)
+                    rest_button.setText(context.getString(R.string.action_rest));
+                else {
+                    int seconds = (int) (milliseconds / 1000) % 60 ;
+                    int minutes = (int) ((milliseconds / (1000*60)) % 60);
+                    int hours   = (int) ((milliseconds / (1000*60*60)) % 24);
+                    sTemp = context.getString(R.string.label_rest_countdown) + context.getString(R.string.my_space_string);
+                    if (hours > 0) {
+                        sTemp += String.format("%02d", hours) + context.getString(R.string.my_space_string) + context.getString(R.string.label_hours);
+                        if (hours == 1)
+                            sTemp = sTemp.substring(0,sTemp.length()-1);
+                        if (minutes > 1)
+                            sTemp += context.getString(R.string.my_space_string);
                     }
+                    if (minutes > 0) {
+                        sTemp += String.format(" %02d", minutes) + context.getString(R.string.my_space_string) + context.getString(R.string.label_mins);
+                        if (minutes == 1)
+                            sTemp = sTemp.substring(0,sTemp.length()-1);
+                    }else
+                        sTemp += String.format(" %02d", seconds) + context.getString(R.string.my_space_string) + context.getString(R.string.label_secs);
+                    if (rest_button != null) rest_button.setText(sTemp);
                 }
             }
+        }
+        if (isShoot) {
+            com.google.android.material.button.MaterialButton field_btn = rootView.findViewById(R.id.archery_field_button);
+            if (workout.shootFormatID == 0)
+                sTemp = context.getString(R.string.default_select) + context.getString(R.string.my_space_string) + context.getString(R.string.label_shoot_field).toLowerCase();
+            else
+                sTemp = workout.shootFormat;
+            if (field_btn != null) field_btn.setText(sTemp);
+            com.google.android.material.button.MaterialButton target_size_btn = rootView.findViewById(R.id.archery_target_size);
+            if (workout.targetSizeID == 0)
+                sTemp = context.getString(R.string.default_select) + context.getString(R.string.my_space_string) + context.getString(R.string.label_shoot_target_size).toLowerCase();
+            else
+                sTemp = workout.targetSizeName;
+            if (target_size_btn != null) target_size_btn.setText(sTemp);
+            com.google.android.material.button.MaterialButton equipment_btn = rootView.findViewById(R.id.archery_equipment_button);
+            if (workout.equipmentID == 0)
+                sTemp = context.getString(R.string.default_select) + context.getString(R.string.my_space_string) + context.getString(R.string.label_shoot_equipment1).toLowerCase();
+            else
+                sTemp = workout.equipmentName;
+            if (equipment_btn != null) equipment_btn.setText(sTemp);
+            com.google.android.material.button.MaterialButton distance_btn = rootView.findViewById(R.id.archery_distance_button);
+            if (workout.distanceID == 0)
+                sTemp = context.getString(R.string.default_select) + context.getString(R.string.my_space_string) + context.getString(R.string.label_shoot_distance).toLowerCase();
+            else
+                sTemp = workout.distanceName;
+            if (distance_btn != null) distance_btn.setText(sTemp);
+            com.google.android.material.button.MaterialButton ends_btn = rootView.findViewById(R.id.archery_ends_button);
+            if (workout.setCount == 0)
+                sTemp = context.getString(R.string.default_select) + context.getString(R.string.my_space_string) + context.getString(R.string.label_shoot_ends).toLowerCase();
+            else
+                sTemp = Integer.toString(workout.setCount) + context.getString(R.string.my_space_string) + context.getString(R.string.label_shoot_ends).toLowerCase();
+            if (ends_btn != null) ends_btn.setText(sTemp);
+
+            com.google.android.material.button.MaterialButton perend_btn = rootView.findViewById(R.id.archery_per_end_button);
+            if (workout.repCount == 0)
+                sTemp = context.getString(R.string.default_select) + context.getString(R.string.my_space_string) + context.getString(R.string.label_shoot_per_end).toLowerCase();
+            else
+                sTemp = Integer.toString(workout.repCount) + context.getString(R.string.my_space_string) + context.getString(R.string.label_shoot_per_end).toLowerCase();
+    /*            if (workout.shotsPerEnd == 0)
+                    sTemp = context.getString(R.string.default_select) + context.getString(R.string.my_space_string) + context.getString(R.string.label_shoot_per_end).toLowerCase();
+                else
+                    sTemp = Integer.toString(workout.shotsPerEnd) + context.getString(R.string.my_space_string) + context.getString(R.string.label_shoot_per_end).toLowerCase();*/
+            if (perend_btn != null) perend_btn.setText(sTemp);
+
+            if (rootView.findViewById(R.id.archery_rest_button) != null) {
+                com.google.android.material.button.MaterialButton rest_button = rootView.findViewById(R.id.archery_rest_button);
+                long milliseconds = (UserPreferences.getArcheryRestDuration(context) * 1000);
+
+                if (milliseconds == 0)
+                    rest_button.setText(context.getString(R.string.label_rest_per_end));
+                else {
+                    int seconds = (int) (milliseconds / 1000) % 60;
+                    int minutes = (int) ((milliseconds / (1000 * 60)) % 60);
+                    int hours = (int) ((milliseconds / (1000 * 60 * 60)) % 24);
+                    sTemp = context.getString(R.string.my_empty_string);
+                    if (hours > 0)
+                        sTemp += String.format("%02d", hours) + context.getString(R.string.my_space_string) + context.getString(R.string.label_hours);
+                    if (minutes > 0) {
+                        sTemp += String.format(" %02d", minutes) + context.getString(R.string.my_space_string) + context.getString(R.string.label_mins);
+                    } else
+                        sTemp += String.format(" %02d", seconds) + context.getString(R.string.my_space_string) + context.getString(R.string.label_secs);
+                    sTemp += getString(R.string.my_space_string) + getString(R.string.label_append_per_end);
+                    rest_button.setText(sTemp);
+                }
+            }
+        }        
+
     }
+    public void updateWorkoutSetUI(WorkoutSet set){
+        View rootView = mLinear.getRootView(); String sTemp;
+        Context context= getContext();
+        boolean isGym = (savedStateViewModel.getIsGym().getValue() != null) ? savedStateViewModel.getIsGym().getValue() : false;
+        if (isGym) {
+            boolean bUseKgs = UserPreferences.getUseKG(context);
+            com.google.android.material.button.MaterialButton activity_btn = rootView.findViewById(R.id.gym_activity_button);
+            if ((activity_btn != null) && (mResourceID > 0)) {
+                Drawable d = ContextCompat.getDrawable(getContext(), mResourceID);
+                if (d != null) activity_btn.setCompoundDrawables(null, null,null,d);
+            }
+
+            com.google.android.material.button.MaterialButton bodypart_btn = rootView.findViewById(R.id.bodypart_button);
+            if ((set == null) || (set.bodypartID == 0))
+                sTemp = context.getString(R.string.default_select) + context.getString(R.string.my_space_string) + context.getString(R.string.label_bodypart);
+            else
+                sTemp = set.bodypartName;
+            if (bodypart_btn != null) bodypart_btn.setText(sTemp);
+
+            com.google.android.material.button.MaterialButton exercise_btn = rootView.findViewById(R.id.exercise_button);
+            if ((set == null) || (set.exerciseID == 0))
+                sTemp = context.getString(R.string.default_select) + context.getString(R.string.my_space_string) + context.getString(R.string.label_exercise);
+            else
+                sTemp = set.exerciseName;
+            if (exercise_btn != null) exercise_btn.setText(sTemp);
+
+            com.google.android.material.button.MaterialButton weight_button = rootView.findViewById(R.id.weight_button);
+            if ((set == null) || (set.weightTotal == 0))
+                sTemp = context.getString(R.string.default_select) + context.getString(R.string.my_space_string) + context.getString(R.string.label_weight);
+            else {
+                if (bUseKgs)
+                    sTemp = Float.toString(set.weightTotal) + context.getString(R.string.my_space_string) + context.getString(R.string.label_weight_units_kg);
+                else
+                    sTemp = Float.toString(set.weightTotal) + context.getString(R.string.my_space_string) + context.getString(R.string.label_weight_units_lbs);
+            }
+            if (weight_button != null) weight_button.setText(sTemp);
+            com.google.android.material.button.MaterialButton sets_button = rootView.findViewById(R.id.sets_button);
+            if ((set == null) || (set.setCount == 0))
+                sTemp = context.getString(R.string.default_select) + context.getString(R.string.my_space_string) + context.getString(R.string.label_set);
+            else
+                sTemp = Integer.toString(set.setCount) + context.getString(R.string.my_space_string) + context.getString(R.string.label_set);
+            if (sets_button != null) sets_button.setText(sTemp);
+            com.google.android.material.button.MaterialButton reps_button = rootView.findViewById(R.id.reps_button);
+            if ((set == null) || (set.repCount == 0))
+                sTemp = context.getString(R.string.default_select) + context.getString(R.string.my_space_string) + context.getString(R.string.label_rep);
+            else
+                sTemp = Integer.toString(set.repCount) + context.getString(R.string.my_space_string) + context.getString(R.string.label_rep);
+            if (reps_button != null) reps_button.setText(sTemp);
+            com.google.android.material.button.MaterialButton build_button = rootView.findViewById(R.id.gym_build_button);
+            if (build_button != null){
+                //build_button.setVisibility(View.GONE);
+                com.google.android.material.button.MaterialButton btn = rootView.findViewById(R.id.gym_start_button);
+                if (btn != null) btn.setText(getString(R.string.session_continue));
+            }
+            if (sessionViewModel.getToDoSetSize() > 0){
+                sTemp = getString(R.string.label_build2) + getString(R.string.my_space_string) + Character.toString((char)40) + Integer.toString(sessionViewModel.getToDoSetSize()) + Character.toString((char)41);
+            }else
+                sTemp = getString(R.string.label_build);
+            if (build_button != null) build_button.setText(sTemp);
+
+            if (rootView.findViewById(R.id.gym_rest_button) != null) {
+                com.google.android.material.button.MaterialButton rest_button = rootView.findViewById(R.id.gym_rest_button);
+                long milliseconds = (UserPreferences.getWeightsRestDuration(context) * 1000);
+
+                if (milliseconds == 0)
+                    rest_button.setText(context.getString(R.string.action_rest));
+                else {
+                    int seconds = (int) (milliseconds / 1000) % 60 ;
+                    int minutes = (int) ((milliseconds / (1000*60)) % 60);
+                    int hours   = (int) ((milliseconds / (1000*60*60)) % 24);
+                    sTemp = context.getString(R.string.label_rest_countdown) + context.getString(R.string.my_space_string);
+                    if (hours > 0) {
+                        sTemp += String.format("%02d", hours) + context.getString(R.string.my_space_string) + context.getString(R.string.label_hours);
+                        if (hours == 1)
+                            sTemp = sTemp.substring(0,sTemp.length()-1);
+                        if (minutes > 1)
+                            sTemp += context.getString(R.string.my_space_string);
+                    }
+                    if (minutes > 0) {
+                        sTemp += String.format(" %02d", minutes) + context.getString(R.string.my_space_string) + context.getString(R.string.label_mins);
+                        if (minutes == 1)
+                            sTemp = sTemp.substring(0,sTemp.length()-1);
+                    }else
+                        sTemp += String.format(" %02d", seconds) + context.getString(R.string.my_space_string) + context.getString(R.string.label_secs);
+                    if (rest_button != null) rest_button.setText(sTemp);
+                }
+            }
+        }
+    }
+
     public void onEnterAmbientInFragment(Bundle ambientDetails) {
         Resources resources = requireActivity().getResources();
         int bgColor = resources.getColor(R.color.colorAmbientBackground, null);
@@ -683,7 +750,7 @@ public class SessionEntryFragment extends Fragment {
         if (mIsGymWorkout){
             mLinear.findViewById(R.id.gym_activity_button).setBackgroundColor(bgColor);
             mLinear.findViewById(R.id.bodypart_button).setBackgroundColor(bgColor);
-            //   (Button)mLinear.findViewById(R.id.bodypart_button).setTextColor
+            //   (com.google.android.material.button.MaterialButton)mLinear.findViewById(R.id.bodypart_button).setTextColor
             mLinear.findViewById(R.id.exercise_button).setBackgroundColor(bgColor);
             mLinear.findViewById(R.id.weight_button).setBackgroundColor(bgColor);
             mLinear.findViewById(R.id.sets_button).setBackgroundColor(bgColor);
@@ -721,40 +788,40 @@ public class SessionEntryFragment extends Fragment {
     public void onExitAmbientInFragment() {
         Log.d(TAG, "onExitAmbient()");
         Context context = getContext();
-        Drawable bg = ContextCompat.getDrawable(context, R.drawable.bg_selector);
+       // Drawable bg = ContextCompat.getDrawable(context, R.drawable.bg_selector);
         Drawable dark_bg =  ContextCompat.getDrawable(context, R.drawable.bg_color_green_dark);
         if (mIsGymWorkout){
-            mLinear.findViewById(R.id.gym_activity_button).setBackground(bg);
-            mLinear.findViewById(R.id.bodypart_button).setBackground(bg);
-            mLinear.findViewById(R.id.exercise_button).setBackground(bg);
-            mLinear.findViewById(R.id.weight_button).setBackground(bg);
-            mLinear.findViewById(R.id.sets_button).setBackground(bg);
-            mLinear.findViewById(R.id.reps_button).setBackground(bg);
-            mLinear.findViewById(R.id.gym_build_button).setBackground(bg);
-            mLinear.findViewById(R.id.gym_rest_button).setBackground(bg);
+            mLinear.findViewById(R.id.gym_activity_button).getBackground().setColorFilter(mBackgroundColorFilter);
+            mLinear.findViewById(R.id.bodypart_button).getBackground().setColorFilter(mBackgroundColorFilter);
+            mLinear.findViewById(R.id.exercise_button).getBackground().setColorFilter(mBackgroundColorFilter);
+            mLinear.findViewById(R.id.weight_button).getBackground().setColorFilter(mBackgroundColorFilter);
+            mLinear.findViewById(R.id.sets_button).getBackground().setColorFilter(mBackgroundColorFilter);
+            mLinear.findViewById(R.id.reps_button).getBackground().setColorFilter(mBackgroundColorFilter);
+            mLinear.findViewById(R.id.gym_build_button).getBackground().setColorFilter(mBackgroundColorFilter);
+            mLinear.findViewById(R.id.gym_rest_button).getBackground().setColorFilter(mBackgroundColorFilter);
             mLinear.findViewById(R.id.gym_message1).setBackground(dark_bg);
             mLinear.findViewById(R.id.gym_message2).setBackground(dark_bg);
-            mLinear.findViewById(R.id.gym_start_button).setBackground(bg);
+            mLinear.findViewById(R.id.gym_start_button).getBackground().setColorFilter(mBackgroundColorFilter);
         }else{
             if (mIsShootWorkout){
-                mLinear.findViewById(R.id.archery_field_button).setBackground(bg);
-                mLinear.findViewById(R.id.archery_equipment_button).setBackground(bg);
-                mLinear.findViewById(R.id.archery_target_size).setBackground(bg);
-                mLinear.findViewById(R.id.archery_distance_button).setBackground(bg);
-                mLinear.findViewById(R.id.archery_ends_button).setBackground(bg);
-                mLinear.findViewById(R.id.archery_per_end_button).setBackground(bg);
-                mLinear.findViewById(R.id.archery_rest_button).setBackground(bg);
+                mLinear.findViewById(R.id.archery_field_button).getBackground().setColorFilter(mBackgroundColorFilter);
+                mLinear.findViewById(R.id.archery_equipment_button).getBackground().setColorFilter(mBackgroundColorFilter);
+                mLinear.findViewById(R.id.archery_target_size).getBackground().setColorFilter(mBackgroundColorFilter);
+                mLinear.findViewById(R.id.archery_distance_button).getBackground().setColorFilter(mBackgroundColorFilter);
+                mLinear.findViewById(R.id.archery_ends_button).getBackground().setColorFilter(mBackgroundColorFilter);
+                mLinear.findViewById(R.id.archery_per_end_button).getBackground().setColorFilter(mBackgroundColorFilter);
+                mLinear.findViewById(R.id.archery_rest_button).getBackground().setColorFilter(mBackgroundColorFilter);
                 mLinear.findViewById(R.id.archery_message1).setBackground(dark_bg);
                 mLinear.findViewById(R.id.archery_message2).setBackground(dark_bg);
-                mLinear.findViewById(R.id.archery_start_button).setBackground(bg);
+                mLinear.findViewById(R.id.archery_start_button).getBackground().setColorFilter(mBackgroundColorFilter);
             }else{
-                mLinear.findViewById(R.id.session_activity_button).setBackground(bg);
-                mLinear.findViewById(R.id.session_goal_1_button).setBackground(bg);
-                mLinear.findViewById(R.id.session_goal_2_button).setBackground(bg);
+                mLinear.findViewById(R.id.session_activity_button).getBackground().setColorFilter(mBackgroundColorFilter);
+                mLinear.findViewById(R.id.session_goal_1_button).getBackground().setColorFilter(mBackgroundColorFilter);
+                mLinear.findViewById(R.id.session_goal_2_button).getBackground().setColorFilter(mBackgroundColorFilter);
                 mLinear.findViewById(R.id.entry_message1).setBackground(dark_bg);
                 mLinear.findViewById(R.id.entry_message2).setBackground(dark_bg);
                 mLinear.findViewById(R.id.session_icon).setBackground(dark_bg);
-                mLinear.findViewById(R.id.session_start_button).setBackground(bg);
+                mLinear.findViewById(R.id.session_start_button).getBackground().setColorFilter(mBackgroundColorFilter);
             }
         }
         //mImageView.setColorFilter(mImageViewColorFilter);
@@ -762,8 +829,9 @@ public class SessionEntryFragment extends Fragment {
 
     private void ShowAlertDialogRestDuration(final View parent_view, final int activity_id){
         Context context = parent_view.getContext();
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context,  R.style.AppTheme_myAlertDialog);
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(parent_view.getContext(), R.layout.item_alertlist); //
+        //AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context,  R.style.AppTheme_myAlertDialog);
+        final MaterialAlertDialogBuilder dialogBuilder = new MaterialAlertDialogBuilder(context, R.style.Theme_AppCompat_DayNight_Dialog_Alert);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, R.layout.item_alertlist); //
         if (Utilities.isGymWorkout(activity_id)){
             String[] gym_rests = getResources().getStringArray(R.array.array_rest_duration_gym);
             arrayAdapter.addAll(gym_rests);
@@ -786,7 +854,7 @@ public class SessionEntryFragment extends Fragment {
 
         final AlertDialog dialog = dialogBuilder.create();
         lv.setOnItemClickListener((adapterView, view, i, l) -> {
-            Button rest_button = parent_view.findViewById(R.id.archery_rest_button);
+            com.google.android.material.button.MaterialButton rest_button = parent_view.findViewById(R.id.archery_rest_button);
             String sTemp = arrayAdapter.getItem(i);
             if (Utilities.isShooting(activity_id)){
                 rest_button = parent_view.findViewById(R.id.archery_rest_button);

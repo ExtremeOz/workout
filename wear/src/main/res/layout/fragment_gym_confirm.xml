@@ -38,42 +38,37 @@
             android:layout_gravity="center"
             android:orientation="horizontal"
             android:paddingBottom="2dp">
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/exercise_confirm_button"
-                style="?android:attr/borderlessButtonStyle"
+                style="@style/ShapeAppearance.MyApp.SmallComponent"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/bg_selector"
                 android:contentDescription="@string/label_exercise"
                 android:gravity="center"
                 android:text="@string/label_exercise"
-                android:textColor="@color/white"
                 android:textSize="@dimen/image_button_text_size_less" />
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/weight_confirm_button"
-                style="?android:attr/borderlessButtonStyle"
+                style="@style/ShapeAppearance.MyApp.SmallComponent"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/bg_selector"
                 android:contentDescription="@string/label_weight"
                 android:gravity="center"
                 android:text="@string/label_weight_units_kg"
-                android:textColor="@color/white"
                 android:textSize="@dimen/image_button_text_size_less" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/reps_confirm_button"
-                style="?android:attr/borderlessButtonStyle"
+                style="@style/ShapeAppearance.MyApp.SmallComponent"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/bg_selector"
+
                 android:contentDescription="@string/label_rep"
                 android:gravity="center"
                 android:text="@string/label_rep"
-                android:textColor="@color/white"
                 android:textSize="@dimen/image_button_text_size_less" />
         </LinearLayout>
         <LinearLayout
@@ -89,7 +84,7 @@
                 android:id="@+id/gym_rest_duration_text"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/recycler_row_height"
-                android:background="@drawable/bg_selector"
+
                 android:drawableStart="@drawable/ic_stopwatch"
                 android:drawableTint="@color/white"
                 android:gravity="center"
@@ -132,29 +127,27 @@
             android:layout_gravity="center"
             android:orientation="horizontal"
             android:paddingBottom="2dp">
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/set_repeat_button"
-                style="?android:attr/borderlessButtonStyle"
+                style="@style/ShapeAppearance.MyApp.SmallComponent"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/bg_selector"
+
                 android:contentDescription="@string/label_repeat"
                 android:gravity="center"
                 android:text="@string/label_repeat"
-                android:textColor="@color/white"
                 android:textSize="@dimen/image_button_text_size_less" />
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/set_add_button"
-                style="?android:attr/borderlessButtonStyle"
+                style="@style/ShapeAppearance.MyApp.SmallComponent"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/bg_selector"
+
                 android:contentDescription="@string/label_add"
                 android:gravity="center"
                 android:text="@string/label_add"
-                android:textColor="@color/white"
                 android:textSize="@dimen/image_button_text_size_less" />
         </LinearLayout>
         <LinearLayout
@@ -164,37 +157,33 @@
             android:layout_gravity="center"
             android:orientation="horizontal"
             android:paddingBottom="2dp">
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/exercise_next_button"
-                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/bg_selector"
                 android:contentDescription="@string/buttonCD"
                 android:gravity="center"
                 android:text="@string/label_exercise"
-                android:textColor="@color/white"
+                style="@style/ShapeAppearance.MyApp.SmallComponent"
                 android:textSize="@dimen/image_button_text_size_less" />
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/weight_next_button"
-                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/bg_selector"
                 android:contentDescription="@string/label_weight"
                 android:gravity="center"
                 android:text="@string/label_weight_units_kg"
-                android:textColor="@color/white"
+                style="@style/ShapeAppearance.MyApp.SmallComponent"
                 android:textSize="@dimen/image_button_text_size_less" />
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/reps_next_button"
-                style="?android:attr/borderlessButtonStyle"
+                style="@style/ShapeAppearance.MyApp.SmallComponent"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/bg_selector"
+
                 android:contentDescription="@string/label_rep"
                 android:gravity="center"
                 android:text="@string/label_rep"
@@ -208,12 +197,12 @@
         android:layout_gravity="center"
         android:orientation="horizontal"
         android:paddingBottom="2dp">
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/gym_confirm_next_set_button"
-                style="?android:attr/borderlessButtonStyle"
+                style="@style/ShapeAppearance.MyApp.SmallComponent"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:background="@drawable/bg_selector"
+
                 android:contentDescription="@string/label_next"
                 android:gravity="center"
                 android:text="@string/action_continue"
@@ -226,12 +215,12 @@
         android:layout_height="@dimen/recycler_row_height"
         android:layout_gravity="center"
         android:orientation="horizontal">
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/gym_confirm_start_confirm_button"
-                style="?android:attr/borderlessButtonStyle"
+                style="@style/ShapeAppearance.MyApp.SmallComponent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/bg_selector"
+
                 android:contentDescription="@string/buttonCD"
                 android:drawableTop="@drawable/ic_checkered_flag_white"
                 android:gravity="center"

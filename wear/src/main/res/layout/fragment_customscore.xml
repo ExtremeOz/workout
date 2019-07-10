@@ -9,7 +9,7 @@
         android:id="@+id/score_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/recycler_simple_row_height"
-        android:background="@color/colorAccentDark"
+        android:background="@color/my_app_primary_variant_color"
         android:paddingTop="@dimen/title_center_padding"
         android:text="@string/label_rep"
         android:textAlignment="center"

@@ -1219,7 +1219,7 @@ public class DataManager implements GoogleApiClient.ConnectionCallbacks, GoogleA
         for (DataPoint dp : dataSet.getDataPoints()) {
             // Populate db cache with data
             for(Field field : dp.getDataType().getFields()) {
-                if(field.getName().equals("activity") && dp.getDataType().getName().equals("com.google.activity.segment")) {
+                if (field.getName().equals("activity") && dp.getDataType().getName().equals("com.google.activity.segment")) {
                     //Log.i(TAG, dp.getOriginalDataSource().getAppPackageName());
                   //  dp.getVersionCode();
                     long startTime = dp.getStartTime(TimeUnit.MILLISECONDS);

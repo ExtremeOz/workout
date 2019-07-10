@@ -13,7 +13,13 @@ buildscript {
         // in the individual module build.gradle files
     }
 }
-
+ext {
+    roomVersion = '2.1.0'
+    lifecycle_version = "2.0.0"
+    lifecycleVersion = '2.2.0-alpha02'
+    lifecycleExtensionsVersion = '2.2.0-alpha02'
+    savedStateVersion = '1.0.0-alpha01'
+}
 allprojects {
     repositories {
         google()

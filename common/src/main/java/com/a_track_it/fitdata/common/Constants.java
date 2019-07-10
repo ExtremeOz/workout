@@ -46,7 +46,8 @@ public class Constants {
     public static final int NOTIFICATION_ID = 11345688;
     public static final String OUTPUT_PATH = "images";
     public static final String KEY_IMAGE_URI = "KEY_IMAGE_URI";
-
+    public static final String KEY_FIT_USER = "KEY_FIT_USER";
+    public static final String KEY_FIT_ACTION = "KEY_FIT_ACTION";
     public static final String KEY_COMM_TYPE = "communicationType";
     public static final String KEY_PAYLOAD = "payload";
 

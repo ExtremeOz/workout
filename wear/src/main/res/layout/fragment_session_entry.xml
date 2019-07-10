@@ -18,16 +18,14 @@
             style="?android:attr/buttonBarStyle"
             android:layout_marginRight="@dimen/entry_card_spacing"
             android:orientation="horizontal">
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/session_activity_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/button_icon_padding"
-                android:background="@drawable/bg_selector"
                 android:gravity="center"
-                style="?android:attr/buttonBarButtonStyle"
+                style="@style/ShapeAppearance.MyApp.SmallComponent"
                 android:contentDescription="@string/default_select"
-                android:textColor="@color/semiWhite"
                 android:drawableBottom="@drawable/ic_run_white"
                 android:drawablePadding="@dimen/button_icon_padding"
                 android:textSize="@dimen/recycler_row_text_size"
@@ -37,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_margin="@dimen/button_icon_padding"
             style="?android:attr/buttonBarStyle"
-            android:background="@drawable/bg_color_green_dark"
+            android:background="@color/my_app_secondary_color"
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/session_icon"
@@ -46,41 +44,36 @@
                 android:contentDescription="@string/label_target_goals"
                 android:gravity="center"
                 android:layout_margin="1dp"
-                android:background="@drawable/bg_color_green_dark"
                 android:text="@string/label_target_goals"
-                android:textColor="@color/semiWhite"
                 android:textSize="@dimen/image_button_text_size"
+                android:textColor="@color/white"
                 android:textAllCaps="true"
                 android:drawableTint="@color/white"/>
             <LinearLayout android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/session_goal_1_button"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:background="@drawable/bg_selector"
                 android:layout_height="@dimen/recycler_simple_session_height"
                 android:layout_margin="@dimen/button_icon_padding"
                 android:gravity="center"
-                style="?android:attr/buttonBarButtonStyle"
+                style="@style/ShapeAppearance.MyApp.SmallComponent"
                 android:layout_marginEnd="1dp"
                 android:contentDescription="@string/label_target_time"
-                android:textColor="@color/semiWhite"
                 android:textSize="@dimen/image_button_text_size"
                 android:text="@string/label_target_time"/>
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/session_goal_2_button"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:background="@drawable/bg_selector"
                 android:layout_height="@dimen/recycler_simple_session_height"
                 android:layout_margin="@dimen/button_icon_padding"
                 android:gravity="center"
-                style="?android:attr/buttonBarButtonStyle"
+                style="@style/ShapeAppearance.MyApp.SmallComponent"
                 android:layout_marginStart="1dp"
                 android:contentDescription="@string/label_target_steps"
-                android:textColor="@color/semiWhite"
                 android:textSize="@dimen/image_button_text_size"
                 android:text="@string/label_target_steps"/>
             </LinearLayout>
@@ -97,10 +90,11 @@
                 android:id="@+id/entry_message1"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="@dimen/recycler_row_height"
+                android:layout_height="@dimen/recycler_title_height"
                 android:gravity="center"
                 android:text="@string/app_name"
                 android:textAlignment="center"
+                style="@style/ShapeAppearance.MyApp.SmallComponent"
                 tools:text="@string/app_name"
                 android:textColor="@color/white"
                 android:layout_margin="1dp"
@@ -110,7 +104,8 @@
                 android:id="@+id/entry_message2"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="@dimen/recycler_row_height"
+                android:layout_height="@dimen/recycler_title_height"
+                style="@style/ShapeAppearance.MyApp.SmallComponent"
                 android:gravity="center"
                 tools:text="@string/app_name"
                 android:textAlignment="center"
@@ -126,19 +121,17 @@
         android:layout_gravity="center"
         style="?android:attr/buttonBarStyle"
         android:orientation="horizontal">
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/session_start_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:layout_margin="@dimen/button_icon_padding"
-            android:background="@drawable/bg_selector"
-            style="?android:attr/buttonBarButtonStyle"
+            style="@style/ShapeAppearance.MyApp.SmallComponent"
             android:contentDescription="@string/session_start"
             android:drawableTop="@drawable/ic_forward_white"
             android:drawablePadding="@dimen/button_icon_padding"
             android:textSize="@dimen/recycler_row_text_size"
-            android:textColor="@color/white"
             android:text="@string/session_start"/>
     </LinearLayout>
 </LinearLayout>
