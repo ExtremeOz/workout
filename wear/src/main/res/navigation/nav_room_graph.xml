@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_room_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.a_track_it.fitdata.fragment.RoomFragment"
+        android:label="home_layout">
+        <action
+            android:id="@+id/action_homeRoomFragment_to_entryRoomFragment"
+            app:destination="@id/entryRoomFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_homeRoomFragment_to_customActivityListDialog"
+            app:destination="@id/customActivityListDialog"
+            app:enterAnim="@anim/jump_in"
+            app:exitAnim="@anim/jump_out"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/homeFragment" />
+        <action
+            android:id="@+id/action_homeRoomFragment_to_settingsDialog"
+            app:destination="@id/settingsDialog"
+            app:enterAnim="@anim/jump_in"
+            app:exitAnim="@anim/jump_out"
+            app:popUpTo="@id/homeFragment" />
+        <action
+            android:id="@+id/action_homeRoomFragment_to_customConfirmDialogPauseStart"
+            app:destination="@id/customConfirmDialog"
+            app:enterAnim="@anim/nav_default_pop_enter_anim"
+            app:exitAnim="@anim/nav_default_pop_exit_anim"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/homeFragment" />
+        <action
+            android:id="@+id/action_homeRoomFragment_to_customListFragment"
+            app:destination="@id/customListFragment"
+            app:enterAnim="@anim/nav_default_pop_enter_anim"
+            app:exitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/homeFragment" />
+        <action
+            android:id="@+id/action_homeRoomFragment_to_gymConfirmFragment"
+            app:destination="@id/gymConfirmFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/entryRoomFragment"
+        android:name="com.a_track_it.fitdata.fragment.EntryRoomFragment"
+        android:label="gym_entry"
+        tools:layout="@layout/fragment_entry" />
+    <dialog
+        android:id="@+id/customActivityListDialog"
+        android:name="com.a_track_it.fitdata.fragment.CustomActivityListDialog"
+        android:label="fragment_customactivitylist"
+        tools:layout="@layout/fragment_customactivitylist" />
+    <dialog
+        android:id="@+id/settingsDialog"
+        android:name="com.a_track_it.fitdata.fragment.SettingsDialog"
+        android:label="dialog_settings"
+        tools:layout="@layout/dialog_settings" />
+    <dialog
+        android:id="@+id/customConfirmDialog"
+        android:name="com.a_track_it.fitdata.fragment.CustomConfirmDialog"
+        android:label="customconfirmdialog"
+        tools:layout="@layout/continueconfirmdialog" />
+    <dialog
+        android:id="@+id/customListFragment"
+        android:name="com.a_track_it.fitdata.fragment.CustomListFragment"
+        android:label="dialog_customlist"
+        tools:layout="@layout/dialog_customlist" />
+    <fragment
+        android:id="@+id/gymConfirmFragment"
+        android:name="com.a_track_it.fitdata.fragment.GymConfirmFragment"
+        android:label="gym_confirm"
+        tools:layout="@layout/fragment_gymconfirm" />
+</navigation>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Color-->
+    <color name="primaryColor">#28732B</color>
+    <color name="primaryLightColor">#64dd17</color>
+    <color name="primaryDarkColor">#005005</color>
+    <color name="secondaryColor">#1565c0</color>
+    <color name="secondaryLightColor">#5e92f3</color>
+    <color name="secondaryDarkColor">#003c8f</color>
+    <color name="primaryTextColor">#E1F2F2F2</color>
+    <color name="secondaryTextColor">#FFCA28</color>
+
+    <color name="firebase_yellow">#FFCA28</color>
+    <color name="firebase_amber">#FFA000</color>
+    <color name="firebase_orange">#F57C00</color>
+    <color name="firebase_blue">#039BE5</color>
+    <color name="firebase_navy">#2C384A</color>
+    <color name="firebase_coral">#FF8A65</color>
+    <color name="firebase_grey">#ECEFF1</color>
+
+    <color name="white">#FAFAFA</color>
+    <color name="white_pressed">#F1F1F1</color>
+
+    <color name="running_graph">#AADE5F8A</color>
+    <color name="biking_graph">#AA76C4C7</color>
+    <color name="walking_graph">#AAFFA55B</color>
+    <color name="lifting_graph">#c2cc0a</color>
+    <color name="archery_graph">#257a84</color>
+    <color name="other_graph">#7b3ab7</color>
+
+    <color name="steps">#7AC57F</color>
+    <color name="calendar">#77B3D4</color>
+    <color name="driving">#B57DD2</color>
+    <color name="running">#DE5F8A</color>
+    <color name="archery">#269ca9</color>
+    <color name="walking">#FFA55B</color>
+    <color name="golfing">#56AB75</color>
+    <color name="lifting">#FFCA28</color>
+    <color name="other">#823ec1</color>
+
+    <color name="running_pressed">#BF5278</color>
+    <color name="archery_pressed">#33d0d9</color>
+    <color name="walking_pressed">#EB984E</color>
+    <color name="lifting_pressed">#e4f011</color>
+    <color name="other_pressed">#5a2b86</color>
+
+    <color name="a_bright_pink">#FF007F</color>
+    <color name="a_red">#BF360C</color>
+    <color name="a_orange">#FF7F00</color>
+    <color name="a_yellow">#FFCA28</color>
+    <color name="a_chartreuse">#7FFF00</color>
+    <color name="a_green">#00FF00</color>
+    <color name="a_spring_green">#00FF7F</color>
+    <color name="a_cyan">#00FFFF</color>
+    <color name="a_azure">#007FFF</color>
+    <color name="a_blue">#0000FF</color>
+    <color name="a_violet">#7F00FF</color>
+    <color name="a_magenta">#FF00FF</color>
+
+    <array name="rainbow">
+        <item>@color/a_green</item>
+        <item>@color/a_azure</item>
+        <item>@color/a_orange</item>
+        <item>@color/a_yellow</item>
+        <item>@color/a_violet</item>
+        <item>@color/running_graph</item>
+        <item>@color/a_chartreuse</item>
+        <item>@color/a_cyan</item>
+        <item>@color/a_red</item>
+        <item>@color/a_blue</item>
+        <item>@color/a_spring_green</item>
+        <item>@color/a_magenta</item>
+        <item>@color/running_graph</item>
+        <item>@color/biking_graph</item>
+        <item>@color/walking_graph</item>
+        <item>@color/lifting_graph</item>
+        <item>@color/archery_graph</item>
+        <item>@color/other_graph</item>
+        <item>@color/steps</item>
+        <item>@color/calendar</item>
+        <item>@color/driving</item>
+        <item>@color/running</item>
+        <item>@color/archery</item>
+        <item>@color/walking</item>
+        <item>@color/golfing</item>
+        <item>@color/lifting</item>
+        <item>@color/other</item>
+    </array>
+
+    <color name="power_factor_1">#FFE0B2</color>
+    <color name="power_factor_2">#FFCC80</color>
+    <color name="power_factor_3">#FFB74D</color>
+    <color name="power_factor_4">#FFA726</color>
+    <color name="power_factor_5">#FF9800</color>
+    <color name="power_factor_6">#FB8C00</color>
+    <color name="power_factor_7">#F57C00</color>
+    <color name="power_factor_8">#EF6C00</color>
+    <color name="power_factor_9">#E65100</color>
+    <color name="power_factor_10">#BF360C</color>
+
+</resources>

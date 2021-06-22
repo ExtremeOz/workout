@@ -2,25 +2,21 @@ package com.a_track_it.fitdata.database;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.ResultReceiver;
 import android.util.Log;
 
-import com.a_track_it.fitdata.activity.MainActivity;
 import com.a_track_it.fitdata.common.Constants;
-import com.a_track_it.fitdata.common.model.Utilities;
-import com.a_track_it.fitdata.common.model.Workout;
+import com.a_track_it.fitdata.common.data_model.FitSyncJobIntentService;
 import com.a_track_it.fitdata.service.ReadCacheIntentService;
 import com.a_track_it.fitdata.service.SummaryCacheIntentService;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
-import nl.qbusict.cupboard.QueryResultIterable;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
-import static nl.qbusict.cupboard.CupboardFactory.cupboard;
+import static com.a_track_it.fitdata.common.Constants.KEY_FIT_DEVICE_ID;
+import static com.a_track_it.fitdata.common.Constants.KEY_FIT_USER;
 
-/**
- * Created by Chris Black
- */
 public class CacheManager {
 
     public static final String TAG = "CacheManager";
@@ -28,45 +24,98 @@ public class CacheManager {
     public CacheManager() {
     }
 
-    public static void getReport(Utilities.TimeFrame timeFrame, ResultReceiver callback, Context context) {
-        if (context != null) {
-            Intent intentService = new Intent(context.getApplicationContext(), ReadCacheIntentService.class);
-            intentService.putExtra("TimeFrame", timeFrame);
-            intentService.putExtra(MainActivity.RECEIVER_TAG, callback);
-            context.startService(intentService);
+    public static void getReport(int reportType, int activityID, ResultReceiver callback,
+                                 Context context, String sUserId, String sDeviceID, long startTime, long endTime) {
+        if (context == null){
+            Log.w(CacheManager.class.getSimpleName(), "null context leaving ");
+            return;
         }
-    }
-
-    public static void getSummary(int workoutType, ResultReceiver callback, Context context) {
-        if (context != null) {
-            Intent intentService = new Intent(context.getApplicationContext(), SummaryCacheIntentService.class);
-            intentService.putExtra("WorkoutType", workoutType);
-            intentService.putExtra(MainActivity.RECEIVER_TAG, callback);
-            context.startService(intentService);
-        }
-    }
-
-    public static boolean checkConflict(Context context, Workout inWorkout) {
-        boolean overlap = false;
-        if (context != null) {
-            final CupboardSQLiteOpenHelper dbHelper = new CupboardSQLiteOpenHelper(context);
-            final SQLiteDatabase mDb = dbHelper.getReadableDatabase();
-            long rangeStart = inWorkout.start - 1000 * 60 * 60 * 24;
-            long rangeEnd = inWorkout.start + inWorkout.duration;
-            QueryResultIterable<Workout> itr = cupboard().withDatabase(mDb).query(Workout.class).withSelection("start BETWEEN ? AND ?", "" + rangeStart, "" + rangeEnd).query();
-            for (Workout workout : itr) {
-                Log.d(TAG, workout.toString());
-                if ((workout.activityID != Constants.WORKOUT_TYPE_STILL) && (workout.activityID != Constants.WORKOUT_TYPE_UNKNOWN) && workout.overlaps(inWorkout)) {
-                    overlap = true;
+    //    if (context != null) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_24Full, Locale.getDefault());
+            Log.w(TAG, "getReport " + reportType + " Range Start: " + dateFormat.format(startTime));
+            Log.w(TAG, "Range End: " + dateFormat.format(endTime) + " activityID " + activityID);
+            if (reportType == -2){
+                Intent mIntent = new Intent(context.getApplicationContext(), FitSyncJobIntentService.class);
+                mIntent.putExtra(Constants.KEY_FIT_ACTION, Constants.TASK_ACTION_READ_HISTORY);
+                mIntent.putExtra(Constants.MAP_START, startTime);
+                mIntent.putExtra(Constants.MAP_END, endTime);
+                mIntent.putExtra(Constants.KEY_RESULT, callback);
+                mIntent.putExtra(Constants.KEY_FIT_VALUE, 1440);  // minutes in a day
+                mIntent.putExtra(KEY_FIT_USER, sUserId);
+                mIntent.putExtra(KEY_FIT_DEVICE_ID, sDeviceID);
+                try{
+                    FitSyncJobIntentService.enqueueWork(context.getApplicationContext(), mIntent);
+                }catch (Exception e){
+                    FirebaseCrashlytics.getInstance().recordException(e);
                 }
             }
-            itr.close();
-            dbHelper.close();
+            if (reportType == -1){
+                Intent mIntent = new Intent(context.getApplicationContext(), FitSyncJobIntentService.class);
+                mIntent.putExtra(Constants.KEY_FIT_ACTION, Constants.TASK_ACTION_READ_SESSION);
+                mIntent.putExtra(Constants.MAP_START, startTime);
+                mIntent.putExtra(Constants.MAP_END, endTime);
+                mIntent.putExtra(Constants.KEY_RESULT, callback);
+                mIntent.putExtra(Constants.KEY_FIT_VALUE, 1440);  // minutes in a day
+                mIntent.putExtra(KEY_FIT_USER, sUserId);
+                mIntent.putExtra(KEY_FIT_DEVICE_ID, sDeviceID);
+                try{
+                    FitSyncJobIntentService.enqueueWork(context.getApplicationContext(), mIntent);
+                }catch (Exception e){
+                    FirebaseCrashlytics.getInstance().recordException(e);
+                }
+            }else {  // 0 per activity by week - 1 summary type
+                Intent intentService = new Intent(context.getApplicationContext(), ReadCacheIntentService.class);
+                intentService.putExtra(Constants.MAP_DATA_TYPE, activityID);
+                intentService.putExtra(Constants.KEY_FIT_REC, callback);
+                intentService.putExtra(Constants.KEY_FIT_USER, sUserId);
+                intentService.putExtra(Constants.KEY_FIT_DEVICE_ID, sDeviceID);
+                intentService.putExtra(Constants.KEY_FIT_TYPE, reportType);
+                intentService.putExtra(Constants.MAP_START, startTime);
+                intentService.putExtra(Constants.MAP_END, endTime);
+                try {
+                    context.startService(intentService);
+                } catch (Exception e) {
+                    Log.e(CacheManager.TAG, "Error starting ReadCacheIntentService " + e.getMessage());
+                }
+            }
+      //  }
+    }
+    public static void getDetails(int reportType, long workoutID, ResultReceiver callback, Context context, String sUserId, String sDeviceID) {
+        if (context != null) {
+            Intent intentService = new Intent(context.getApplicationContext(), ReadCacheIntentService.class);
+            intentService.putExtra(Constants.KEY_FIT_TYPE, reportType);
+            intentService.putExtra(Constants.KEY_FIT_WORKOUTID, workoutID);
+            intentService.putExtra(Constants.KEY_FIT_REC, callback);
+            intentService.putExtra(Constants.KEY_FIT_USER, sUserId);
+            intentService.putExtra(Constants.KEY_FIT_DEVICE_ID, sDeviceID);
+            try{
+                context.startService(intentService);
+            }catch (Exception e){
+                Log.e(CacheManager.TAG, "Error starting ReadCacheIntentService " + e.getMessage());
+            }
         }
-        return overlap;
+    }
+    public static void getSummary(int indexTimeFrame, long activityID,  ResultReceiver callback, Context context, String sUserId, int indexGrouping,
+                                  int indexMetrics, int indexUOY, int indexFilter) {
+        if (context != null) {
+            if ((sUserId!=null) && (sUserId.length() > 0)) {
+                Log.e(CacheManager.TAG, "getSummary " + activityID + " timeframe idx " + indexTimeFrame + " indxGrp " + indexGrouping + " indxMetric "+ indexMetrics);
+                Intent intentService = new Intent(context.getApplicationContext(), SummaryCacheIntentService.class);
+                intentService.putExtra(Constants.MAP_DATA_TYPE, activityID);
+                intentService.putExtra(Constants.KEY_FIT_REC, callback);
+                intentService.putExtra(Constants.KEY_FIT_USER, sUserId);
+                intentService.putExtra(Constants.KEY_INDEX_GROUP, indexGrouping);
+                intentService.putExtra(Constants.KEY_INDEX_METRIC, indexMetrics);
+                intentService.putExtra(Constants.KEY_INDEX_UOY, indexUOY);
+                intentService.putExtra(Constants.KEY_INDEX_FILTER, indexFilter);
+                intentService.putExtra(Constants.KEY_FIT_TYPE, indexTimeFrame);
+                try {
+                    context.startService(intentService);
+                }catch (Exception e){
+                    Log.e(CacheManager.TAG, "Error SummaryCacheIntentService " + e.getMessage());
+                }
+            }
+        }
     }
 
-    public interface ICacheManager {
-        Cursor getCursor();
-    }
 }

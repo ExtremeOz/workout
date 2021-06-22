@@ -1,0 +1,1015 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    tools:context=".fragment.SettingsDialog"
+    android:background="@color/primaryDarkColor"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container">
+<androidx.appcompat.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:elevation="4dp"
+    android:fitsSystemWindows="true"
+    style="@style/ToolbarAppearance"
+    android:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_below="@+id/toolbar"  >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout_settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/logo_card"
+                app:cardBackgroundColor="?attr/colorSurface"
+                app:strokeColor="@color/primaryLightColor"
+                app:strokeWidth="@dimen/score_icon_padding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/settings_logoRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:strokeColor="@color/primaryLightColor"
+                app:strokeWidth="@dimen/score_icon_padding"
+                android:layout_marginBottom="@dimen/big_padding"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/permissions_card"
+                app:cardBackgroundColor="?attr/colorSurface"
+                app:strokeColor="@color/primaryLightColor"
+                app:strokeWidth="@dimen/score_icon_padding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/logo_card">
+                <LinearLayout android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/settings_permissions_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:iconSize="@dimen/home_button_icon_size"
+                        android:layout_marginTop="@dimen/small_padding"
+                        android:text="@string/label_settings_permissions_label"
+                        android:textAppearance="?attr/textAppearanceSubtitle2"
+                        android:textSize="@dimen/entry_button_text_size"
+                        android:drawablePadding="@dimen/small_padding"
+                        app:drawableLeftCompat="@drawable/fit_icon_item" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/settings_read_permissions"
+                        style="@style/Widget.MyApp.MyToggleButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:checkable="true"
+                        android:checked="true"
+                        android:text="@string/label_settings_read_permissions_label" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/settings_sensors_permissions"
+                        style="@style/Widget.MyApp.MyToggleButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:checkable="true"
+                        android:checked="true"
+                        android:text="@string/label_settings_sensor_permissions_label" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/settings_sensors_use"
+                        style="@style/Widget.MyApp.MyToggleButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:checkable="true"
+                        android:checked="true"
+                        android:text="@string/label_settings_sensor_use_label" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/settings_location_permissions"
+                        style="@style/Widget.MyApp.MyToggleButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:checkable="true"
+                        android:checked="true"
+                        android:text="@string/label_settings_location_permissions_label" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/settings_location_use"
+                        style="@style/Widget.MyApp.MyToggleButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:checkable="true"
+                        android:checked="true"
+                        android:text="@string/label_settings_location_use_label" />
+                    <TextView
+                        android:id="@+id/settings_daily_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:drawableLeftCompat="@drawable/ic_cloud_sync_white"
+                        android:drawablePadding="@dimen/small_padding"
+                        android:gravity="center"
+                        android:text="@string/label_settings_daily_interval"
+                        android:textAppearance="?attr/textAppearanceSubtitle2"
+                        android:textColor="@color/secondaryTextColor"
+                        android:textSize="@dimen/home_title_text_size4" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnSettingsDailyPlus"
+                            style="@style/Widget.MyApp.MyOutlinedButton"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            app:icon="@drawable/ic_plus_symbol"
+                            app:iconPadding="0dp" />
+
+                        <TextView
+                            android:id="@+id/btnSettingsDaily"
+                            style="@style/Widget.MyApp.MySettingsText"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_number_3"
+                            android:padding="@dimen/small_padding"
+                            android:textColor="@color/primaryTextColor" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnSettingsDailyMinus"
+                            style="@style/Widget.MyApp.MyOutlinedButton"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            app:icon="@drawable/ic_minus_symbol"
+                            app:iconPadding="0dp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/profile_card"
+                app:cardBackgroundColor="?attr/colorSurface"
+                app:strokeColor="@color/primaryLightColor"
+                app:strokeWidth="@dimen/score_icon_padding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/permissions_card">
+                <LinearLayout android:id="@+id/personal_card"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+                <TextView
+                    android:id="@+id/settings_user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/live_image_view_padding"
+                    android:gravity="center_horizontal"
+                    android:text="@string/label_settings_user_name"
+                    android:textAppearance="?attr/textAppearanceSubtitle1"
+                    android:textColor="@color/primaryTextColor" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/settings_sign_out_button"
+                    style="@style/Widget.MyApp.MyIconButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/nav_sign_out"
+                    android:textSize="@dimen/entry_button_text_size"
+                    app:icon="@drawable/ic_outline_exit_to_app_white"
+                    app:iconSize="@dimen/entry_button_icon_size" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/settings_age_button"
+                    style="@style/Widget.MyApp.MyIconButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/small_padding"
+                    android:layout_marginEnd="@dimen/small_padding"
+                    android:text="@string/label_settings_age"
+                    android:textSize="@dimen/entry_button_text_size"
+                    app:icon="@drawable/ic_adult"
+                    app:iconSize="@dimen/entry_button_icon_size" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/settings_height_button"
+                    style="@style/Widget.MyApp.MyIconButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/small_padding"
+                    android:layout_marginEnd="@dimen/small_padding"
+                    android:text="@string/label_settings_height"
+                    android:textSize="@dimen/entry_button_text_size"
+                    app:icon="@drawable/ic_height"
+                    app:iconSize="@dimen/entry_button_icon_size"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cloud_card"
+                app:cardBackgroundColor="?attr/colorSurface"
+                app:strokeColor="@color/primaryLightColor"
+                app:strokeWidth="@dimen/score_icon_padding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_card">
+                <LinearLayout android:id="@+id/personal2_card"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+                <TextView
+                    android:id="@+id/settings_history_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/big_padding"
+                    android:gravity="center_horizontal"
+                    android:text="@string/label_google_sets_history"
+                    android:textAppearance="?attr/textAppearanceSubtitle2"
+                    android:textColor="?attr/colorOnPrimary"
+                    android:textSize="@dimen/entry_button_text_size"
+                    app:drawableLeftCompat="@drawable/fit_icon_item"
+                    android:drawablePadding="@dimen/small_padding"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/settings_height_button" />
+                <TextView
+                    android:id="@+id/settings_history_start_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/live_image_view_padding"
+                    android:gravity="center_horizontal"
+                    android:text="@string/label_settings_history_start"
+                    android:textAppearance="?attr/textAppearanceSubtitle1"
+                    android:textColor="?attr/colorOnSecondary" />
+                <TextView
+                    android:id="@+id/settings_history_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/live_image_view_padding"
+                    android:gravity="center_horizontal"
+                    android:text="@string/label_settings_history_not_loaded"
+                    android:textAppearance="?attr/textAppearanceSubtitle1"
+                    android:textColor="?attr/colorPrimaryVariant"
+                    android:textSize="@dimen/entry_button_text_size"/>
+                <TextView
+                    android:id="@+id/settings_history_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/live_image_view_padding"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?attr/textAppearanceSubtitle1"
+                    android:textColor="@color/secondaryTextColor"
+                    android:textSize="@dimen/entry_button_text_size"/>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/settings_load_history_button"
+                    style="@style/Widget.MyApp.MyIconButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/small_padding"
+                    android:layout_marginEnd="@dimen/small_padding"
+                    android:text="@string/label_settings_history_set_start"
+                    android:textSize="@dimen/entry_button_text_size"
+                    app:icon="@drawable/ic_calendar"
+                    app:iconSize="@dimen/entry_button_icon_size"/>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/settings_load_goals_button"
+                        style="@style/Widget.MyApp.MyIconButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/small_padding"
+                        android:layout_marginEnd="@dimen/small_padding"
+                        android:text="@string/label_load_goals"
+                        android:textSize="@dimen/entry_button_text_size"
+                        app:icon="@drawable/ic_refresh_white"
+                        app:iconSize="@dimen/entry_button_icon_size"/>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/settings_show_goals_toggle"
+                        style="@style/Widget.MyApp.MyToggleButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:enabled="true"
+                        android:checkable="true"
+                        android:checked="false"
+                        android:text="@string/label_settings_show_goals"
+                        />
+                    <TextView
+                        android:id="@+id/cloud_sync_interval_label"
+                        style="@style/Widget.MyApp.MySettingsText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        app:drawableLeftCompat="@drawable/ic_cloud_sync_white"
+                        android:drawablePadding="@dimen/small_padding"
+                        app:drawableTint="@color/primaryTextColor"
+                        android:text="@string/label_settings_cloud_sync_interval" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnCloudSampleRatePlus"
+                            style="@style/Widget.MyApp.MyOutlinedButton"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            app:icon="@drawable/ic_plus_symbol"
+                            app:iconPadding="0dp"/>
+                        <TextView
+                            android:id="@+id/btnCloudSampleRate"
+                            style="@style/Widget.MyApp.MySettingsText"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_number_3"
+                            android:textColor="@color/primaryTextColor"
+                            android:padding="@dimen/small_padding"/>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnCloudSampleRateMinus"
+                            style="@style/Widget.MyApp.MyOutlinedButton"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            app:icon="@drawable/ic_minus_symbol"
+                            app:iconPadding="0dp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/online_card"
+                app:cardBackgroundColor="?attr/colorSurface"
+                app:strokeColor="@color/primaryLightColor"
+                app:strokeWidth="@dimen/score_icon_padding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cloud_card">
+                <LinearLayout android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal">
+                    <TextView
+                        android:id="@+id/settings_devices_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/big_padding"
+                        android:gravity="center_horizontal"
+                        android:text="@string/action_label_device"
+                        android:textAppearance="?attr/textAppearanceSubtitle2"
+                        android:textColor="?attr/colorOnPrimary"
+                        android:textSize="@dimen/entry_button_text_size"
+                        android:drawablePadding="@dimen/small_padding"
+                        app:drawableLeftCompat="@drawable/wear_icon_item"  />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/settings_has_device_toggle"
+                        style="@style/Widget.MyApp.MyToggleButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:checkable="true"
+                        android:checked="true"
+                        android:text="@string/has_device_text" />
+                    <TextView
+                        android:id="@+id/settings_phone_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/big_padding"
+                        style="@style/Widget.MyApp.MySettingsText"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/label_settings_phone_label"
+                        android:textAppearance="?attr/textAppearanceSubtitle2"
+                        android:textColor="?attr/colorOnSecondary"
+                        android:textSize="@dimen/entry_button_text_size"
+                        />
+
+                    <TextView
+                        android:id="@+id/settings_phone_name"
+                        style="@style/Widget.MyApp.MySettingsText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_padding"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/label_settings_phone_name"
+                        android:textAppearance="?attr/textAppearanceSubtitle2"
+                        android:textColor="@color/primaryTextColor" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/settings_find_phone_button"
+                        style="@style/Widget.MyApp.MyIconButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/action_find_phone"
+                        android:textSize="@dimen/entry_button_text_size"
+                        android:layout_marginTop="@dimen/live_image_view_padding"
+                        app:icon="@drawable/ic_refresh_white"
+                        app:iconSize="@dimen/entry_button_icon_size" />
+                    <TextView
+                        android:id="@+id/settings_device_int_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:drawableLeftCompat="@drawable/ic_watch_white"
+                        android:drawablePadding="@dimen/small_padding"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/label_settings_device_interval"
+                        android:textAppearance="?attr/textAppearanceSubtitle2"
+                        android:textColor="@color/secondaryTextColor"
+                        android:textSize="@dimen/home_title_text_size2" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnSettingsDeviceIntPlus"
+                            style="@style/Widget.MyApp.MyOutlinedButton"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            app:icon="@drawable/ic_plus_symbol"
+                            app:iconPadding="0dp" />
+
+                        <TextView
+                            android:id="@+id/btnSettingsDeviceInt"
+                            style="@style/Widget.MyApp.MySettingsText"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_number_5"
+                            android:padding="@dimen/small_padding"
+                            android:textColor="@color/primaryTextColor" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnSettingsDeviceIntMinus"
+                            style="@style/Widget.MyApp.MyOutlinedButton"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            app:icon="@drawable/ic_minus_symbol"
+                            app:iconPadding="0dp" />
+                    </LinearLayout>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/settings_send_info"
+                        style="@style/Widget.MyApp.MyIconButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Send Settings"
+                        android:textSize="@dimen/entry_button_text_size"
+                        android:layout_marginTop="@dimen/live_image_view_padding"
+                        app:icon="@drawable/ic_phone_receive_white"
+                        app:iconSize="@dimen/entry_button_icon_size"  />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/settings_get_info"
+                        style="@style/Widget.MyApp.MyIconButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Get Settings"
+                        android:textSize="@dimen/entry_button_text_size"
+                        android:layout_marginTop="@dimen/live_image_view_padding"
+                        app:icon="@drawable/ic_phone_send_white"
+                        app:iconSize="@dimen/entry_button_icon_size" />
+
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/settings_notifications_button"
+                        style="@style/Widget.MyApp.MyIconButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/live_image_view_padding"
+                        android:text="@string/label_settings_notifications"
+                        android:textSize="@dimen/entry_button_text_size"
+                        app:icon="@drawable/ic_settings_white"
+                        app:iconSize="@dimen/entry_button_icon_size"/>
+
+<!--                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/settings_button_firebase"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/live_image_view_padding"
+                        style="@style/Widget.MyApp.MyOutlinedButton"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/label_settings_firebase"
+                        android:textAppearance="?attr/textAppearanceSubtitle2"
+                        android:textSize="@dimen/entry_button_text_size"
+                        app:icon="@drawable/firebase_logomark"
+                        app:iconTint="@color/firebase_amber" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/settings_firebase_toggle"
+                        style="@style/Widget.MyApp.MyToggleButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:checkable="true"
+                        android:checked="true"
+                        android:text="@string/label_settings_firebase_online"
+                        app:icon="@drawable/firebase_logomark"
+                        app:iconSize="@dimen/home_button_icon_size"
+                        app:iconGravity="textEnd" />-->
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/workout_card"
+                app:cardBackgroundColor="?attr/colorSurface"
+                app:strokeColor="@color/primaryLightColor"
+                app:strokeWidth="@dimen/score_icon_padding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/online_card">
+                <LinearLayout android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/settings_label_settings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/big_padding"
+                    android:gravity="center_horizontal"
+                    android:text="@string/label_settings_defaults"
+                    app:drawableLeftCompat="@drawable/ic_a_outlined"
+                    android:drawablePadding="@dimen/small_padding"
+                    android:textAppearance="?attr/textAppearanceSubtitle2"
+                    android:textColor="?attr/colorOnPrimary"
+                    android:textSize="@dimen/entry_button_text_size" />
+                <TextView
+                    android:id="@+id/default_new_sets"
+                    style="@style/Widget.MyApp.MySettingsText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_padding"
+                    android:text="@string/label_settings_default_sets" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:orientation="horizontal">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSettingsSetsPlus"
+                    style="@style/Widget.MyApp.MyOutlinedButton"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    app:icon="@drawable/ic_plus_symbol"
+                    app:iconPadding="0dp" />
+                <TextView
+                    android:id="@+id/btnSettingsSets"
+                    style="@style/Widget.MyApp.MySettingsText"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/label_number_3"
+                    android:textColor="@color/primaryTextColor"
+                    android:padding="@dimen/small_padding" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSettingsSetsMinus"
+                    style="@style/Widget.MyApp.MyOutlinedButton"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    app:icon="@drawable/ic_minus_symbol"
+                    app:iconPadding="0dp" />
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/default_new_reps"
+                    style="@style/Widget.MyApp.MySettingsText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_padding"
+                    android:text="@string/label_settings_default_reps" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:orientation="horizontal">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSettingsRepsPlus"
+                    style="@style/Widget.MyApp.MyOutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    app:icon="@drawable/ic_plus_symbol"
+                    app:iconPadding="0dp" />
+
+                <TextView
+                    android:id="@+id/btnSettingsReps"
+                    style="@style/Widget.MyApp.MySettingsText"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_number_8"
+                    android:textColor="@color/primaryTextColor"
+                    android:padding="@dimen/small_padding" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSettingsRepsMinus"
+                    style="@style/Widget.MyApp.MyOutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    app:icon="@drawable/ic_minus_symbol"
+                    app:iconPadding="0dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/labelSessions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/big_padding"
+                    android:gravity="center_horizontal"
+                    android:text="@string/label_settings_session_control"
+                    android:textAppearance="?attr/textAppearanceSubtitle2"
+                    android:textColor="?attr/colorOnSecondary"
+                    android:textSize="@dimen/home_title_text_size2"/>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/settings_use_notifications"
+                    style="@style/Widget.MyApp.MyToggleButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:checkable="true"
+                    android:checked="true"
+                    android:text="@string/confirm_use_notifications_prompt" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/settings_use_audio"
+                    style="@style/Widget.MyApp.MyToggleButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:checkable="true"
+                    android:checked="true"
+                    android:text="@string/confirm_use_audio_prompt" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/settings_use_vibrate"
+                    style="@style/Widget.MyApp.MyToggleButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:checkable="true"
+                    android:checked="true"
+                    android:text="@string/confirm_use_vibrate_prompt" />
+                <TextView
+                    android:id="@+id/default_new_confirm_duration"
+                    style="@style/Widget.MyApp.MySettingsText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_padding"
+                    android:text="@string/label_settings_default_countdown"/>
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content" android:orientation="horizontal">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnConfirmDurationPlus"
+                    style="@style/Widget.MyApp.MyOutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    app:icon="@drawable/ic_plus_symbol"
+                    app:iconPadding="0dp" />
+                <TextView
+                    android:id="@+id/btnConfirmDuration"
+                    style="@style/Widget.MyApp.MySettingsText"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_number_3"
+                    android:padding="@dimen/small_padding"
+                    android:textColor="@color/primaryTextColor" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnConfirmDurationMinus"
+                    style="@style/Widget.MyApp.MyOutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    app:icon="@drawable/ic_minus_symbol"
+                    app:iconPadding="0dp" />
+               </LinearLayout>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/settings_use_timed_rest_toggle"
+                    style="@style/Widget.MyApp.MyToggleButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:checkable="true"
+                    android:checked="true"
+                    android:text="@string/confirm_use_timed_rest_toggle_prompt" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSettingsRest"
+                    style="@style/Widget.MyApp.MyIconButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="@dimen/small_padding"
+                    android:layout_marginEnd="@dimen/small_padding"
+                    android:text="@string/label_recovery" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/settings_auto_start_toggle"
+                    style="@style/Widget.MyApp.MyToggleButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:checkable="true"
+                    android:checked="true"
+                    android:text="@string/confirm_auto_start_toggle_prompt" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/settings_start_toggle"
+                    style="@style/Widget.MyApp.MyToggleButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:checkable="true"
+                    android:checked="true"
+                    android:text="@string/confirm_start_toggle_prompt" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/settings_set_toggle"
+                    style="@style/Widget.MyApp.MyToggleButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:checkable="true"
+                    android:checked="true"
+                    android:text="@string/confirm_set_toggle_prompt" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/settings_delete_toggle"
+                    style="@style/Widget.MyApp.MyToggleButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:checkable="true"
+                    android:checked="true"
+                    android:text="@string/confirm_delete_toggle_prompt" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/settings_end_toggle"
+                    style="@style/Widget.MyApp.MyToggleButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:checkable="true"
+                    android:checked="true"
+                    android:text="@string/confirm_end_toggle_prompt" />
+                <com.google.android.material.button.MaterialButton
+                        android:id="@+id/settings_vehicle_toggle"
+                        style="@style/Widget.MyApp.MyToggleButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:checkable="true"
+                        android:checked="true"
+                        android:text="@string/confirm_vehicle_toggle_prompt" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/settings_exit_toggle"
+                    style="@style/Widget.MyApp.MyToggleButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:checkable="true"
+                    android:checked="true"
+                    android:text="@string/confirm_dismiss_toggle_prompt" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/settings_use_kg"
+                    style="@style/Widget.MyApp.MyToggleButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:checkable="true"
+                    android:checked="true"
+                    android:text="@string/label_settings_use_kg_units" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/sensors_card"
+                app:cardBackgroundColor="?attr/colorSurface"
+                app:strokeColor="@color/primaryLightColor"
+                app:strokeWidth="@dimen/score_icon_padding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                android:textAlignment="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/workout_card">
+            <LinearLayout android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/other_sample_devicelabel"
+                    android:layout_width="match_parent"
+                    style="@style/Widget.MyApp.MySettingsText"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/label_fit_sensors"
+                    android:textAppearance="?attr/textAppearanceSubtitle2"
+                    app:drawableLeftCompat="@drawable/fit_icon_item"
+                    android:drawablePadding="@dimen/small_padding"
+                    android:layout_marginTop="@dimen/small_padding"
+                    android:textSize="@dimen/home_title_text_size" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_settings_sensors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/big_padding"
+                android:text="@string/label_settings_sensors_label"
+                style="@style/Widget.MyApp.MyIconButton"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
+                android:textColor="?attr/colorOnSecondary"
+                android:textSize="@dimen/home_title_text_size" />
+            <TextView
+                android:id="@+id/steps_sample_devicelabel"
+                style="@style/Widget.MyApp.MySettingsText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/label_not_available0"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="@dimen/home_title_text_size2"/>
+
+            <TextView
+                android:id="@+id/steps_sample_rate_label"
+                style="@style/Widget.MyApp.MySettingsText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                app:drawableLeftCompat="@drawable/ic_footsteps_silhouette_variant"
+                android:drawablePadding="@dimen/small_padding"
+                app:drawableTint="@color/primaryTextColor"
+                android:text="@string/label_settings_steps_sample_rate" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnStepsSampleRatePlus"
+                style="@style/Widget.MyApp.MyOutlinedButton"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/ic_plus_symbol"
+                app:iconPadding="0dp"/>
+
+            <TextView
+                android:id="@+id/btnStepsSampleRate"
+                style="@style/Widget.MyApp.MySettingsText"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/label_number_3"
+                android:textColor="@color/primaryTextColor"
+                android:padding="@dimen/small_padding"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnStepsSampleRateMinus"
+                style="@style/Widget.MyApp.MyOutlinedButton"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/ic_minus_symbol"
+                app:iconPadding="0dp" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/bpm_sample_devicelabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MyApp.MySettingsText"
+            android:visibility="gone"
+            android:gravity="center_horizontal"
+            android:text="@string/label_not_available0"
+            android:textAppearance="?attr/textAppearanceSubtitle2"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="@dimen/home_title_text_size" />
+        <TextView
+            android:id="@+id/bpm_sample_rate_label"
+            style="@style/Widget.MyApp.MySettingsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:drawableLeftCompat="@drawable/ic_heart_solid"
+            android:drawablePadding="@dimen/small_padding"
+            android:layout_gravity="center_horizontal"
+            app:drawableTint="@color/primaryTextColor"
+            android:text="@string/label_settings_bpm_sample_rate"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBPMSampleRatePlus"
+                style="@style/Widget.MyApp.MyOutlinedButton"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/ic_plus_symbol"
+                app:iconPadding="0dp" />
+            <TextView
+                android:id="@+id/btnBPMSampleRate"
+                style="@style/Widget.MyApp.MySettingsText"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/label_number_3"
+                android:textColor="@color/primaryTextColor" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBPMSampleRateMinus"
+                style="@style/Widget.MyApp.MyOutlinedButton"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/ic_minus_symbol"
+                app:iconPadding="0dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/other_sample_rate_label"
+                style="@style/Widget.MyApp.MySettingsText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:drawablePadding="@dimen/small_padding"
+                app:drawableLeftCompat="@drawable/ic_barometer"
+                app:drawableRightCompat="@drawable/ic_temperature"
+                app:drawableTint="@color/primaryTextColor"
+                android:text="@string/label_settings_other_sample_rate" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnOtherSampleRatePlus"
+                        style="@style/Widget.MyApp.MyOutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        app:icon="@drawable/ic_plus_symbol"
+                        app:iconPadding="0dp"/>
+
+                    <TextView
+                        android:id="@+id/btnOtherSampleRate"
+                        style="@style/Widget.MyApp.MySettingsText"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_number_3"
+                        android:textColor="@color/primaryTextColor" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnOtherSampleRateMinus"
+                        style="@style/Widget.MyApp.MyOutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        app:icon="@drawable/ic_minus_symbol"
+                        app:iconPadding="0dp" />
+                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/other_device_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:strokeColor="@color/primaryLightColor"
+                    app:strokeWidth="@dimen/score_icon_padding"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</RelativeLayout>

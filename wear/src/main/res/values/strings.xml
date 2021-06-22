@@ -4,21 +4,21 @@
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
     -->
-    <string name="hello_world">Hello Square World!</string>
+    <string name="no_device">No device provides the requested capabilities</string>
+    <string name="connected_nodes">Nodes: %1$s</string>
     <string name="hint_word">Word…</string>
-    <string name="no_network_connection">No network connection</string>
+    <string name="a_track_it_url">https://a-track-it.com</string>
+    <string name="label_offline">Offline</string>
+    <string name="label_requested">Requested...</string>
+
     <string name="signing_in_google">Signing in to Google</string>
     <string name="connecting_google">Connecting to Google Fit</string>
     <string name="requesting_data">Finding information...</string>
     <string name="checking_device_permissions">Checking device permissions</string>
+    <string name="action_no_location">ATrackIt will not access your location</string>
     <string name="no_google_play">Error: No Google Play Services are available - initial setup cannot proceed</string>
     <string name="toast_no_google_accounts_registered">No google accounts are available to use this app (mandatory)</string>
-    <string name="permission_rationale">Location data is used as part of the Google Fit API</string>
-    <string name="permission_denied_explanation">Permission was denied, but is needed for core functionality</string>
     <string name="ok">OK</string>
-    <string name="sensors_location_unavailable"><b>Watch Location Sensors could not be accessed.</b>\nGrant ATrackIt access to monitor your workout location.</string>
-    <string name="sensors_location_unavailable_short"><b>Watch Location Sensors could not be accessed.</b>\nGrant ATrackIt access to monitor your workouts.</string>
-    <string name="sensors_body_unavailable"><b>Watch Body Sensors could not be accessed.</b>\nGrant ATrackIt access to monitor your workouts.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="credits_message"><![CDATA[
 Our brilliant Icons are made by Gregor Cresnar from https://www.flaticon.com/ FlatIcons and is licenced by http://creativecommons.org/licenses/by/3.0/
@@ -28,21 +28,7 @@ Visit https://www.a-track-it.com for all product and policy information and feed
 ]]>
     </string>
     <string name="select_account_for_access">Select the Google account to use with ATrackIt</string>
-    <string name="microphone_access_required">Microphone access is required to enable voice commands</string>
-    <string name="no_audio_input">Audio input is not available</string>
-    <string name="location_access_required">Location access is required to monitor your workout performance</string>
-    <string name="sensors_access_required">Sensors access is required to monitor your workout performance</string>
-    <string name="sensors_permission_not_available">Permission is not available. Requesting permission</string>
-    <string name="sensors_permission_available">Sensors permission are available</string>
-    <string name="sensors_permission_granted">Sensors permission was granted</string>
-    <string name="location_permission_granted">Location permission was granted</string>
-    <string name="recording_permission_granted">Recording audio permission was granted</string>
-    <string name="sensors_permission_denied">Sensors permission request was denied</string>
-    <string name="location_permission_denied">Location permission request was denied</string>
-    <string name="recording_permission_denied">Recording audio permission request was denied</string>
-
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_settings">Settings</string>
 
     <!-- Strings related to Settings -->
@@ -59,54 +45,173 @@ Visit https://www.a-track-it.com for all product and policy information and feed
     <string name="user_pref_11">Favourite Activity 4</string>
 
 
-    <!-- Example General settings -->
-    <string name="confirm_start_toggle_prompt">Confirm start of new session</string>
-    <string name="confirm_end_toggle_prompt">Confirm finish of session</string>
-    <string name="confirm_no_sets_prompt">Finished - Use repeat or add to continue the session</string>
-    <string name="confirm_dismiss_toggle_prompt">Exit ATrackIt?</string>
-    <string name="confirm_sensors_toggle_prompt">Use body sensors during sessions</string>
-    <string name="confirm_use_kg_prompt">Use KG for weights - No = pounds</string>
-    <string name="confirm_work_offline">Work offline</string>
-    <string name="use_timed_breaks_prompt">Use timed breaks between sets</string>
-    <string name="title_activity_initial">ATrackIt</string>
-    <string name="must_quit">Unable to continue - exiting now</string>
+
     <string name="activity_id_not_set">select an activity before commencing</string>
-    <string name="title_activity_permissions">Permissions Activity</string>
-
+    <string name="no_permission_okay">The requested service will not be accessed</string>
+    <string name="location_permission_reason">ATrackIt uses your location information to track (speed,distance) and monitor your workout. Simply turn off and on location tracking as needed.</string>
+    <string name="sensor_permission_reason">ATrackIt requests the use of sensors to track and monitor your workout. Nobody but you will have access to this data unless explicitly shared by you. Turn off and on using sensors in settings.</string>
+    <string name="recog_permission_reason">ATrackIt requests the use of activity recognition to optimize sensor use and provide summary reports of activity</string>
     <string name="message_notification_title_template">Message: %1$s</string>
-
-    <!-- TODO: remove this placeholder text -->
-    <string name="message_notification_placeholder_text_template">You said %1$s and lorem ipsum
-        dolor sit amet, consectetur adipiscing elit. Etiam non enim magna. Morbi dictum, velit vel
-        semper venenatis, magna odio volutpat velit, at ullamcorper nulla lacus sed turpis.
-        Pellentesque vitae metus elit, nec tincidunt tellus. Integer sed nisl sem, ullamcorper
-        ornare lacus. Duis ac mauris sed massa congue volutpat. Donec sed erat sit amet turpis
-        viverra rhoncus sit amet nec magna. Donec lacinia ligula at libero volutpat volutpat nec nec
-        tortor.
-    </string>
-
+    <string name="action_history">History</string>
     <string name="action_share">Share</string>
     <string name="action_reply">Reply</string>
     <string name="launch_activity">Launch activity</string>
-    <string name="request_location_updates">Request location updates</string>
-    <string name="remove_location_updates">Remove location updates</string>
-    <string name="location_updated">Location Updated: %1$s</string>
-    <string name="LastLong">LastLong</string>
-    <string name="LastLat">LastLati</string>
-    <string name="label_subs">subs_</string>
-    <string name="label_sensor">sens_</string>
-    <string name="label_bpm">BPM</string>
-    <string name="label_clock">clock</string>
-    <string name="label_first_step_value">100</string>
-    <string name="label_steps">steps</string>
-    <string name="label_first_step">firstStep</string>
-    <string name="label_last_step">lastStep</string>
-    <string name="label_last_step_upd">lastStepUpdated</string>
-    <string name="title_activity_splash">SplashActivity</string>
+    <string name="label_location_enabled">Use Location Updates</string>
+    <string name="label_location_disabled">Do NOT track Location</string>
+    <string name="setting_location_disabled">Location Updates Disabled</string>
+    <string name="label_settings_animation_online">Show Animation when Live</string>
+    <string name="label_settings_animation_offline">Show progress  when Live</string>
+    <string name="label_settings_show_goals">Show goals on homepage</string>
+    <string name="setting_updated">Setting Changed</string>
+    <string name="title_activity_splash">A Track It</string>
     <string name="label_welcome_back">Welcome back</string>
     <string name="label_setting_up">Setting up...</string>
     <string name="new_word">New</string>
     <string name="hint_text">enter a word</string>
     <string name="button_save">Save</string>
     <string name="empty_not_saved">Word not saved because it is empty.</string>
+    <string name="label_more">more...</string>
+    <string name="label_settings_dont_use">Do not use phone app</string>
+    <string name="has_device_text">\nUse phone app and data sync</string>
+    <string name="get_device_text">Find the phone app and sync history and exercises?</string>
+    <string name="label_keep_draft_sets">\nLoad previous draft workout sets?</string>
+    <!--
+        This is the name that users will see when interacting with this channel.
+        It should describe the category of notifications that will be sent through this channel
+     -->
+    <string name="default_notification_channel_name" translatable="true">A Track It</string>
+    <string name="title_activity_report">ReportActivity</string>
+
+    <string name="large_text">
+        "Ulysses Software Pty Ltd is committed to protecting its customers data.\n\n"
+
+        "Our solutions are designed to maximize your effectiveness by collecting and analysing your performance data."
+        "This data is held securely by your account and not shared with any other 3rd parties, except for the purpose "
+        "of improving the efficiencies and functionality of our app solution.\n"
+        "At anytime, you may turn off and on location tracking simply using the bottom draw slider."
+        ".\n\n"
+
+        "Bold, graphic, intentional.\n\n"
+
+        "The foundational elements of print based design typography, grids, space, scale, color, "
+        "and use of imagery guide visual treatments. These elements do far more than please the "
+        "eye. They create hierarchy, meaning, and focus. Deliberate color choices, edge to edge "
+        "imagery, large scale typography, and intentional white space create a bold and graphic "
+        "interface that immerse the user in the experience.\n"
+        "An emphasis on user actions makes core functionality immediately apparent and provides "
+        "waypoints for the user.\n\n"
+
+        "Motion provides meaning.\n\n"
+
+        "Motion respects and reinforces the user as the prime mover. Primary user actions are "
+        "inflection points that initiate motion, transforming the whole design.\n"
+        "All action takes place in a single environment. Objects are presented to the user without "
+        "breaking the continuity of experience even as they transform and reorganize.\n"
+        "Motion is meaningful and appropriate, serving to focus attention and maintain continuity. "
+        "Feedback is subtle yet clear. Transitions are efﬁcient yet coherent.\n\n"
+
+        "3D world.\n\n"
+
+        "The material environment is a 3D space, which means all objects have x, y, and z "
+        "dimensions. The z-axis is perpendicularly aligned to the plane of the display, with the "
+        "positive z-axis extending towards the viewer. Every sheet of material occupies a single "
+        "position along the z-axis and has a standard 1dp thickness.\n"
+        "On the web, the z-axis is used for layering and not for perspective. The 3D world is "
+        "emulated by manipulating the y-axis.\n\n"
+
+        "Light and shadow.\n\n"
+
+        "Within the material environment, virtual lights illuminate the scene. Key lights create "
+        "directional shadows, while ambient light creates soft shadows from all angles.\n"
+        "Shadows in the material environment are cast by these two light sources. In Android "
+        "development, shadows occur when light sources are blocked by sheets of material at "
+        "various positions along the z-axis. On the web, shadows are depicted by manipulating the "
+        "y-axis only. The following example shows the card with a height of 6dp.\n\n"
+
+        "Resting elevation.\n\n"
+
+        "All material objects, regardless of size, have a resting elevation, or default elevation "
+        "that does not change. If an object changes elevation, it should return to its resting "
+        "elevation as soon as possible.\n\n"
+
+        "Component elevations.\n\n"
+
+        "The resting elevation for a component type is consistent across apps (e.g., FAB elevation "
+        "does not vary from 6dp in one app to 16dp in another app).\n"
+        "Components may have different resting elevations across platforms, depending on the depth "
+        "of the environment (e.g., TV has a greater depth than mobile or desktop).\n\n"
+
+        "Responsive elevation and dynamic elevation offsets.\n\n"
+
+        "Some component types have responsive elevation, meaning they change elevation in response "
+        "to user input (e.g., normal, focused, and pressed) or system events. These elevation "
+        "changes are consistently implemented using dynamic elevation offsets.\n"
+        "Dynamic elevation offsets are the goal elevation that a component moves towards, relative "
+        "to the component’s resting state. They ensure that elevation changes are consistent "
+        "across actions and component types. For example, all components that lift on press have "
+        "the same elevation change relative to their resting elevation.\n"
+        "Once the input event is completed or cancelled, the component will return to its resting "
+        "elevation.\n\n"
+
+        "Avoiding elevation interference.\n\n"
+
+        "Components with responsive elevations may encounter other components as they move between "
+        "their resting elevations and dynamic elevation offsets. Because material cannot pass "
+        "through other material, components avoid interfering with one another any number of ways, "
+        "whether on a per component basis or using the entire app layout.\n"
+        "On a component level, components can move or be removed before they cause interference. "
+        "For example, a floating action button (FAB) can disappear or move off screen before a "
+        "user picks up a card, or it can move if a snackbar appears.\n"
+        "On the layout level, design your app layout to minimize opportunities for interference. "
+        "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
+        "when a user tries to pick up one of cards.\n\n"
+    </string>
+    <string-array name="duration_list" translatable="false">
+        <!-- declaring the provided capabilities -->
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>21</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+    </string-array>
 </resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/row_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="horizontal"
+    android:background="@drawable/bg_selector_recycleview"
+    android:padding="4dp"
+    android:layout_margin="@dimen/recycler_row_padding">
+    <ImageView
+        android:id="@+id/image"
+        android:layout_margin="@dimen/small_padding"
+        android:layout_width="@dimen/recycler_simplest_row_height"
+        android:layout_height="@dimen/recycler_simplest_row_height"
+        app:srcCompat="@drawable/ic_running"
+        android:backgroundTint="@color/primaryColor" />
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingLeft="@dimen/recycler_row_padding"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="@dimen/recycler_row_text_size"
+        tools:text="Example Activity" />
+</LinearLayout>

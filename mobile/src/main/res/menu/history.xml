@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/action_filter"
-        android:title="@string/action_filter"
+    <item android:id="@+id/action_period_spinner"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Spinner"
+        android:title="Period" />
+    <item android:id="@+id/action_filter_date"
+        android:title="@string/action_open_history"
         android:orderInCategory="100"
-        android:icon="@drawable/ic_filter_list_white"
+        app:showAsAction="ifRoom|withText" />
+    <item android:id="@+id/action_filter"
+        android:title="@string/action_open_history"
+        android:icon="@drawable/ic_calendar2"
+        android:iconTint="@color/primaryTextColor"
         app:showAsAction="always" />
 </menu>

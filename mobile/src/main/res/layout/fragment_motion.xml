@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipeView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/main_constraint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/home_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/big_padding"
+            android:layout_gravity="center_horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button_home_start">
+            <androidx.constraintlayout.motion.widget.MotionLayout
+                android:id="@+id/card_motion_constraint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutDescription="@xml/fragment_motion_scene"
+                tools:showPaths="true">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_home_start"
+                    style="@style/Widget.MyApp.MyIconButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/label_activity"
+                    app:icon="@drawable/ic_add_white"
+                    app:iconTint="@color/primaryLightColor"
+                    app:iconPadding="@dimen/button_icon_padding"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+                <TextView
+                    android:id="@+id/textViewMsgLeft"
+                    style="@style/Widget.MyApp.MyHomeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/live_image_view_padding"
+                    android:drawablePadding="@dimen/button_icon_padding"
+                    app:drawableTint="@color/primaryTextColor"
+                    android:text="@string/label_bpm"
+                    android:textSize="@dimen/home_title_text_size4"
+                    app:drawableLeftCompat="@drawable/ic_heart_outline"
+                    app:layout_constraintEnd_toStartOf="@id/textViewMsgRight"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/chronoClock" />
+                <Chronometer android:id="@+id/chronoClock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.MyApp.MyChronoClock"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/button_home_start" />
+                <TextView
+                    android:id="@+id/textViewMsgRight"
+                    style="@style/Widget.MyApp.MyHomeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/button_icon_padding"
+                    app:drawableTint="@color/primaryTextColor"
+                    android:text="@string/label_steps"
+                    android:textSize="@dimen/home_title_text_size4"
+                    app:drawableLeftCompat="@drawable/ic_footsteps_silhouette_variant"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/textViewMsgLeft"
+                    app:layout_constraintTop_toBottomOf="@id/chronoClock" />
+                <TextView
+                    android:id="@+id/textViewCenter1"
+                    style="@style/Widget.MyApp.MyHomeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/home_edge_margin"
+                    android:layout_marginEnd="@dimen/home_edge_margin"
+                    android:drawablePadding="@dimen/button_icon_padding"
+                    app:drawableTint="@color/primaryTextColor"
+                    android:paddingStart="@dimen/tiny_padding"
+                    android:paddingEnd="@dimen/tiny_padding"
+                    android:visibility="visible"
+                    android:textSize="@dimen/home_title_text_size4"
+                    app:layout_constraintEnd_toStartOf="@id/textViewCenter"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textViewMsgRight"
+                    tools:text="26/50 mins" />
+
+                <TextView
+                    android:id="@+id/textViewCenter"
+                    style="@style/Widget.MyApp.MyHomeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/home_edge_margin"
+                    android:layout_marginEnd="@dimen/home_edge_margin"
+                    android:paddingStart="@dimen/tiny_padding"
+                    android:paddingEnd="@dimen/tiny_padding"
+                    android:visibility="visible"
+                    android:textSize="@dimen/home_title_text_size4"
+                    app:layout_constraintEnd_toStartOf="@id/textViewCenter3"
+                    app:layout_constraintStart_toEndOf="@id/textViewCenter1"
+                    app:layout_constraintTop_toBottomOf="@id/textViewMsgRight"
+                    tools:text="Tennis Score" />
+
+                <TextView
+                    android:id="@+id/textViewCenter3"
+                    style="@style/Widget.MyApp.MyHomeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/home_edge_margin"
+                    android:layout_marginEnd="@dimen/home_edge_margin"
+                    android:drawablePadding="@dimen/button_icon_padding"
+                    app:drawableTint="@color/primaryTextColor"
+                    android:paddingStart="@dimen/tiny_padding"
+                    android:paddingEnd="@dimen/tiny_padding"
+                    android:visibility="visible"
+                    android:textSize="@dimen/home_title_text_size4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/textViewCenter"
+                    app:layout_constraintTop_toBottomOf="@id/textViewMsgRight"
+                    tools:text="6/15 Hrt Pts" />
+
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/barrierScores"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="bottom"
+                    app:constraint_referenced_ids="textViewCenter1,textViewCenter,textViewCenter3" />
+
+                <Chronometer
+                    android:id="@+id/chronometerViewCenter"
+                    style="@style/Widget.MyApp.MyHomeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/chronometer_padding"
+                    android:paddingBottom="@dimen/chronometer_padding"
+                    android:textSize="@dimen/chronometer_text_size"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/barrierScores" />
+                <ProgressBar
+                    android:id="@+id/home_progress_view"
+                    android:layout_width="@dimen/recycler_settings_logo_image_height"
+                    android:layout_height="@dimen/recycler_settings_logo_image_height"
+                    android:indeterminate="true"
+                    android:indeterminateOnly="true"
+                    android:visibility="gone"
+                    android:indeterminateTint="@color/secondaryTextColor"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/chronometerViewCenter" />
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/barrierLive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="bottom"
+                    app:constraint_referenced_ids="chronometerViewCenter, home_progress_view" />
+
+                <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+                    android:id="@+id/home_reveal_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clipChildren="false"
+                    app:cardCornerRadius="@dimen/small_padding"
+                    app:cardElevation="@dimen/item_elevation"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/barrierLive">
+                    <ImageView
+                        android:id="@+id/home_image_view"
+                        android:layout_width="@dimen/home_image_size"
+                        android:layout_height="@dimen/home_image_size"
+                        android:contentDescription="@string/app_name"
+                        android:visibility="visible"
+                        app:srcCompat="@drawable/ic_launcher" />
+                </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
+
+                <TextView
+                    android:id="@+id/textViewCenter2"
+                    style="@style/Widget.MyApp.MyHomeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/home_edge_margin"
+                    android:layout_marginEnd="@dimen/home_edge_margin"
+                    android:layout_marginTop="@dimen/home_edge_margin"
+                    android:textSize="@dimen/home_title_text_size2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/home_reveal_view"
+                    tools:text="location" />
+
+                <TextView
+                    android:id="@+id/textViewCenterLeft"
+                    style="@style/Widget.MyApp.MyHomeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/live_image_view_padding"
+                    android:layout_marginTop="@dimen/live_image_view_padding"
+                    android:layout_marginBottom="@dimen/live_image_view_padding"
+                    android:drawablePadding="@dimen/button_icon_padding"
+                    app:drawableTint="@color/primaryTextColor"
+                    android:textSize="@dimen/recycler_row_text_size"
+                    app:iconSize="20dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/home_reveal_view"
+                    app:layout_constraintEnd_toStartOf="@+id/home_reveal_view"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/home_reveal_view"
+                    tools:text="cal" />
+
+                <TextView
+                    android:id="@+id/textViewCenterRight"
+                    style="@style/Widget.MyApp.MyHomeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/live_image_view_padding"
+                    android:layout_marginEnd="@dimen/live_image_view_padding"
+                    android:layout_marginBottom="@dimen/live_image_view_padding"
+                    android:drawablePadding="@dimen/button_icon_padding"
+                    app:drawableTint="@color/primaryTextColor"
+                    android:textSize="@dimen/recycler_row_text_size"
+                    app:iconSize="20dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/home_reveal_view"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/home_reveal_view"
+                    app:layout_constraintTop_toTopOf="@+id/home_reveal_view"
+                    tools:text="m" />
+
+                <TextView
+                    android:id="@+id/textViewMsgBottomLeft"
+                    style="@style/Widget.MyApp.MyHomeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/button_icon_padding"
+                    app:drawableTint="@color/primaryTextColor"
+                    app:drawableLeftCompat="@drawable/ic_battery_full_white"
+                    app:iconSize="24dp"
+                    app:layout_constraintEnd_toStartOf="@id/textViewMsgBottomRight"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textViewCenter2"
+                    tools:text="Player 1" />
+
+                <TextView
+                    android:id="@+id/textViewMsgBottomRight"
+                    style="@style/Widget.MyApp.MyHomeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/button_icon_padding"
+                    app:drawableTint="@color/primaryTextColor"
+                    app:iconSize="24dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/textViewMsgBottomLeft"
+                    app:layout_constraintTop_toBottomOf="@id/textViewCenter2"
+                    tools:text="Player 2" />
+            </androidx.constraintlayout.motion.widget.MotionLayout>
+        </com.google.android.material.card.MaterialCardView>
+        <TextView
+            android:id="@+id/textViewBottom"
+            style="@style/Widget.MyApp.MyHomeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/app_name"
+            android:textSize="@dimen/home_title_text_size3" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/home_recycle_view"
+            style="@style/Widget.MyApp.MyHomeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible" />
+    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

@@ -1,1 +1,2 @@
-include ':mobile', ':wear', ':common'
+include ':achartengine'
+include ':mobile', ':wear', ':common', ':lvl_library'

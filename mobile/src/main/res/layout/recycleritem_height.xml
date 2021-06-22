@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_selector_recycleview"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/heightName1"
+        android:layout_width="wrap_content"
+        style="@style/word_title"
+        tools:text="192 cm"
+        android:textSize="@dimen/recycler_row_text_size"
+        android:layout_marginTop="@dimen/cardview_default_elevation"
+        android:layout_marginEnd="@dimen/cardview_default_elevation"
+        android:textColor="@color/secondaryTextColor"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/live_image_view_padding"
+        android:paddingEnd="@dimen/live_image_view_padding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/heightName2"/>
+    <TextView
+        android:id="@+id/heightName2"
+        android:layout_width="wrap_content"
+        style="@style/word_title"
+        tools:text="6.2 ft"
+        android:textSize="@dimen/recycler_row_text_size"
+        android:layout_marginTop="@dimen/cardview_default_elevation"
+        android:layout_marginEnd="@dimen/cardview_default_elevation"
+        android:textColor="@color/secondaryTextColor"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/heightName1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

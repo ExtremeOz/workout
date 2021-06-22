@@ -2,9 +2,8 @@ package com.a_track_it.fitdata.reports;
 
 import android.app.Activity;
 import android.graphics.Color;
-import androidx.core.content.ContextCompat;
 
-import com.a_track_it.fitdata.R;
+import androidx.core.content.ContextCompat;
 
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 /**
  * Created by Chris Black
  *
- * Class that renders a_track_it.com line graph for each fitness activity regionID.
+ * Class that renders a_track_it.com line graph for each fitness activity activityID.
  */
 public class MultipleLineGraphs extends BaseReportGraph {
 
@@ -39,13 +38,18 @@ public class MultipleLineGraphs extends BaseReportGraph {
         mRenderer.setPanEnabled(true, false);
         mRenderer.setZoomEnabled(true, false);
         mRenderer.setLabelsTextSize(getDPI(15));
-        mRenderer.setXLabelsColor(ContextCompat.getColor(activity,R.color.colorWhite));
-        mRenderer.setYLabelsColor(0, ContextCompat.getColor(activity,R.color.colorWhite));
-        mRenderer.setLabelsColor(ContextCompat.getColor(activity,R.color.colorWhite));
-        mRenderer.setAxesColor(ContextCompat.getColor(activity,R.color.colorWhite));
+        mRenderer.setXLabelsColor(ContextCompat.getColor(activity,android.R.color.white));
+        mRenderer.setYLabelsColor(0, ContextCompat.getColor(activity,android.R.color.white));
+        mRenderer.setLabelsColor(ContextCompat.getColor(activity,android.R.color.white));
+        mRenderer.setAxesColor(ContextCompat.getColor(activity,android.R.color.white));
 
         mRenderer.setShowGrid(true); // we show the grid
         mRenderer.setXLabels(0);
+    }
+
+    @Override
+    public void setType(int reportType) {
+        mReportType = reportType;
     }
 
     @Override

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView_top_incompleteconfirm"
+        style="@style/Widget.MyApp.MyHomeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/live_image_view_padding"
+        android:layout_marginTop="@dimen/live_image_view_padding"
+        android:layout_marginEnd="@dimen/live_image_view_padding"
+        app:drawableRightCompat="@drawable/ic_question_mark_button"
+        android:drawablePadding="@dimen/small_padding"
+        app:drawableTint="@color/primaryTextColor"
+        android:text="@string/label_session_incomplete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_delete_confirm"
+        style="@style/Widget.MyApp.MyIconButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/live_image_view_padding"
+        android:text="@string/action_delete"
+        app:icon="@drawable/ic_rubbish_bin"
+        app:iconTint="@color/primaryTextColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_top_incompleteconfirm" />
+    <TextView
+        android:id="@+id/textViewWorkout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MyApp.MyHomeText"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_delete_confirm" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_duration_confirm"
+        style="@style/Widget.MyApp.MyIconButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/live_image_view_padding"
+        android:text="@string/action_set_duration"
+        app:icon="@drawable/ic_stopwatch_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWorkout" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,30 +1,87 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity" >
-
+    tools:context="com.a_track_it.fitdata.activity.MainActivity" >
     <item
         android:id="@+id/search_participants"
         android:icon="@drawable/ic_search"
         android:title="@string/action_search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
-        app:showAsAction="collapseActionView|always"/>
-
+        app:showAsAction="collapseActionView|ifRoom"/>
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
         android:orderInCategory="100"
         android:icon="@drawable/ic_settings_white"
         app:showAsAction="ifRoom" />
-
-    <item android:id="@+id/action_reload_data"
-        android:title="@string/action_load_data"
+    <item android:id="@+id/action_use_location"
+        android:title="@string/nav_location"
         android:orderInCategory="100"
-        android:icon="@drawable/ic_refresh_white"
+        android:checkable="true"
+        android:icon="@drawable/ic_location_enabled_white"
+        android:actionLayout="@layout/action_checkbox"
         app:showAsAction="ifRoom" />
-
-    <item android:id="@+id/action_history"
-        android:title="@string/action_history"
+    <item android:id="@+id/action_open_data"
+        android:title="@string/action_open"
         android:orderInCategory="100"
         android:icon="@drawable/ic_history_white"
+        app:showAsAction="ifRoom" >
+        <menu>
+            <item android:id="@+id/action_open_template"
+                android:title="@string/action_open_template"
+                android:orderInCategory="100"
+                android:icon="@drawable/ic_folder_open_white"
+                app:showAsAction="ifRoom|withText" />
+            <item android:id="@+id/action_open_history"
+                android:title="@string/action_open_history"
+                android:orderInCategory="100"
+                android:icon="@drawable/ic_history_review_white"
+                app:showAsAction="ifRoom|withText" />
+        </menu>
+    </item>
+    <item android:id="@+id/action_browse_bpm"
+        android:title="@string/action_bpm"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_heart_outline"
+        app:showAsAction="ifRoom|withText" >
+    <menu>
+        <item android:id="@+id/action_bpm_perhour"
+            android:title="@string/action_review_bpm"
+            android:orderInCategory="100"
+            android:icon="@drawable/ic_heart_outline"
+            app:showAsAction="ifRoom|withText" />
+        <item android:id="@+id/action_bpm_permonth"
+            android:title="@string/action_month_bpm"
+            android:orderInCategory="100"
+            android:icon="@drawable/ic_heart_outline"
+            app:showAsAction="ifRoom|withText" />
+    </menu>
+    </item>
+    <item android:id="@+id/action_phone_send"
+        android:title="@string/action_send_wear"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_phone_receive_white"
+        app:showAsAction="never">
+        <menu>
+            <item android:id="@+id/action_phone_camera"
+                android:title="@string/action_phone_camera"
+                android:orderInCategory="100"
+                android:icon="@drawable/ic_camera"
+                app:showAsAction="ifRoom|withText" />
+            <item android:id="@+id/action_phone_pick_image"
+                android:title="@string/action_phone_pick"
+                android:orderInCategory="100"
+                android:icon="@drawable/ic_image_wallpaper"
+                app:showAsAction="ifRoom|withText" />
+        </menu>
+    </item>
+    <item android:id="@+id/action_data_policy"
+        android:title="@string/action_data_policy"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_link_white"
+        app:showAsAction="never" />
+    <item android:id="@+id/action_signout"
+        android:title="@string/nav_sign_out"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_outline_exit_to_app_white"
         app:showAsAction="never" />
 </menu>

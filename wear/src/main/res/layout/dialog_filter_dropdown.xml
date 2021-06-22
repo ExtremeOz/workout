@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:viewBindingIgnore="true"
+    android:minHeight="@dimen/medium_card_height"
+    android:background="@color/primaryDarkColor">
+    <TextView android:id="@+id/filterLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_settings_daily_interval"
+        android:labelFor="@id/filterDropDown"
+        android:layout_marginTop="@dimen/big_padding"
+        android:padding="@dimen/small_padding"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+    <FrameLayout android:id="@+id/filterFrame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/filterLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <Spinner android:id="@+id/filterDropDown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:entries="@array/region_names"
+            android:dropDownVerticalOffset="10dp"
+            android:gravity="center|center_vertical"
+            style="@style/Widget.MyFormSpinnerLook"
+            android:popupBackground="?attr/colorPrimary"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+            android:padding="4dp"
+            android:layout_margin="@dimen/small_padding"
+            android:prompt="@string/label_settings_daily_interval"
+            android:spinnerMode="dropdown"            />
+    </FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <ImageButton
+            android:id="@+id/filterNegativeButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:contentDescription="@string/contentDescription_no"
+            android:background="@android:color/darker_gray"
+            android:focusableInTouchMode="true"
+            app:srcCompat="@drawable/ic_outline_cancel_white" />
+
+        <ImageButton
+            android:id="@+id/filterPositiveButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:contentDescription="@string/contentDescription_yes"
+            android:background="@color/primaryLightColor"
+            android:focusableInTouchMode="true"
+            app:srcCompat="@drawable/ic_outline_check_white">
+
+            <requestFocus />
+        </ImageButton>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

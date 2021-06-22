@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -21,19 +20,13 @@ import androidx.fragment.app.Fragment;
 import com.a_track_it.fitdata.R;
 import com.a_track_it.fitdata.common.Constants;
 import com.a_track_it.fitdata.common.ReferencesTools;
-import com.a_track_it.fitdata.common.model.Utilities;
-import com.a_track_it.fitdata.common.model.Workout;
-import com.a_track_it.fitdata.database.DataManager;
-import com.crashlytics.android.answers.Answers;
-import com.crashlytics.android.answers.ContentViewEvent;
+import com.a_track_it.fitdata.common.Utilities;
+import com.a_track_it.fitdata.common.data_model.Workout;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Calendar;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.OnFocusChange;
 
 
 
@@ -42,44 +35,32 @@ import butterknife.OnFocusChange;
  *
  * Input form used to add a_track_it.com manual entry.
  */
-@SuppressWarnings({"WeakerAccess", "unused"}) // Butterknife requires public reference of injected views
+
 public class AddEntryFragment extends Fragment {
 
     public static final String ARG_ACTIVITY_ID = "ARG_ACTIVITY_ID";
     public static final String TAG = "AddEntryFragment";
 
-    private DataManager.IDataManager mCallback;
+    //private DataManager.IDataManager mCallback;
     private Calendar cal = Calendar.getInstance();
     private ReferencesTools mRefTools;
 
-    @BindView(R.id.timeTextView)
+    TextView textviewAddEntry;
     TextView timeTextView;
-
-    @BindView(R.id.dateTextView)
     TextView dateTextView;
-
-    @BindView(R.id.activitySpinner)
     Spinner activitySpinner;
-
-    @BindView(R.id.editTextMinutes)
-    EditText editTextMinutes;
-
-    @BindView(R.id.editTextSteps)
-    EditText editTextSteps;
-
-    @BindView(R.id.editInputLayout)
+    com.google.android.material.textfield.TextInputEditText editTextMinutes;
+    com.google.android.material.textfield.TextInputEditText editTextSteps;
     TextInputLayout editInputLayout;
-
-    @BindView(R.id.editInputLayout2)
     TextInputLayout editInputLayout2;
-
-    @BindView(R.id.editInputLayout3)
     TextInputLayout editInputLayoutTime;
-
-    @BindView(R.id.labelText2)
     TextView labelText2;
-
     private int mActivityType;
+    int year;
+    int month;
+    int day;
+    int hour;
+    int minute;
 
     public static AddEntryFragment create(int activityType) {
         Bundle args = new Bundle();
@@ -102,11 +83,15 @@ public class AddEntryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_entry, container, false);
 
-        ButterKnife.bind(this, view);
-        if (editTextSteps == null) editTextSteps = view.findViewById(R.id.editTextSteps);
+        labelText2 = view.findViewById(R.id.labelText2);
+        editInputLayout = view.findViewById(R.id.editInputLayout);
+        editInputLayoutTime = view.findViewById(R.id.editInputLayout3);
+        editInputLayout2 = view.findViewById(R.id.editInputLayout2);
+        editTextMinutes = view.findViewById(R.id.editTextMinutes);
+        editTextSteps = view.findViewById(R.id.editTextSteps);
         editTextSteps.addTextChangedListener(new TextWatcher(){
             public void afterTextChanged(Editable s) {
-                if(!editTextSteps.getText().toString().equals("")) {
+                if(!editTextSteps.getText().toString().equals(Constants.ATRACKIT_EMPTY)) {
                     editTextMinutes.setText("" + (int)(Double.parseDouble(editTextSteps.getText().toString()) / 1000.0 * 10));
                 }
             }
@@ -122,11 +107,50 @@ public class AddEntryFragment extends Fragment {
         hour = mCurrentTime.get(Calendar.HOUR_OF_DAY);
         minute = mCurrentTime.get(Calendar.MINUTE);
         cal.set(year, month, day, hour, minute);
-        if (timeTextView == null) timeTextView = view.findViewById(R.id.timeTextView);
+        timeTextView = view.findViewById(R.id.timeTextView);
         timeTextView.setText(Utilities.getTimeString(cal.getTimeInMillis()));
-        if (dateTextView == null) dateTextView = view.findViewById(R.id.dateTextView);
+        timeTextView.setOnFocusChangeListener((v, hasFocus) -> {
+                if (hasFocus) {
+                    TimePickerDialog mTimePicker;
+                    mTimePicker = new TimePickerDialog(getActivity(),R.style.ThemeOverlay_MaterialComponents_MaterialCalendar, new TimePickerDialog.OnTimeSetListener() {
+                        @Override
+                        public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                            hour = selectedHour;
+                            minute = selectedMinute;
+                            cal.set(year, month, day, hour, minute);
+                            timeTextView.setText(Utilities.getTimeString(cal.getTimeInMillis()));
+                            textviewAddEntry.setText(Utilities.getPartOfDayString(cal.getTimeInMillis()));
+                        }
+                    }, hour, minute, false);
+                    mTimePicker.setTitle("Select Time");
+                    mTimePicker.show();
+                    if (editTextSteps.getVisibility() == View.VISIBLE) {
+                        editTextSteps.requestFocus();
+                    } else {
+                        editTextMinutes.requestFocus();
+                    }
+                }
+            });
+        dateTextView = view.findViewById(R.id.dateTextView);
         dateTextView.setText(Utilities.getDateString(cal.getTimeInMillis()));
-        if (activitySpinner == null) activitySpinner = view.findViewById(R.id.activitySpinner);
+        dateTextView.setOnClickListener(v -> {
+            DatePickerDialog mTimePicker;
+            mTimePicker = new DatePickerDialog(getActivity(),R.style.MyDatePickerStyle, new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker view1, int selectedYear, int monthOfYear, int dayOfMonth) {
+                    day = dayOfMonth;
+                    year = selectedYear;
+                    month = monthOfYear;
+                    cal.set(year, month, day, hour, minute);
+                    dateTextView.setText(Utilities.getDateString(cal.getTimeInMillis()));
+                }
+            }, year,  month, day);
+            mTimePicker.setTitle("Select Date");
+            mTimePicker.show();
+        });
+        textviewAddEntry = view.findViewById(R.id.textViewAddEntry);
+        textviewAddEntry.setText(Utilities.getPartOfDayString(cal.getTimeInMillis()));
+        activitySpinner = view.findViewById(R.id.activitySpinner);
         activitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -152,13 +176,11 @@ public class AddEntryFragment extends Fragment {
             }
 
         }
-        if(Answers.getInstance() != null) {
-            Answers.getInstance().logContentView(new ContentViewEvent()
-                    .putContentName("Add new entry")
-                    .putContentType("View")
-                    .putContentId("AddEntryFragment"));
-        }
-
+        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(getActivity());
+        Bundle params = new Bundle();
+        params.putString(FirebaseAnalytics.Param.CONTENT, AddEntryFragment.class.getSimpleName());
+        params.putString(FirebaseAnalytics.Param.ITEM_ID, String.valueOf(mActivityType));
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM, params);
         return view;
     }
 
@@ -194,9 +216,9 @@ public class AddEntryFragment extends Fragment {
     @Override
     public void onAttach(Context activity) {
         super.onAttach(activity);
-        if(activity instanceof DataManager.IDataManager) {
-            mCallback = (DataManager.IDataManager)activity;
-        }
+//        if(activity instanceof DataManager.IDataManager) {
+//            mCallback = (DataManager.IDataManager)activity;
+//        }
     }
 
     /**
@@ -205,54 +227,12 @@ public class AddEntryFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mCallback = null;
+      //  mCallback = null;
     }
 
-    int year;
-    int month;
-    int day;
-
-    @OnClick(R.id.dateTextView) void onDateSelect() {
-        DatePickerDialog mTimePicker;
-        mTimePicker = new DatePickerDialog(this.getActivity(), new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int selectedYear, int monthOfYear, int dayOfMonth) {
-                day = dayOfMonth;
-                year = selectedYear;
-                month = monthOfYear;
-                cal.set(year, month, day, hour, minute);
-                dateTextView.setText(Utilities.getDateString(cal.getTimeInMillis()));
-            }
-        }, year,  month, day);
-        mTimePicker.setTitle("Select Date");
-        mTimePicker.show();
-    }
-
-    int hour;
-    int minute;
 
 
-    @OnFocusChange(R.id.timeTextView) void onTimeSelect(View v, boolean hasFocus) {
-        if (hasFocus) {
-            TimePickerDialog mTimePicker;
-            mTimePicker = new TimePickerDialog(this.getActivity(), new TimePickerDialog.OnTimeSetListener() {
-                @Override
-                public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                    hour = selectedHour;
-                    minute = selectedMinute;
-                    cal.set(year, month, day, hour, minute);
-                    timeTextView.setText(Utilities.getTimeString(cal.getTimeInMillis()));
-                }
-            }, hour, minute, false);
-            mTimePicker.setTitle("Select Time");
-            mTimePicker.show();
-            if (editTextSteps.getVisibility() == View.VISIBLE) {
-                editTextSteps.requestFocus();
-            } else {
-                editTextMinutes.requestFocus();
-            }
-        }
-    }
+
 
     public Workout getWorkout() {
         // need validation
@@ -261,7 +241,7 @@ public class AddEntryFragment extends Fragment {
         cal.set(year, month, day, hour, minute);
         long startTime = cal.getTimeInMillis();
         workout.start = startTime;
-        workout._id = startTime;
+        workout._id = (startTime);
         cal.add(Calendar.MINUTE, Integer.parseInt(editTextMinutes.getText().toString()));
         workout.duration = cal.getTimeInMillis() - startTime;
         workout.stepCount = Integer.parseInt(editTextSteps.getText().toString());
@@ -269,20 +249,20 @@ public class AddEntryFragment extends Fragment {
         int selectedIndex = activitySpinner.getSelectedItemPosition();
         String sRet = mRefTools.getActivityListInfoByIndex(0,selectedIndex);
         try {
-            workout.activityID = Integer.decode(sRet);
+            workout.activityID = Long.parseLong(sRet);
         }catch (NumberFormatException nfe){
             workout.activityID = Constants.WORKOUT_TYPE_UNKNOWN;
         }
         switch (selectedIndex) {
-            case Constants.WORKOUT_TYPE_WALKING:
+            case (int)Constants.WORKOUT_TYPE_WALKING:
             case 5:
             case 4:
             case 2:
                 workout.stepCount = 0;
                 break;
         }
-        workout.wattsTotal = 0;
-        workout.weightTotal = 0;
+        workout.wattsTotal = 0F;
+        workout.weightTotal = 0F;
         workout.repCount = 0;
         workout.setCount = 0;
         if (workout.activityID == Constants.WORKOUT_TYPE_WALKING) {

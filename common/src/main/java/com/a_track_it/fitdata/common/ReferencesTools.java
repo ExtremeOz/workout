@@ -1,32 +1,41 @@
 package com.a_track_it.fitdata.common;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
-import android.media.AudioDeviceInfo;
-import android.media.AudioManager;
 import android.net.ConnectivityManager;
-import android.os.Build;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.util.Log;
 
-import androidx.core.app.NotificationCompat;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 
-import java.util.Arrays;
+import com.a_track_it.fitdata.common.data_model.Workout;
+import com.a_track_it.fitdata.common.data_model.WorkoutMeta;
+import com.a_track_it.fitdata.common.data_model.WorkoutSet;
+import com.google.android.gms.fitness.FitnessOptions;
+import com.google.android.gms.fitness.data.DataType;
+import com.google.android.gms.location.DetectedActivity;
 
-import static com.a_track_it.fitdata.common.Constants.CHANNEL_ENDSET;
-import static com.a_track_it.fitdata.common.Constants.CHANNEL_ENTRY;
-import static com.a_track_it.fitdata.common.Constants.CHANNEL_HOME;
-import static com.a_track_it.fitdata.common.Constants.CHANNEL_LIVE;
-import static com.a_track_it.fitdata.common.Constants.CHANNEL_REPORT;
-import static com.a_track_it.fitdata.common.Constants.SESSION_PREFIX;
-import static com.a_track_it.fitdata.common.Constants.STATE_END_SET;
-import static com.a_track_it.fitdata.common.Constants.STATE_ENTRY;
-import static com.a_track_it.fitdata.common.Constants.STATE_HOME;
-import static com.a_track_it.fitdata.common.Constants.STATE_LIVE;
-import static com.a_track_it.fitdata.common.Constants.STATE_REPORT;
+import java.util.Arrays;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
+
+import static com.a_track_it.fitdata.common.Constants.ATRACKIT_EMPTY;
+import static com.a_track_it.fitdata.common.Constants.ATRACKIT_SPACE;
+import static com.a_track_it.fitdata.common.Constants.FLAG_NON_TRACKING;
+import static com.a_track_it.fitdata.common.Constants.SELECTION_ACTIVITY_BIKE;
+import static com.a_track_it.fitdata.common.Constants.SELECTION_ACTIVITY_CARDIO;
+import static com.a_track_it.fitdata.common.Constants.SELECTION_ACTIVITY_GYM;
+import static com.a_track_it.fitdata.common.Constants.SELECTION_ACTIVITY_MISC;
+import static com.a_track_it.fitdata.common.Constants.SELECTION_ACTIVITY_RUN;
+import static com.a_track_it.fitdata.common.Constants.SELECTION_ACTIVITY_SHOOT;
+import static com.a_track_it.fitdata.common.Constants.SELECTION_ACTIVITY_SPORT;
+import static com.a_track_it.fitdata.common.Constants.SELECTION_ACTIVITY_WATER;
+import static com.a_track_it.fitdata.common.Constants.SELECTION_ACTIVITY_WINTER;
+import static com.a_track_it.fitdata.common.Constants.WORKOUT_TYPE_STEPCOUNT;
 
 
 public class ReferencesTools {
@@ -47,135 +56,23 @@ public class ReferencesTools {
     public static ReferencesTools getInstance() {
         return ourInstance;
     }
-
+    public static ReferencesTools setInstance(Context context){
+        mContext = context;
+        mResources = mContext.getResources();
+        return ourInstance;
+    }
     private ReferencesTools() {
     }
     public void init(Context context){
         mContext = context;
         mResources = mContext.getResources();
     }
-
-    /**
-     * Determines if the wear device has a built-in speaker and if it is supported. Speaker, even if
-     * physically present, is only supported in Android M+ on a wear device..
-     */
-    public final boolean speakerIsSupported() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            PackageManager packageManager = mContext.getPackageManager();
-            // The results from AudioManager.getDevices can't be trusted unless the device
-            // advertises FEATURE_AUDIO_OUTPUT.
-            if (!packageManager.hasSystemFeature(PackageManager.FEATURE_AUDIO_OUTPUT)) {
-                return false;
-            }
-            AudioManager audioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
-            AudioDeviceInfo[] devices = audioManager.getDevices(AudioManager.GET_DEVICES_OUTPUTS);
-            for (AudioDeviceInfo device : devices) {
-                if (device.getType() == AudioDeviceInfo.TYPE_BUILTIN_SPEAKER) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    public Context getMyContext(){
+        return mContext;
     }
-
-    public static NotificationChannel createNotificationChannel(
-            Context context, int notifyType, boolean canVibrate) {
-
-        // NotificationChannels are required for Notifications on O (API 26) and above.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // The id of the channel.
-            String channelId = SESSION_PREFIX + notifyType;
-
-            // The user-visible name of the channel.
-            CharSequence channelName = CHANNEL_HOME; // = mockNotificationData.getChannelName();
-            // The user-visible description of the channel.
-            String channelDescription = mContext.getString(R.string.app_name); // = mockNotificationData.getChannelDescription();
-            int channelImportance =  NotificationManager.IMPORTANCE_DEFAULT;  // = mockNotificationData.getChannelImportance();
-            boolean channelEnableVibrate = false; // = mockNotificationData.isChannelEnableVibrate();
-            int channelLockscreenVisibility = NotificationCompat.VISIBILITY_PUBLIC; // =
-            switch (notifyType){
-                case STATE_HOME:
-                    channelName = CHANNEL_HOME;
-                    channelDescription = "ATrackIt home";
-                    channelImportance = NotificationManager.IMPORTANCE_DEFAULT;
-                    channelEnableVibrate = false;
-                    break;
-                case STATE_ENTRY:
-                    channelName = CHANNEL_ENTRY;
-                    channelDescription = "Live Session Recoding";
-                    channelImportance = NotificationManager.IMPORTANCE_DEFAULT;
-                    channelEnableVibrate = false;
-                    break;
-                case STATE_LIVE:
-                    channelName = CHANNEL_LIVE;
-                    channelDescription = "Live Session Recording";
-                    channelImportance = NotificationManager.IMPORTANCE_HIGH;
-                    channelEnableVibrate = canVibrate;
-                    break;
-                case STATE_END_SET:
-                    channelName = CHANNEL_ENDSET;
-                    channelDescription = "End of Set";
-                    channelImportance = NotificationManager.IMPORTANCE_DEFAULT;
-                    channelEnableVibrate = canVibrate;
-                    break;
-                case STATE_REPORT:
-                    channelName = CHANNEL_REPORT;
-                    channelDescription = "Session Reporting";
-                    channelImportance = NotificationManager.IMPORTANCE_DEFAULT;
-                    channelEnableVibrate = false;
-                    break;
-/*                case STATE_SETTINGS:
-                    break;
-                case STATE_DIALOG:
-                    break;
-                case STATE_15DIALOG:
-                    break;*/
-            }
-            // Initializes NotificationChannel.
-
-            NotificationChannel notificationChannel =
-                    new NotificationChannel(channelId, channelName, channelImportance);
-            notificationChannel.setDescription(channelDescription);
-            if (canVibrate)
-                notificationChannel.enableVibration(channelEnableVibrate);
-            notificationChannel.setLockscreenVisibility(channelLockscreenVisibility);
-
-
-            // Adds NotificationChannel to system. Attempting to create an existing notification
-            // channel with its original values performs no operation, so it's safe to perform the
-            // below sequence.
-            NotificationManager notificationManager =
-                    (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            notificationManager.createNotificationChannel(notificationChannel);
-
-            return notificationChannel;
-        } else {
-            // Returns null for pre-O (26) devices.
-            return null;
-        }
-    }
-
-    public static NotificationCompat.Builder makeNotification(String title, String message, String info, Context context, int notifyType, boolean canVibrate) {
-        String channelId = SESSION_PREFIX + notifyType;
-        NotificationChannel channel;
-        // Make a channel if necessary
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Create the NotificationChannel, but only on API 26+ because
-            // the NotificationChannel class is new and not in the support library
-            channel = createNotificationChannel(context, notifyType, canVibrate);
-        }
-
-        // Create the notification
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelId)
-                .setSmallIcon(R.drawable.ic_launch)
-                .setContentTitle(title)
-                .setContentText(message)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-        if (canVibrate) builder.setVibrate(new long[0]);
-        if (info.length() > 0) builder.setContentInfo(info);
-        // Show the notification
-
-        return builder;
+    public void killme(){
+        mContext = null;
+        mResources = null;
     }
     public String[] getNamesSorted(){
         if ((mNamesSortedArray == null) || (mNamesSortedArray.length == 0)) mNamesSortedArray = mResources.getStringArray(R.array.activity_names_sorted);
@@ -261,6 +158,19 @@ public class ReferencesTools {
         return myarray;
     }
 
+    public AnimationDrawable getAnimatedDialForValue(int percentage){
+        AnimationDrawable animatedDrawable = (AnimationDrawable)AppCompatResources.getDrawable(mContext,R.drawable.dial_animation);
+        int iCounter = 10;
+        while (iCounter <= percentage){
+            String sName = "ic_dial_" + iCounter;
+            int resId = mResources.getIdentifier(sName,Constants.ATRACKIT_DRAWABLE,Constants.ATRACKIT_ATRACKIT_CLASS);
+            Drawable item = AppCompatResources.getDrawable(mContext, resId);
+            animatedDrawable.addFrame(item, 100);
+            iCounter += 10;
+        }
+        return  animatedDrawable;
+    }
+
     public String[] getIconsNameSorted(){
         return mResources.getStringArray(R.array.activity_icon_name_sorted);
     }
@@ -276,27 +186,38 @@ public class ReferencesTools {
         return iRet;
     }
 
-    public String getFitnessActivityTextById(int id){
-        String sRet = "";
-        if ((mNamesIDSortedArray == null) || (mNamesIDSortedArray.length == 0)) mNamesIDSortedArray = mResources.getStringArray(R.array.activity_name_id_sorted);
-        if ((mIDSortedArray == null) || (mIDSortedArray.length == 0)) mIDSortedArray = mResources.getIntArray(R.array.activity_id_sorted);
+    public String getFitnessActivityTextById(long id){
+        String sRet = Constants.ATRACKIT_EMPTY;
+        int searchID = Math.toIntExact(id);
+        try {
+            if (mResources == null) mResources = mContext.getResources();
+            if ((mNamesIDSortedArray == null) || (mNamesIDSortedArray.length == 0))
+                mNamesIDSortedArray = mResources.getStringArray(R.array.activity_name_id_sorted);
+            if ((mIDSortedArray == null) || (mIDSortedArray.length == 0))
+                mIDSortedArray = mResources.getIntArray(R.array.activity_id_sorted);
 
-        int index = Arrays.binarySearch(mIDSortedArray, id);
+            int index = Arrays.binarySearch(mIDSortedArray, searchID);
 
-        if (index >= 0)
-            sRet = mNamesIDSortedArray[index];
-
+            if (index >= 0)
+                sRet = mNamesIDSortedArray[index];
+        }catch(Exception e){
+            Log.e("ReferenceTools", e.getMessage());
+        }
         return sRet;
     }
-    public String getFitnessActivityIdentifierById(int id){
-        String sRet = "";
+    public String getFitnessActivityIdentifierById(long id){
+        String sRet = Constants.ATRACKIT_EMPTY;
+        int searchID = Math.toIntExact(id);
+        try{
         if ((mIdentifiersIDSortedArray == null) || (mIdentifiersIDSortedArray.length == 0)) mIdentifiersIDSortedArray = mResources.getStringArray(R.array.activity_ident_id_sorted);
         if ((mIDSortedArray == null) || (mIDSortedArray.length == 0)) mIDSortedArray = mResources.getIntArray(R.array.activity_id_sorted);
 
-        int index = Arrays.binarySearch(mIDSortedArray, id);
+        int index = Arrays.binarySearch(mIDSortedArray, searchID);
         if (index >= 0)
             sRet = mIdentifiersIDSortedArray[index];
-
+        }catch(Exception e){
+            Log.e("ReferenceTools", e.getMessage());
+        }
         return sRet;
     }
     public String getFitnessActivityIconById(int id){
@@ -309,64 +230,220 @@ public class ReferencesTools {
             sRet = mActivityIconArray[index];
         return sRet;
     }
-    public int getFitnessActivityIconResById(int id){
+    public String currentWorkoutStateString(Workout workout){
+        String retState = "Invalid";
+
+        if (workout != null) {
+            if (workout.start == -1)
+                retState = "template";  // template
+            else {
+                if (workout.start == 0) {
+                    if (workout.activityID > 0) retState = "pending";
+                } else {
+                    if (workout.end == 0)
+                        retState = "live";
+                    else
+                        retState = "completed";
+                }
+            }
+            // if (workout.last_sync > 0) retState += WORKOUT_SYNCD;2
+        }
+        return retState;
+    }
+
+
+    /** Gets {@link FitnessOptions} in order to check or request OAuth permission for the user. */
+    public FitnessOptions getFitnessSignInOptions(int requestType) {
+        FitnessOptions fa = null;
+        if (requestType == 0)  // read and aggregates
+            fa = FitnessOptions.builder()
+                    .addDataType(DataType.TYPE_ACTIVITY_SEGMENT, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_SPEED, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_POWER_SAMPLE, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_MOVE_MINUTES, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_LOCATION_SAMPLE, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.AGGREGATE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_HEART_RATE_BPM, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_DISTANCE_DELTA, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_WORKOUT_EXERCISE,FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.AGGREGATE_ACTIVITY_SUMMARY, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.AGGREGATE_HEART_RATE_SUMMARY, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.AGGREGATE_POWER_SUMMARY, FitnessOptions.ACCESS_READ)
+                    .build();
+        if (requestType == 1) // data read-write
+            fa = FitnessOptions.builder()
+                    .addDataType(DataType.TYPE_ACTIVITY_SEGMENT, FitnessOptions.ACCESS_WRITE)
+                    .addDataType(DataType.TYPE_ACTIVITY_SEGMENT, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_SPEED, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_MOVE_MINUTES, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_MOVE_MINUTES, FitnessOptions.ACCESS_WRITE)
+                    .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_WRITE)
+                    .addDataType(DataType.TYPE_HEART_RATE_BPM, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_HEART_RATE_BPM, FitnessOptions.ACCESS_WRITE)
+                    .addDataType(DataType.TYPE_DISTANCE_DELTA, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_WORKOUT_EXERCISE,FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_WORKOUT_EXERCISE,FitnessOptions.ACCESS_WRITE)
+                    .build();
+        if (requestType == 2) // data read
+            fa = FitnessOptions.builder()
+                    .accessActivitySessions(FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_ACTIVITY_SEGMENT, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_STEP_COUNT_CUMULATIVE, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_HEART_RATE_BPM, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_HEART_RATE_BPM, FitnessOptions.ACCESS_WRITE)
+                    .addDataType(DataType.TYPE_CALORIES_EXPENDED, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_MOVE_MINUTES, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_SPEED, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_LOCATION_SAMPLE, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_DISTANCE_DELTA, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_WORKOUT_EXERCISE,FitnessOptions.ACCESS_READ)
+                    .build();
+
+        if (requestType == 3)  // read for subscribe to RecordingClient
+            fa = FitnessOptions.builder()
+                    .addDataType(DataType.TYPE_ACTIVITY_SEGMENT, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_SPEED, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_POWER_SAMPLE, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_MOVE_MINUTES, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_LOCATION_SAMPLE, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_HEART_RATE_BPM, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_DISTANCE_DELTA, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_WORKOUT_EXERCISE,FitnessOptions.ACCESS_READ)
+                    .build();
+        if (requestType == 4) // session read-write
+            fa = FitnessOptions.builder()
+                    .accessActivitySessions(FitnessOptions.ACCESS_WRITE)
+                    .build();
+        if (requestType == 5) // session read-write fully
+            fa = FitnessOptions.builder()
+                    .accessActivitySessions(FitnessOptions.ACCESS_WRITE)
+                    .addDataType(DataType.TYPE_ACTIVITY_SEGMENT, FitnessOptions.ACCESS_WRITE)
+                    .addDataType(DataType.TYPE_ACTIVITY_SEGMENT, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_SPEED, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_MOVE_MINUTES, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_MOVE_MINUTES, FitnessOptions.ACCESS_WRITE)
+                    .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_WRITE)
+                    .addDataType(DataType.TYPE_HEART_RATE_BPM, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_HEART_RATE_BPM, FitnessOptions.ACCESS_WRITE)
+                    .addDataType(DataType.TYPE_DISTANCE_DELTA, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_WORKOUT_EXERCISE,FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_WORKOUT_EXERCISE,FitnessOptions.ACCESS_WRITE)
+                    .build();
+        return  fa;
+    }
+
+    public int getFitnessActivityIconResById(long id){
+        if (mResources == null)
+            mResources = mContext.getResources();
+        if (mResources == null) return 0;
         int result = R.drawable.ic_trail_running_shoe;
-        if (id < 0){
+        if (id == Constants.WORKOUT_TYPE_UNKNOWN) result = R.drawable.ic_search;
+        else
+        if ((id == Constants.SELECTION_FITNESS_ACTIVITY) || (id <= 0)){
             if (id == Constants.WORKOUT_TYPE_STEPCOUNT) result = R.drawable.ic_walk_white;
-            if (id == Constants.WORKOUT_TYPE_TIME) result = R.drawable.ic_calendar;
+            if (id == Constants.WORKOUT_TYPE_TIME) result = R.drawable.ic_running_white;
             if (id == Constants.WORKOUT_TYPE_INVEHICLE) result = R.drawable.ic_motoring_car;
-            if (id == Constants.WORKOUT_TYPE_UNKNOWN) result = R.drawable.ic_search;
+            if (id == Constants.SELECTION_FITNESS_ACTIVITY) result = R.drawable.ic_sort_a_to_z_white;
+
         }else {
             if ((mIDSortedArray == null) || (mIDSortedArray.length == 0))
                 mIDSortedArray = mResources.getIntArray(R.array.activity_id_sorted);
             if ((mActivityIconArray == null) || (mActivityIconArray.length == 0))
                 mActivityIconArray = mResources.getStringArray(R.array.activity_icon_id_sorted);
             String sRet = "ic_trail_running_shoe";
-            int index = Arrays.binarySearch(mIDSortedArray, id);
+            int idSearch = Math.toIntExact(id);
+            int index = Arrays.binarySearch(mIDSortedArray, idSearch);
             if (index >= 0)
                 sRet = mActivityIconArray[index];
 
-            result = mResources.getIdentifier(sRet, "drawable", mContext.getPackageName());
+            result = mResources.getIdentifier(sRet, "drawable", Constants.ATRACKIT_ATRACKIT_CLASS);
             if (result == 0) result = R.drawable.ic_footsteps_silhouette_variant;
         }
         return result;
     }
+
     public Drawable getRepsDrawableByCount(int count){
         Drawable dRet = null;
+        int colorWhite = ContextCompat.getColor(mContext, android.R.color.white);
         if (count >= 0 && count <= 10)
         switch (count){
             case 0:
-                dRet = ContextCompat.getDrawable(mContext,R.drawable.ic_number_zero_circle_white);
+                dRet = AppCompatResources.getDrawable(mContext,R.drawable.ic_number_zero_circle_white);
                 break;
             case 1:
-                dRet = ContextCompat.getDrawable(mContext,R.drawable.ic_number_one_circle_white);
+                dRet = AppCompatResources.getDrawable(mContext,R.drawable.ic_number_one_circle_white);
                 break;
             case 2:
-                dRet = ContextCompat.getDrawable(mContext,R.drawable.ic_number_two_circle_white);
+                dRet = AppCompatResources.getDrawable(mContext,R.drawable.ic_number_two_circle_white);
                 break;
             case 3:
-                dRet = ContextCompat.getDrawable(mContext,R.drawable.ic_number_three_circle_white);
+                dRet = AppCompatResources.getDrawable(mContext,R.drawable.ic_number_three_circle_white);
                 break;
             case 4:
-                dRet = ContextCompat.getDrawable(mContext, R.drawable.ic_number_four_circle_white);
+                dRet = AppCompatResources.getDrawable(mContext, R.drawable.ic_number_four_circle_white);
                 break;
             case 5:
-                dRet = ContextCompat.getDrawable(mContext, R.drawable.ic_number_five_circle_white);
+                dRet = AppCompatResources.getDrawable(mContext, R.drawable.ic_number_five_circle_white);
                 break;
             case 6:
-                dRet = ContextCompat.getDrawable(mContext, R.drawable.ic_number_six_circle_white);
+                dRet = AppCompatResources.getDrawable(mContext, R.drawable.ic_number_six_circle_white);
                 break;
             case 7:
-                dRet = ContextCompat.getDrawable(mContext, R.drawable.ic_number_seven_circle_white);
+                dRet = AppCompatResources.getDrawable(mContext, R.drawable.ic_number_seven_circle_white);
                 break;
             case 8:
-                dRet = ContextCompat.getDrawable(mContext, R.drawable.ic_number_eight_circle_white);
+                dRet = AppCompatResources.getDrawable(mContext, R.drawable.ic_number_eight_circle_white);
                 break;
             case 9:
-                dRet = ContextCompat.getDrawable(mContext, R.drawable.ic_number_nine_circle_white);
+                dRet = AppCompatResources.getDrawable(mContext, R.drawable.ic_number_nine_circle_white);
                 break;
             case 10:
-                dRet = ContextCompat.getDrawable(mContext, R.drawable.ic_number_ten_circle_white);
+                dRet = AppCompatResources.getDrawable(mContext, R.drawable.ic_number_ten_circle_white);
+                break;
+            case 11:
+                dRet = AppCompatResources.getDrawable(mContext, R.drawable.ic_number_eleven_circle);
+                Utilities.setColorFilter(dRet, colorWhite);
+                break;
+            case 12:
+                dRet = AppCompatResources.getDrawable(mContext, R.drawable.ic_number_twelve_circle);
+                Utilities.setColorFilter(dRet, colorWhite);
+                break;
+            case 13:
+                dRet = AppCompatResources.getDrawable(mContext, R.drawable.ic_thirteen_circle);
+                Utilities.setColorFilter(dRet, colorWhite);
+                break;
+            case 14:
+                dRet = AppCompatResources.getDrawable(mContext, R.drawable.ic_number_fourteen_circle);
+                Utilities.setColorFilter(dRet, colorWhite);
+                break;
+            case 15:
+                dRet = AppCompatResources.getDrawable(mContext, R.drawable.ic_number_fifteen_circle);
+                Utilities.setColorFilter(dRet, colorWhite);
+                break;
+            case 16:
+                dRet = AppCompatResources.getDrawable(mContext, R.drawable.ic_number_sixteen_circle);
+                Utilities.setColorFilter(dRet, colorWhite);
+                break;
+            case 17:
+                dRet = AppCompatResources.getDrawable(mContext, R.drawable.ic_number_seventeen_circle);
+                Utilities.setColorFilter(dRet, colorWhite);
+                break;
+            case 18:
+                dRet = AppCompatResources.getDrawable(mContext, R.drawable.ic_number_eighteen_circle);
+                Utilities.setColorFilter(dRet, colorWhite);
+                break;
+            case 19:
+                dRet = AppCompatResources.getDrawable(mContext, R.drawable.ic_number_nineteen_circle);
+                Utilities.setColorFilter(dRet, colorWhite);
+                break;
+            case 20:
+                dRet = AppCompatResources.getDrawable(mContext, R.drawable.ic_number_twenty_circle);
+                Utilities.setColorFilter(dRet, colorWhite);
                 break;
         }
         return  dRet;
@@ -385,14 +462,21 @@ public class ReferencesTools {
     }
     public int getActivityListIndexById(int in_type){
         if ((mActivityListIDs == null) || (mActivityListIDs.length == 0)) mActivityListIDs = mResources.getIntArray(R.array.activity_types_ids);
-        int iRet = Arrays.binarySearch(mActivityListIDs, in_type);
+        int iRet = 0;
+        for(int setId : mActivityListIDs){
+            if (in_type == setId)
+                return iRet;
+            else
+                iRet += 1;
+        }
+        iRet = -1;
         return iRet;
     }
-    public int getActivityHighlyMobileById(int id){
+    public int getActivityHighlyMobileById(long id){
         int retVal = 0;
         if ((mIDSortedArray == null) || (mIDSortedArray.length == 0)) mIDSortedArray = mResources.getIntArray(R.array.activity_id_sorted);
-
-        int index = Arrays.binarySearch(mIDSortedArray, id);
+        int idSearch = Math.toIntExact(id);
+        int index = Arrays.binarySearch(mIDSortedArray, idSearch);
         if (index >= 0) {
             int[] veryActives = mResources.getIntArray(R.array.activity_veryactive_id_sorted);
             retVal = veryActives[index];
@@ -400,19 +484,50 @@ public class ReferencesTools {
         return retVal;
 
     }
-
-    public int getFitnessActivityColorById(int id) {
+    public static int getSummaryActivityColor(long id){
+        int summaryID = R.color.steps;
+        if (id == Constants.WORKOUT_TYPE_TIME)
+            summaryID = R.color.calendar;
+        if (id == DetectedActivity.WALKING)
+            summaryID = R.color.steps;
+        if (id == DetectedActivity.IN_VEHICLE)
+            summaryID = R.color.driving;
+        if (id == SELECTION_ACTIVITY_GYM)
+            summaryID = R.color.lifting;
+        if (id == SELECTION_ACTIVITY_SHOOT)
+            summaryID = R.color.archery;
+        if (id == SELECTION_ACTIVITY_CARDIO)
+            summaryID = R.color.running;
+        if (id == SELECTION_ACTIVITY_BIKE)
+            summaryID = R.color.biking_graph;
+        if (id == SELECTION_ACTIVITY_RUN)
+            summaryID = R.color.running;
+        if (id == SELECTION_ACTIVITY_WATER)
+            summaryID = R.color.firebase_blue;
+        if (id == SELECTION_ACTIVITY_WINTER)
+            summaryID = R.color.a_cyan;
+        if (id == SELECTION_ACTIVITY_SPORT)
+            summaryID = R.color.golfing;
+        if (id == SELECTION_ACTIVITY_MISC)
+            summaryID = R.color.other; // gardening
+        return  summaryID;
+    }
+    public int getFitnessActivityColorById(long id) {
         int result = R.color.other;
-        switch (id) {
-            case Constants.WORKOUT_TYPE_STEPCOUNT:
+        switch (Math.toIntExact(id)) {
+            case (int)Constants.WORKOUT_TYPE_STEPCOUNT:
+            case DetectedActivity.WALKING:
+            case 93:
+            case 94:
+            case 95:
                 result = R.color.steps;
                 break;
-            case Constants.WORKOUT_TYPE_TIME:
+            case (int)Constants.WORKOUT_TYPE_TIME:
             case 106: case 35: case 104: case  50: case  52: case  70: case  61: case 62: case  63: case  64: case  65: case  66: case  67
                     : case 68: case  71: case  73: case  74: case  75: case  89: case  90: case  91:
                 result = R.color.calendar;
                 break;
-            case Constants.WORKOUT_TYPE_INVEHICLE:
+            case (int)Constants.WORKOUT_TYPE_INVEHICLE:
             case 1:
             case 14:
             case 19:
@@ -423,7 +538,7 @@ public class ReferencesTools {
             case 58:
                 result = R.color.driving;
                 break;
-            case Constants.WORKOUT_TYPE_ARCHERY:
+            case (int)Constants.WORKOUT_TYPE_ARCHERY:
             case 102:
             case 40:
             case 48:
@@ -440,11 +555,11 @@ public class ReferencesTools {
             case 99:
                 result = R.color.archery;
                 break;
-            case Constants.WORKOUT_TYPE_AEROBICS:
-            case Constants.WORKOUT_TYPE_RUNNING:
+            case (int)Constants.WORKOUT_TYPE_AEROBICS:
+            case (int)Constants.WORKOUT_TYPE_RUNNING:
                 result = R.color.running;
                 break;
-            case Constants.WORKOUT_TYPE_VIDEOGAME:
+            case (int)Constants.WORKOUT_TYPE_VIDEOGAME:
             case 21:
             case 117:
             case 25:
@@ -456,11 +571,7 @@ public class ReferencesTools {
             case 77:
             case 78:
             case 88:
-            case 7:
-            case 93:
-            case 94:
-            case 95:
-                result = R.color.walking;
+                result = R.color.running;
                 break;
             case 10: case 11: case 12: case 20: case 23:
             case 27: case 28: case 29: case 32: case 33: case 34:
@@ -469,7 +580,7 @@ public class ReferencesTools {
                 result = R.color.golfing;
                 break;
             case 97:
-            case Constants.WORKOUT_TYPE_STRENGTH:
+            case (int)Constants.WORKOUT_TYPE_STRENGTH:
             case 22:
             case 41: case 47: case 113: case 114: case 115:                
                 result = R.color.lifting;
@@ -480,11 +591,380 @@ public class ReferencesTools {
         }
         return result;
     }
+
+    public String workoutGymSummaryText(Workout w){
+        String result = ATRACKIT_EMPTY;
+        if (w.scoreTotal > 0)
+            result = w.scoreTotal + " sessions";
+        if (w.duration > 0) {
+            if (result.length() > 0)
+                result += Constants.LINE_DELIMITER + "for " + Utilities.getDurationBreakdown(w.duration);
+            else
+                result = "for " + Utilities.getDurationBreakdown(w.duration);
+        }
+        if (w.bodypartCount > 0)
+            result += Constants.LINE_DELIMITER + "using " + w.bodypartCount + " bodyparts";
+        if (w.exerciseCount > 0)
+            result += Constants.LINE_DELIMITER + w.exerciseCount + " exercises";
+        if (w.setCount > 0)
+            result += Constants.LINE_DELIMITER + w.setCount + " sets ";
+        if (w.repCount == 1)
+            result += w.repCount + " rep ";
+        else
+            if (w.repCount > 0) 
+                result += " : " + w.repCount + " reps ";
+        if (w.weightTotal > 0)
+            result += Constants.LINE_DELIMITER + "total weight " + String.format(Locale.getDefault(),Constants.SINGLE_FLOAT, w.weightTotal) + ((UnitLocale.getDefault() == UnitLocale.Metric) ? " kg " : " lbs ");
+        if (w.wattsTotal > 0)
+            result += Constants.LINE_DELIMITER + "using " + String.format(Locale.getDefault(),Constants.SINGLE_FLOAT, (w.wattsTotal/1000.0)) + " kJ ";
+
+        if (w.stepCount == 1)
+            result += Constants.LINE_DELIMITER + w.stepCount + " step ";
+        else
+            if (w.stepCount > 0) 
+                result += Constants.LINE_DELIMITER + w.stepCount + " steps ";
+
+        return result;
+    }
+    public String workoutListText(Workout w){
+        String result = ATRACKIT_EMPTY;
+        try {
+            if (w.start > 0)
+                result = "On " + Utilities.getDayString(w.start) + " at " + Utilities.getTimeString(w.start);
+            if (w.duration > 0) result += " for " + Utilities.getDurationBreakdown(w.duration);
+            else if (w.end > w.start)
+                result += " for " + Utilities.getDurationBreakdown(w.end - w.start);
+        }catch(IllegalArgumentException iae){
+            iae.printStackTrace();
+            result = ATRACKIT_EMPTY;
+        }
+        if (Utilities.isGymWorkout(w.activityID) && (w.scoreTotal != FLAG_NON_TRACKING)){
+            if ((w.name != null) && (w.name.length() > 0))
+                result = w.name + Constants.ATRACKIT_SPACE;
+            if (w.bodypartCount > 0)
+                result += " using " + w.bodypartCount + " bodyparts";
+            if (w.exerciseCount > 0)
+                result += Constants.ATRACKIT_SPACE + w.exerciseCount + " exercises";
+            if (w.setCount > 0)
+                result += Constants.ATRACKIT_SPACE + w.setCount + " sets ";
+            if (w.repCount == 1)
+                result += w.repCount + " rep ";
+            else
+            if (w.repCount > 0) result += w.repCount + " reps ";
+            if (w.weightTotal > 0)
+                result += "total weight " + String.format(Locale.getDefault(),Constants.SINGLE_FLOAT, w.weightTotal) + ((UnitLocale.getDefault() == UnitLocale.Metric) ? " kg " : " lbs ");
+            if (w.wattsTotal > 0)
+                result += " using " + String.format(Locale.getDefault(),Constants.SINGLE_FLOAT, (w.wattsTotal/1000.0)) + " kJ ";
+
+        }
+        else{
+            if (Utilities.isShooting(w.activityID)){
+                if (w.setCount > 0)
+                    result += " ends: " + w.setCount + Constants.ATRACKIT_SPACE;
+                if (w.repCount == 1)
+                    result += w.repCount + " arrow per w.end ";
+                else
+                    result += w.repCount + " arrows per w.end ";
+            }
+        }
+        if (w.stepCount > 0)
+            result += " taking " + w.stepCount + " steps ";
+        if (w.goal_duration > 0)
+            result += " goal " + Utilities.getDurationBreakdown(TimeUnit.MINUTES.toMillis(w.goal_duration));
+        if (w.goal_steps > 0)
+            result += " goal steps " + w.goal_steps;
+        return result;
+    }
+    public String workoutNotifyText(Workout w){
+        String result = ATRACKIT_EMPTY;
+        if (Utilities.isGymWorkout(w.activityID)){
+            if ((w.name != null) && (w.name.length() > 0))
+                result = w.name + Constants.ATRACKIT_SPACE;
+            if (w.scoreTotal != FLAG_NON_TRACKING) {
+                if (w.bodypartCount > 0)
+                    result += " using " + w.bodypartCount + " bodyparts";
+                if (w.exerciseCount > 0)
+                    result += Constants.ATRACKIT_SPACE + w.exerciseCount + " exercises";
+                if (w.setCount > 0)
+                    result += Constants.ATRACKIT_SPACE + w.setCount + " sets ";
+                if (w.repCount == 1)
+                    result += w.repCount + " rep ";
+                else if (w.repCount > 0) result += w.repCount + " reps ";
+                if (w.weightTotal > 0)
+                    result += String.format(Locale.getDefault(), Constants.SINGLE_FLOAT, w.weightTotal) + ((UnitLocale.getDefault() == UnitLocale.Metric) ? " kg " : " lbs ");
+            }
+            // if (w.start > 0)
+            //     result += " on " + Utilities.getDayString(w.start) + " at " + Utilities.getTimeString(w.start);
+            if (w.end > 0)
+                result += " for " + Utilities.getDurationBreakdown(w.duration);
+            if (w.wattsTotal > 0)
+                result += " using " + String.format(Locale.getDefault(),Constants.SINGLE_FLOAT, (w.wattsTotal/1000.0)) + " kJ ";
+
+        }else{
+            if (Utilities.isShooting(w.activityID)){
+                if (w.setCount > 0)
+                    result += " ends: " + w.setCount + Constants.ATRACKIT_SPACE;
+                if (w.repCount == 1)
+                    result += w.repCount + " arrow per w.end ";
+                else
+                    result += w.repCount + " arrows per w.end ";
+                if (w.start > 0)
+                    result += " on " + Utilities.getDayString(w.start) + " at " + Utilities.getTimeString(w.start);
+                if (w.duration > 0) result += " for " + Utilities.getDurationBreakdown(w.duration);
+            }else{
+                if (w.start > 0)
+                    result += " on " + Utilities.getDayString(w.start) + " at " + Utilities.getTimeString(w.start);
+                if (w.end > 0) result += " for " + Utilities.getDurationBreakdown(w.end - w.start);
+            }
+        }
+        if (w.stepCount > 0)
+            result += " taking " + w.stepCount + " steps ";
+        if (w.goal_duration > 0)
+            result += " goal " + Utilities.getDurationBreakdown(TimeUnit.MINUTES.toMillis(w.goal_duration));
+        if (w.goal_steps > 0)
+            result += " goal steps " + w.goal_steps;
+        return result;
+    }
+    public String workoutTemplateText(Workout w){
+        String result = w.name;
+        if (w.bodypartCount > 0)
+            result += "\n using " + w.bodypartCount + " bodyparts";
+        if (w.exerciseCount > 0)
+            result += Constants.LINE_DELIMITER +  w.exerciseCount + " exercises ";
+        if (w.setCount > 0)
+            result += Constants.LINE_DELIMITER + w.setCount + " sets ";
+        if (w.repCount == 1)
+            result += Constants.LINE_DELIMITER + w.repCount + " rep ";
+        else
+            if (w.repCount > 0) result += Constants.LINE_DELIMITER + w.repCount + " reps ";
+        if (w.weightTotal > 0)
+            result += Constants.LINE_DELIMITER + String.format(Locale.getDefault(),Constants.SINGLE_FLOAT, w.weightTotal) + ((UnitLocale.getDefault() == UnitLocale.Metric) ? " kg " : " lbs ");
+        if (w.weightTotal > 0)
+            result += Constants.LINE_DELIMITER + String.format(Locale.getDefault(),Constants.SINGLE_FLOAT, w.wattsTotal) + " kJ ";
+        if ((w.duration) > 0)
+            result += Constants.LINE_DELIMITER + " for " + Utilities.getDurationBreakdown(w.duration);
+        return result;
+    }
+
+    public String workoutShortText(Workout w) {
+        String result = ((w.activityID > 0) && (w.start > 0)) ? Utilities.getPartOfDayString(w.start) : Constants.ATRACKIT_EMPTY;
+        if (Utilities.isGymWorkout(w.activityID)){
+            result += Constants.ATRACKIT_SPACE + w.activityName + Constants.ATRACKIT_SPACE;
+            if (w.scoreTotal != FLAG_NON_TRACKING) {
+                if (w.bodypartCount > 0)
+                    result += " using " + w.bodypartCount + " bodyparts";
+                if (w.exerciseCount > 0)
+                    result += Constants.ATRACKIT_SPACE + w.exerciseCount + " exercises ";
+                if (w.setCount > 0)
+                    result += w.setCount + " sets ";
+                if (w.repCount == 1)
+                    result += w.repCount + " rep ";
+                else if (w.repCount > 0) result += w.repCount + " reps ";
+                if (w.weightTotal > 0)
+                    result += String.format(Locale.getDefault(), Constants.SINGLE_FLOAT, w.weightTotal) + ((UnitLocale.getDefault() == UnitLocale.Metric) ? " kg " : " lbs ");
+                if (w.weightTotal > 0)
+                    result += String.format(Locale.getDefault(), Constants.SINGLE_FLOAT, w.wattsTotal) + " kJ ";
+            }
+            if (w.start > 0)
+                result += " on " + Utilities.getDayString(w.start) + " at " + Utilities.getTimeString(w.start);
+            if ((w.end - w.start) > 0)
+                result += " for " + Utilities.getDurationBreakdown(w.end - w.start);
+        }
+        else{
+            if (Utilities.isShooting(w.activityID)){
+                result += Constants.ATRACKIT_SPACE + w.activityName + Constants.ATRACKIT_SPACE;
+                if (w.setCount > 0)
+                    result += " ends: " + w.setCount + Constants.ATRACKIT_SPACE;
+                if (w.repCount == 1)
+                    result += w.repCount + " arrow per end ";
+                else
+                    result += w.repCount + " arrows per end ";
+                if (w.start > 0)
+                    result += " on " + Utilities.getDayString(w.start) + " at " + Utilities.getTimeString(w.start);
+                if (w.duration > 0) result += " for " + Utilities.getDurationBreakdown(w.duration);
+                result += " score " + w.scoreTotal;
+            }
+            else{
+                if (w.activityID == WORKOUT_TYPE_STEPCOUNT)
+                    result += " Step Count Accumulator ";
+                else {
+                    if (w.activityID > 0)
+                        result += Constants.ATRACKIT_SPACE + w.activityName + Constants.ATRACKIT_SPACE;
+                    else
+                        result = w.activityName;
+                }
+                if (w.start > 0)
+                    result += " on " + Utilities.getDayString(w.start) + " at " + Utilities.getTimeString(w.start);
+                if ((w.end - w.start) > 0) result += " for " + Utilities.getDurationBreakdown(w.end - w.start);
+            }
+        }
+        if (w.stepCount > 0)
+            result += " taking " + w.stepCount + " steps ";
+        if (w.goal_duration > 0)
+            result += " goal " + Utilities.getDurationBreakdown(TimeUnit.MINUTES.toMillis(w.goal_duration));
+        if (w.goal_steps > 0)
+            result += " goal steps " + w.goal_steps;
+        return result;
+    }
+    public String workoutSetTinyText(WorkoutSet set) {
+        String result = ATRACKIT_EMPTY;
+        if (Utilities.isGymWorkout(set.activityID)){
+            result = Integer.toString(set.setCount) + " : ";
+            result += set.exerciseName + ATRACKIT_SPACE;
+            if ((set.weightTotal !=null) && (set.weightTotal > 0)) {
+                result += String.format(Locale.getDefault(), Constants.SINGLE_FLOAT, set.weightTotal)
+                        + ((UnitLocale.getDefault() == UnitLocale.Metric) ? " kg " : " lbs ");
+            }
+            if (set.repCount != null)
+                result += "x " + Integer.toString(set.repCount);
+        }else
+            if (Utilities.isShooting(set.activityID)){
+                result = "End " + set.setCount + ATRACKIT_SPACE + set.score_card;
+            }else{
+                result = set.activityName;
+                if (set.duration > 0) result += " for " + Utilities.getDurationBreakdown(set.duration);
+                if ((set.stepCount !=null) && (set.stepCount > 0))
+                    result += Integer.toString(set.stepCount) + " steps ";
+            }
+        return result;
+    }
+    public String workoutSetShortText(WorkoutSet set) {
+        String result;
+        if (Utilities.isGymWorkout(set.activityID)){
+            //if ((set.regionName != null) && (set.regionName.length() > 0)) result += " at " + set.regionName + Constants.ATRACKIT_SPACE;
+            result = set.exerciseName;
+            if (set.start > 0)
+                result += " at " + Utilities.getTimeString(set.start) + Constants.ATRACKIT_SPACE;
+            else
+            if (set.setCount > 1)
+                result += " pending set " + Integer.toString(set.setCount) + Constants.ATRACKIT_SPACE;
+            if (set.repCount != null)
+                if (set.repCount == 1)
+                    result += Integer.toString(set.repCount) + " rep ";
+                else
+                    result += Integer.toString(set.repCount) + " reps ";
+            if ((set.weightTotal !=null) && (set.weightTotal > 0)) {
+                result += String.format(Locale.getDefault(), Constants.SINGLE_FLOAT, set.weightTotal)
+                        + ((UnitLocale.getDefault() == UnitLocale.Metric) ? " kg " : " lbs ");
+            }
+            if (set.duration > 0) result += "for " + Utilities.getDurationBreakdown(set.duration);
+            if ((set.wattsTotal !=null) && (set.wattsTotal > 0))
+                result += " using "+ String.format(Locale.getDefault(),Constants.SINGLE_FLOAT, set.wattsTotal) + " watts ";
+        }else{
+            if (Utilities.isShooting(set.activityID)){
+                result = set.activityName;
+                if (set.start > 0)
+                    result += " on " + Utilities.getDayString(set.start) + " at " + Utilities.getTimeString(set.start);
+                if (set.duration > 0) result += " for " + Utilities.getDurationBreakdown(set.duration);
+            }else{
+                result = set.activityName;
+                if (set.start > 0)
+                    result += " on " + Utilities.getDayString(set.start) + " at " + Utilities.getTimeString(set.start);
+                if (set.duration > 0) result += " for " + Utilities.getDurationBreakdown(set.duration);
+                if ((set.stepCount !=null) && (set.stepCount > 0))
+                    result += Integer.toString(set.stepCount) + " steps ";
+            }
+        }
+        return result;
+    }
+    public String workoutSetNotifyText(WorkoutSet set) {
+        String result;
+        if (Utilities.isGymWorkout(set.activityID)){
+            result = set.exerciseName;
+            if (set.start > 0)
+                result += " at " + Utilities.getTimeString(set.start) + Constants.ATRACKIT_SPACE;
+            if (set.repCount != null)
+                if (set.repCount == 1)
+                    result += Integer.toString(set.repCount) + " rep ";
+                else
+                    result += Integer.toString(set.repCount) + " reps ";
+            if ((set.weightTotal !=null) && (set.weightTotal > 0)) {
+                result += String.format(Locale.getDefault(), Constants.SINGLE_FLOAT, set.weightTotal) + ((UnitLocale.getDefault() == UnitLocale.Metric) ? " kg " : " lbs ");
+            }
+            if (set.duration > 0) result += "for " + Utilities.getDurationBreakdown(set.duration);
+            if ((set.wattsTotal !=null) && (set.wattsTotal > 0))
+                result += " using "+ String.format(Locale.getDefault(),Constants.SINGLE_FLOAT, set.wattsTotal) + " watts ";
+        }else{
+            if (Utilities.isShooting(set.activityID)){
+                result = set.activityName;
+                if (set.start > 0)
+                    result += " on " + Utilities.getDayString(set.start) + " at " + Utilities.getTimeString(set.start);
+                if (set.duration > 0) result += " for " + Utilities.getDurationBreakdown(set.duration);
+            }else{
+                result = set.activityName;
+                if (set.start > 0)
+                    result += " on " + Utilities.getDayString(set.start) + " at " + Utilities.getTimeString(set.start);
+                if (set.duration > 0) result += " for " + Utilities.getDurationBreakdown(set.duration);
+                if ((set.stepCount !=null) && (set.stepCount > 0))
+                    result += Integer.toString(set.stepCount) + " steps ";
+            }
+        }
+        return result;
+    }
+
+    public String metaShortText(WorkoutMeta meta) {
+        String result = (meta.start > 0) ? Utilities.getPartOfDayString(meta.start) : Constants.ATRACKIT_EMPTY;
+
+        if (Utilities.isGymWorkout(meta.activityID)){
+            result += Constants.ATRACKIT_SPACE + meta.activityName + Constants.ATRACKIT_SPACE + meta.description + Constants.ATRACKIT_SPACE;
+            if (meta.weightTotal > 0)
+                result += String.format(Locale.getDefault(),Constants.SINGLE_FLOAT, meta.weightTotal) + ((UnitLocale.getDefault() == UnitLocale.Metric) ? " kg " : " lbs ");
+            if (meta.weightTotal > 0)
+                result += String.format(Locale.getDefault(),Constants.SINGLE_FLOAT, meta.wattsTotal) + " kJ ";
+            if (meta.start > 0)
+                result += " on " + Utilities.getDayString(meta.start) + " at " + Utilities.getTimeString(meta.start);
+            if (meta.duration > 0)
+                result += " for " + Utilities.getDurationBreakdown(meta.duration);
+
+        }else{
+            result += Constants.ATRACKIT_SPACE + meta.activityName + Constants.ATRACKIT_SPACE + meta.description + Constants.ATRACKIT_SPACE;
+            if (Utilities.isShooting(meta.activityID)){
+                if (meta.shootFormat.length() > 0) result += meta.shootFormat + Constants.ATRACKIT_SPACE;
+                if (meta.equipmentName.length() > 0) result += meta.equipmentName + Constants.ATRACKIT_SPACE;
+                if (meta.targetSizeName.length() > 0) result += "target " + meta.targetSizeName + Constants.ATRACKIT_SPACE;
+                if (meta.distanceName.length() > 0) result += " at " + meta.distanceName + Constants.ATRACKIT_SPACE;
+                if (meta.score_card.length() > 0) result += Constants.ATRACKIT_SPACE + meta.score_card + Constants.ATRACKIT_SPACE;
+                if (meta.start > 0)
+                    result += " on " + Utilities.getDayString(meta.start) + " at " + Utilities.getTimeString(meta.start);
+                if (meta.duration > 0) result += " for " + Utilities.getDurationBreakdown(meta.duration);
+            }else{
+                if (meta.start > 0)
+                    result += " on " + Utilities.getDayString(meta.start) + " at " + Utilities.getTimeString(meta.start);
+                if (meta.duration > 0) result += " for " + Utilities.getDurationBreakdown(meta.duration);
+            }
+        }
+        if (meta.stepCount > 0)
+            result += " taking " + meta.stepCount + " steps ";
+        if (meta.distance > 0)
+            result += " distance " + meta.distance + " m ";
+        if (meta.move_mins > 0)
+            result += " move " + meta.move_mins + " mins ";
+        if (meta.heart_pts > 0)
+            result += " heart " + meta.heart_pts + " pts ";
+        if (meta.total_calories > 0)
+            result += " calories " + meta.total_calories + " kJ ";
+        if (meta.goal_duration > 0)
+            result += " goal " + Utilities.getDurationBreakdown(TimeUnit.MINUTES.toMillis(meta.goal_duration));
+        if (meta.goal_steps > 0)
+            result += " goal steps " + meta.goal_steps;
+        return result;
+    }
     public boolean isNetworkConnected() {
         boolean isConnected = false;
-        if (mContext != null) {
-            ConnectivityManager cm = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-            isConnected = cm.getActiveNetworkInfo() != null;
+        try {
+            final ConnectivityManager cm = (mContext != null) ? (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE) : null;
+            if (cm != null) {
+                final Network n = cm.getActiveNetwork();
+                if (n != null) {
+                    final NetworkCapabilities nc = cm.getNetworkCapabilities(n);
+
+                    isConnected =(nc.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) || nc.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+                            || nc.hasTransport(NetworkCapabilities.TRANSPORT_BLUETOOTH));
+                }
+
+            }
+        }catch (Exception e){
+            isConnected = false;
         }
 
         return isConnected;

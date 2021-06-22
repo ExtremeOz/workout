@@ -33,14 +33,20 @@ public class SingleBarGraphWithGoal extends BaseReportGraph {
         mGoalSeries = new XYSeries("Goal");
         mDataset.addSeries(mCurrentSeries);
         mDataset.addSeries(mGoalSeries);
-        CombinedXYChart.XYCombinedChartDef[] types = new CombinedXYChart.XYCombinedChartDef[] {new CombinedXYChart.XYCombinedChartDef(BarChart.TYPE, 0), new CombinedXYChart.XYCombinedChartDef(BarChart.TYPE, 1)};
+        CombinedXYChart.XYCombinedChartDef[] types = new CombinedXYChart.XYCombinedChartDef[] {new CombinedXYChart.XYCombinedChartDef(BarChart.TYPE, 0),
+                new CombinedXYChart.XYCombinedChartDef(BarChart.TYPE, 1)};
         return ChartFactory.getCombinedXYChartView(activity, mDataset, mRenderer, types);
     }
 
     @Override
+    public void setType(int reportType) {
+        mReportType = reportType;
+    }
+
+    @Override
     public void clearData() {
-        maxData = 15;
-        minData = 10;
+        maxData = 0;
+        minData = 0;
         mCurrentSeries.clear();
         mGoalSeries.clear();
     }
@@ -49,21 +55,21 @@ public class SingleBarGraphWithGoal extends BaseReportGraph {
         // Now we create the renderer
         XYSeriesRenderer mCurrentRenderer = new XYSeriesRenderer();
         mCurrentRenderer.setLineWidth(getDPI(2));
-        mCurrentRenderer.setColor(activity.getResources().getColor(R.color.colorBarGraph));
+        mCurrentRenderer.setColor(activity.getResources().getColor(R.color.colorBarGraph, activity.getTheme()));
         // Include low and max value
         mCurrentRenderer.setDisplayBoundingPoints(true);
         // we add point markers
         mCurrentRenderer.setPointStyle(PointStyle.CIRCLE);
         mCurrentRenderer.setPointStrokeWidth(getDPI(5));
-        mCurrentRenderer.setShowLegendItem(false);
+        mCurrentRenderer.setShowLegendItem(true);
 
         // Creating XYSeriesRenderer to customize expenseSeries
         XYSeriesRenderer expenseRenderer = new XYSeriesRenderer();
-        expenseRenderer.setColor(activity.getResources().getColor(R.color.colorBarGraph2));
+        expenseRenderer.setColor(activity.getResources().getColor(R.color.colorBarGraph2, activity.getTheme()));
         expenseRenderer.setPointStyle(PointStyle.POINT);
         expenseRenderer.setFillPoints(true);
         expenseRenderer.setLineWidth(getDPI(3));
-        expenseRenderer.setShowLegendItem(false);
+        expenseRenderer.setShowLegendItem(true);
 
         mRenderer = new XYMultipleSeriesRenderer();
         mRenderer.addSeriesRenderer(mCurrentRenderer);
@@ -74,10 +80,11 @@ public class SingleBarGraphWithGoal extends BaseReportGraph {
         mRenderer.setPanEnabled(true, false);
         mRenderer.setZoomEnabled(true, false);
         mRenderer.setLabelsTextSize(getDPI(15));
-        mRenderer.setXLabelsColor(activity.getResources().getColor(R.color.colorWhite));
-        mRenderer.setYLabelsColor(0, activity.getResources().getColor(R.color.colorWhite));
-        mRenderer.setLabelsColor(activity.getResources().getColor(R.color.colorWhite));
-        mRenderer.setAxesColor(activity.getResources().getColor(R.color.colorWhite));
+
+        mRenderer.setXLabelsColor(activity.getResources().getColor(android.R.color.white, activity.getTheme()));
+        mRenderer.setYLabelsColor(0, activity.getResources().getColor(android.R.color.white, activity.getTheme()));
+        mRenderer.setLabelsColor(activity.getResources().getColor(android.R.color.white, activity.getTheme()));
+        mRenderer.setAxesColor(activity.getResources().getColor(android.R.color.white, activity.getTheme()));
         mRenderer.setBarSpacing(0.2);
 
         mRenderer.setShowGrid(true); // we show the grid
@@ -90,7 +97,7 @@ public class SingleBarGraphWithGoal extends BaseReportGraph {
 
     @Override
     public void addWorkout(int series, int data, int position) {
-        if (data >= 0) {
+        if ((data >= 0) && (mGoal > 0)) {
             mGoalSeries.add(position, mGoal);
         }
         if (data > maxData) maxData = data;
@@ -102,7 +109,7 @@ public class SingleBarGraphWithGoal extends BaseReportGraph {
     public void updateRenderer() {
         mRenderer.clearXTextLabels();
         mRenderer.setYAxisMax(Math.round(maxData) + (maxData / 5));
-        mRenderer.setYAxisMin(0);
+        mRenderer.setYAxisMin(minData);
         mRenderer.setXAxisMin(mCurrentSeries.getItemCount() - 7);
         mRenderer.setXAxisMax(mCurrentSeries.getItemCount());
         mRenderer.setPanLimits(new double[]{-5, mCurrentSeries.getItemCount() + 5, 0, 0});

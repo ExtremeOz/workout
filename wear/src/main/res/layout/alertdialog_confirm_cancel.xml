@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.wear.widget.BoxInsetLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardCornerRadius="@dimen/small_padding"
+    app:cardBackgroundColor="@color/primaryDarkColor"
+    app:strokeColor="@color/primaryLightColor"
+    app:strokeWidth="2dp"
+    app:boxedEdges="all"
+    tools:deviceIds="wear">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+    android:layout_gravity="center">
+    <TextView
+        android:id="@+id/circular_text_message"
+        style="@style/Widget.MyApp.MyHomeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/home_message_height"
+        android:paddingBottom="@dimen/small_padding"
+        android:textAlignment="center"
+        tools:text="@string/action_starting"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <androidx.wear.widget.CircularProgressLayout
+        android:id="@+id/circular_progress"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:padding="@dimen/small_padding"
+        android:layout_marginTop="@dimen/big_padding"
+        android:layout_marginBottom="@dimen/big_padding"
+        app:backgroundColor="@color/secondaryDarkColor"
+        app:colorSchemeColors="@color/secondaryLightColor"
+        app:strokeWidth="@dimen/small_padding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/circular_text_message"
+        app:layout_constraintBottom_toBottomOf="parent">
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:contentDescription="@string/action_cancel"
+        android:padding="@dimen/button_icon_padding"
+        app:srcCompat="@drawable/ic_close_white" />
+    </androidx.wear.widget.CircularProgressLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.wear.widget.BoxInsetLayout>

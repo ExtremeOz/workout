@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/btm_menu_tracking"
+        android:enabled="true"
+        android:icon="@drawable/ic_a_outlined"
+        android:contentDescription="@string/label_session_live"
+        android:title="@string/label_session_live"/>
+    <item
+        android:id="@+id/btm_menu_completed"
+        android:enabled="true"
+        android:icon="@drawable/ic_checkered_flag_white"
+        android:contentDescription="@string/label_activity"
+        android:title="@string/label_activity"/>
+    <item
+        android:id="@+id/btm_menu_bodyparts"
+        android:enabled="true"
+        android:icon="@drawable/ic_muscular_white"
+        android:title="@string/action_review"
+        android:contentDescription="@string/action_review"/>
+<!--
+    <item
+        android:id="@+id/btm_menu_exercise"
+        android:enabled="true"
+        android:icon="@drawable/ic_gym_equipmemt"
+        android:title="@string/label_exercise"
+        android:contentDescription="@string/label_exercise"/>
+-->
+
+</menu>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="55dip"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+ 
+    <TextView
+        android:id="@+id/lblListItem"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.MyTheme.Body1"
+        android:paddingTop="5dp"
+        tools:text="3 sets 26 reps 1009kg"
+        android:paddingBottom="5dp"
+        android:paddingStart="?android:attr/expandableListPreferredChildPaddingLeft" />
+ 
+</LinearLayout>

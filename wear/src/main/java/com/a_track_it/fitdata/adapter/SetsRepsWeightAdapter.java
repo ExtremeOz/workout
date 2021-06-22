@@ -26,6 +26,8 @@ public class SetsRepsWeightAdapter extends androidx.wear.widget.WearableRecycler
 
     private Context mContext;
     private int mAdapterType;
+    private String mTargetId;
+    private int selectedPos = WearableRecyclerView.NO_POSITION;
 
     public SetsRepsWeightAdapter(Context context, int adapterType) {
         this.mContext = context;
@@ -84,20 +86,22 @@ public class SetsRepsWeightAdapter extends androidx.wear.widget.WearableRecycler
             Arrays.sort(ends, Collections.reverseOrder());
             this.items = new ArrayList<>(Arrays.asList(ends));
         }
-        if (adapterType == Constants.SELECTION_REST_DURATION_GYM) {
+        if ((adapterType == Constants.SELECTION_REST_DURATION_SETTINGS) || (adapterType == Constants.SELECTION_REST_DURATION_GYM) || (adapterType == Constants.SELECTION_INCOMPLETE_DURATION)){
             String[] durations = context.getResources().getStringArray(R.array.array_rest_duration_gym);
-            Arrays.sort(durations, Collections.reverseOrder());
+        //    Arrays.sort(durations, Collections.reverseOrder());
             this.items = new ArrayList<>(Arrays.asList(durations));
         }
         if (adapterType == Constants.SELECTION_REST_DURATION_TARGET) {
             String[] durations = context.getResources().getStringArray(R.array.array_rest_duration_target);
-            Arrays.sort(durations, Collections.reverseOrder());
+      //      Arrays.sort(durations, Collections.reverseOrder());
             this.items = new ArrayList<>(Arrays.asList(durations));
         }
     }
     public class SetRepsWeightListViewHolder extends WearableRecyclerView.ViewHolder{
         public final TextView text;
         public final LinearLayout container;
+        private int selectedPos = WearableRecyclerView.NO_POSITION;
+        private String mTargetId;
 
         SetRepsWeightListViewHolder(View itemView){
             super(itemView);
@@ -115,10 +119,23 @@ public class SetsRepsWeightAdapter extends androidx.wear.widget.WearableRecycler
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
-
+    public void setTargetId(String targetId){
+        if (targetId.length() > 0){
+            mTargetId = targetId;
+            int pos = WearableRecyclerView.NO_POSITION;
+            for(String item : items){
+                pos++;
+                if (mTargetId.equals(item)){
+                    selectedPos = pos;
+                    break;
+                }
+            }
+            notifyDataSetChanged();
+        }else mTargetId = "";
+    }
     @Override
     public SetRepsWeightListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_row_single_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_row_gym_item, parent, false);
         return new SetRepsWeightListViewHolder(v);
     }
 
@@ -128,14 +145,28 @@ public class SetsRepsWeightAdapter extends androidx.wear.widget.WearableRecycler
         item = items.get(position);
         pos = position;
         holder.text.setText(item);
-
-        holder.text.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        if ((mTargetId != null) && (mTargetId.length() > 0))
+            holder.itemView.setSelected(item.equals(mTargetId));
+        else
+            holder.itemView.setSelected(selectedPos == position);
+        holder.itemView.setOnClickListener(view -> {
+            if (onItemClickListener != null) {
+                // Log.d(TAG, "text onclick " + Integer.toString(items.size()));
+                onItemClickListener.onItemClick(view, item, pos);
+                notifyItemChanged(selectedPos);
+                selectedPos = holder.getLayoutPosition();
+                mTargetId = "";
+                notifyItemChanged(selectedPos);
+            }
+        });
+        holder.text.setOnClickListener(view -> {
             if (onItemClickListener != null) {
                // Log.d(TAG, "text onclick " + Integer.toString(items.size()));
                 onItemClickListener.onItemClick(view, item, pos);
-            }
+                notifyItemChanged(selectedPos);
+                selectedPos = holder.getLayoutPosition();
+                mTargetId = "";
+                notifyItemChanged(selectedPos);
             }
         });
 

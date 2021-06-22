@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/bg_selector_confirm"
+    android:orientation="horizontal"
+    android:padding="4dp">
+    <ImageView
+        android:id="@+id/imageDial"
+        android:layout_width="@dimen/recycler_simplest_row_height"
+        android:layout_height="@dimen/recycler_simplest_row_height"
+        android:layout_margin="@dimen/small_padding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_running" />
+
+    <TextView
+        android:id="@+id/goalTitle"
+        style="@style/Widget.MyApp.MyHomeText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="@dimen/recycler_simple_title_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imageDial"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Daily Step Count" />
+
+    <TextView
+        android:id="@+id/percentText"
+        style="@style/Widget.MyApp.MyHomeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="@dimen/small_padding"
+        android:paddingStart="@dimen/small_padding"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="@dimen/home_title_text_size4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageDial"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageDial"
+        tools:text="90 %" />
+
+    <TextView
+        android:id="@+id/currentValue"
+        style="@style/Widget.MyApp.MyHomeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_padding"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="@dimen/home_title_text_size2"
+        app:layout_constraintBottom_toBottomOf="@id/percentText"
+        app:layout_constraintEnd_toStartOf="@id/OfValue"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@+id/goalTitle"
+        app:layout_constraintTop_toTopOf="@+id/percentText"
+        tools:text="30" />
+
+    <TextView
+        android:id="@+id/OfValue"
+        style="@style/Widget.MyApp.MyHomeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_padding"
+        android:text=" of "
+        android:textColor="@color/primaryTextColor"
+        android:textSize="@dimen/home_title_text_size2"
+        app:layout_constraintBottom_toBottomOf="@id/percentText"
+        app:layout_constraintEnd_toEndOf="@id/goalValue"
+        app:layout_constraintStart_toEndOf="@id/currentValue"
+        app:layout_constraintTop_toTopOf="@+id/percentText" />
+
+    <TextView
+        android:id="@+id/goalValue"
+        style="@style/Widget.MyApp.MyHomeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_padding"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="@dimen/home_title_text_size2"
+        app:layout_constraintBottom_toBottomOf="@id/percentText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/OfValue"
+        app:layout_constraintTop_toTopOf="@+id/percentText"
+        tools:text="120" />
+</androidx.constraintlayout.widget.ConstraintLayout>

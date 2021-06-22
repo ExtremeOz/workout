@@ -5,12 +5,46 @@
         android:icon="@drawable/add"
         android:enabled="true"
         android:shortcutShortLabel="@string/add_new_activity_short"
-        android:shortcutLongLabel="@string/add_new_activity"
-        >
+        android:shortcutLongLabel="@string/add_new_activity" >
         <intent
             android:action="com.a_track_it.fitdata.ADD_ACTIVITY"
             android:targetPackage="com.a_track_it.fitdata"
-            android:targetClass="com.a_track_it.fitdata.activity.MainActivity"
-            />
+            android:targetClass="com.a_track_it.fitdata.activity.MainActivity">
+            <extra android:name="ARG_ACTIVITY_ID"  android:value="0" /></intent>
+    </shortcut>
+    <shortcut
+        android:shortcutId="add_cardio"
+        android:icon="@drawable/running_icon_color"
+        android:enabled="true"
+        android:shortcutShortLabel="@string/add_new_cardio_short"
+        android:shortcutLongLabel="@string/add_new_cardio" >
+        <intent
+            android:action="com.a_track_it.fitdata.ADD_ACTIVITY"
+            android:targetPackage="com.a_track_it.fitdata"
+            android:targetClass="com.a_track_it.fitdata.activity.MainActivity">
+            <extra android:name="ARG_ACTIVITY_ID"  android:value="56" /></intent>
+    </shortcut>
+    <shortcut
+        android:shortcutId="add_workout"
+        android:icon="@drawable/weights_icon_color2"
+        android:enabled="true"
+        android:shortcutShortLabel="@string/add_new_workout_short"
+        android:shortcutLongLabel="@string/add_new_workout" >
+        <intent
+            android:action="com.a_track_it.fitdata.ADD_ACTIVITY"
+            android:targetPackage="com.a_track_it.fitdata"
+            android:targetClass="com.a_track_it.fitdata.activity.MainActivity">
+            <extra android:name="ARG_ACTIVITY_ID"  android:value="80" /></intent>
+    </shortcut>
+    <shortcut
+            android:shortcutId="add_exercise"
+            android:icon="@drawable/weights_icon_color"
+            android:enabled="true"
+            android:shortcutShortLabel="@string/add_new_exercise_short"
+            android:shortcutLongLabel="@string/add_new_exercise" >
+            <intent
+                android:action="com.a_track_it.fitdata.ADD_EXERCISE"
+                android:targetPackage="com.a_track_it.fitdata"
+                android:targetClass="com.a_track_it.fitdata.activity.MainActivity" />
     </shortcut>
 </shortcuts>

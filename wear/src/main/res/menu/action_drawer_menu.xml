@@ -3,7 +3,7 @@
     <group android:checkableBehavior="single">
     <item
         android:id="@+id/action_new_workout"
-        android:icon="@drawable/ic_gym_white"
+        android:icon="@drawable/ic_dumbbell_pair"
         android:title="@string/action_new_workout"/>
     <item
         android:id="@+id/action_new_archery"

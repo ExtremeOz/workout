@@ -2,6 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <string name="app_name">ATrackIt</string>
+    <string name="a_track_it_url">https://a-track-it.com</string>
     <string name="action_search">Search</string>
     <string name="action_load_data">Reload</string>
     <string name="action_refresh_data">Refresh</string>
@@ -10,12 +11,25 @@
     <string name="action_history">History</string>
     <string name="action_filter">Filter</string>
     <string name="hello_world">Coming soon!</string>
-
-    <!-- Shortcut XML -->
+    <string name="app_check_exit">"Press back again to exit</string>
+    <!-- Shortcut XML -->>
+    <string name="add_new_workout_short">Add New Gym</string>
+    <string name="add_new_workout">Add Workout</string>
     <string name="add_new_activity_short">Add New Activity</string>
     <string name="add_new_activity">Add Activity</string>
-
-
+    <string name="add_new_cardio_short">Start Cardio</string>
+    <string name="add_new_cardio">Quick Cardio</string>
+    <string name="add_new_exercise_short">Add New Exercise</string>
+    <string name="add_new_exercise">Add Exercise</string>
+    <string name="action_last_30_days">30 Days</string>
+    <string name="action_per_hour">Per Hour</string>
+    <string name="action_no_location">ATrackIt will not access your location</string>
+    <string name="label_keep_draft_sets">Load previous draft workout sets?</string>
+    <!-- RoutineFragment
+    <string name="confirm_use_timed_rest_toggle_prompt">Use timed rest between sets</string>
+    <string name="confirm_auto_start_toggle_prompt">Auto start next set on rest countdown</string>
+    <string name="confirm_start_toggle_prompt">Confirm start of session</string>
+-->
     <!-- PageFragment -->
     <string name="active_label">Active:</string>
     <string name="step_label">steps</string>
@@ -30,16 +44,222 @@
 
     <!-- AddEntryFragment -->
     <string name="activity_prompt">Choose an activity</string>
+    <string name="exercise_name_prompt">Unique name...</string>
+    <string name="exercise_find_name_prompt">Find possible...</string>
+    <string name="exercise_workname_prompt">Unique descriptor</string>
+    <string name="exercise_name_helper" >Create new or select existing</string>
+    <string name="exercise_find_name_helper" >Find existing possible match</string>
+    <string name="exercise_max_kg_format" formatted="false">%1$.1f Kg for %d reps</string>
+    <string name="exercise_max_lbs_format" formatted="false">%1$.0f lbs for %d reps</string>
+    <string name="exercise__name_found" formatted="false">Existing exercise found with name %1$s %2$s %3$s</string>
+    <string name="resistance_type_prompt">Choose an exercise type</string>
+    <string name="bodypart_primary_prompt">Choose primary bodypart</string>
+    <string name="bodypart_secondary_prompt">Choose secondary bodypart</string>
+    <string name="bodypart_third_prompt">Choose third bodypart</string>
+    <string name="bodypart_fourth_prompt">Choose other bodypart</string>
+    <string name="exercise_last_prompt">Last and next default</string>
+    <string name="exercise_number_helper">Last and next default</string>
+    <string name="exercise_last_trained_none">No training history</string>
+    <string name="exercise_max_label">Max Weight :</string>
     <string name="cancel_button_text" tools:ignore="ButtonCase">CANCEL</string>
     <string name="save_button_text" tools:ignore="ButtonCase">SAVE</string>
-
+    <string name="send_button_text" tools:ignore="ButtonCase">SEND</string>
+    <string name="select_button_text" tools:ignore="ButtonCase">SELECT</string>
+    <string name="ok_button_text" tools:ignore="ButtonCase">OK</string>
+    <string name="template_name_label">Create a new template name</string>
+    <string name="template_find_name_helper" >Find and change existing...</string>
+    <string name="template_error_name_helper" >Existing template found</string>
+    <!-- Strings related to Settings -->
+    <string name="user_pref_1">Confirm details before session start</string>
+    <string name="user_pref_2">Confirm session details before finishing</string>
+    <string name="user_pref_3">Confirm before exiting ATrackIt</string>
+    <string name="user_pref_4">Use watch body sensors with ATrackIt</string>
+    <string name="user_pref_5">Mute sound and vibrate feedback for ATrackIt</string>
+    <string name="user_pref_6">Yes = use KG units X = use lbs units</string>
+    <string name="user_pref_7">Use timed breaks between sets</string>
+    <string name="user_pref_8">Favourite Activity 1</string>
+    <string name="user_pref_9">Favourite Activity 2</string>
+    <string name="user_pref_10">Favourite Activity 3</string>
+    <string name="user_pref_11">Favourite Activity 4</string>
     <!-- Content Descriptions -->
+    <string name="expand_icon_desc">Expand sets icon</string>
     <string name="activity_icon_desc">Activity icon</string>
+    <string name="start_icon_desc">Start button</string>
+    <string name="report_icon_desc">Report</string>
+    <string name="delete_icon_desc">Delete button</string>
     <string name="close_icon_desc">Close button</string>
-
-    <string-array name="graph_types">
+    <string name="no_permission_okay">The requested service will not be accessed</string>
+    <string name="location_permission_reason">ATrackIt uses your location information to track (speed,distance) and monitor your workout. Simply turn off and on location tracking as needed in settings.</string>
+    <string name="sensor_permission_reason">ATrackIt requests the use of sensors to track and monitor your workout. Nobody but you will have access to this data unless explicitly shared by you. Turn off and on using sensors in settings.</string>
+    <string name="recog_permission_reason">ATrackIt requests the use of activity recognition to optimize sensor use and provide summary reports of activity</string>
+    <string name="has_device_text">Click Yes if you have ATrackIt on your Wear OS smart watch</string>
+    <string name="label_settings_dont_use">Do not use watch app</string>
+    <string name="label_location_enabled">Use Location Updates</string>
+    <string name="label_location_disabled">Do NOT track Location</string>
+    <string name="setting_location_disabled">Location Updates Disabled</string>
+    <string name="label_settings_show_goals">Show goals on homepage</string>
+    <string-array name="graph_unit_of_year">
         <item>Day</item>
         <item>Week</item>
+        <item>Month</item>
     </string-array>
-
+    <string-array name="graph_chart_types">
+        <item>Bar</item>
+        <item>Line</item>
+        <item>Scatter</item>
+    </string-array>
+    <string-array name="graph_gym_metrics">
+        <item>Reps</item>
+        <item>Sets</item>
+        <item>Weight</item>
+        <item>Watts</item>
+        <item>Duration</item>
+        <item>BPM</item>
+    </string-array>
+    <string-array name="graph_cardio_metrics">
+        <item>Duration</item>
+        <item>Steps</item>
+        <item>BPM</item>
+        <item>Move Mins</item>
+        <item>Heart Pts</item>
+        <item>Calories</item>
+        <item>Distance</item>
+    </string-array>
+    <string-array name="graph_gym_grouping">
+        <item>Region</item>
+        <item>Bodypart</item>
+        <item>Exercise</item>
+        <item>Equipment</item>
+    </string-array>
+    <string-array name="period_types">
+        <item>Today</item>
+        <item>Week</item>
+        <item>Last Week</item>
+        <item>Month</item>
+        <item>Last Month</item>
+        <item>Ninety Days</item>
+        <item>Year to Date</item>
+    </string-array>
+    <string-array name="object_types">
+        <item>Type…</item>
+        <item>Bodypart</item>
+        <item>Exercise</item>
+        <item>Workout</item>
+    </string-array>
+    <string-array name="object_sort_types">
+        <item>Sort by…</item>
+        <item>Last Trained</item>
+        <item>Last Sets</item>
+        <item>Last Reps</item>
+        <item>Last Weight</item>
+    </string-array>
+    <string-array name="exercise_filter_types">
+        <item>Filter by…</item>
+        <item>Bodypart</item>
+        <item>Resistance Type</item>
+        <item>Last Reps</item>
+        <item>Last Weight</item>
+    </string-array>
+    <string-array name="bodypart_filter_types">
+        <item>Filter by…</item>
+        <item>Region</item>
+        <item>Push/Pull</item>
+        <item>Last Sets</item>
+        <item>Last Reps</item>
+        <item>Last Weight</item>
+    </string-array>
+    <string-array name="push_pull_list">
+        <item>All Muscles</item>
+        <item>Push Muscles</item>
+        <item>Pull Muscles</item>
+    </string-array>
+    <string-array name="region_list">
+        <item>Select region…</item>
+        <item>Torso</item>
+        <item>Legs</item>
+        <item>Shoulders</item>
+        <item>Arms</item>
+        <item>Core</item>
+    </string-array>
+    <string-array name="bodypart_list">
+        <item>Select bodypart…</item>
+        <item>Chest</item>
+        <item>Back</item>
+        <item>Legs</item>
+        <item>Shoulders</item>
+        <item>Arms</item>
+        <item>Core</item>
+        <item>Upper Chest</item>
+        <item>Lower Chest</item>
+        <item>Lats</item>
+        <item>Traps</item>
+        <item>Lower Back</item>
+        <item>Upper Back</item>
+        <item>Butt</item>
+        <item>Hamstrings</item>
+        <item>Thighs</item>
+        <item>Calves</item>
+        <item>Adductors</item>
+        <item>Front Delts</item>
+        <item>Side Delts</item>
+        <item>Rear Delts</item>
+        <item>Biceps</item>
+        <item>Triceps</item>
+        <item>Forearms</item>
+        <item>Abs</item>
+        <item>Obliques</item>
+    </string-array>
+    <string-array name="resistance_type_list">
+        <item>Equipment…</item>
+        <item>Barbell</item>
+        <item>Bodyweight</item>
+        <item>Cable</item>
+        <item>Dumbbell</item>
+        <item>Kettlebell</item>
+        <item>Machine</item>
+        <item>N\/A</item>
+    </string-array>
+    <string-array name="sort_list">
+        <item>Select sort by…</item>
+        <item>Ascending</item>
+        <item>Descending</item>
+    </string-array>
+    <string-array name="number_list">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="cheese_ipsum">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue
+    cheese caerphilly bavarian bergkase cheese and biscuits mascarpone. Cheeseburger swiss bavarian
+    bergkase cream cheese fromage frais cheesy feet port-salut airedale. St. agur blue cheese rubber
+    cheese caerphilly cheddar cheesecake cream cheese manchego lancashire. Roquefort squirty cheese
+    the big cheese.</string>
 </resources>

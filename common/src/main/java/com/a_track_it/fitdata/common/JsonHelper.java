@@ -1,5 +1,5 @@
 package com.a_track_it.fitdata.common;
-import com.a_track_it.fitdata.common.model.Workout;
+import com.a_track_it.fitdata.common.data_model.Workout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,7 +24,7 @@ public class JsonHelper {
             json.put("start", workout.start);
             json.put("duration", workout.duration);
             json.put("activityName", workout.activityName);
-            json.put("activityName", workout.packageName);
+            json.put("packageName", workout.packageName);
             json.put("stepCount", workout.stepCount);
             json.put("setCount", workout.setCount);
             json.put("repCount", workout.repCount);

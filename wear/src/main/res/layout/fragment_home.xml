@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollview_home"
+    android:background="@color/primaryDarkColor"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/main_constraint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_home_start"
+            style="@style/Widget.MyApp.MyIconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/big_padding"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/label_activity"
+            app:icon="@drawable/ic_add_white" />
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/home_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:strokeColor="@color/primaryLightColor"
+            app:strokeWidth="@dimen/tiny_padding"
+            android:layout_marginStart="@dimen/big_padding"
+            android:layout_marginEnd="@dimen/big_padding">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/card_constraint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Chronometer android:id="@+id/chronoClock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                style="@style/Widget.MyApp.MyChronoClock"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewMsgLeft"
+            style="@style/Widget.MyApp.MyHomeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/home_edge_margin"
+            android:layout_marginEnd="@dimen/live_image_view_padding"
+            android:drawablePadding="@dimen/button_icon_padding"
+            app:drawableTint="@color/primaryTextColor"
+            android:text="@string/label_bpm"
+            app:drawableRightCompat="@drawable/ic_heart_outline"
+            app:iconSize="@dimen/home_button_icon_size"
+            app:layout_constraintEnd_toStartOf="@+id/textViewMsgRight"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chronoClock" />
+
+        <TextView
+            android:id="@+id/textViewMsgRight"
+            style="@style/Widget.MyApp.MyHomeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/home_edge_margin"
+            android:drawablePadding="@dimen/button_icon_padding"
+            app:drawableTint="@color/primaryTextColor"
+            android:text="@string/label_steps"
+            app:drawableLeftCompat="@drawable/ic_watch_white"
+            app:iconSize="@dimen/home_button_icon_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textViewMsgLeft"
+            app:layout_constraintTop_toBottomOf="@+id/chronoClock" />
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrierDevices"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="textViewMsgLeft,chronoClock,textViewMsgRight" />
+        <TextView
+            android:id="@+id/textViewCenter1"
+            style="@style/Widget.MyApp.MyHomeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/home_edge_small_margin"
+            android:layout_marginEnd="@dimen/home_edge_small_margin"
+            android:drawablePadding="@dimen/button_icon_padding"
+            app:drawableTint="@color/secondaryTextColor"
+            app:iconSize="@dimen/home_button_icon_size"
+            android:paddingStart="@dimen/tiny_padding"
+            android:paddingEnd="@dimen/tiny_padding"
+            android:textColor="@color/secondaryTextColor"
+            android:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@id/textViewCenter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewMsgRight"
+            tools:text="8 mins" />
+
+        <TextView
+            android:id="@+id/textViewCenter"
+            style="@style/Widget.MyApp.MyHomeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/home_edge_small_margin"
+            android:layout_marginEnd="@dimen/home_edge_small_margin"
+            android:paddingStart="@dimen/tiny_padding"
+            android:paddingEnd="@dimen/tiny_padding"
+            android:textColor="@color/secondaryTextColor"
+            app:iconSize="@dimen/home_button_icon_size"
+            android:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@id/textViewCenter3"
+            app:layout_constraintStart_toEndOf="@id/textViewCenter1"
+            app:layout_constraintTop_toBottomOf="@id/textViewMsgRight"
+            tools:text="Tennis Score" />
+
+        <TextView
+            android:id="@+id/textViewCenter3"
+            style="@style/Widget.MyApp.MyHomeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/home_edge_small_margin"
+            android:layout_marginEnd="@dimen/home_edge_small_margin"
+            android:drawablePadding="@dimen/button_icon_padding"
+            app:drawableTint="@color/secondaryTextColor"
+            app:iconSize="@dimen/home_button_icon_size"
+            android:paddingStart="@dimen/tiny_padding"
+            android:paddingEnd="@dimen/tiny_padding"
+            android:textColor="@color/secondaryTextColor"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textViewCenter"
+            app:layout_constraintTop_toBottomOf="@id/textViewMsgRight"
+            tools:text="10/25 pts" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrierScores"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="textViewCenter1,textViewCenter,textViewCenter3,barrierDevices" />
+
+           <Chronometer
+               android:id="@+id/chronoViewCenter"
+               style="@style/Widget.MyApp.MyHomeText"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="@dimen/home_edge_margin"
+               android:layout_marginEnd="@dimen/home_edge_margin"
+               android:contentDescription="@string/label_target_duration"
+               app:drawableTint="@color/primaryTextColor"
+               android:paddingStart="@dimen/small_padding"
+               android:paddingEnd="@dimen/small_padding"
+               android:textSize="@dimen/chronometer_text_size"
+               android:visibility="visible"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toBottomOf="@id/barrierScores" />
+
+           <ProgressBar
+               android:id="@+id/home_progress_view"
+               android:layout_width="@dimen/home_progress_size"
+               android:layout_height="@dimen/home_progress_size"
+               android:indeterminate="true"
+               android:visibility="visible"
+               android:indeterminateTint="@color/secondaryDarkColor"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toBottomOf="@id/chronoViewCenter" />
+
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrierLive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="chronoViewCenter,home_progress_view" />
+        <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+            android:id="@+id/home_reveal_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_padding"
+            android:padding="@dimen/tiny_padding"
+            android:clipChildren="false"
+            android:elevation="@dimen/small_padding"
+            app:cardCornerRadius="@dimen/small_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/barrierLive"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.MaterialCardView.Rounded">
+            <ImageView
+                android:id="@+id/home_image_view"
+                android:layout_width="@dimen/home_image_size"
+                android:layout_height="@dimen/home_image_size"
+                android:contentDescription="@string/app_name"
+                android:visibility="visible"
+                app:srcCompat="@drawable/ic_launcher" />
+        </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
+        <TextView
+            android:id="@+id/textViewCenter2"
+            style="@style/Widget.MyApp.MyHomeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/home_edge_margin"
+            android:layout_marginEnd="@dimen/home_edge_margin"
+            android:drawablePadding="@dimen/button_icon_padding"
+            android:layout_marginTop="@dimen/small_padding"
+            app:iconSize="@dimen/home_button_icon_size"
+            android:textSize="@dimen/home_title_text_size2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/home_reveal_view"
+            tools:text="location" />
+        <TextView
+            android:id="@+id/textViewCenterLeft"
+            style="@style/Widget.MyApp.MyHomeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/home_edge_margin"
+            android:drawablePadding="@dimen/button_icon_padding"
+            app:drawableTint="@color/primaryTextColor"
+            android:textSize="@dimen/home_title_text_size3"
+            app:iconSize="@dimen/home_button_icon_size"
+            app:layout_constraintBottom_toBottomOf="@+id/home_reveal_view"
+            app:layout_constraintEnd_toStartOf="@+id/home_reveal_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/home_reveal_view"
+            tools:text="cal" />
+        <TextView
+            android:id="@+id/textViewCenterRight"
+            style="@style/Widget.MyApp.MyHomeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/home_edge_margin"
+            android:drawablePadding="@dimen/button_icon_padding"
+            app:drawableTint="@color/primaryTextColor"
+            android:textSize="@dimen/home_title_text_size3"
+            app:iconSize="@dimen/home_button_icon_size"
+            app:layout_constraintBottom_toBottomOf="@+id/home_reveal_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/home_reveal_view"
+            app:layout_constraintTop_toTopOf="@+id/home_reveal_view"
+            tools:text="m" />
+        <TextView
+            android:id="@+id/textViewMsgBottomLeft"
+            style="@style/Widget.MyApp.MyHomeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/home_edge_margin"
+            android:layout_marginBottom="@dimen/big_padding"
+            android:drawablePadding="@dimen/button_icon_padding"
+            app:drawableTint="@color/primaryTextColor"
+            app:drawableLeftCompat="@drawable/ic_battery_full_white"
+            app:iconSize="@dimen/home_button_icon_size"
+            app:layout_constraintEnd_toStartOf="@id/textViewMsgBottomRight"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewCenter2"
+            tools:text="Player 1" />
+
+        <TextView
+            android:id="@+id/textViewMsgBottomRight"
+            style="@style/Widget.MyApp.MyHomeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/big_padding"
+            android:layout_marginStart="@dimen/home_edge_margin"
+            android:drawablePadding="@dimen/button_icon_padding"
+            app:drawableTint="@color/primaryTextColor"
+            app:drawableLeftCompat="@drawable/ic_barometer"
+            app:iconSize="@dimen/home_button_icon_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textViewMsgBottomLeft"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCenter2"
+            tools:text="Player 2" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+        <TextView
+            android:id="@+id/textViewBottom"
+            style="@style/Widget.MyApp.MyHomeBigText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/home_edge_margin"
+            android:layout_marginEnd="@dimen/home_edge_margin"
+            android:text="@string/app_name" />
+        <androidx.wear.widget.WearableRecyclerView
+            android:id="@+id/home_recycle_view"
+            style="@style/Widget.MyApp.MyHomeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible" />
+    </LinearLayout>
+</ScrollView>

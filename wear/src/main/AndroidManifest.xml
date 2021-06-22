@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.a_track_it.fitdata">
     <uses-feature android:name="android.hardware.type.watch" />
-    <uses-feature android:name="android.hardware.location.gps" />
+    <uses-feature android:name="android.hardware.location.gps" android:required="false" />
+    <uses-feature android:name="android.hardware.sensor.heartrate" android:required="false" />
+    <uses-feature android:name="android.hardware.sensor.stepcounter" android:required="false" />
+    <uses-feature android:name="android.hardware.sensor.stepdetector" android:required="false"/>
+    <uses-feature android:name="android.hardware.sensor.gyroscope" android:required="false" />
+    <uses-feature android:name="android.hardware.sensor.accelerometer"  android:required="false" />
+    <uses-feature android:name="android.hardware.sensor.barometer" android:required="false" />
+    <uses-feature android:name="android.hardware.sensor.relative_humidity" android:required="false" />
+    <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.PROVIDE_BACKGROUND" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
     <uses-permission android:name="android.permission.BODY_SENSORS" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -17,123 +25,197 @@
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION"/>
     <application
-        android:allowBackup="true"
-        android:fullBackupContent="@xml/backup_files"
-        android:icon="@drawable/ic_launcher_home"
-        android:label="@string/app_name"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="@string/app_said_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <!-- must be API level 22 or greater -->
-        <uses-library
-            android:name="com.google.android.wearable" android:required="true" />
-        <!--
-               Set to true if your app is Standalone, that is, it does not require the handheld
-               app to run.
-        -->
+        android:appCategory="productivity"
+        android:theme="@style/Theme.MyApp">
+        <activity
+            android:name="com.a_track_it.fitdata.activity.ReportActivity"
+            android:label="@string/label_routine"
+            android:parentActivityName=".activity.RoomActivity"
+            android:theme="@style/Theme.MyApp"
+            android:launchMode="singleTask"
+            android:excludeFromRecents="true">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a_track_it.fitdata.activity.RoomActivity" />
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.a_track_it.fitdata.activity.RoomActivity"
+            android:launchMode="singleInstance"
+            android:taskAffinity=""
+            android:documentLaunchMode="intoExisting"
+            android:label="@string/app_said_name"
+            android:allowEmbedded="false"
+            android:excludeFromRecents="false">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="vnd.google.fitness.VIEW" />
+                <data android:mimeType="vnd.google.fitness.session/biking" />
+                <data android:mimeType="vnd.google.fitness.session/running" />
+                <data android:mimeType="vnd.google.fitness.session/strength_training" />
+                <data android:mimeType="vnd.google.fitness.session/tennis" />
+                <data android:mimeType="vnd.google.fitness.session/swimming" />
+                <data android:mimeType="vnd.google.fitness.session/walking" />
+                <data android:mimeType="vnd.google.fitness.data_type/com.google.step_count.cumulative" />
+                <data android:mimeType="vnd.google.fitness.data_type/com.google.step_count.delta" />
+            </intent-filter>
+            <!-- sent by us to listeners -->
+            <intent-filter>
+                <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/wear_message_path"  />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/start-activity"/>
+            </intent-filter>
+            <intent-filter> <!-- implicit to start app -->
+                <action android:name="com.a_track_it.com.fitdata.LOGIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>  <!-- explicit from wear service -->
+                <action android:name="com.a_track_it.com.fitdata.workout.START" />
+                <action android:name="com.a_track_it.com.fitdata.workout.STOP" />
+                <action android:name="com.a_track_it.com.fitdata.workoutset.START" />
+                <action android:name="com.a_track_it.com.fitdata.workoutset.STOP" />
+                <action android:name="com.a_track_it.com.fitdata.TOTALS" />
+            </intent-filter>
+
+
+        </activity>
+        <activity
+            android:name="com.a_track_it.fitdata.activity.SplasherActivity"
+            android:launchMode="singleTop"
+            android:label="@string/app_said_name"
+            android:theme="@style/AppTheme.Launcher"
+            android:excludeFromRecents="true">
+        </activity>
+        <activity android:name="androidx.wear.activity.ConfirmationActivity" />
+        <meta-data
+            android:name="com.google.android.wearable.notificationBridgeMode"
+            android:value="NO_BRIDGING" />
         <meta-data
             android:name="com.google.android.wearable.standalone"
             android:value="true" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
-        <activity
-            android:name=".activity.PermissionsActivity"
-            android:label="@string/title_activity_permissions"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".activity.InitialActivity"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".activity.RoomActivity"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".activity.NewWordActivity"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".activity.SplashActivity"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:roundIcon="@drawable/ic_launcher_home"
-            android:theme="@style/AppTheme.Launcher">
+        <!-- [START fcm_default_icon] -->
+        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
+             See README(https://goo.gl/l4GJaQ) for more.
+        -->
+        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
+        <!--
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_a_outlined" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+         [END fcm_default_icon]
+         [START fcm_default_channel]
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" />
+        -->
+        <receiver
+            android:name=".service.CustomIntentReceiver"
+            android:enabled="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="com.a_track_it.fitdata.EXER_RECOG" />
+                <action android:name="com.a_track_it.fitdata.ACT_RECOG" />
+                <action android:name="com.a_track_it.fitdata.ACT_DAILY" />
+                <action android:name="com.a_track_it.fitdata.message.TOAST" />
+                <action android:name="com.a_track_it.fitdata.message.VIBRATE" />
+                <action android:name="com.a_track_it.com.fitdata.START_REFRESH" />
             </intent-filter>
-        </activity>
-        <activity android:name=".activity.WearMainActivity"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:roundIcon="@drawable/ic_launcher_home"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        </receiver>
+        <receiver android:name=".service.BootCompleteReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="com.a_track_it.fitdata.datalayer.EXAMPLE" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".activity.MainActivity"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:roundIcon="@drawable/ic_launcher_home"
-            android:theme="@style/AppTheme">
-        </activity>
-        <activity android:name="android.support.wearable.activity.ConfirmationActivity" />
+        </receiver>
+        <!-- [START FireBase_service]
         <service
-            android:name=".service.ReadHistoryIntentService"
-            android:exported="false" />
-
-        <service
-            android:name=".service.FITAPIManager"
-            android:enabled="true"
-            android:exported="false" />
-        <service
-            android:name=".service.IncomingRequestWearService"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
-
-                <data
-                    android:host="*"
-                    android:pathPrefix="/"
-                    android:scheme="wear" />
-            </intent-filter>
-        </service>
-        <service
-            android:name=".service.DataLayerListenerService"
-            android:enabled="true"
+            android:name=".service.FCMService"
             android:exported="false">
             <intent-filter>
-
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+         [END firebase_service] -->
+        <service
+            android:name=".service.CustomWearListenerService" >
+            <intent-filter>
                 <!-- listeners receive events that match the action and data filters -->
+                <action android:name="com.google.android.gms.wearable.CAPABILITY_CHANGED" />
+                <action android:name="com.google.android.gms.wearable.CHANNEL_EVENT" />
+            </intent-filter>
+            <!-- sent by controlling tracker -->
+            <intent-filter>
                 <action android:name="com.google.android.gms.wearable.DATA_CHANGED" />
-
-                <data
-                    android:host="*"
-                    android:pathPrefix="/count"
-                    android:scheme="wear" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/count"/>
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/image"/>
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/camera"/>
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/wear-data-item"/>
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/wear-sync-item"/>
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/wear-data-bundle"/>
             </intent-filter>
             <intent-filter>
                 <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
-                <data
-                    android:host="*"
-                    android:pathPrefix="/start-activity"
-                    android:scheme="wear" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/data-start-activity"/>
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/data-start-workout"/>
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/data-stop-workout" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/data-start-workout-set" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/data-stop-workout-set" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/wear_message_path_service"  />
             </intent-filter>
         </service>
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="66296b93b004277db3a3392eb9ecdef5e5c03210" />
-    </application>
+        <service
+            android:name=".common.service.ActivityRecognizedService"
+            android:enabled="true"
+            android:exported="false" />
+        <service
+            android:name=".common.service.ExerciseDetectedService"
+            android:enabled="true"
+            android:exported="false" />
+        <service
+            android:name=".common.service.DailySummaryJobIntentService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name=".common.data_model.SkuJobIntentService"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name=".common.data_model.LicenceJobIntentService"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name=".common.data_model.FitSyncJobIntentService"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name=".common.data_model.FitSessionJobIntentService"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name=".common.data_model.FitPopulateJobIntentService"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
 
+        <uses-library android:name="com.google.android.wearable" android:required="true" />
+    </application>
 </manifest>

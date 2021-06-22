@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/recycler_simplest_row_height"
     android:layout_gravity="center"
+    android:background="@drawable/bg_selector_recycleview"
     android:orientation="horizontal"
     android:paddingTop="3dp"
     android:paddingBottom="3dp">
@@ -12,10 +13,9 @@
         android:id="@+id/single_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_color_green_dark"
         android:gravity="center"
         android:paddingLeft="@dimen/recycler_row_padding"
-        android:textColor="@color/semiWhite"
-        android:textSize="@dimen/recycler_simple_row_text_size"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="@dimen/wear_msg_text_size"
         tools:text="this has been a nice item" />
 </LinearLayout>

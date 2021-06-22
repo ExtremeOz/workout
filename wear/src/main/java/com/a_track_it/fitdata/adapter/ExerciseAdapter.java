@@ -7,13 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
+
 import com.a_track_it.fitdata.R;
-import com.a_track_it.fitdata.data_model.Exercise;
-import com.a_track_it.fitdata.user_model.Utilities;
+import com.a_track_it.fitdata.common.data_model.Exercise;
 
 import java.util.ArrayList;
-
-import androidx.core.content.ContextCompat;
 
 
 public class ExerciseAdapter extends androidx.wear.widget.WearableRecyclerView.Adapter<ATrackItListViewHolder>{
@@ -24,7 +24,8 @@ public class ExerciseAdapter extends androidx.wear.widget.WearableRecyclerView.A
     private OnItemClickListener onItemClickListener;
 
     private Context mContext;
-
+    private int selectedPos = androidx.wear.widget.WearableRecyclerView.NO_POSITION;
+    private long mTargetId;
 
     public ExerciseAdapter(Context context) {
         this.mContext = context;
@@ -36,6 +37,17 @@ public class ExerciseAdapter extends androidx.wear.widget.WearableRecyclerView.A
         for (Exercise item : itemsList){
             if (!this.items.contains(item)) this.items.add(item);
         }
+    }
+    public void setTargetId(long targetId){
+        if (targetId > 0){
+            mTargetId = targetId;
+            notifyDataSetChanged();
+        }else mTargetId = 0;
+    }
+    public void clearSelected(){
+        this.mTargetId = 0;
+        this.selectedPos = androidx.wear.widget.WearableRecyclerView.NO_POSITION;
+        notifyDataSetChanged();
     }
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
@@ -51,33 +63,50 @@ public class ExerciseAdapter extends androidx.wear.widget.WearableRecyclerView.A
     public void onBindViewHolder(ATrackItListViewHolder holder, final int position) {
         final Exercise item;
         item = items.get(position);
+        if (mTargetId == 0)
+            holder.itemView.setSelected(selectedPos == position);
+        else
+            holder.itemView.setSelected(item._id == mTargetId);
+
+        holder.itemView.setOnClickListener(v -> {
+            if (onItemClickListener != null) {
+                Log.d(TAG, "text onclick " + Integer.toString(items.size()));
+                onItemClickListener.onItemClick(v, item);
+                notifyItemChanged(selectedPos);
+                selectedPos = holder.getLayoutPosition();
+                mTargetId = 0;
+                notifyItemChanged(selectedPos);
+
+            }
+        });
         holder.text.setText(item.name);
-        holder.text.setOnClickListener(new View.OnClickListener() {
+        holder.text.setOnClickListener(view -> {
+            if (onItemClickListener != null) {
+                Log.d(TAG, "text onclick " + Integer.toString(items.size()));
+                onItemClickListener.onItemClick(view, item);
+                notifyItemChanged(selectedPos);
+                selectedPos = holder.getLayoutPosition();
+                mTargetId = 0;
+                notifyItemChanged(selectedPos);
 
-            @Override
-            public void onClick(View view) {
-                if (onItemClickListener != null) {
-                    Log.d(TAG, "text onclick " + Integer.toString(items.size()));
-                    onItemClickListener.onItemClick(view, item);
-                }
             }
         });
-      //  holder.image.setImageResource(item.resource_id);
-        holder.image.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                if (onItemClickListener != null) {
-                    Log.d(TAG, "image onclick " + Integer.toString(items.size()));
-                    onItemClickListener.onItemClick(view, item);
-                }
+        holder.image.setImageDrawable(AppCompatResources.getDrawable(mContext, R.drawable.ic_bench));
+        holder.image.setOnClickListener(view -> {
+            if (onItemClickListener != null) {
+                Log.d(TAG, "image onclick " + Integer.toString(items.size()));
+                onItemClickListener.onItemClick(view, item);
+                notifyItemChanged(selectedPos);
+                selectedPos = holder.getLayoutPosition();
+                mTargetId = 0;
+                notifyItemChanged(selectedPos);
             }
         });
-        int vibrant = ContextCompat.getColor(mContext, R.color.colorAccent);  //item.color
+        int vibrant = ContextCompat.getColor(mContext, R.color.primaryDarkColor);  //item.color
         //holder.container.setBackgroundColor(vibrant);
         holder.image.setColorFilter(ContextCompat.getColor(mContext,android.R.color.white), PorterDuff.Mode.SRC_IN);
-        holder.image.setBackgroundColor(Utilities.lighter(vibrant, 0.4f));
-        holder.text.setTag(item);
+        holder.image.setBackgroundColor(vibrant); //  Utilities.lighter(vibrant, 0.4f));
+    //    holder.text.setTag(item);
 
         // This is just not working as expected. Switching to use hard coded color.
         // TODO: Colorize image to match pre-defined color. Allowing user to select the color at some point.

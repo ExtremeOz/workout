@@ -1,0 +1,2911 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "b38efdb7e573fa2f47702927412c7ef9",
+    "entities": [
+      {
+        "tableName": "bodypart_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`rowid` INTEGER NOT NULL, `shortName` TEXT NOT NULL, `fullName` TEXT NOT NULL, `imageName` TEXT, `regionID` INTEGER, `regionName` TEXT, `parentID` INTEGER, `parentName` TEXT, `powerFactor` REAL NOT NULL, `sessionCount` INTEGER NOT NULL, `exerciseCount` INTEGER NOT NULL, `setMin` INTEGER NOT NULL, `setMax` INTEGER NOT NULL, `repMin` INTEGER NOT NULL, `repMax` INTEGER NOT NULL, `lastTrained` INTEGER NOT NULL, `lastTrainedBP2` INTEGER NOT NULL, `lastTrainedBP3` INTEGER NOT NULL, `lastSets` INTEGER NOT NULL, `lastReps` INTEGER NOT NULL, `lastWeight` REAL NOT NULL, `lastTotalWatts` REAL NOT NULL, `lastAvgWatts` REAL NOT NULL, `avgSets` REAL NOT NULL, `avgReps` REAL NOT NULL, `avgWeight` REAL NOT NULL, `avgTotalWatts` REAL NOT NULL, `maxWeight` REAL NOT NULL, `maxWatts` REAL NOT NULL, `lastMaxWeight` INTEGER NOT NULL, `lastMaxWatts` INTEGER NOT NULL, `flagPushPull` INTEGER NOT NULL, `lastUpdated` INTEGER NOT NULL, `fav1ExerciseID` INTEGER, `fav2ExerciseID` INTEGER, `fav3ExerciseID` INTEGER, PRIMARY KEY(`rowid`), FOREIGN KEY(`regionID`) REFERENCES `bodyregion_table`(`rowid`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`fav1ExerciseID`) REFERENCES `exercise_table`(`rowid`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`fav2ExerciseID`) REFERENCES `exercise_table`(`rowid`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`fav3ExerciseID`) REFERENCES `exercise_table`(`rowid`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "_id",
+            "columnName": "rowid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "shortName",
+            "columnName": "shortName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fullName",
+            "columnName": "fullName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "imageName",
+            "columnName": "imageName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "regionID",
+            "columnName": "regionID",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "regionName",
+            "columnName": "regionName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "parentID",
+            "columnName": "parentID",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "parentName",
+            "columnName": "parentName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "powerFactor",
+            "columnName": "powerFactor",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sessionCount",
+            "columnName": "sessionCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "exerciseCount",
+            "columnName": "exerciseCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "setMin",
+            "columnName": "setMin",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "setMax",
+            "columnName": "setMax",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "repMin",
+            "columnName": "repMin",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "repMax",
+            "columnName": "repMax",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastTrained",
+            "columnName": "lastTrained",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastTrainedBP2",
+            "columnName": "lastTrainedBP2",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastTrainedBP3",
+            "columnName": "lastTrainedBP3",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastSets",
+            "columnName": "lastSets",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastReps",
+            "columnName": "lastReps",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastWeight",
+            "columnName": "lastWeight",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastTotalWatts",
+            "columnName": "lastTotalWatts",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastAvgWatts",
+            "columnName": "lastAvgWatts",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "avgSets",
+            "columnName": "avgSets",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "avgReps",
+            "columnName": "avgReps",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "avgWeight",
+            "columnName": "avgWeight",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "avgTotalWatts",
+            "columnName": "avgTotalWatts",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "maxWeight",
+            "columnName": "maxWeight",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "maxWatts",
+            "columnName": "maxWatts",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastMaxWeight",
+            "columnName": "lastMaxWeight",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastMaxWatts",
+            "columnName": "lastMaxWatts",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "flagPushPull",
+            "columnName": "flagPushPull",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastUpdated",
+            "columnName": "lastUpdated",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fav1ExerciseID",
+            "columnName": "fav1ExerciseID",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fav2ExerciseID",
+            "columnName": "fav2ExerciseID",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fav3ExerciseID",
+            "columnName": "fav3ExerciseID",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "rowid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_bodypart_table_shortName",
+            "unique": true,
+            "columnNames": [
+              "shortName"
+            ],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_bodypart_table_shortName` ON `${TABLE_NAME}` (`shortName`)"
+          },
+          {
+            "name": "index_bodypart_table_regionID",
+            "unique": false,
+            "columnNames": [
+              "regionID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_bodypart_table_regionID` ON `${TABLE_NAME}` (`regionID`)"
+          },
+          {
+            "name": "index_bodypart_table_lastTrained",
+            "unique": false,
+            "columnNames": [
+              "lastTrained"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_bodypart_table_lastTrained` ON `${TABLE_NAME}` (`lastTrained`)"
+          },
+          {
+            "name": "index_bodypart_table_lastTrainedBP2",
+            "unique": false,
+            "columnNames": [
+              "lastTrainedBP2"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_bodypart_table_lastTrainedBP2` ON `${TABLE_NAME}` (`lastTrainedBP2`)"
+          },
+          {
+            "name": "index_bodypart_table_lastTrainedBP3",
+            "unique": false,
+            "columnNames": [
+              "lastTrainedBP3"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_bodypart_table_lastTrainedBP3` ON `${TABLE_NAME}` (`lastTrainedBP3`)"
+          },
+          {
+            "name": "index_bodypart_table_lastUpdated",
+            "unique": false,
+            "columnNames": [
+              "lastUpdated"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_bodypart_table_lastUpdated` ON `${TABLE_NAME}` (`lastUpdated`)"
+          },
+          {
+            "name": "index_bodypart_table_fav1ExerciseID",
+            "unique": false,
+            "columnNames": [
+              "fav1ExerciseID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_bodypart_table_fav1ExerciseID` ON `${TABLE_NAME}` (`fav1ExerciseID`)"
+          },
+          {
+            "name": "index_bodypart_table_fav2ExerciseID",
+            "unique": false,
+            "columnNames": [
+              "fav2ExerciseID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_bodypart_table_fav2ExerciseID` ON `${TABLE_NAME}` (`fav2ExerciseID`)"
+          },
+          {
+            "name": "index_bodypart_table_fav3ExerciseID",
+            "unique": false,
+            "columnNames": [
+              "fav3ExerciseID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_bodypart_table_fav3ExerciseID` ON `${TABLE_NAME}` (`fav3ExerciseID`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "bodyregion_table",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "regionID"
+            ],
+            "referencedColumns": [
+              "rowid"
+            ]
+          },
+          {
+            "table": "exercise_table",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "fav1ExerciseID"
+            ],
+            "referencedColumns": [
+              "rowid"
+            ]
+          },
+          {
+            "table": "exercise_table",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "fav2ExerciseID"
+            ],
+            "referencedColumns": [
+              "rowid"
+            ]
+          },
+          {
+            "table": "exercise_table",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "fav3ExerciseID"
+            ],
+            "referencedColumns": [
+              "rowid"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "bodyregion_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`rowid` INTEGER NOT NULL, `regionName` TEXT NOT NULL, `imageName` TEXT NOT NULL, `lastTrained` INTEGER NOT NULL, `lastSets` INTEGER NOT NULL, `lastReps` INTEGER NOT NULL, `lastWeight` REAL NOT NULL, `lastTotalWatts` REAL NOT NULL, `lastAvgWatts` REAL NOT NULL, `maxWeight` REAL NOT NULL, `maxWatts` REAL NOT NULL, `lastMaxWeight` INTEGER NOT NULL, `lastMaxWatts` INTEGER NOT NULL, `exerciseCount` INTEGER NOT NULL, PRIMARY KEY(`rowid`))",
+        "fields": [
+          {
+            "fieldPath": "_id",
+            "columnName": "rowid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "regionName",
+            "columnName": "regionName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "imageName",
+            "columnName": "imageName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastTrained",
+            "columnName": "lastTrained",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastSets",
+            "columnName": "lastSets",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastReps",
+            "columnName": "lastReps",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastWeight",
+            "columnName": "lastWeight",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastTotalWatts",
+            "columnName": "lastTotalWatts",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastAvgWatts",
+            "columnName": "lastAvgWatts",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "maxWeight",
+            "columnName": "maxWeight",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "maxWatts",
+            "columnName": "maxWatts",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastMaxWeight",
+            "columnName": "lastMaxWeight",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastMaxWatts",
+            "columnName": "lastMaxWatts",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "exerciseCount",
+            "columnName": "exerciseCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "rowid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "exercise_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`rowid` INTEGER NOT NULL, `exerciseName` TEXT NOT NULL, `resistanceType` INTEGER, `resistanceTypeName` TEXT, `workoutExercise` TEXT, `otherNames` TEXT, `powerFloat` REAL NOT NULL, `sessionCount` INTEGER NOT NULL, `bodypartCount` INTEGER NOT NULL, `first_BPID` INTEGER, `first_BPName` TEXT, `second_BPID` INTEGER, `second_BPName` TEXT, `third_BPID` INTEGER, `third_BPName` TEXT, `fourth_BPID` INTEGER, `fourth_BPName` TEXT, `lastTrained` INTEGER NOT NULL, `lastAvgWeight` REAL NOT NULL, `lastSelectedWeight` REAL NOT NULL, `lastAvgWatts` REAL NOT NULL, `lastSets` INTEGER NOT NULL, `lastReps` INTEGER NOT NULL, `maxWeightReps` INTEGER NOT NULL, `maxWeight` REAL NOT NULL, `minWeight` REAL NOT NULL, `avgWatts` REAL NOT NULL, `totalWatts` REAL NOT NULL, `maxReps` INTEGER NOT NULL, `minReps` INTEGER NOT NULL, `totalReps` INTEGER NOT NULL, `lastMaxWeight` INTEGER NOT NULL, `lastTotalWatts` INTEGER NOT NULL, `lastUpdated` INTEGER NOT NULL, PRIMARY KEY(`rowid`), FOREIGN KEY(`first_BPID`) REFERENCES `bodypart_table`(`rowid`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`second_BPID`) REFERENCES `bodypart_table`(`rowid`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`third_BPID`) REFERENCES `bodypart_table`(`rowid`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`fourth_BPID`) REFERENCES `bodypart_table`(`rowid`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`resistanceType`) REFERENCES `resistance_type_table`(`rowid`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "_id",
+            "columnName": "rowid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "exerciseName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "resistanceType",
+            "columnName": "resistanceType",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "resistanceTypeName",
+            "columnName": "resistanceTypeName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "workoutExercise",
+            "columnName": "workoutExercise",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "otherNames",
+            "columnName": "otherNames",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "powerFactor",
+            "columnName": "powerFloat",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sessionCount",
+            "columnName": "sessionCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "bodypartCount",
+            "columnName": "bodypartCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "first_BPID",
+            "columnName": "first_BPID",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "first_BPName",
+            "columnName": "first_BPName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "second_BPID",
+            "columnName": "second_BPID",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "second_BPName",
+            "columnName": "second_BPName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "third_BPID",
+            "columnName": "third_BPID",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "third_BPName",
+            "columnName": "third_BPName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fourth_BPID",
+            "columnName": "fourth_BPID",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fourth_BPName",
+            "columnName": "fourth_BPName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lastTrained",
+            "columnName": "lastTrained",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastAvgWeight",
+            "columnName": "lastAvgWeight",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastSelectedWeight",
+            "columnName": "lastSelectedWeight",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastAvgWatts",
+            "columnName": "lastAvgWatts",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastSets",
+            "columnName": "lastSets",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastReps",
+            "columnName": "lastReps",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "maxWeightReps",
+            "columnName": "maxWeightReps",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "maxWeight",
+            "columnName": "maxWeight",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "minWeight",
+            "columnName": "minWeight",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "avgWatts",
+            "columnName": "avgWatts",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "totalWatts",
+            "columnName": "totalWatts",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "maxReps",
+            "columnName": "maxReps",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "minReps",
+            "columnName": "minReps",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "totalReps",
+            "columnName": "totalReps",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastMaxWeight",
+            "columnName": "lastMaxWeight",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastTotalWatts",
+            "columnName": "lastTotalWatts",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastUpdated",
+            "columnName": "lastUpdated",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "rowid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_exercise_table_exerciseName",
+            "unique": false,
+            "columnNames": [
+              "exerciseName"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_exercise_table_exerciseName` ON `${TABLE_NAME}` (`exerciseName`)"
+          },
+          {
+            "name": "index_exercise_table_resistanceType",
+            "unique": false,
+            "columnNames": [
+              "resistanceType"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_exercise_table_resistanceType` ON `${TABLE_NAME}` (`resistanceType`)"
+          },
+          {
+            "name": "index_exercise_table_workoutExercise",
+            "unique": false,
+            "columnNames": [
+              "workoutExercise"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_exercise_table_workoutExercise` ON `${TABLE_NAME}` (`workoutExercise`)"
+          },
+          {
+            "name": "index_exercise_table_otherNames",
+            "unique": false,
+            "columnNames": [
+              "otherNames"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_exercise_table_otherNames` ON `${TABLE_NAME}` (`otherNames`)"
+          },
+          {
+            "name": "index_exercise_table_first_BPID",
+            "unique": false,
+            "columnNames": [
+              "first_BPID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_exercise_table_first_BPID` ON `${TABLE_NAME}` (`first_BPID`)"
+          },
+          {
+            "name": "index_exercise_table_second_BPID",
+            "unique": false,
+            "columnNames": [
+              "second_BPID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_exercise_table_second_BPID` ON `${TABLE_NAME}` (`second_BPID`)"
+          },
+          {
+            "name": "index_exercise_table_third_BPID",
+            "unique": false,
+            "columnNames": [
+              "third_BPID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_exercise_table_third_BPID` ON `${TABLE_NAME}` (`third_BPID`)"
+          },
+          {
+            "name": "index_exercise_table_fourth_BPID",
+            "unique": false,
+            "columnNames": [
+              "fourth_BPID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_exercise_table_fourth_BPID` ON `${TABLE_NAME}` (`fourth_BPID`)"
+          },
+          {
+            "name": "index_exercise_table_lastTrained",
+            "unique": false,
+            "columnNames": [
+              "lastTrained"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_exercise_table_lastTrained` ON `${TABLE_NAME}` (`lastTrained`)"
+          },
+          {
+            "name": "index_exercise_table_lastUpdated",
+            "unique": false,
+            "columnNames": [
+              "lastUpdated"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_exercise_table_lastUpdated` ON `${TABLE_NAME}` (`lastUpdated`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "bodypart_table",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "first_BPID"
+            ],
+            "referencedColumns": [
+              "rowid"
+            ]
+          },
+          {
+            "table": "bodypart_table",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "second_BPID"
+            ],
+            "referencedColumns": [
+              "rowid"
+            ]
+          },
+          {
+            "table": "bodypart_table",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "third_BPID"
+            ],
+            "referencedColumns": [
+              "rowid"
+            ]
+          },
+          {
+            "table": "bodypart_table",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "fourth_BPID"
+            ],
+            "referencedColumns": [
+              "rowid"
+            ]
+          },
+          {
+            "table": "resistance_type_table",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "resistanceType"
+            ],
+            "referencedColumns": [
+              "rowid"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "fitness_type_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`rowid` INTEGER NOT NULL, `name` TEXT NOT NULL, `session_count` INTEGER NOT NULL, `last_session` INTEGER NOT NULL, PRIMARY KEY(`rowid`))",
+        "fields": [
+          {
+            "fieldPath": "_id",
+            "columnName": "rowid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "session_count",
+            "columnName": "session_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "last_session",
+            "columnName": "last_session",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "rowid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "fitness_activity_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`rowid` INTEGER NOT NULL, `name` TEXT NOT NULL, `resource_id` INTEGER NOT NULL, `color` INTEGER NOT NULL, `type` INTEGER NOT NULL, `identifier` TEXT, `session_count` INTEGER NOT NULL, `last_session` INTEGER NOT NULL, PRIMARY KEY(`rowid`), FOREIGN KEY(`type`) REFERENCES `fitness_type_table`(`rowid`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "_id",
+            "columnName": "rowid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "resource_id",
+            "columnName": "resource_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "color",
+            "columnName": "color",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "identifier",
+            "columnName": "identifier",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "session_count",
+            "columnName": "session_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "last_session",
+            "columnName": "last_session",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "rowid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_fitness_activity_table_type",
+            "unique": false,
+            "columnNames": [
+              "type"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_fitness_activity_table_type` ON `${TABLE_NAME}` (`type`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "fitness_type_table",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "type"
+            ],
+            "referencedColumns": [
+              "rowid"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "config_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`stringName` TEXT NOT NULL, `userValue` TEXT NOT NULL, `stringValue` TEXT, `longValue` INTEGER NOT NULL, `stringValue1` TEXT, `stringValue2` TEXT, PRIMARY KEY(`stringName`, `userValue`))",
+        "fields": [
+          {
+            "fieldPath": "stringName",
+            "columnName": "stringName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userValue",
+            "columnName": "userValue",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "stringValue",
+            "columnName": "stringValue",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "longValue",
+            "columnName": "longValue",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "stringValue1",
+            "columnName": "stringValue1",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "stringValue2",
+            "columnName": "stringValue2",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "stringName",
+            "userValue"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_config_table_stringValue",
+            "unique": false,
+            "columnNames": [
+              "stringValue"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_config_table_stringValue` ON `${TABLE_NAME}` (`stringValue`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "resistance_type_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`rowid` INTEGER NOT NULL, `resistanceName` TEXT, `imageName` TEXT, PRIMARY KEY(`rowid`))",
+        "fields": [
+          {
+            "fieldPath": "_id",
+            "columnName": "rowid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "resistanceName",
+            "columnName": "resistanceName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "imageName",
+            "columnName": "imageName",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "rowid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "object_agg_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`rowid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `userID` TEXT NOT NULL, `objectType` INTEGER NOT NULL, `objectID` INTEGER NOT NULL, `objectName` TEXT NOT NULL, `countSessions` INTEGER, `countSets` INTEGER, `minStart` INTEGER NOT NULL, `maxEnd` INTEGER NOT NULL, `maxReps` INTEGER, `minReps` INTEGER, `avgReps` REAL, `totalReps` INTEGER, `maxWeight` REAL, `avgWeight` REAL, `minWeight` REAL, `maxWatts` REAL, `avgWatts` REAL, `totalWatts` REAL, `maxDuration` INTEGER, `minDuration` INTEGER, `avgDuration` INTEGER, `maxRestDuration` INTEGER, `minRestDuration` INTEGER, `avgRestDuration` INTEGER, `maxElapsed` INTEGER, `minElapsed` INTEGER, `avgElapsed` INTEGER, `lastUpdated` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "_id",
+            "columnName": "rowid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userID",
+            "columnName": "userID",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "objectType",
+            "columnName": "objectType",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "objectID",
+            "columnName": "objectID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "objectName",
+            "columnName": "objectName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "countSessions",
+            "columnName": "countSessions",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "countSets",
+            "columnName": "countSets",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "minStart",
+            "columnName": "minStart",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "maxEnd",
+            "columnName": "maxEnd",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "maxReps",
+            "columnName": "maxReps",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "minReps",
+            "columnName": "minReps",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "avgReps",
+            "columnName": "avgReps",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "totalReps",
+            "columnName": "totalReps",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "maxWeight",
+            "columnName": "maxWeight",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "avgWeight",
+            "columnName": "avgWeight",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "minWeight",
+            "columnName": "minWeight",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "maxWatts",
+            "columnName": "maxWatts",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "avgWatts",
+            "columnName": "avgWatts",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "totalWatts",
+            "columnName": "totalWatts",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "maxDuration",
+            "columnName": "maxDuration",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "minDuration",
+            "columnName": "minDuration",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "avgDuration",
+            "columnName": "avgDuration",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "maxRestDuration",
+            "columnName": "maxRestDuration",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "minRestDuration",
+            "columnName": "minRestDuration",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "avgRestDuration",
+            "columnName": "avgRestDuration",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "maxElapsed",
+            "columnName": "maxElapsed",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "minElapsed",
+            "columnName": "minElapsed",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "avgElapsed",
+            "columnName": "avgElapsed",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lastUpdated",
+            "columnName": "lastUpdated",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "rowid"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_object_agg_table_userID_objectType_objectID",
+            "unique": true,
+            "columnNames": [
+              "userID",
+              "objectType",
+              "objectID"
+            ],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_object_agg_table_userID_objectType_objectID` ON `${TABLE_NAME}` (`userID`, `objectType`, `objectID`)"
+          },
+          {
+            "name": "index_object_agg_table_userID",
+            "unique": false,
+            "columnNames": [
+              "userID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_object_agg_table_userID` ON `${TABLE_NAME}` (`userID`)"
+          },
+          {
+            "name": "index_object_agg_table_objectType",
+            "unique": false,
+            "columnNames": [
+              "objectType"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_object_agg_table_objectType` ON `${TABLE_NAME}` (`objectType`)"
+          },
+          {
+            "name": "index_object_agg_table_objectID",
+            "unique": false,
+            "columnNames": [
+              "objectID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_object_agg_table_objectID` ON `${TABLE_NAME}` (`objectID`)"
+          },
+          {
+            "name": "index_object_agg_table_lastUpdated",
+            "unique": false,
+            "columnNames": [
+              "lastUpdated"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_object_agg_table_lastUpdated` ON `${TABLE_NAME}` (`lastUpdated`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "workout_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`rowid` INTEGER NOT NULL, `userID` TEXT, `deviceID` TEXT, `name` TEXT, `parentID` INTEGER, `duration` INTEGER NOT NULL, `start` INTEGER NOT NULL, `end` INTEGER NOT NULL, `activityID` INTEGER, `stepCount` INTEGER NOT NULL, `repCount` INTEGER NOT NULL, `setCount` INTEGER NOT NULL, `bodypartCount` INTEGER NOT NULL, `exerciseCount` INTEGER NOT NULL, `weightTotal` REAL, `wattsTotal` REAL, `packageName` TEXT, `activityName` TEXT, `identifier` TEXT, `last_sync` INTEGER NOT NULL, `offline_recording` INTEGER NOT NULL, `rest_duration` INTEGER NOT NULL, `pause_duration` INTEGER NOT NULL, `call_duration` INTEGER NOT NULL, `goal_duration` INTEGER NOT NULL, `goal_steps` INTEGER NOT NULL, `meta_sync` INTEGER NOT NULL, `device_sync` INTEGER NOT NULL, `scoreTotal` INTEGER NOT NULL, `lastUpdated` INTEGER NOT NULL, PRIMARY KEY(`rowid`), FOREIGN KEY(`activityID`) REFERENCES `fitness_activity_table`(`rowid`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "_id",
+            "columnName": "rowid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userID",
+            "columnName": "userID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "deviceID",
+            "columnName": "deviceID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "parentID",
+            "columnName": "parentID",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "duration",
+            "columnName": "duration",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "start",
+            "columnName": "start",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "end",
+            "columnName": "end",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "activityID",
+            "columnName": "activityID",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "stepCount",
+            "columnName": "stepCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "repCount",
+            "columnName": "repCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "setCount",
+            "columnName": "setCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "bodypartCount",
+            "columnName": "bodypartCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "exerciseCount",
+            "columnName": "exerciseCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "weightTotal",
+            "columnName": "weightTotal",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "wattsTotal",
+            "columnName": "wattsTotal",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "packageName",
+            "columnName": "packageName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "activityName",
+            "columnName": "activityName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "identifier",
+            "columnName": "identifier",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "last_sync",
+            "columnName": "last_sync",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "offline_recording",
+            "columnName": "offline_recording",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rest_duration",
+            "columnName": "rest_duration",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pause_duration",
+            "columnName": "pause_duration",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "call_duration",
+            "columnName": "call_duration",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "goal_duration",
+            "columnName": "goal_duration",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "goal_steps",
+            "columnName": "goal_steps",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "meta_sync",
+            "columnName": "meta_sync",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "device_sync",
+            "columnName": "device_sync",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "scoreTotal",
+            "columnName": "scoreTotal",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastUpdated",
+            "columnName": "lastUpdated",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "rowid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_workout_table_userID",
+            "unique": false,
+            "columnNames": [
+              "userID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_table_userID` ON `${TABLE_NAME}` (`userID`)"
+          },
+          {
+            "name": "index_workout_table_deviceID",
+            "unique": false,
+            "columnNames": [
+              "deviceID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_table_deviceID` ON `${TABLE_NAME}` (`deviceID`)"
+          },
+          {
+            "name": "index_workout_table_name",
+            "unique": false,
+            "columnNames": [
+              "name"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_table_name` ON `${TABLE_NAME}` (`name`)"
+          },
+          {
+            "name": "index_workout_table_parentID",
+            "unique": false,
+            "columnNames": [
+              "parentID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_table_parentID` ON `${TABLE_NAME}` (`parentID`)"
+          },
+          {
+            "name": "index_workout_table_start",
+            "unique": false,
+            "columnNames": [
+              "start"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_table_start` ON `${TABLE_NAME}` (`start`)"
+          },
+          {
+            "name": "index_workout_table_end",
+            "unique": false,
+            "columnNames": [
+              "end"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_table_end` ON `${TABLE_NAME}` (`end`)"
+          },
+          {
+            "name": "index_workout_table_activityID",
+            "unique": false,
+            "columnNames": [
+              "activityID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_table_activityID` ON `${TABLE_NAME}` (`activityID`)"
+          },
+          {
+            "name": "index_workout_table_packageName",
+            "unique": false,
+            "columnNames": [
+              "packageName"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_table_packageName` ON `${TABLE_NAME}` (`packageName`)"
+          },
+          {
+            "name": "index_workout_table_last_sync",
+            "unique": false,
+            "columnNames": [
+              "last_sync"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_table_last_sync` ON `${TABLE_NAME}` (`last_sync`)"
+          },
+          {
+            "name": "index_workout_table_offline_recording",
+            "unique": false,
+            "columnNames": [
+              "offline_recording"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_table_offline_recording` ON `${TABLE_NAME}` (`offline_recording`)"
+          },
+          {
+            "name": "index_workout_table_meta_sync",
+            "unique": false,
+            "columnNames": [
+              "meta_sync"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_table_meta_sync` ON `${TABLE_NAME}` (`meta_sync`)"
+          },
+          {
+            "name": "index_workout_table_device_sync",
+            "unique": false,
+            "columnNames": [
+              "device_sync"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_table_device_sync` ON `${TABLE_NAME}` (`device_sync`)"
+          },
+          {
+            "name": "index_workout_table_lastUpdated",
+            "unique": false,
+            "columnNames": [
+              "lastUpdated"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_table_lastUpdated` ON `${TABLE_NAME}` (`lastUpdated`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "fitness_activity_table",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "activityID"
+            ],
+            "referencedColumns": [
+              "rowid"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "workout_set_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`rowid` INTEGER NOT NULL, `userID` TEXT, `deviceID` TEXT, `workoutID` INTEGER, `duration` INTEGER NOT NULL, `pause_duration` INTEGER NOT NULL, `start` INTEGER NOT NULL, `end` INTEGER NOT NULL, `activityID` INTEGER, `exerciseID` INTEGER, `exerciseName` TEXT, `resistance_type` INTEGER, `regionID` INTEGER, `regionName` TEXT, `bodypartID` INTEGER, `bodypartName` TEXT, `stepCount` INTEGER, `repCount` INTEGER, `setCount` INTEGER NOT NULL, `weightTotal` REAL, `wattsTotal` REAL, `activityName` TEXT, `rest_duration` INTEGER, `call_duration` INTEGER, `goal_duration` INTEGER, `score_card` TEXT, `last_sync` INTEGER NOT NULL, `offline_recording` INTEGER, `realElapsedStart` INTEGER, `realElapsedEnd` INTEGER, `device_sync` INTEGER, `meta_sync` INTEGER, `per_end_xy` TEXT, `scoreTotal` INTEGER NOT NULL, `startBPM` REAL, `endBPM` REAL, `lastUpdated` INTEGER NOT NULL, PRIMARY KEY(`rowid`), FOREIGN KEY(`workoutID`) REFERENCES `workout_table`(`rowid`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`activityID`) REFERENCES `fitness_activity_table`(`rowid`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`regionID`) REFERENCES `bodyregion_table`(`rowid`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`bodypartID`) REFERENCES `bodypart_table`(`rowid`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`exerciseID`) REFERENCES `exercise_table`(`rowid`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`resistance_type`) REFERENCES `resistance_type_table`(`rowid`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "_id",
+            "columnName": "rowid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userID",
+            "columnName": "userID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "deviceID",
+            "columnName": "deviceID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "workoutID",
+            "columnName": "workoutID",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "duration",
+            "columnName": "duration",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pause_duration",
+            "columnName": "pause_duration",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "start",
+            "columnName": "start",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "end",
+            "columnName": "end",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "activityID",
+            "columnName": "activityID",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "exerciseID",
+            "columnName": "exerciseID",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "exerciseName",
+            "columnName": "exerciseName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "resistance_type",
+            "columnName": "resistance_type",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "regionID",
+            "columnName": "regionID",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "regionName",
+            "columnName": "regionName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bodypartID",
+            "columnName": "bodypartID",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bodypartName",
+            "columnName": "bodypartName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "stepCount",
+            "columnName": "stepCount",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "repCount",
+            "columnName": "repCount",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "setCount",
+            "columnName": "setCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "weightTotal",
+            "columnName": "weightTotal",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "wattsTotal",
+            "columnName": "wattsTotal",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "activityName",
+            "columnName": "activityName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "rest_duration",
+            "columnName": "rest_duration",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "call_duration",
+            "columnName": "call_duration",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "goal_duration",
+            "columnName": "goal_duration",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "score_card",
+            "columnName": "score_card",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "last_sync",
+            "columnName": "last_sync",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "offline_recording",
+            "columnName": "offline_recording",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "realElapsedStart",
+            "columnName": "realElapsedStart",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "realElapsedEnd",
+            "columnName": "realElapsedEnd",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "device_sync",
+            "columnName": "device_sync",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "meta_sync",
+            "columnName": "meta_sync",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "per_end_xy",
+            "columnName": "per_end_xy",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "scoreTotal",
+            "columnName": "scoreTotal",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startBPM",
+            "columnName": "startBPM",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "endBPM",
+            "columnName": "endBPM",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lastUpdated",
+            "columnName": "lastUpdated",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "rowid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_workout_set_table_userID",
+            "unique": false,
+            "columnNames": [
+              "userID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_set_table_userID` ON `${TABLE_NAME}` (`userID`)"
+          },
+          {
+            "name": "index_workout_set_table_deviceID",
+            "unique": false,
+            "columnNames": [
+              "deviceID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_set_table_deviceID` ON `${TABLE_NAME}` (`deviceID`)"
+          },
+          {
+            "name": "index_workout_set_table_workoutID",
+            "unique": false,
+            "columnNames": [
+              "workoutID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_set_table_workoutID` ON `${TABLE_NAME}` (`workoutID`)"
+          },
+          {
+            "name": "index_workout_set_table_start",
+            "unique": false,
+            "columnNames": [
+              "start"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_set_table_start` ON `${TABLE_NAME}` (`start`)"
+          },
+          {
+            "name": "index_workout_set_table_end",
+            "unique": false,
+            "columnNames": [
+              "end"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_set_table_end` ON `${TABLE_NAME}` (`end`)"
+          },
+          {
+            "name": "index_workout_set_table_activityID",
+            "unique": false,
+            "columnNames": [
+              "activityID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_set_table_activityID` ON `${TABLE_NAME}` (`activityID`)"
+          },
+          {
+            "name": "index_workout_set_table_exerciseID",
+            "unique": false,
+            "columnNames": [
+              "exerciseID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_set_table_exerciseID` ON `${TABLE_NAME}` (`exerciseID`)"
+          },
+          {
+            "name": "index_workout_set_table_resistance_type",
+            "unique": false,
+            "columnNames": [
+              "resistance_type"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_set_table_resistance_type` ON `${TABLE_NAME}` (`resistance_type`)"
+          },
+          {
+            "name": "index_workout_set_table_regionID",
+            "unique": false,
+            "columnNames": [
+              "regionID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_set_table_regionID` ON `${TABLE_NAME}` (`regionID`)"
+          },
+          {
+            "name": "index_workout_set_table_bodypartID",
+            "unique": false,
+            "columnNames": [
+              "bodypartID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_set_table_bodypartID` ON `${TABLE_NAME}` (`bodypartID`)"
+          },
+          {
+            "name": "index_workout_set_table_score_card",
+            "unique": false,
+            "columnNames": [
+              "score_card"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_set_table_score_card` ON `${TABLE_NAME}` (`score_card`)"
+          },
+          {
+            "name": "index_workout_set_table_last_sync",
+            "unique": false,
+            "columnNames": [
+              "last_sync"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_set_table_last_sync` ON `${TABLE_NAME}` (`last_sync`)"
+          },
+          {
+            "name": "index_workout_set_table_offline_recording",
+            "unique": false,
+            "columnNames": [
+              "offline_recording"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_set_table_offline_recording` ON `${TABLE_NAME}` (`offline_recording`)"
+          },
+          {
+            "name": "index_workout_set_table_device_sync",
+            "unique": false,
+            "columnNames": [
+              "device_sync"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_set_table_device_sync` ON `${TABLE_NAME}` (`device_sync`)"
+          },
+          {
+            "name": "index_workout_set_table_meta_sync",
+            "unique": false,
+            "columnNames": [
+              "meta_sync"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_set_table_meta_sync` ON `${TABLE_NAME}` (`meta_sync`)"
+          },
+          {
+            "name": "index_workout_set_table_lastUpdated",
+            "unique": false,
+            "columnNames": [
+              "lastUpdated"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_set_table_lastUpdated` ON `${TABLE_NAME}` (`lastUpdated`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "workout_table",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "workoutID"
+            ],
+            "referencedColumns": [
+              "rowid"
+            ]
+          },
+          {
+            "table": "fitness_activity_table",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "activityID"
+            ],
+            "referencedColumns": [
+              "rowid"
+            ]
+          },
+          {
+            "table": "bodyregion_table",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "regionID"
+            ],
+            "referencedColumns": [
+              "rowid"
+            ]
+          },
+          {
+            "table": "bodypart_table",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "bodypartID"
+            ],
+            "referencedColumns": [
+              "rowid"
+            ]
+          },
+          {
+            "table": "exercise_table",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "exerciseID"
+            ],
+            "referencedColumns": [
+              "rowid"
+            ]
+          },
+          {
+            "table": "resistance_type_table",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "resistance_type"
+            ],
+            "referencedColumns": [
+              "rowid"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "workout_meta_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`rowid` INTEGER NOT NULL, `userID` TEXT, `deviceID` TEXT, `workoutID` INTEGER, `setID` INTEGER, `description` TEXT, `duration` INTEGER NOT NULL, `start` INTEGER NOT NULL, `end` INTEGER NOT NULL, `activityID` INTEGER, `stepCount` INTEGER NOT NULL, `repCount` INTEGER NOT NULL, `setCount` INTEGER NOT NULL, `avgBPM` REAL NOT NULL, `minBPM` REAL NOT NULL, `maxBPM` REAL NOT NULL, `weightTotal` REAL NOT NULL, `wattsTotal` REAL NOT NULL, `packageName` TEXT, `activityName` TEXT, `identifier` TEXT, `shootFormatID` INTEGER NOT NULL, `shootFormat` TEXT, `distanceID` INTEGER NOT NULL, `distanceName` TEXT, `last_sync` INTEGER NOT NULL, `equipmentID` INTEGER NOT NULL, `equipmentName` TEXT, `targetSizeID` INTEGER NOT NULL, `targetSizeName` TEXT, `totalPossible` INTEGER NOT NULL, `shotsPerEnd` INTEGER NOT NULL, `rest_duration` INTEGER NOT NULL, `call_duration` INTEGER NOT NULL, `score_card` TEXT, `totalScore` INTEGER NOT NULL, `pause_duration` INTEGER NOT NULL, `start_steps` INTEGER NOT NULL, `end_steps` INTEGER NOT NULL, `goal_duration` INTEGER NOT NULL, `goal_steps` INTEGER NOT NULL, `move_mins` INTEGER NOT NULL, `heart_pts` REAL NOT NULL, `total_calories` REAL NOT NULL, `distance` REAL NOT NULL, `device_sync` INTEGER NOT NULL, `cloud_sync` INTEGER NOT NULL, `per_end_xy` TEXT, PRIMARY KEY(`rowid`), FOREIGN KEY(`workoutID`) REFERENCES `workout_table`(`rowid`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`activityID`) REFERENCES `fitness_activity_table`(`rowid`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "_id",
+            "columnName": "rowid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userID",
+            "columnName": "userID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "deviceID",
+            "columnName": "deviceID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "workoutID",
+            "columnName": "workoutID",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "setID",
+            "columnName": "setID",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "duration",
+            "columnName": "duration",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "start",
+            "columnName": "start",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "end",
+            "columnName": "end",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "activityID",
+            "columnName": "activityID",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "stepCount",
+            "columnName": "stepCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "repCount",
+            "columnName": "repCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "setCount",
+            "columnName": "setCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "avgBPM",
+            "columnName": "avgBPM",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "minBPM",
+            "columnName": "minBPM",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "maxBPM",
+            "columnName": "maxBPM",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "weightTotal",
+            "columnName": "weightTotal",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "wattsTotal",
+            "columnName": "wattsTotal",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "packageName",
+            "columnName": "packageName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "activityName",
+            "columnName": "activityName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "identifier",
+            "columnName": "identifier",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "shootFormatID",
+            "columnName": "shootFormatID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "shootFormat",
+            "columnName": "shootFormat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "distanceID",
+            "columnName": "distanceID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "distanceName",
+            "columnName": "distanceName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "last_sync",
+            "columnName": "last_sync",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "equipmentID",
+            "columnName": "equipmentID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "equipmentName",
+            "columnName": "equipmentName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "targetSizeID",
+            "columnName": "targetSizeID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "targetSizeName",
+            "columnName": "targetSizeName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "totalPossible",
+            "columnName": "totalPossible",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "shotsPerEnd",
+            "columnName": "shotsPerEnd",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rest_duration",
+            "columnName": "rest_duration",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "call_duration",
+            "columnName": "call_duration",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "score_card",
+            "columnName": "score_card",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "totalScore",
+            "columnName": "totalScore",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pause_duration",
+            "columnName": "pause_duration",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "start_steps",
+            "columnName": "start_steps",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "end_steps",
+            "columnName": "end_steps",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "goal_duration",
+            "columnName": "goal_duration",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "goal_steps",
+            "columnName": "goal_steps",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "move_mins",
+            "columnName": "move_mins",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "heart_pts",
+            "columnName": "heart_pts",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "total_calories",
+            "columnName": "total_calories",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "distance",
+            "columnName": "distance",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "device_sync",
+            "columnName": "device_sync",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cloud_sync",
+            "columnName": "cloud_sync",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "per_end_xy",
+            "columnName": "per_end_xy",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "rowid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_workout_meta_table_userID",
+            "unique": false,
+            "columnNames": [
+              "userID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_meta_table_userID` ON `${TABLE_NAME}` (`userID`)"
+          },
+          {
+            "name": "index_workout_meta_table_deviceID",
+            "unique": false,
+            "columnNames": [
+              "deviceID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_meta_table_deviceID` ON `${TABLE_NAME}` (`deviceID`)"
+          },
+          {
+            "name": "index_workout_meta_table_workoutID",
+            "unique": false,
+            "columnNames": [
+              "workoutID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_meta_table_workoutID` ON `${TABLE_NAME}` (`workoutID`)"
+          },
+          {
+            "name": "index_workout_meta_table_setID",
+            "unique": false,
+            "columnNames": [
+              "setID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_meta_table_setID` ON `${TABLE_NAME}` (`setID`)"
+          },
+          {
+            "name": "index_workout_meta_table_start",
+            "unique": false,
+            "columnNames": [
+              "start"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_meta_table_start` ON `${TABLE_NAME}` (`start`)"
+          },
+          {
+            "name": "index_workout_meta_table_end",
+            "unique": false,
+            "columnNames": [
+              "end"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_meta_table_end` ON `${TABLE_NAME}` (`end`)"
+          },
+          {
+            "name": "index_workout_meta_table_activityID",
+            "unique": false,
+            "columnNames": [
+              "activityID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_meta_table_activityID` ON `${TABLE_NAME}` (`activityID`)"
+          },
+          {
+            "name": "index_workout_meta_table_last_sync",
+            "unique": false,
+            "columnNames": [
+              "last_sync"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_meta_table_last_sync` ON `${TABLE_NAME}` (`last_sync`)"
+          },
+          {
+            "name": "index_workout_meta_table_equipmentID",
+            "unique": false,
+            "columnNames": [
+              "equipmentID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_meta_table_equipmentID` ON `${TABLE_NAME}` (`equipmentID`)"
+          },
+          {
+            "name": "index_workout_meta_table_targetSizeID",
+            "unique": false,
+            "columnNames": [
+              "targetSizeID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_meta_table_targetSizeID` ON `${TABLE_NAME}` (`targetSizeID`)"
+          },
+          {
+            "name": "index_workout_meta_table_device_sync",
+            "unique": false,
+            "columnNames": [
+              "device_sync"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_meta_table_device_sync` ON `${TABLE_NAME}` (`device_sync`)"
+          },
+          {
+            "name": "index_workout_meta_table_cloud_sync",
+            "unique": false,
+            "columnNames": [
+              "cloud_sync"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_meta_table_cloud_sync` ON `${TABLE_NAME}` (`cloud_sync`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "workout_table",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "workoutID"
+            ],
+            "referencedColumns": [
+              "rowid"
+            ]
+          },
+          {
+            "table": "fitness_activity_table",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "activityID"
+            ],
+            "referencedColumns": [
+              "rowid"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "userdaily_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`rowid` INTEGER, `userID` TEXT, `stepCount` INTEGER NOT NULL, `activeMinutes` INTEGER NOT NULL, `distanceTravelled` REAL NOT NULL, `caloriesExpended` REAL NOT NULL, `heartIntensity` REAL NOT NULL, `heartDuration` INTEGER NOT NULL, `maxBPM` REAL NOT NULL, `minBPM` REAL NOT NULL, `avgBPM` REAL NOT NULL, `maxSpeed` REAL NOT NULL, `minSpeed` REAL NOT NULL, `avgSpeed` REAL NOT NULL, `lastLatitude` REAL NOT NULL, `lastLongitude` REAL NOT NULL, `lastAltitude` REAL NOT NULL, `lastSpeed` REAL NOT NULL, `lastLocation` TEXT, `durationVehicle` INTEGER NOT NULL, `durationBiking` INTEGER NOT NULL, `durationOnFoot` INTEGER NOT NULL, `durationStill` INTEGER NOT NULL, `durationUnknown` INTEGER NOT NULL, `durationTilting` INTEGER NOT NULL, `durationWalking` INTEGER NOT NULL, `durationRunning` INTEGER NOT NULL, `lastUpdated` INTEGER NOT NULL, PRIMARY KEY(`rowid`))",
+        "fields": [
+          {
+            "fieldPath": "_id",
+            "columnName": "rowid",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "userID",
+            "columnName": "userID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "stepCount",
+            "columnName": "stepCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "activeMinutes",
+            "columnName": "activeMinutes",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "distanceTravelled",
+            "columnName": "distanceTravelled",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "caloriesExpended",
+            "columnName": "caloriesExpended",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "heartIntensity",
+            "columnName": "heartIntensity",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "heartDuration",
+            "columnName": "heartDuration",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "maxBPM",
+            "columnName": "maxBPM",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "minBPM",
+            "columnName": "minBPM",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "avgBPM",
+            "columnName": "avgBPM",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "maxSpeed",
+            "columnName": "maxSpeed",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "minSpeed",
+            "columnName": "minSpeed",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "avgSpeed",
+            "columnName": "avgSpeed",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastLatitude",
+            "columnName": "lastLatitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastLongitude",
+            "columnName": "lastLongitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastAltitude",
+            "columnName": "lastAltitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastSpeed",
+            "columnName": "lastSpeed",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastLocation",
+            "columnName": "lastLocation",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "durationVehicle",
+            "columnName": "durationVehicle",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "durationBiking",
+            "columnName": "durationBiking",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "durationOnFoot",
+            "columnName": "durationOnFoot",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "durationStill",
+            "columnName": "durationStill",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "durationUnknown",
+            "columnName": "durationUnknown",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "durationTilting",
+            "columnName": "durationTilting",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "durationWalking",
+            "columnName": "durationWalking",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "durationRunning",
+            "columnName": "durationRunning",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastUpdated",
+            "columnName": "lastUpdated",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "rowid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_userdaily_table_rowid_userID",
+            "unique": true,
+            "columnNames": [
+              "rowid",
+              "userID"
+            ],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_userdaily_table_rowid_userID` ON `${TABLE_NAME}` (`rowid`, `userID`)"
+          },
+          {
+            "name": "index_userdaily_table_userID",
+            "unique": false,
+            "columnNames": [
+              "userID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_userdaily_table_userID` ON `${TABLE_NAME}` (`userID`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "sensordaily_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`rowid` INTEGER NOT NULL, `userID` TEXT, `activityType` INTEGER NOT NULL, `lastActivityType` INTEGER NOT NULL, `deviceStep` INTEGER NOT NULL, `lastDeviceStep` INTEGER NOT NULL, `deviceBPM` REAL NOT NULL, `lastDeviceBPM` INTEGER NOT NULL, `temperature` REAL NOT NULL, `humidity` REAL NOT NULL, `pressure` REAL NOT NULL, `lastDeviceOther` INTEGER NOT NULL, `fitStep` INTEGER NOT NULL, `lastFitStep` INTEGER NOT NULL, `fitBPM` REAL NOT NULL, `lastFitBPM` INTEGER NOT NULL, `fitLat` REAL NOT NULL, `fitLng` REAL NOT NULL, `fitLocation` TEXT, `device2Step` INTEGER NOT NULL, `lastDevice2Step` INTEGER NOT NULL, `device2BPM` REAL NOT NULL, `lastDevice2BPM` INTEGER NOT NULL, `temperature2` REAL NOT NULL, `humidity2` REAL NOT NULL, `pressure2` REAL NOT NULL, `lastDevice2Other` INTEGER NOT NULL, `lastUpdated` INTEGER NOT NULL, PRIMARY KEY(`rowid`))",
+        "fields": [
+          {
+            "fieldPath": "_id",
+            "columnName": "rowid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userID",
+            "columnName": "userID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "activityType",
+            "columnName": "activityType",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastActivityType",
+            "columnName": "lastActivityType",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "deviceStep",
+            "columnName": "deviceStep",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastDeviceStep",
+            "columnName": "lastDeviceStep",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "deviceBPM",
+            "columnName": "deviceBPM",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastDeviceBPM",
+            "columnName": "lastDeviceBPM",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "temperature",
+            "columnName": "temperature",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "humidity",
+            "columnName": "humidity",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pressure",
+            "columnName": "pressure",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastDeviceOther",
+            "columnName": "lastDeviceOther",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fitStep",
+            "columnName": "fitStep",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastFitStep",
+            "columnName": "lastFitStep",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fitBPM",
+            "columnName": "fitBPM",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastFitBPM",
+            "columnName": "lastFitBPM",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fitLat",
+            "columnName": "fitLat",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fitLng",
+            "columnName": "fitLng",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fitLocation",
+            "columnName": "fitLocation",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "device2Step",
+            "columnName": "device2Step",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastDevice2Step",
+            "columnName": "lastDevice2Step",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "device2BPM",
+            "columnName": "device2BPM",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastDevice2BPM",
+            "columnName": "lastDevice2BPM",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "temperature2",
+            "columnName": "temperature2",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "humidity2",
+            "columnName": "humidity2",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pressure2",
+            "columnName": "pressure2",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastDevice2Other",
+            "columnName": "lastDevice2Other",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastUpdated",
+            "columnName": "lastUpdated",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "rowid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_sensordaily_table_rowid_userID",
+            "unique": true,
+            "columnNames": [
+              "rowid",
+              "userID"
+            ],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_sensordaily_table_rowid_userID` ON `${TABLE_NAME}` (`rowid`, `userID`)"
+          },
+          {
+            "name": "index_sensordaily_table_userID",
+            "unique": false,
+            "columnNames": [
+              "userID"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_sensordaily_table_userID` ON `${TABLE_NAME}` (`userID`)"
+          },
+          {
+            "name": "index_sensordaily_table_lastUpdated",
+            "unique": false,
+            "columnNames": [
+              "lastUpdated"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_sensordaily_table_lastUpdated` ON `${TABLE_NAME}` (`lastUpdated`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "latlng_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`rowid` INTEGER NOT NULL, `shortName` TEXT, `Lat` REAL, `Lng` REAL, `Speed` REAL, `Alt` REAL, `BPM` REAL, `Steps` INTEGER, PRIMARY KEY(`rowid`))",
+        "fields": [
+          {
+            "fieldPath": "_id",
+            "columnName": "rowid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "shortName",
+            "columnName": "shortName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Lat",
+            "columnName": "Lat",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Lng",
+            "columnName": "Lng",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Speed",
+            "columnName": "Speed",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Alt",
+            "columnName": "Alt",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "BPM",
+            "columnName": "BPM",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Steps",
+            "columnName": "Steps",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "rowid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_latlng_table_Lat",
+            "unique": false,
+            "columnNames": [
+              "Lat"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_latlng_table_Lat` ON `${TABLE_NAME}` (`Lat`)"
+          },
+          {
+            "name": "index_latlng_table_Lng",
+            "unique": false,
+            "columnNames": [
+              "Lng"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_latlng_table_Lng` ON `${TABLE_NAME}` (`Lng`)"
+          }
+        ],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b38efdb7e573fa2f47702927412c7ef9')"
+    ]
+  }
+}

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:viewBindingIgnore="true"
+    android:minHeight="@dimen/medium_card_height"
+    android:background="@color/primaryDarkColor"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:id="@+id/filterLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/template_name_label"
+        android:labelFor="@id/autoCompleteFindName"
+        android:layout_marginTop="@dimen/big_padding"
+        android:padding="@dimen/small_padding"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nameMic"
+        style="@style/Widget.MyApp.MyRecycleButton"
+        app:icon="@drawable/ic_microphone_white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/filterLabel"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <FrameLayout android:id="@+id/nameFrame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/filterLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editInputLayoutName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:completionThreshold="3"
+            android:hint="@string/exercise_name_prompt"
+            android:importantForAutofill="no"
+            android:orientation="horizontal"
+            android:padding="@dimen/small_padding"
+            app:boxStrokeColor="@color/secondaryColor"
+            app:endIconMode="clear_text"
+            app:helperText="@string/exercise_find_name_helper"
+            app:helperTextTextColor="@color/primaryLightColor"
+            app:hintEnabled="true"
+            app:errorEnabled="true"
+            app:errorContentDescription="Unique name is required"
+            android:layout_marginBottom="@dimen/big_padding"
+            app:hintTextColor="@color/primaryLightColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/labelList2">
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteFindName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:completionThreshold="3"
+                android:inputType="textCapWords|textAutoComplete"
+                app:endIconMode="clear_text"
+                app:endIconContentDescription="clear text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/nameFrame">
+        <ImageButton
+            android:id="@+id/NegativeButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:contentDescription="@string/contentDescription_no"
+            android:background="@android:color/darker_gray"
+            android:focusableInTouchMode="true"
+            app:srcCompat="@drawable/ic_outline_cancel_white" />
+
+        <ImageButton
+            android:id="@+id/PositiveButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:contentDescription="@string/contentDescription_yes"
+            android:background="@color/primaryLightColor"
+            android:focusableInTouchMode="true"
+            app:srcCompat="@drawable/ic_outline_check_white">
+
+            <requestFocus />
+        </ImageButton>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

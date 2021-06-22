@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--<item android:id="@+id/action_pending_exercise"
+        android:title="@string/action_no_pending_exercise"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_outline_check_white"
+        app:showAsAction="always" />-->
+    <item android:id="@+id/action_type_spinner"
+        app:showAsAction="always"
+        android:orderInCategory="100"
+        app:actionViewClass="android.widget.Spinner"
+        android:title="Type" />
+    <item android:id="@+id/action_filter_spinner"
+        app:showAsAction="ifRoom"
+        android:orderInCategory="100"
+        app:actionViewClass="android.widget.Spinner"
+        android:title="Filter" />
+    <item android:id="@+id/action_sort_spinner"
+        app:showAsAction="ifRoom"
+        android:orderInCategory="100"
+        app:actionViewClass="android.widget.Spinner"
+        android:title="Sort" />
+    <item
+        android:id="@+id/search_participants"
+        android:icon="@drawable/ic_search"
+        android:title="@string/action_search"
+        android:orderInCategory="100"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="collapseActionView|ifRoom"/>
+
+</menu>

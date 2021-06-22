@@ -1,26 +1,102 @@
 <resources>
-    <string name="app_name">ATrackIt</string>
+    <string name="app_name">A-Track-It</string>
+    <string name="app_package">com.a-track-it.fitdata</string>
+    <string name="app_said_name">ATrackIt</string>
     <string name="imageCD">activity image</string>
+    <string name="bodypartCD">bodypart image</string>
     <string name="buttonCD">start image</string>
-    <string name="my_empty_string"></string>
-    <string name="my_space_string">&#160;</string>
-    <string name="action_new_archery">Archery</string>
-    <string name="action_new_workout">Gym</string>
-    <string name="action_new_cardio">Cardio</string>
-    <string name="action_new_sport">Sport</string>
-    <string name="action_new_other">Other</string>
-    <string name="action_new_more">More</string>
-    <string name="action_new_less">Less</string>
-    <string name="action_new_run">Running</string>
-    <string name="action_new_winter">Outdoors-Winter</string>
-    <string name="action_new_water">Air-Water</string>
-    <string name="action_new_bike">Cycle</string>
-    <string name="action_new_misc">Misc.</string>
+    <string name="contentDescription_yes">respond yes</string>
+    <string name="contentDescription_no">respond no</string>
+    <string name="edit_set_exercise">set the exercise</string>
+    <string name="edit_set_reps">set the reps</string>
+    <string name="edit_set_weight">set the weight</string>
+    <string name="my_tracking_string">&#160;is tracking&#160;</string>
+    <string name="my_div_string">\/</string>
+    <string name="msg_token_fmt" formatted="false">Token\: %s</string>
+    <string name="no_network_connection">Internet connection required to continue</string>
+    <string name="label_action">Action</string>
+    <string name="reply_action">Reply</string>
+    <string name="state_pending">Pending</string>
+    <string name="state_live">Live</string>
+    <string name="state_completed">Completed</string>
+    <string name="state_paused">Paused</string>
+    <string name="state_call">Call to Line</string>
+    <string name="state_invalid">Ready</string>
+    <string name="state_setup">Setup</string>
+    <string name="state_template">Template</string>
+    <string name="action_sensor_start">sensors active</string>
+    <string name="action_sync_start">starting cloud sync</string>
+    <string name="action_sync_error">sync failed&#160;</string>
+    <string name="action_sync_end">sync finished&#160;</string>
+    <string name="action_send_phone">Send to phone</string>
+    <string name="action_send_wear">Send to device</string>
+    <string name="action_wallpaper_home">Set Image</string>
+    <string name="action_new_exercise">Add Exercise</string>
+    <string name="action_pending_exercise">%d Require Edits</string>
+    <string name="action_no_pending_exercise">No Pending Edits</string>
+    <string name="action_no_changes">No changes to save</string>
+    <string name="action_no_data">No data found…</string>
+    <string name="action_data_policy">Data Policy</string>
+    <string name="action_add">Add</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_list">List</string>
+    <string name="action_name">Name</string>
+    <string name="action_edit_next">Edit Next</string>
     <string name="action_finish">Finish</string>
+    <string name="action_map">Map</string>
     <string name="action_pause">Pause</string>
+    <string name="action_stop_set">Finish Set</string>
     <string name="action_continue">Continue</string>
+    <string name="action_okay">Ok</string>
     <string name="action_exit">Exit</string>
     <string name="action_cancel">Cancel</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_repeat">Repeat</string>
+    <string name="action_copy">Copy</string>
+    <string name="action_select">Select</string>
+    <string name="action_save">Save</string>
+    <string name="action_save_template">Save Fav</string>
+    <string name="action_saved">Saved</string>
+    <string name="action_updated">Updated</string>
+    <string name="action_set_duration">Set Duration</string>
+    <string name="action_go">Go\!</string>
+    <string name="action_stop">Well Done\!</string>
+    <string name="action_open">Open</string>
+    <string name="action_open_template">Open Fav</string>
+    <string name="action_open_history">Open History</string>
+    <string name="action_template_start">Start Fav</string>
+    <string name="action_template_device">to Device</string>
+    <string name="action_label_device">Wear OS</string>
+
+    <string name="action_find">Find</string>
+    <string name="action_find_phone">Find Phone</string>
+    <string name="action_find_watch">Find Wear Watch</string>
+    <string name="action_loading">Loading…</string>
+    <string name="action_licence">Verifying…</string>
+    <string name="action_phone_camera">Send Photo</string>
+    <string name="action_phone_pick">Select Image</string>
+    <string name="action_home_camera">Take Photo</string>
+    <string name="action_home_pick">Pick Image</string>
+    <string name="action_review">Review</string>
+    <string name="action_bpm">BPM</string>
+    <string name="action_review_bpm">Daily BPM</string>
+    <string name="action_month_bpm">30 Days BPM</string>
+    <string name="action_start">Start</string>
+    <string name="action_view">View</string>
+    <string name="action_live">Live…</string>
+    <string name="action_add_history">Add History…</string>
+    <string name="action_call">Call to Line…</string>
+    <string name="action_offline">Offline…</string>
+    <string name="action_online">Online…</string>
+    <string name="action_nospeech_activity">Speech recognition app is missing</string>
+    <string name="action_cloud_running">…cloud sync with Google Fit</string>
+    <string name="action_cloud_save">…save to Google Fit cloud</string>
+    <string name="action_cloud_verify">…reading from Google Fit cloud</string>
+    <string name="action_cloud_history">…history save to Fit cloud</string>
+    <string name="action_db_running">…DB query is running</string>
+    <string name="action_device_running">…device sync is running</string>
+    <string name="action_setup_running">…setup is running, click open</string>
+    <string name="action_setup_running2">Setup in progress</string>
     <string name="action_setup_complete">Setup has completed</string>
     <string name="action_load_complete">Loaded </string>
     <string name="action_starting">Session is starting…   X to cancel</string>
@@ -28,47 +104,147 @@
     <string name="action_quick_stop">Quick stop live session… X to cancel</string>
     <string name="action_pausing">Session is pausing…</string>
     <string name="action_resuming">Session is resuming…</string>
+    <string name="action_delete_workout">Deleting Workout…     X to cancel</string>
+    <string name="action_copy_set">Copying Set…     X to cancel</string>
+    <string name="action_delete_set">Deleting Set…     X to cancel</string>
+    <string name="action_repeat_set">Repeating Set…     X to cancel</string>
+    <string name="action_start_set">Starting Set…     X to cancel</string>
+    <string name="action_end_set">Ending Set…     X to cancel</string>
+    <string name="action_start_end">Starting End…     X to cancel</string>
+    <string name="action_end_end">Stopping End…     X to cancel</string>
     <string name="action_exiting">Exiting…     X to cancel</string>
+    <string name="action_signout">Signout…     X to cancel</string>
     <string name="action_homebtn_long_press">Long press sets favourite</string>
+    <string name="action_live_unable_to_load">Complete the current live session before continuing</string>
     <string name="action_next">Next Set</string>
-    <string name="action_rest">Recovery</string>
+    <string name="action_interval">Interval</string>
+    <string name="action_untimed_rest">Un-timed Recovery</string>
     <string name="action_resume">Resume</string>
+    <string name="action_report_completed">Report data collection completed</string>
+    <string name="action_phone_unavailable">Phone Unavailable</string>
+    <string name="action_wear_unavailable">Wear Devices Unavailable</string>
     <string name="nav_setting">Settings</string>
+    <string name="nav_status">Status</string>
+    <string name="nav_location">Location</string>
+    <string name="nav_grid_view">Summary Grid</string>
+    <string name="nav_list_view">Detail List</string>
+    <string name="nav_motion">Motion</string>
+    <string name="nav_cloud">Cloud</string>
     <string name="nav_sign_out">Sign out</string>
     <string name="nav_reset_out">Reset Account</string>
+    <string name="nav_fav">Fav</string>
     <string name="nav_credits">Credits</string>
     <string name="nav_mute">Mute Feedback</string>
+    <string name="nav_quick">Quick</string>
+    <string name="nav_open">Open</string>
+    <string name="nav_save">Save</string>
+    <string name="nav_deleted">Deleted</string>
+    <string name="nav_copied">Copied</string>
+    <string name="nav_firebase">Firebase</string>
     <string name="nav_mute_off">Feedback is ON</string>
     <string name="session_desc">Desc.</string>
+    <string name="label_no_items">No completed activities</string>
+    <string name="label_unknown">Unknown</string>
+    <string name="label_na">N\/A</string>
+    <string name="label_last_trained">Last Trained</string>
+    <string name="label_last_weight">Last Weight and Watts</string>
+    <string name="label_max_watts">Max Watts</string>
+    <string name="label_max_weight">Max Weight</string>
+    <string name="label_max">Max.</string>
+    <string name="label_min">Min.</string>
+    <string name="label_avg">Avg.</string>
+    <string name="label_sets">Sets</string>
+    <string name="label_reps">Reps</string>
+    <string name="label_region">Region</string>
+    <string name="label_parent">Parent</string>
+    <string name="sensor_device_speaker">speaker</string>
+    <string name="sensor_device_location">GPS (location)</string>
+    <string name="sensor_device_steps">sensor steps</string>
+    <string name="sensor_fit_steps">google steps</string>
+    <string name="sensor_device2_steps">device steps</string>
+    <string name="sensor_device_bpm">sensor BPM</string>
+    <string name="sensor_fit_bpm">google BPM</string>
+    <string name="sensor_device2_bpm">device BPM</string>
+    <string name="sensor_fit_calories">google calories</string>
+    <string name="sensor_fit_distance">google distance</string>
+    <string name="sensor_device_battery">battery</string>
+    <string name="sensor_fit_altitude">altitude</string>
+    <string name="sensor_device_pressure">barometer</string>
+    <string name="sensor_device_temperature">thermometer</string>
+    <string name="sensor_device_humidity">sensor humidity</string>
+    <string name="sensor_device_speed">fit speed</string>
     <string name="label_confirm_prev">Confirm Last Set</string>
+    <string name="label_confirm_next">Next Set</string>
+    <string name="label_new_sets">Sets x </string>
+    <string name="label_target">Target</string>
+    <string name="label_metric">Metric</string>
+    <string name="label_chart">Chart</string>
+    <string name="label_bodyregion">Region</string>
     <string name="label_bodypart">Body part</string>
-    <string name="label_add">Add</string>
+    <string name="label_bodypart_plural">Bodyparts</string>
+    <string name="label_template">Favourite</string>
+    <string name="label_timeframe">Time Frame</string>
+    <string name="label_add_sets">Add Sets</string>
     <string name="label_repeat">Repeat</string>
     <string name="label_next">Next Set</string>
+    <string name="label_final_set">Final Set\!</string>
+    <string name="label_not_available0">N\/A</string>
     <string name="label_new">New</string>
     <string name="label_next_end">Next End</string>
-    <string name="label_build">Build Routine</string>
-    <string name="label_build2">+ To Do Sets</string>
+    <string name="label_build">Build Mode</string>
     <string name="label_routine">Routine</string>
+    <string name="label_new_exercise">New Exercise</string>
+    <string name="label_exercise_plural">Exercises</string>
     <string name="label_exercise">Exercise</string>
+    <string name="label_edit_exercise">Exercise Needing Edits</string>
+    <string name="label_name">Name</string>
+    <string name="label_fit_sensors">Fit Registered Sensors</string>
+    <string name="label_other_sensors">Other Sensors</string>
+    <string name="label_exercise_last_sets">Last Sets</string>
+    <string name="label_exercise_last_reps">Last Reps</string>
+    <string name="label_exercise_last_weight">Last Weight</string>
+    <string name="label_exercise_last_trained">Last Trained</string>
+    <string name="label_exercise_max_weight">Maximum Weight</string>
+    <string name="label_exercise_max_trained">Maximum Date+</string>
+    <string name="label_resistance_type">Resistance Type</string>
+    <string name="label_primary_bodypart">Primary</string>
+    <string name="label_secondary_bodypart">Secondary</string>
+    <string name="label_third_bodypart">Third Bodypart</string>
+    <string name="label_fourth_bodypart">Fourth Bodypart</string>
     <string name="label_activity">Activity</string>
+    <string name="label_shoot">Shoot</string>
     <string name="label_set">Sets</string>
+    <string name="label_new_set">New Sets</string>
     <string name="label_rep">Reps</string>
+    <string name="label_year">Year</string>
     <string name="label_hours">hours</string>
     <string name="label_mins">mins</string>
     <string name="label_secs">sec</string>
+    <string name="label_gym_exercise_duration">Exercise Duration</string>
+    <string name="label_archery_rest_duration">Rest Duration</string>
+    <string name="label_archery_call_duration">Call Duration</string>
+    <string name="label_archery_end_duration">Shot Duration</string>
+    <string name="label_duration">Duration</string>
     <string name="label_recovery">Recovery Duration</string>
     <string name="label_rest_countdown">Rest</string>
     <string name="label_goal_duration">Goal (min)</string>
     <string name="label_goal_steps">Goal (steps)</string>
-    <string name="label_target_duration">Duration</string>
+    <string name="label_target_duration">Duration (mins)</string>
     <string name="label_target_time">Time</string>
     <string name="label_target_distance">Distance</string>
     <string name="label_target_steps">Steps</string>
     <string name="label_target_goals">Set Goals</string>
+    <string name="label_goals_updated">Goals Updated!</string>
+    <string name="label_no_goals">No Goals</string>
+    <string name="label_no_goals_advice">Google Fit to add Goals</string>
+    <string name="label_load_goals">Load Goals from Google Fit</string>
+    <string name="action_load_goals">Checking goals on Google Fit</string>
     <string name="label_user_prefs">Preferences</string>
+    <string name="label_shoot_path">Path </string>
     <string name="label_shoot_shot">Shot </string>
     <string name="label_shoot_shot_results">Shot Results</string>
+    <string name="label_shoot_shot_select">Select Shot</string>
+    <string name="label_shoot_shot_noscore">Set No Score</string>
     <string name="label_shoot_field">Division</string>
     <string name="label_shoot_equipment1">Equipment</string>
     <string name="label_shoot_equipment">Bow</string>
@@ -76,38 +252,64 @@
     <string name="label_weight_bodyweight">Body weight</string>
     <string name="label_weight_units_kg">Kg</string>
     <string name="label_weight_units_lbs">lbs</string>
+    <string name="label_temperature_celcius">C</string>
+    <string name="label_pressure_hpa">hPa</string>
+    <string name="label_relative_humidity">\%</string>
     <string name="label_shoot_format">Format</string>
     <string name="label_shoot_distance">Distance</string>
     <string name="label_shoot_target_size">Target Size</string>
     <string name="label_shoot_end">End</string>
     <string name="label_shoot_ends">Ends</string>
-    <string name="label_shoot_per_end">Arrows per End</string>
+    <string name="label_shoot_per_end">Shots per End</string>
     <string name="label_rest_per_end">Time per End</string>
     <string name="label_append_per_end">per End</string>
     <string name="label_shoot_possible_score">Possible Score</string>
     <string name="label_workout_history">Completed Workouts</string>
     <string name="label_workout_sets_history">Completed Sets</string>
-    <string name="label_google_sets_history">Google History</string>
+    <string name="label_google_sets_history">Google Fit History</string>
     <string name="label_to_do_sets_gym">To Do Sets</string>
     <string name="label_active_session">Session</string>
+    <string name="label_empty_report">No summary data from Google</string>
+    <string name="label_empty_sets">No sets found</string>
     <string name="label_active_sets">Current Set</string>
     <string name="label_to_do_sets_archery">To Do Ends</string>
     <string name="label_month_selector">Month</string>
     <string name="label_day_selector">Day</string>
+    <string name="label_setup_complete">Setup Complete</string>
+    <string name="label_loading_google">Checking Google FIT history</string>
+    <string name="label_player_1">Player1</string>
+    <string name="label_player_2">Player2</string>
     <string name="session_prompt">1st select</string>
     <string name="session_start">Start</string>
-    <string name="session_continue">Continue</string>
     <string name="session_end">Finish</string>
     <string name="default_select">set</string>
     <string name="default_loadtype">dialog_loadtype_</string>
+    <string name="default_act_steps">upref_def_steps_</string>
+    <string name="default_act_dur">upref_def_dur_</string>
     <string name="label_muted">"Sound and vibrate muted"</string>
     <string name="label_not_muted">"Sound and vibrate NOT muted"</string>
     <string name="label_session_paused">Session Paused</string>
     <string name="label_session_resumed">Session Resumed</string>
     <string name="label_session_live">Live Session</string>
     <string name="label_session_completed">Session Completed</string>
+    <string name="label_session_incomplete">Incomplete Session</string>
+    <string name="label_session_select_set">Select Start Set</string>
+    <string name="label_agg_session_count">Sessions: </string>
+    <string name="label_agg_duration_sum">for: </string>
+    <string name="label_agg_step_sum">Steps: </string>
+    <string name="label_agg_bpm_start">BPM start: </string>
+    <string name="label_agg_bpm_end">BPM end: </string>
+    <string name="label_agg_bpm_avg">BPM avg: </string>
+    <string name="label_agg_set_sum">Sets: </string>
+    <string name="label_agg_rep_sum">Reps: </string>
+    <string name="label_agg_avg">Avg: </string>
+    <string name="label_agg_weight_total">Total: </string>
+    <string name="label_agg_weight_avg">Avg:  </string>
+    <string name="label_agg_watts">Watts:  </string>
+
     <string name="label_number_prev">&lt;</string>
     <string name="label_number_next">&gt;</string>
+    <string name="label_number_0">0</string>
     <string name="label_number_1">1</string>
     <string name="label_number_2">2</string>
     <string name="label_number_3">3</string>
@@ -128,14 +330,294 @@
     <string name="label_number_18">18</string>
     <string name="label_number_19">19</string>
     <string name="label_number_20">20</string>
+    <string name="label_battery_empty">ic_battery_empty_white</string>
+    <string name="label_battery_25">ic_battery_25_white</string>
+    <string name="label_battery_50">ic_battery_50_white</string>
+    <string name="label_battery_75">ic_battery_75_white</string>
+    <string name="label_battery_full">ic_battery_full_white</string>
+    <string name="label_subs">subs_</string>
+    <string name="label_sensor">sens_</string>
+    <string name="label_sensor_name">sens_nm_</string>
+    <string name="label_fit_sensor">fit_sens_</string>
+    <string name="label_fit_name">fit_sens_nm_</string>
+    <string name="label_source">source_</string>
+    <string name="label_bpm">BPM</string>
+    <string name="label_filter">Filter</string>
+    <string name="label_clock">clock</string>
+    <string name="label_first_step_value">100</string>
+    <string name="label_steps">steps</string>
+    <string name="label_steps_goal">Steps Goal</string>
+    <string name="label_heart_pts">heart pts</string>
+    <string name="label_heart_points">Heart Points</string>
+    <string name="label_move_mins">move mins</string>
+    <string name="label_move_minutes">Move Minutes</string>
+    <string name="label_first_step">firstStep</string>
+    <string name="label_last_step">lastStep</string>
+    <string name="label_last_step_upd">lastStepUpdated</string>
+    <string name="label_settings_phone_name">Not connected</string>
+    <string name="label_settings_age">Setup Age</string>
+    <string name="label_settings_height">Setup Height</string>
+    <string name="set_reps_label" formatted="false">%2d reps</string>
+    <string name="set_sets_label" formatted="false">set %d</string>
+    <string name="label_settings_firebase">Firebase Online</string>
+    <string name="label_settings_firebase_online">Use Firebase Online</string>
+    <string name="label_settings_firebase_offline">Firebase Offline</string>
+    <string name="label_settings_firebase_unavail">Firebase Unavailable</string>
+    <string name="label_settings_firebase_via_phone">Firebase via Phone</string>
+    <string name="action_settings">Settings</string>
+    <string name="label_settings_daily_interval">Daily fitness totals refresh interval (mins)</string>
+    <string name="label_settings_cloud_sync_interval">Cloud sync interval (mins)</string>
+    <string name="label_settings_device_interval">Device sync interval (mins)</string>
+    <string name="label_settings_session_control">Session Transition Control</string>
+    <string name="label_settings_default_sets">New exercise sets</string>
+    <string name="label_settings_default_reps">New exercise reps</string>
+    <string name="label_settings_default_countdown">Show confirms (sec)</string>
+    <string name="label_settings_use_kg_units">Use Kg units</string>
+    <string name="label_settings_use_lbs_units">Use lbs units</string>
+    <string name="label_settings_user_name">John Citizen</string>
+    <string name="label_settings_history_start">Loaded History Dates</string>
+    <string name="label_settings_history_set_start">Set First Workout Date</string>
+    <string name="label_settings_history_not_loaded">History Not Loaded</string>
+    <string name="label_settings_phone_label">Connected Device</string>
+    <string name="label_settings_read_permissions_label">Permission to access Google Fitness Data</string>
+    <string name="label_settings_sensor_permissions_label">Permission to Read Device Sensors</string>
+    <string name="label_settings_sensor_use_label">Use Sensors</string>
+    <string name="label_settings_location_use_label">Use Location</string>
+    <string name="label_settings_location_permissions_label">Permission to access Location</string>
+    <string name="label_settings_permissions_label">Permissions and Sensors</string>
+    <string name="label_settings">Settings</string>
+    <string name="label_settings_defaults">Gym Workout Settings</string>
+    <string name="label_settings_notifications">Notification Settings</string>
+    <string name="label_settings_sensors_label">Device Sensors</string>
+    <string name="label_settings_firebase_label">Firebase</string>
+    <string name="label_settings_steps_sample_rate">Steps Sample Rate (sec)</string>
+    <string name="label_settings_steps_not_avail">Steps Sensor Not Available</string>
+    <string name="label_settings_bpm_sample_rate">BPM Sample Rate (sec)</string>
+    <string name="label_settings_bpm_not_avail">Heart Rate Sensor Not Available</string>
+    <string name="label_settings_other_sample_rate">Other Sensors Sample Rate (sec)</string>
+    <string name="label_settings_other_not_avail">Other Sensors Not Available</string>
+    <string name="label_settings_speaker_not_avail">Speakers Are Not Available</string>
+    <plurals name="start_countdown">
+        <item quantity="one" formatted="false">%1$d sec</item>
+        <item quantity="other" formatted="false">%1$d secs</item>
+    </plurals>
     <plurals name="rest_countdown">
-        <item quantity="one">Recovery complete in %1$d second</item>
-        <item quantity="other">Recovery complete in %1$d seconds</item>
+        <item quantity="one" formatted="false">Recovery complete in %1$d second</item>
+        <item quantity="other" formatted="false">Recovery complete in %1$d seconds</item>
     </plurals>
     <plurals name="rest_count_over">
-        <item quantity="one">Rest finished %1$d second ago</item>
-        <item quantity="other">Rest finished %1$d seconds ago</item>
+        <item quantity="one" formatted="false">Rest finished %1$d second ago</item>
+        <item quantity="other" formatted="false">Rest finished %1$d seconds ago</item>
     </plurals>
-    <string name="reply_action">Reply</string>
-    <string name="post_countdown_complete">Notification Posted</string>
+
+    <string name="notify_channel_activity_name">Active Workouts</string>
+    <string name="notify_channel_activity_desc">Notify me when workout starts, stops, pauses and resumes</string>
+    <string name="notify_channel_summary_name">Summary Reports</string>
+    <string name="notify_channel_summary_desc">Notify me when daily totals and workout summary reports are ready</string>
+    <string name="notify_channel_goals_name">Fit Goals</string>
+    <string name="notify_channel_goals_desc">Notify me when fitness goals are met</string>
+    <string name="notify_channel_goals_title">Goal Achieved</string>
+    <string name="notify_channel_maintain_name">Data Maintenance</string>
+    <string name="notify_channel_maintain_desc">Notify me when data requires editing</string>
+    <string name="notify_channel_firebase_name">Firebase Cloud</string>
+    <string name="notify_channel_firebase_desc">Notifications from the Google Firebase cloud</string>
+    <string name="note_summary_title">%1$s current activity totals</string>
+    <string name="note_summary_title2">Current Activity Totals</string>
+    <string name="note_summary_desc" formatted="false">Move Mins:%1$d Steps: %7$d Dist:%2$.1f metres Calories:%6$.1f Heart BPM: min %3$.1f max %4$.1f avg %5$.1f</string>
+    <string name="note_summary_move" formatted="false">Move Mins:%1$d </string>
+    <string name="note_summary_move_goals" formatted="false">Move Mins:%1$d goal %2$d %3$.1f%%</string>
+    <string name="note_summary_heart_pts" formatted="false">Heart Pts:%1$d </string>
+    <string name="note_summary_heart_pts_goals" formatted="false">Heart Pts:%1$d goal %2$d %3$.1f%%</string>
+    <string name="note_summary_steps">Steps: %1$d </string>
+    <string name="note_summary_steps_goals" formatted="false">Steps: %1$d goal %2$d %3$.1f%%</string>
+    <string name="note_summary_dist" formatted="false">Dist:%1$.1f metres </string>
+    <string name="note_summary_calories" formatted="false">Calories:%1$.1f </string>
+    <string name="note_summary_heart" formatted="false">Heart BPM: min %1$.1f max %2$.1f avg %3$.1f</string>
+    <string name="note_summary_update">Refresh statistics</string>
+    <string name="note_report_review">Review Report</string>
+    <string name="notification_title">You\'ve been notified!</string>
+    <string name="notification_text">Notifications</string>
+    <string name="notification_updated">Notification Updated</string>
+    <string name="sets_summary1" formatted="false">Edit Set: %1$d</string>
+    <string name="sets_summaryOf" formatted="false">Edit: %1$d of %2$d</string>
+    <string name="sets_summaryOf2" formatted="false">Sets: %1$d</string>
+    <string name="sets_summaryOf3" formatted="false">%1$d of %2$d</string>
+    <string name="sets_summaryOf4" formatted="false">Build from %1$d of %2$d</string>
+    <string name="sets_summaryOf5" formatted="false">Adding to end of %1$d</string>
+    <string name="microphone_access_required">Microphone access is required to enable voice commands</string>
+    <string name="no_audio_input">Audio input is not available</string>
+    <string name="location_access_required">Location access is required to monitor your workout</string>
+    <string name="sensors_access_required">Sensors access is required to monitor your workout</string>
+    <string name="sensors_permission_not_available">Permission is not available. Requesting permission</string>
+    <string name="sensors_permission_available">Sensors permission are available</string>
+    <string name="sensors_permission_granted">Sensors permission was granted</string>
+    <string name="sensors_permission_not_granted">Sensors permission was NOT granted</string>
+    <string name="location_permission_granted">Location permission was granted</string>
+    <string name="location_permission_not_granted">Location permission was NOT granted</string>
+    <string name="recog_permission_granted">Activity recognition permission was granted</string>
+    <string name="recog_permission_denied">Activity recognition permission was granted</string>
+    <string name="recording_permission_granted">Recording audio permission was granted</string>
+    <string name="sensors_permission_denied">Sensors not used</string>
+    <string name="location_permission_denied">Locations sensors not used</string>
+    <string name="sensors_permission_not_used">Sensors not used</string>
+    <string name="location_permission_not_used">Locations sensors not used</string>
+    <string name="sensors_permission_used">Sensors in use</string>
+    <string name="location_permission_used">Location sensors in use</string>
+    <string name="recording_permission_denied">Recording audio permission request was denied</string>
+    <string name="default_notification_channel_id" translatable="false">notify_firebase_channel</string>
+    <string name="policy_text">
+        "\n"
+        "Ulysses Software Pty Ltd is committed to protecting its customers data.\n\n"
+        "Our solutions are designed to maximize your effectiveness by collecting and analysing your performance data."
+        "This data is held securely by your account and not shared. We do collect application use data for the purpose "
+        "of improving the efficiencies and functionality of our solution.\n\n"
+        "At anytime, you may turn off and on sensors, location tracking and permissions using Settings."
+    </string>
+    <string name="has_device_text">
+        "\n"
+        "ATrackIt offers superior performance tracking if you have use its Wear OS app.\n\n"
+        "Indicate now if you have the ATrackIt wear app. If you do not have the companion app ATrackIt will operate each independently."
+        "You can enable or disable this feature in the future under Settings. "
+    </string>
+    <string name="load_user_history">
+        "\n"
+        "If you have already collected Google Fit data ATrackIt can load and analyse this data.\n\n"
+        "You may be notified to add unknown exercises. Aggregated performance statistics will be generated for reports."
+        "You can review and re-run your previous Google Fit data at any time from the Options menu. \n\n"
+        "Do you have historic data to review?"
+    </string>
+    <string name="ask_user_age">
+        "\n"
+        "ATrackIt follows Google\'s Families Policy and Designed for Families requirements.\n\n"
+        "When possible we color code and review your heart rate according to the target zones for your age group.\n"
+    </string>
+    <string name="ask_user_age2">
+        "\n"
+        "Location tracking will be turned off by default for young kids."
+    </string>
+    <string name="ask_user_height">
+        "Power Calculations\n"
+        "ATrackIt calculates the amount of work performed in a workout\n\n"
+        "We can use your height to approximate the distance travelled by a single repetition.\n"
+        "Work performed = weight times reps for the approx. distance travelled\n"
+        "Select your height or cancel to not use this for your power calculations"
+    </string>
+    <string name="ask_user_height2">
+        "\n"
+        "All your fitness data remains your private property and is only used within the app for your reports"
+    </string>
+    <string name="ask_fit_read_aggregate">
+        "Read Google Fit Totals\n"
+        "ATrackIt requires access to your fitness daily totals\n\n"
+        "We can keep you informed of total steps, calories and heart rate over the\n"
+        "duration of each day. You can turn off or on related notifications\n"
+        "You will be prompted to allow read access to this summary data"
+    </string>
+    <string name="ask_fit_write_session">
+        "Write Google Fit Sessions\n"
+        "ATrackIt requires your approval to write to Google Fitness Data\n\n"
+        "This data is stored on the Google Fit cloud for your review and analysis\n"
+        "You will be prompted to allow write access for this fitness data."
+    </string>
+    <string name="ask_fit_read_session">
+        "Read Google Fit Sessions\n"
+        "ATrackIt requires your approval to read fitness data from the Google Cloud\n\n"
+        "This data will never be shared and is only used for your private reports.\n"
+        "You will be prompted to allow read access to your Google Fit data for reports and charts."
+    </string>
+    <string name="ask_age_under10">Age 9 and Under</string>
+    <string name="ask_age_10to13">Age 10 to 13</string>
+    <string name="ask_age_14to17">Age 14 to 17</string>
+    <string name="ask_age_18Over">Age 18 to 19</string>
+    <string name="ask_age_20to30">Age 20 to 30</string>
+    <string name="ask_age_31to40">Age 31 to 40</string>
+    <string name="ask_age_41to50">Age 41 to 50</string>
+    <string name="ask_age_51to60">Age 51 to 60</string>
+    <string name="ask_age_61to70">Age 61 to 70</string>
+    <string name="ask_age_70Above">Age 71 +</string>
+    <string name="confirm_action_timers">Auto start next timer</string>
+    <string name="confirm_action_prompt">Confirm Last Set</string>
+    <string name="confirm_shooting_prompt">Confirm Last End</string>
+    <string name="confirm_use_notifications_prompt">Use Notifications for transitions?</string>
+    <string name="confirm_use_audio_prompt">Use audio chime for transitions?</string>
+    <string name="confirm_use_vibrate_prompt">Use vibration for transitions?</string>
+    <string name="confirm_use_vibrate_not_avail">Device vibrate not available</string>
+    <string name="confirm_use_track_sets">Track sets and exercises now</string>
+    <string name="confirm_use_timed_rest_toggle_prompt">Use timed rest between sets</string>
+    <string name="confirm_use_timed_archery_toggle_prompt">Use timed ends</string>
+    <string name="confirm_auto_start_toggle_prompt">Auto start next set on rest countdown</string>
+    <string name="confirm_start_toggle_prompt">Confirm start of session</string>
+    <string name="confirm_resume_session">Resume unfinished session\? %1$s started %2$s</string>
+    <string name="confirm_set_toggle_prompt">Confirm set completion</string>
+    <string name="confirm_delete_toggle_prompt">Confirm deletes</string>
+    <string name="confirm_end_toggle_prompt">Confirm finish of session</string>
+    <string name="confirm_vehicle_toggle_prompt">Auto finish session if in-vehicle motion detected</string>
+    <string name="confirm_no_sets_prompt">Finished - Use repeat or add to continue the session</string>
+    <string name="confirm_animate_toggle_prompt">Show live tracking animation</string>
+    <string name="confirm_dismiss_toggle_prompt">Confirm Exit App</string>
+    <string name="confirm_sensors_toggle_prompt">Use body sensors during sessions</string>
+    <string name="confirm_location_toggle_prompt">Use location sensors during sessions</string>
+    <string name="confirm_use_kg_prompt">Use KG for weights - No = pounds</string>
+    <string name="confirm_work_offline">Work offline</string>
+    <string name="use_timed_breaks_prompt">Use timed breaks between sets</string>
+    <string name="title_activity_initial">A Track It</string>
+    <string name="must_quit">Unable to continue - exiting now</string>
+    <!-- CustomListFragment -->
+    <string name="action_new_archery">Archery</string>
+    <string name="action_new_workout">Gym Workout</string>
+    <string name="action_new_template">Use Favourite</string>
+    <string name="action_new_cardio">Cardio</string>
+    <string name="action_new_sport">Sport</string>
+    <string name="action_new_other">Other</string>
+    <string name="action_new_more">More</string>
+    <string name="action_new_less">Less</string>
+    <string name="action_new_run">Running</string>
+    <string name="action_new_winter">Outdoors-Winter</string>
+    <string name="action_new_water">Air-Water</string>
+    <string name="action_new_bike">Cycle</string>
+    <string name="action_new_misc">Misc.</string>
+    <string name="action_new_shoot">Target Shooting</string>
+    <string name="action_new_detected">Detected Activity</string>
+    <string-array name="minutes_list">
+        <item>0 - off</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>35</item>
+        <item>40</item>
+        <item>45</item>
+        <item>50</item>
+        <item>55</item>
+        <item>60</item>
+        <item>70</item>
+        <item>80</item>
+        <item>90</item>
+    </string-array>
 </resources>

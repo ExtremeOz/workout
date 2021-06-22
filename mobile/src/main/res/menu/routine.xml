@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.a_track_it.fitdata.activity.RoutineActivity">
+    <item android:id="@+id/action_template"
+        android:title="@string/action_save"
+        android:orderInCategory="100"
+        android:tooltipText="@string/action_save_template"
+        android:icon="@drawable/ic_heart_add"
+        app:showAsAction="always|withText" />
+    <item android:id="@+id/action_open"
+        android:title="@string/action_open"
+        android:orderInCategory="100"
+        android:tooltipText="@string/action_open_template"
+        android:icon="@drawable/ic_folder_open_white"
+        app:showAsAction="always|withText" />
+    <item android:id="@+id/action_routine_device"
+        android:title="@string/action_send_wear"
+        android:orderInCategory="100"
+        android:tooltipText="@string/action_send_wear"
+        android:icon="@drawable/ic_phone_receive_white"
+        app:showAsAction="ifRoom|withText" />
+</menu>

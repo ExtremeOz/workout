@@ -7,21 +7,31 @@
     android:layout_height="wrap_content"
     android:layout_gravity="top"
     app:liftOnScroll="true">
-    <androidx.appcompat.widget.Toolbar
+   <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_scrollFlags="scroll|enterAlways"
-        android:background="?attr/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        tools:title="@string/app_name"/>
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:background="?attr/colorPrimaryDark"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"/>
+        android:theme="@style/MainToolbarAppearance"
+        app:popupTheme="@style/myOverflowMenuStyle"
+       tools:title="@string/app_name">
+   <Spinner
+       android:id="@+id/spinnerMainPeriod"
+       style="@style/Widget.MyFormSpinnerLook"
+       android:layout_width="120dp"
+       android:layout_height="wrap_content"
+       android:layout_gravity="end"
+       android:layout_marginEnd="15dp"
+       android:dropDownVerticalOffset="25dp"
+       android:dropDownSelector="@drawable/bg_confirm"
+       android:entries="@array/period_types"
+       android:visibility="gone"
+       android:gravity="start"
+       android:paddingStart="4dp"
+       android:paddingEnd="4dp"
+       android:popupBackground="?attr/colorPrimary"
+       android:spinnerMode="dropdown"
+       android:textAlignment="viewStart"
+       android:theme="@style/ThemeOverlay.AppCompat.Dark" />
+   </androidx.appcompat.widget.Toolbar>
 </com.google.android.material.appbar.AppBarLayout>

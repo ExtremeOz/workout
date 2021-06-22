@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.a_track_it.fitdata.activity.RoutineActivity">
+    <item
+        android:id="@+id/search_exercise"
+        android:icon="@drawable/ic_search"
+        android:title="@string/action_search"
+        app:actionViewClass="com.a_track_it.fitdata.adapter.ArrayAdapterSearchView"
+        app:showAsAction="collapseActionView|always"/>
+    <item android:id="@+id/menu_new_exercise"
+        android:title="@string/action_new_exercise"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_add_white"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/menu_pending_exercise"
+        android:title="@string/action_no_pending_exercise"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_outline_check_white"
+        app:showAsAction="never" />
+    <item android:id="@+id/menu_report_exercise"
+        android:title="@string/report_icon_desc"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_analytics"
+        app:showAsAction="never" />
+</menu>

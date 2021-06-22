@@ -1,41 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.wear.widget.BoxInsetLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primaryDarkColor"
+    app:boxedEdges="all"
+    android:id="@+id/confirm_cancel_box"
+    tools:deviceIds="wear">
     <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/circular_linear"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/my_app_primary_variant_color"
-        android:padding="@dimen/box_inset_layout_padding"
         tools:deviceIds="wear">
         <TextView
             android:id="@+id/circular_text_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginTop="48dp"
-            android:paddingBottom="18dp"
+            android:layout_marginTop="30dp"
+            style="@style/Widget.MyApp.MyHomeText"
+            android:background="@color/primaryDarkColor"
+            android:paddingStart="@dimen/small_padding"
+            android:paddingEnd="@dimen/small_padding"
+            android:paddingBottom="@dimen/small_padding"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.Wearable.Small"
-            android:textColor="@color/card_default_background"
             tools:text="@string/action_starting" />
+
         <androidx.wear.widget.CircularProgressLayout
             android:id="@+id/circular_progress"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:layout_below="@id/circular_text_message"
-            android:layout_marginTop="4dp"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            app:backgroundColor="@color/darkblue"
-            app:colorSchemeColors="@color/lightblue"
-            app:strokeWidth="4dp">
+            android:padding="@dimen/small_padding"
+            android:layout_marginTop="@dimen/small_padding"
+            app:backgroundColor="@color/secondaryDarkColor"
+            app:colorSchemeColors="@color/secondaryLightColor"
+            app:strokeWidth="@dimen/small_padding">
             <ImageView
                 android:id="@+id/image_view"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:contentDescription="@string/action_cancel"
-                android:src="@drawable/ic_close_white" />
+                android:padding="@dimen/button_icon_padding"
+                app:srcCompat="@drawable/ic_close_white" />
         </androidx.wear.widget.CircularProgressLayout>
     </RelativeLayout>
+</androidx.wear.widget.BoxInsetLayout>

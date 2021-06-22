@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollViewConfirm"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:background="@color/primaryDarkColor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/confirm_constraint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textViewConfirmName"
+            style="@style/Widget.MyApp.MyHomeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:text="@string/label_confirm_prev"
+            android:textSize="@dimen/recycler_simple_title_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnTopFinish"
+            style="@style/Widget.MyApp.MyIconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_finish"
+            app:icon="@drawable/ic_stop_circle_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewConfirmName" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnConfirmBodypart"
+            style="@style/Widget.MyApp.MyIconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_padding"
+            android:layout_marginEnd="@dimen/small_padding"
+            android:text="@string/label_bodypart"
+            android:textSize="@dimen/entry_button_text_size"
+            app:icon="@drawable/ic_musculous_arm_silhouette"
+            app:iconSize="@dimen/entry_button_icon_size"
+            app:layout_constraintBottom_toTopOf="@+id/chronometerConfirm"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnTopFinish" />
+
+
+        <Chronometer
+            android:id="@+id/chronometerConfirm"
+            style="@style/Widget.MyApp.MyRightIconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_clock"
+            android:format="Total %s"
+            android:drawablePadding="@dimen/small_padding"
+            android:textAppearance="@style/TextAppearance.MyTheme.Headline3"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnConfirmBodypart" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnConfirmAddExercise"
+            style="@style/Widget.MyApp.MyOutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/small_padding"
+            android:textSize="@dimen/image_button_text_size2"
+            android:text="@string/label_exercise"
+            app:icon="@drawable/ic_plus_symbol"
+            app:iconSize="@dimen/entry_button_icon_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chronometerConfirm" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnConfirmExercise"
+            style="@style/Widget.MyApp.MyIconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_exercise"
+            android:textSize="@dimen/image_button_text_size2"
+            app:icon="@drawable/ic_bench"
+            app:iconSize="@dimen/entry_button_icon_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnConfirmAddExercise" />
+
+        <TextView
+            android:id="@+id/textViewWeightLabel"
+            style="@style/Widget.MyApp.MyHomeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_weight"
+            app:drawableRightCompat="@drawable/ic_weight"
+            app:drawableTint="@color/primaryTextColor"
+            app:iconSize="@dimen/entry_button_icon_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnConfirmExercise" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnWeightMinus"
+            style="@style/Widget.MyApp.MyOutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:icon="@drawable/ic_minus_symbol"
+            app:layout_constraintEnd_toStartOf="@+id/btnConfirmWeight"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewWeightLabel" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnConfirmWeight"
+            style="@style/Widget.MyApp.MyIconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_weight_units_kg"
+            app:layout_constraintBottom_toTopOf="@+id/textViewRepsLabel"
+            app:layout_constraintEnd_toStartOf="@+id/btnWeightPlus"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btnWeightMinus"
+            app:layout_constraintTop_toBottomOf="@+id/textViewWeightLabel" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnWeightPlus"
+            style="@style/Widget.MyApp.MyOutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:icon="@drawable/ic_plus_symbol"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnConfirmWeight"
+            app:layout_constraintTop_toBottomOf="@+id/textViewWeightLabel" />
+
+        <TextView
+            android:id="@+id/textViewRepsLabel"
+            style="@style/Widget.MyApp.MyHomeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/label_rep"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnWeightPlus" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRepsPlus"
+            style="@style/Widget.MyApp.MyOutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:icon="@drawable/ic_plus_symbol"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnConfirmReps"
+            app:layout_constraintTop_toBottomOf="@+id/textViewRepsLabel" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnConfirmReps"
+            style="@style/Widget.MyApp.MyIconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_number_8"
+            app:layout_constraintBottom_toTopOf="@+id/textViewNextLabel"
+            app:layout_constraintEnd_toStartOf="@+id/btnRepsPlus"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btnRepsMinus"
+            app:layout_constraintTop_toBottomOf="@+id/textViewRepsLabel" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRepsMinus"
+            style="@style/Widget.MyApp.MyOutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:icon="@drawable/ic_minus_symbol"
+            app:layout_constraintEnd_toStartOf="@+id/btnConfirmReps"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewRepsLabel" />
+
+        <TextView
+            android:id="@+id/textViewNextLabel"
+            style="@style/Widget.MyApp.MyHomeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/label_confirm_prev"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnRepsPlus" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSaveLast"
+            style="@style/Widget.MyApp.MyIconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_save"
+            app:icon="@drawable/ic_checkbox_white"
+            app:iconSize="@dimen/entry_button_icon_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewNextLabel" />
+
+        <Chronometer
+            android:id="@+id/chronoConfirmCenter"
+            style="@style/Widget.MyApp.MyHomeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_padding"
+            android:layout_marginEnd="@dimen/small_padding"
+            android:contentDescription="@string/label_target_duration"
+            android:textSize="@dimen/chronometer_confirm_text_size"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnSaveLast" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnConfirmContinue"
+            style="@style/Widget.MyApp.MyIconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_continue"
+            app:icon="@drawable/ic_play_button_white"
+            app:iconSize="@dimen/entry_button_icon_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnConfirmExerciseRepeat" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnConfirmExerciseRepeat"
+            style="@style/Widget.MyApp.MyIconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_repeat"
+            app:icon="@drawable/ic_refresh_white"
+            app:iconGravity="textEnd"
+            app:iconPadding="@dimen/button_icon_padding"
+            app:iconSize="@dimen/entry_button_icon_size"
+            app:layout_constraintEnd_toEndOf="@+id/btnConfirmContinue"
+            app:layout_constraintHorizontal_bias="0.487"
+            app:layout_constraintStart_toStartOf="@+id/btnConfirmContinue"
+            app:layout_constraintTop_toBottomOf="@+id/chronoConfirmCenter" />
+
+        <TextView
+            android:id="@+id/textViewConfirmContinue"
+            style="@style/Widget.MyApp.MyHomeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/live_image_view_padding"
+            android:paddingStart="@dimen/home_edge_margin"
+            android:paddingEnd="@dimen/home_edge_margin"
+            android:textAlignment="center"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/btnConfirmEdit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnConfirmContinue"
+            tools:text="Next set: 5/5 Incline Dumbell Bench Press" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnConfirmEdit"
+            style="@style/Widget.MyApp.MyIconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_edit_next"
+            app:icon="@drawable/ic_edit_black"
+            app:iconSize="@dimen/entry_button_icon_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewConfirmContinue" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnConfirmFinish"
+            style="@style/Widget.MyApp.MyIconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_finish"
+            app:icon="@drawable/ic_stop_circle_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnConfirmEdit" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/confirm_timed_rest_toggle"
+            style="@style/Widget.MyApp.MyToggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkable="true"
+            android:checked="true"
+            android:text="@string/confirm_use_timed_rest_toggle_prompt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnConfirmFinish" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnConfirmRest"
+            style="@style/Widget.MyApp.MyIconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_padding"
+            android:layout_marginEnd="@dimen/small_padding"
+            android:text="@string/label_recovery"
+            android:enabled="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/confirm_timed_rest_toggle" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/confirm_auto_start_toggle"
+            style="@style/Widget.MyApp.MyToggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkable="true"
+            android:checked="true"
+            android:text="@string/confirm_auto_start_toggle_prompt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnConfirmRest" />
+        
+        <TextView
+            android:id="@+id/textViewNextSetsLabel"
+            style="@style/Widget.MyApp.MyHomeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/home_edge_margin"
+            android:layout_marginEnd="@dimen/home_edge_margin"
+            android:text="@string/label_to_do_sets_gym"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/confirm_auto_start_toggle" />
+        <TextView
+            android:id="@+id/confirm_bottom_ATrackIt"
+            style="@style/Widget.MyApp.MyHomeBigText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/home_edge_margin"
+            android:layout_marginEnd="@dimen/home_edge_margin"
+            android:text="@string/app_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewNextSetsLabel" />
+        <androidx.wear.widget.WearableRecyclerView
+            android:id="@+id/recycleViewConfirmItems"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="@dimen/recycler_simple_row_text_size"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/confirm_bottom_ATrackIt" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

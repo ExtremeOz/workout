@@ -3,6 +3,7 @@
     <integer-array name="activity_id_names_sorted">
         <item>9</item>
         <item>119</item>
+        <item>500</item>
         <item>10</item>
         <item>11</item>
         <item>12</item>
@@ -33,6 +34,7 @@
         <item>30</item>
         <item>31</item>
         <item>32</item>
+        <item>122</item>
         <item>33</item>
         <item>34</item>
         <item>35</item>
@@ -124,6 +126,7 @@
     <string-array name="activity_names_sorted">
         <item>Aerobics</item>
         <item>Archery</item>
+        <item>A-Track-It</item>
         <item>Badminton</item>
         <item>Baseball</item>
         <item>Basketball</item>
@@ -154,6 +157,7 @@
         <item>Frisbee</item>
         <item>Gardening</item>
         <item>Golf</item>
+        <item>Guided Breathing</item>
         <item>Gymnastics</item>
         <item>Handball</item>
         <item>Hiking</item>
@@ -215,7 +219,7 @@
         <item>Stair-climbing machine</item>
         <item>Stand-up paddleboarding</item>
         <item>Still (not moving)</item>
-        <item>Strength training</item>
+        <item>Strength Training</item>
         <item>Surfing</item>
         <item>Swimming</item>
         <item>Swimming (open water)</item>
@@ -245,6 +249,7 @@
     <string-array name="activity_icon_name_sorted">
         <item>ic_trail_running_shoe</item>
         <item>ic_shooting_with_arch_silhouette</item>
+        <item>ic_a_outlined</item>
         <item>ic_badminton_player</item>
         <item>ic_baseball_player</item>
         <item>ic_basketball_player_with_the_ball</item>
@@ -258,7 +263,7 @@
         <item>ic_exercisebike</item>
         <item>ic_boxing_silhouette</item>
         <item>ic_trail_running_shoe</item>
-        <item>ic_dumbbell</item>
+        <item>ic_dumbbell_pair</item>
         <item>ic_criquet_silhouette</item>
         <item>ic_olympic_weightlifting_side_silhouette</item>
         <item>ic_olympic_curling_player</item>
@@ -275,6 +280,7 @@
         <item>ic_frisbee</item>
         <item>ic_seeding</item>
         <item>ic_golf_player</item>
+        <item>ic_body_region</item>
         <item>ic_gymnast_posture_silhouette</item>
         <item>ic_basketball_player_with_the_ball</item>
         <item>ic_hiking_person_silhouette_with_a_stick</item>
@@ -283,7 +289,7 @@
         <item>ic_group</item>
         <item>ic_speed_skiing</item>
         <item>ic_motoring_car</item>
-        <item>ic_dumbbell</item>
+        <item>ic_dumbbell_pair</item>
         <item>ic_stopwatch</item>
         <item>ic_jumping_rope_silhouette</item>
         <item>ic_rowing_silhouette</item>
@@ -336,7 +342,7 @@
         <item>ic_man_silhouette_running_on_treadmill_machine</item>
         <item>ic_paralympic_alpine_ski_silhouette</item>
         <item>ic_standing_up_man</item>
-        <item>ic_strong_man_silhouette</item>
+        <item>ic_weightlifting</item>
         <item>ic_surf_silhouette</item>
         <item>ic_person_swimming</item>
         <item>ic_person_swimming</item>
@@ -363,6 +369,129 @@
         <item>ic_yoga_posture</item>
         <item>ic_dancer_with_music</item>
     </string-array>
+    <integer-array name="activity_type_name_sorted">
+        <item>19</item>
+        <item>119</item>
+        <item>26</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>119</item>
+        <item>1</item>
+        <item>25</item>
+        <item>25</item>
+        <item>25</item>
+        <item>25</item>
+        <item>25</item>
+        <item>25</item>
+        <item>20</item>
+        <item>19</item>
+        <item>21</item>
+        <item>20</item>
+        <item>21</item>
+        <item>24</item>
+        <item>26</item>
+        <item>23</item>
+        <item>19</item>
+        <item>19</item>
+        <item>19</item>
+        <item>19</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>26</item>
+        <item>26</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>24</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>26</item>
+        <item>24</item>
+        <item>1</item>
+        <item>21</item>
+        <item>21</item>
+        <item>19</item>
+        <item>23</item>
+        <item>21</item>
+        <item>20</item>
+        <item>20</item>
+        <item>23</item>
+        <item>20</item>
+        <item>20</item>
+        <item>26</item>
+        <item>1</item>
+        <item>26</item>
+        <item>26</item>
+        <item>23</item>
+        <item>19</item>
+        <item>20</item>
+        <item>20</item>
+        <item>26</item>
+        <item>24</item>
+        <item>23</item>
+        <item>19</item>
+        <item>20</item>
+        <item>22</item>
+        <item>22</item>
+        <item>22</item>
+        <item>22</item>
+        <item>23</item>
+        <item>23</item>
+        <item>26</item>
+        <item>24</item>
+        <item>24</item>
+        <item>26</item>
+        <item>26</item>
+        <item>24</item>
+        <item>24</item>
+        <item>24</item>
+        <item>24</item>
+        <item>24</item>
+        <item>26</item>
+        <item>26</item>
+        <item>26</item>
+        <item>26</item>
+        <item>26</item>
+        <item>24</item>
+        <item>24</item>
+        <item>24</item>
+        <item>20</item>
+        <item>20</item>
+        <item>19</item>
+        <item>19</item>
+        <item>23</item>
+        <item>1</item>
+        <item>21</item>
+        <item>23</item>
+        <item>23</item>
+        <item>23</item>
+        <item>23</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>1</item>
+        <item>19</item>
+        <item>1</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>23</item>
+        <item>1</item>
+        <item>19</item>
+        <item>19</item>
+        <item>19</item>
+        <item>19</item>
+        <item>23</item>
+        <item>21</item>
+        <item>26</item>
+        <item>23</item>
+        <item>26</item>
+        <item>26</item>
+    </integer-array>
     <integer-array name="activity_id_sorted">
         <item>0</item>
         <item>1</item>
@@ -483,6 +612,8 @@
         <item>118</item>
         <item>119</item>
         <item>120</item>
+        <item>122</item>
+        <item>500</item>
     </integer-array>
     <string-array name="activity_icon_id_sorted">
         <item>ic_motoring_car</item>
@@ -506,7 +637,7 @@
         <item>ic_exercisebike</item>
         <item>ic_boxing_silhouette</item>
         <item>ic_trail_running_shoe</item>
-        <item>ic_dumbbell</item>
+        <item>ic_dumbbell_pair</item>
         <item>ic_criquet_silhouette</item>
         <item>ic_flamenco_couple_dancing</item>
         <item>ic_man_silhouette_running_on_treadmill_machine</item>
@@ -598,22 +729,24 @@
         <item>ic_standing_up_man</item>
         <item>ic_olympic_weightlifting_side_silhouette</item>
         <item>ic_stopwatch</item>
-        <item>ic_dumbbell</item>
+        <item>ic_dumbbell_pair</item>
         <item>ic_trail_running_shoe</item>
         <item>ic_man_silhouette_running_on_treadmill_machine</item>
         <item>ic_man_silhouette_running_on_treadmill_machine</item>
         <item>ic_shooting_with_arch_silhouette</item>
         <item>ic_baseball_player</item>
+        <item>ic_body_region</item>
+        <item>ic_a_outlined</item>
     </string-array>
     <string-array name="activity_name_id_sorted">
         <item>In vehicle</item>
-        <item>Biking</item>
-        <item>On foot</item>
+        <item>Biking (detected)</item>
+        <item>On foot (detected)</item>
         <item>Still (not moving)</item>
         <item>Unknown (unable to detect activity)</item>
         <item>Tilting (sudden device gravity change)</item>
-        <item>Walking</item>
-        <item>Running</item>
+        <item>Walking (detected)</item>
+        <item>Running (detected)</item>
         <item>Aerobics</item>
         <item>Badminton</item>
         <item>Baseball</item>
@@ -627,7 +760,7 @@
         <item>Biking - utility</item>
         <item>Boxing</item>
         <item>Calisthenics</item>
-        <item>Gym - circuit training</item>
+        <item>Circuit training</item>
         <item>Cricket</item>
         <item>Dancing</item>
         <item>Elliptical</item>
@@ -685,7 +818,7 @@
         <item>Stair climbing</item>
         <item>Stair-climbing machine</item>
         <item>Stand-up paddleboarding</item>
-        <item>Strength training</item>
+        <item>Strength Training</item>
         <item>Surfing</item>
         <item>Swimming</item>
         <item>Swimming (swimming pool)</item>
@@ -725,6 +858,8 @@
         <item>Escalator</item>
         <item>Archery</item>
         <item>Softball</item>
+        <item>Guided Breathing</item>
+        <item>A-Track-It</item>
     </string-array>
     <string-array name="activity_ident_id_sorted">
         <item>in_vehicle</item>
@@ -846,6 +981,8 @@
         <item>escalator</item>
         <item>archery</item>
         <item>softball</item>
+        <item>guided_breathing</item>
+        <item>unknown</item>
     </string-array>
     <integer-array name="activity_veryactive_id_sorted">
         <item>0</item>
@@ -967,10 +1104,13 @@
         <item>0</item>
         <item>0</item>
         <item>1</item>
+        <item>1</item>
     </integer-array>
-    <string-array name="activity_ident_name_sorted"><item>aerobics</item>
+    <string-array name="activity_ident_name_sorted">
+        <item>aerobics</item>
         <item>archery</item>
         <item>badminton</item>
+        <item>unknown</item>
         <item>baseball</item>
         <item>basketball</item>
         <item>biathlon</item>
@@ -1000,6 +1140,7 @@
         <item>frisbee_disc</item>
         <item>gardening</item>
         <item>golf</item>
+        <item>guided_breathing</item>
         <item>gymnastics</item>
         <item>handball</item>
         <item>hiking</item>
@@ -1089,6 +1230,7 @@
         <item>zumba</item>
     </string-array>
     <integer-array name="bodypart_ids">
+        <item>0</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
@@ -1116,6 +1258,7 @@
         <item>25</item>
     </integer-array>
     <integer-array name="bodypart_parentids">
+        <item>0</item>
         <item>0</item>
         <item>0</item>
         <item>0</item>
@@ -1150,6 +1293,7 @@
         <item></item>
         <item></item>
         <item></item>
+        <item></item>
         <item>Chest</item>
         <item>Chest</item>
         <item>Back</item>
@@ -1172,6 +1316,7 @@
         <item>Back</item>
     </string-array>
     <string-array name="bodypart_fullnames">
+        <item>Select...</item>
         <item>Pectoralis - Upper and Lower</item>
         <item>Latissimus Dorsi, Traps and Errectors</item>
         <item>Quadriceps, Hamstrings, Calves</item>
@@ -1198,7 +1343,37 @@
         <item>Rectus Abdominus</item>
         <item>External Oblique</item>
     </string-array>
+    <string-array name="bodypart_images">
+        <item>ic_list_white</item>
+        <item>bp_chest</item>
+        <item>bp_back</item>
+        <item>bp_legs</item>
+        <item>bp_shoulders</item>
+        <item>bp_arms</item>
+        <item>bp_core</item>
+        <item>bp_chest</item>
+        <item>bp_lowerchest</item>
+        <item>bp_back</item>
+        <item>bp_traps</item>
+        <item>bp_lowerback</item>
+        <item>bp_upperback</item>
+        <item>bp_butt</item>
+        <item>bp_hamstrings</item>
+        <item>bp_quads</item>
+        <item>bp_calves</item>
+        <item>bp_abductors</item>
+        <item>bp_shoulders</item>
+        <item>bp_shoulders</item>
+        <item>bp_shoulders</item>
+        <item>bp_biceps</item>
+        <item>bp_triceps</item>
+        <item>bp_forearm</item>
+        <item>bp_abs</item>
+        <item>bp_abs</item>
+        <item>bp_abs</item>
+    </string-array>
     <string-array name="bodypart_shortnames">
+        <item>Select...</item>
         <item>Chest</item>
         <item>Back</item>
         <item>Legs</item>
@@ -1213,7 +1388,7 @@
         <item>Upper Back</item>
         <item>Butt</item>
         <item>Hamstrings</item>
-        <item>Thighs</item>
+        <item>Quads</item>
         <item>Calves</item>
         <item>Adductors</item>
         <item>Front Delts</item>
@@ -1231,8 +1406,11 @@
         <item>Shoulders</item>
         <item>Arms</item>
         <item>Core</item>
+        <item>Push</item>
+        <item>Pull</item>
     </string-array>
     <integer-array name="bodypart_regionids">
+        <item>1</item>
         <item>1</item>
         <item>1</item>
         <item>2</item>
@@ -1250,17 +1428,46 @@
         <item>2</item>
         <item>2</item>
         <item>2</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
         <item>5</item>
         <item>5</item>
         <item>1</item>
     </integer-array>
+    <integer-array name="bodypart_flag_push_pull">
+        <item>0</item>
+        <item>1</item>
+        <item>-1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>0</item>
+        <item>0</item>
+        <item>1</item>
+        <item>1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>-1</item>
+        <item>1</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+    </integer-array>
     <string-array name="bodypart_regionnames">
+        <item>Torso</item>
         <item>Torso</item>
         <item>Torso</item>
         <item>Legs</item>
@@ -1278,17 +1485,18 @@
         <item>Legs</item>
         <item>Legs</item>
         <item>Legs</item>
-        <item>Torso</item>
-        <item>Torso</item>
-        <item>Torso</item>
-        <item>Torso</item>
-        <item>Torso</item>
-        <item>Torso</item>
+        <item>Shoulders</item>
+        <item>Shoulders</item>
+        <item>Shoulders</item>
+        <item>Arms</item>
+        <item>Arms</item>
+        <item>Arms</item>
         <item>Core</item>
         <item>Core</item>
         <item>Torso</item>
     </string-array>
     <integer-array name="bodypart_setmin">
+        <item>0</item>
         <item>3</item>
         <item>5</item>
         <item>7</item>
@@ -1317,6 +1525,7 @@
     </integer-array>
     <integer-array name="bodypart_setmax">
         <item>15</item>
+        <item>15</item>
         <item>20</item>
         <item>20</item>
         <item>18</item>
@@ -1343,6 +1552,7 @@
         <item>10</item>
     </integer-array>
     <integer-array name="bodypart_repmin">
+        <item>0</item>
         <item>6</item>
         <item>6</item>
         <item>8</item>
@@ -1370,6 +1580,7 @@
         <item>10</item>
     </integer-array>
     <integer-array name="bodypart_repmax">
+        <item>0</item>
         <item>15</item>
         <item>20</item>
         <item>25</item>
@@ -1397,6 +1608,7 @@
         <item>50</item>
     </integer-array>
     <integer-array name="bodypart_power_rating">
+        <item>0</item>
         <item>7</item>
         <item>8</item>
         <item>9</item>
@@ -1427,6 +1639,7 @@
         <item>1</item>
         <item>2</item>
         <item>3</item>
+        <item>4</item>
         <item>4</item>
         <item>5</item>
         <item>6</item>
@@ -1484,49 +1697,79 @@
         <item>58</item>
         <item>59</item>
         <item>60</item>
+        <item>61</item>
+        <item>62</item>
+        <item>63</item>
+        <item>64</item>
+        <item>65</item>
+        <item>66</item>
+        <item>67</item>
+        <item>68</item>
+        <item>69</item>
+        <item>70</item>
+        <item>71</item>
+        <item>72</item>
+        <item>73</item>
+        <item>74</item>
+        <item>75</item>
+        <item>76</item>
+        <item>77</item>
+        <item>78</item>
+        <item>79</item>
+        <item>80</item>
+        <item>81</item>
+        <item>82</item>
+        <item>83</item>
+        <item>84</item>
+        <item>85</item>
+        <item>86</item>
+        <item>87</item>
+        <item>88</item>
+        <item>89</item>
     </integer-array>
     <string-array name="exercise_name_list">
-        <item>Dips</item>
-        <item>Bench Press</item>
-        <item>Incline Bench Press</item>
-        <item>Dumbell Fly</item>
-        <item>Incline Dumbell Fly</item>
-        <item>Cable Crossovers</item>
-        <item>Hammersmith ISO-Lateral Decline Press</item>
-        <item>Hammersmith ISO-Lateral Press</item>
-        <item>Hammersmith ISO-Lateral Incline Press</item>
-        <item>Barbell Bentover Row</item>
-        <item>Dumbell Bentover Row</item>
-        <item>Hammersmith ISO-Lateral Row</item>
+        <item>Chest Dips</item>
+        <item>Barbell Bench Press</item>
+        <item>Barbell Incline Bench Press</item>
+        <item>Dumbbell Incline Bench Press</item>
+        <item>Dumbbell Fly</item>
+        <item>Dumbbell Incline Fly</item>
+        <item>Cable Crossover</item>
+        <item>Hammer-Strength ISO-Lateral Decline Press</item>
+        <item>Hammer-Strength ISO-Lateral Press</item>
+        <item>Hammer-Strength ISO-Lateral Incline Press</item>
+        <item>Barbell Bentover Rows</item>
+        <item>Dumbbell Bentover Rows</item>
+        <item>Hammer-Strength ISO-Lateral Rows</item>
         <item>Chinups</item>
         <item>Pulldowns</item>
         <item>Deadlifts</item>
         <item>Hyper Extensions</item>
-        <item>Biceps Curl(Barbell)</item>
-        <item>Biceps Curl(Dumbell)</item>
+        <item>Barbell Biceps Curls</item>
+        <item>Dumbbell Biceps Curls</item>
         <item>Preacher Bench Machine Curls</item>
         <item>Triceps Pressdowns</item>
-        <item>Triceps Dumbell Extensions</item>
+        <item>Dumbbell Triceps Extensions</item>
         <item>Lying Barbell Triceps Extensions</item>
         <item>Overhead Barbell Press</item>
-        <item>Overhead Dumbell Press</item>
-        <item>Hammersmith ISO-Lateral Overhead Press</item>
-        <item>Dumbell Side Lateral Raises</item>
-        <item>Hammersmith Lateral Raises</item>
+        <item>Overhead Dumbbell Press</item>
+        <item>Hammer-Strength ISO-Lateral Overhead Press</item>
+        <item>Dumbbell Side Lateral Raises</item>
+        <item>Hammer-Strength Lateral Raises</item>
         <item>Cable Side Lateral Raises</item>
         <item>Standing Calf Raises</item>
         <item>Donkey Calf Raises</item>
         <item>Seated Calf Raises</item>
-        <item>Dumbell Rear Lateral Raises</item>
+        <item>Dumbbell Rear Lateral Raises</item>
         <item>Pec Machine Rear Lateral Raises</item>
-        <item>Situps</item>
+        <item>Situp</item>
         <item>Leg Raises</item>
         <item>Thigh Adductor Machine</item>
         <item>Planking</item>
         <item>Hip Bridges</item>
-        <item>Alternate Dumbell Curls</item>
-        <item>Concentration Curls</item>
-        <item>2 Arm Dumbell French Press</item>
+        <item>Alternate Dumbbell Curls</item>
+        <item>Dumbbell Concentration Curls</item>
+        <item>2 Arm Dumbbell French Press</item>
         <item>Seated Leg Extensions</item>
         <item>45 Degree Leg Press</item>
         <item>Vertical Leg Press</item>
@@ -1534,18 +1777,47 @@
         <item>Leg Press Machine Calf Raises</item>
         <item>Pushups</item>
         <item>Decline Barbell Press</item>
-        <item>Decline Dumbell Fly</item>
+        <item>Decline Dumbbell Fly</item>
         <item>Tbar Rows</item>
         <item>Seated Cable Rows</item>
         <item>Superman</item>
-        <item>Stiff-legged Deadlift</item>
+        <item>Stiff-legged Deadlifts</item>
         <item>Upright Cable Rows</item>
         <item>Barbell Shrugs</item>
-        <item>Dumbell Shrugs</item>
+        <item>Dumbbell Shrugs</item>
         <item>Thigh Abductor Machine</item>
         <item>Windmills</item>
         <item>Hip Circles</item>
         <item>Side Leg Raises</item>
+        <item>Incline Dumbbell Press</item>
+        <item>Lying Leg Curl Machine</item>
+        <item>Dumbbell Bench Pullovers</item>
+        <item>Machine Pullovers</item>
+        <item>Front Squats</item>
+        <item>Back Squats</item>
+        <item>Hack Squats</item>
+        <item>Clean</item>
+        <item>Clean and Jerk</item>
+        <item>Lunges</item>
+        <item>Power Cleans</item>
+        <item>Crunches</item>
+        <item>Twisting Situps</item>
+        <item>Twisting Crunches</item>
+        <item>Crossfit Thruster</item>
+        <item>Dumbbell Front Raises</item>
+        <item>Arnold Press</item>
+        <item>Military Shoulder Press</item>
+        <item>Triceps Dips</item>
+        <item>Close Grip Bench Press</item>
+        <item>Close Grip Pushups</item>
+        <item>High Rows</item>
+        <item>Burpee</item>
+        <item>Jumping Jack</item>
+        <item>Wall Sit</item>
+        <item>Single Leg Deadlifts</item>
+        <item>JM Press</item>
+        <item>Power Snatch</item>
+        <item>Calf Press</item>
     </string-array>
     <integer-array name="exercise_resistance_type">
         <item>6</item>
@@ -1553,6 +1825,7 @@
         <item>1</item>
         <item>3</item>
         <item>3</item>
+        <item>3</item>
         <item>2</item>
         <item>5</item>
         <item>5</item>
@@ -1608,14 +1881,229 @@
         <item>6</item>
         <item>6</item>
         <item>6</item>
+        <item>3</item>
+        <item>5</item>
+        <item>3</item>
+        <item>5</item>
+        <item>1</item>
+        <item>1</item>
+        <item>5</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>6</item>
+        <item>6</item>
+        <item>6</item>
+        <item>1</item>
+        <item>3</item>
+        <item>3</item>
+        <item>1</item>
+        <item>6</item>
+        <item>1</item>
+        <item>6</item>
+        <item>5</item>
+        <item>6</item>
+        <item>6</item>
+        <item>6</item>
+        <item>3</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>5</item>
     </integer-array>
+    <string-array name="exercise_workout_exercise_list">
+        <item>dip.chest</item>
+        <item>press.bench</item>
+        <item>press.bench.incline</item>
+        <item>press.bench.incline.dumbbell</item>
+        <item>fly</item>
+        <item>fly.incline</item>
+        <item>cross-over.cable</item>
+        <item>hammer-strength.press.decline</item>
+        <item>hammer-strength.press</item>
+        <item>hammer-strength.press.incline</item>
+        <item>row</item>
+        <item>row.dumbbell</item>
+        <item>row.hammer-strength</item>
+        <item>pullup</item>
+        <item>pulldown</item>
+        <item>deadlift</item>
+        <item>back_extension</item>
+        <item>curl.bicep</item>
+        <item>curl.bicep.dumbbell</item>
+        <item>curl.bicep.preacher_bench</item>
+        <item>tricep.pressdown</item>
+        <item>triceps_extension</item>
+        <item>triceps_extension.barbell</item>
+        <item>press.shoulder</item>
+        <item>press.shoulder.dumbbell</item>
+        <item>press.shoulder.hammer-strength</item>
+        <item>raise.lateral</item>
+        <item>raise.lateral.hammer-strength</item>
+        <item>raise.lateral.cable</item>
+        <item>calf_raise</item>
+        <item>calf_raise.donkey</item>
+        <item>calf_raise.seated</item>
+        <item>raise.lateral.rear</item>
+        <item>raise.lateral.rear.machine</item>
+        <item>situp</item>
+        <item>leg_raise</item>
+        <item>adductor_machine</item>
+        <item>plank</item>
+        <item>hip_thrust</item>
+        <item>curl.biceps.dumbbell.alternate</item>
+        <item>curl.biceps.dumbbell.concentration</item>
+        <item>triceps_extension.dumbbell</item>
+        <item>leg_extension</item>
+        <item>leg_press</item>
+        <item>leg_press.vertical</item>
+        <item>leg_press.seated</item>
+        <item>calf_press</item>
+        <item>pushup</item>
+        <item>press.bench.decline</item>
+        <item>fly.decline</item>
+        <item>row.tbar</item>
+        <item>row.cable</item>
+        <item>superman</item>
+        <item>deadlift.straight_leg</item>
+        <item>row.upright</item>
+        <item>shrug</item>
+        <item>shrug.dumbbell</item>
+        <item>abductor_machine</item>
+        <item>windmill</item>
+        <item>hip_raise</item>
+        <item>leg_raise.side</item>
+        <item>press.bench.incline.dumbbell</item>
+        <item>leg_curl</item>
+        <item>pull_over.dumbbell</item>
+        <item>pullover</item>
+        <item>squat.front</item>
+        <item>squat</item>
+        <item>squat.hack</item>
+        <item>clean</item>
+        <item>clean.jerk</item>
+        <item>lunge</item>
+        <item>clean.power</item>
+        <item>crunch</item>
+        <item>situp.twisting</item>
+        <item>crunch.twisting</item>
+        <item>thruster</item>
+        <item>raise.front</item>
+        <item>press.shoulder.arnold</item>
+        <item>press.shoulder.military</item>
+        <item>dip.triceps</item>
+        <item>press.bench.close_grip</item>
+        <item>pushup.close_grip</item>
+        <item>row.high</item>
+        <item>burpee</item>
+        <item>jumping_jack</item>
+        <item>wall_sit</item>
+        <item>deadlift.single_leg</item>
+        <item>press.jm</item>
+        <item>snatch.power</item>
+        <item>calf.press</item>
+    </string-array>
+    <string-array name="exercise_other_name_list">
+        <item>Dips</item>
+        <item>Barbell Bench Presses</item>
+        <item>Barbell Incline Bench Presses</item>
+        <item>Dumbbell Incline Bench Presses,Incline Bench Dumbbell Press,Incline Dumbbell Bench Press</item>
+        <item>Dumbbell Flies, Flies, Chest Fly</item>
+        <item>Dumbbell Incline Flies, Incline Flies, Incline Fly</item>
+        <item>Cable Crossovers</item>
+        <item>HammerStrength Decline Press</item>
+        <item>HammerStrength Press</item>
+        <item>HammerStrength Incline Press</item>
+        <item>Barbell Bent over Row</item>
+        <item>Dumbbell Bent over Row</item>
+        <item>HammerStrength Rows</item>
+        <item>Chinup</item>
+        <item>Pulldown</item>
+        <item>Deadlift</item>
+        <item>Hyper Extension</item>
+        <item>Barbell Bicep Curl</item>
+        <item>Dumbbell Bicep Curl</item>
+        <item>Machine Preacher Bench Curl</item>
+        <item>Tricep Pressdown, Tricep Pressdowns</item>
+        <item>Dumbbell Tricep Extension</item>
+        <item>Lying Barbell Tricep Extension</item>
+        <item>Overhead Barbell Presses</item>
+        <item>Overhead Dumbbell Presses</item>
+        <item>Hammer-Strength Overhead Press</item>
+        <item>Dumbbell Side Lateral Raise</item>
+        <item>HammerStrength Lateral Raise</item>
+        <item>Cable Side Lateral Raise</item>
+        <item>Standing Calf Raise</item>
+        <item>Donkey Calf Raise</item>
+        <item>Seated Calf Raise</item>
+        <item>Dumbbell Rear Lateral Raise</item>
+        <item>Pec Machine Rear Lateral Raise</item>
+        <item>Situps</item>
+        <item>Leg Raise</item>
+        <item>Thigh Adductor Machine</item>
+        <item>Plank</item>
+        <item>Hip Bridge</item>
+        <item>Alternate Dumbbell Curl, Dumbbell Alternate Curls</item>
+        <item>Dumbbell Concentration Curl, Concentration Curls</item>
+        <item>2 Arm Dumbbell French Presses</item>
+        <item>Seated Leg Extension</item>
+        <item>45 Degree Leg Press Machine</item>
+        <item>Vertical Leg Press Machine</item>
+        <item>Seated Leg Press Machine</item>
+        <item>Leg Press Machine Calf Raise</item>
+        <item>Pushup</item>
+        <item>Decline Barbell Presses</item>
+        <item>Decline Fly, Decline Flies</item>
+        <item>T-bar Row</item>
+        <item>Seated Cable Row</item>
+        <item>Superman</item>
+        <item>Stiff-legged Deadlift</item>
+        <item>Upright Cable Row</item>
+        <item>Barbell Shrug</item>
+        <item>Dumbbell Shrug</item>
+        <item>Thigh Abductor Machine</item>
+        <item>Windmill</item>
+        <item>Hip Circle</item>
+        <item>Side Leg Raise</item>
+        <item>Incline Dumbbell Press, Dumbbell Incline Presses</item>
+        <item>Lying Leg-Curl Machine</item>
+        <item>Dumbbell Bench Pullover</item>
+        <item>Machine Pullover</item>
+        <item>Front Squat</item>
+        <item>Back Squat</item>
+        <item>Hack Squat</item>
+        <item>Cleans</item>
+        <item>Clean and Jerk</item>
+        <item>Lunge</item>
+        <item>Power Clean</item>
+        <item>Crunch</item>
+        <item>Twisting Situp</item>
+        <item>Twisting Crunch</item>
+        <item>Crossfit Thruster</item>
+        <item>Dumbbell Front Raise</item>
+        <item>Arnold Press</item>
+        <item>Military Shoulder Press</item>
+        <item>Triceps Dip</item>
+        <item>Close Grip Bench Press</item>
+        <item>Close Grip Pushup</item>
+        <item>High Rows</item>
+        <item>Burpees</item>
+        <item>Jumping Jacks</item>
+        <item>Wall Sits</item>
+        <item>Single Leg Deadlift</item>
+        <item>JM Presses</item>
+        <item>Power Snatches</item>
+        <item>Calf Presses</item>
+    </string-array>
     <integer-array name="exercise_bodypart_count">
         <item>4</item>
         <item>4</item>
         <item>4</item>
+        <item>4</item>
+        <item>3</item>
+        <item>3</item>
         <item>2</item>
-        <item>2</item>
-        <item>1</item>
         <item>4</item>
         <item>3</item>
         <item>4</item>
@@ -1669,13 +2157,43 @@
         <item>1</item>
         <item>1</item>
         <item>1</item>
+        <item>1</item>
+        <item>4</item>
+        <item>3</item>
+        <item>4</item>
+        <item>4</item>
+        <item>3</item>
+        <item>3</item>
+        <item>2</item>
+        <item>4</item>
+        <item>3</item>
+        <item>3</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>3</item>
+        <item>1</item>
+        <item>4</item>
+        <item>4</item>
+        <item>2</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>2</item>
+        <item>2</item>
+        <item>1</item>
+        <item>4</item>
+        <item>3</item>
+        <item>4</item>
         <item>1</item>
     </integer-array>
     <integer-array name="exercise_bodypart1_id">
         <item>8</item>
-        <item>8</item>
+        <item>1</item>
         <item>7</item>
-        <item>8</item>
+        <item>7</item>
+        <item>1</item>
         <item>7</item>
         <item>1</item>
         <item>8</item>
@@ -1732,14 +2250,44 @@
         <item>17</item>
         <item>17</item>
         <item>17</item>
+        <item>7</item>
+        <item>14</item>
+        <item>9</item>
+        <item>9</item>
+        <item>15</item>
+        <item>15</item>
+        <item>15</item>
+        <item>2</item>
+        <item>2</item>
+        <item>15</item>
+        <item>15</item>
+        <item>24</item>
+        <item>24</item>
+        <item>24</item>
+        <item>2</item>
+        <item>18</item>
+        <item>18</item>
+        <item>18</item>
+        <item>22</item>
+        <item>22</item>
+        <item>22</item>
+        <item>12</item>
+        <item>2</item>
+        <item>2</item>
+        <item>15</item>
+        <item>11</item>
+        <item>22</item>
+        <item>2</item>
+        <item>16</item>
     </integer-array>
     <integer-array name="exercise_bodypart2_id">
         <item>1</item>
+        <item>8</item>
         <item>1</item>
         <item>1</item>
-        <item>4</item>
-        <item>4</item>
-        <item>0</item>
+        <item>8</item>
+        <item>1</item>
+        <item>8</item>
         <item>1</item>
         <item>4</item>
         <item>1</item>
@@ -1793,14 +2341,44 @@
         <item>0</item>
         <item>0</item>
         <item>0</item>
+        <item>0</item>
+        <item>1</item>
+        <item>13</item>
+        <item>1</item>
+        <item>1</item>
+        <item>11</item>
+        <item>11</item>
+        <item>13</item>
+        <item>10</item>
+        <item>10</item>
+        <item>14</item>
+        <item>2</item>
+        <item>25</item>
+        <item>25</item>
+        <item>25</item>
+        <item>3</item>
+        <item>0</item>
+        <item>19</item>
+        <item>19</item>
+        <item>8</item>
+        <item>18</item>
+        <item>18</item>
+        <item>2</item>
+        <item>3</item>
+        <item>3</item>
+        <item>0</item>
+        <item>15</item>
+        <item>1</item>
+        <item>3</item>
         <item>0</item>
     </integer-array>
     <integer-array name="exercise_bodypart3_id">
         <item>4</item>
         <item>4</item>
         <item>4</item>
-        <item>0</item>
-        <item>0</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
         <item>0</item>
         <item>4</item>
         <item>22</item>
@@ -1856,8 +2434,38 @@
         <item>0</item>
         <item>0</item>
         <item>0</item>
+        <item>4</item>
+        <item>11</item>
+        <item>25</item>
+        <item>25</item>
+        <item>13</item>
+        <item>13</item>
+        <item>0</item>
+        <item>3</item>
+        <item>3</item>
+        <item>11</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>4</item>
+        <item>0</item>
+        <item>10</item>
+        <item>10</item>
+        <item>0</item>
+        <item>1</item>
+        <item>1</item>
+        <item>20</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>13</item>
+        <item>18</item>
+        <item>4</item>
+        <item>0</item>
     </integer-array>
     <integer-array name="exercise_bodypart4_id">
+        <item>22</item>
         <item>22</item>
         <item>22</item>
         <item>22</item>
@@ -1918,11 +2526,41 @@
         <item>0</item>
         <item>0</item>
         <item>0</item>
+        <item>22</item>
+        <item>0</item>
+        <item>24</item>
+        <item>24</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>4</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>22</item>
+        <item>22</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>14</item>
+        <item>0</item>
+        <item>5</item>
+        <item>0</item>
     </integer-array>
     <string-array name="exercise_power_factor">
         <item>7</item>
         <item>7</item>
         <item>8</item>
+        <item>8</item>
         <item>6</item>
         <item>5</item>
         <item>6</item>
@@ -1980,12 +2618,42 @@
         <item>4</item>
         <item>3</item>
         <item>3</item>
+        <item>8</item>
+        <item>6</item>
+        <item>6</item>
+        <item>6</item>
+        <item>9</item>
+        <item>9</item>
+        <item>9</item>
+        <item>8</item>
+        <item>9</item>
+        <item>8</item>
+        <item>8</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>6</item>
+        <item>6</item>
+        <item>6</item>
+        <item>6</item>
+        <item>6</item>
+        <item>5</item>
+        <item>6</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>6</item>
+        <item>6</item>
+        <item>8</item>
+        <item>9</item>
     </string-array>
     <string-array name="exercise_bodypart1_name">
         <item>Lower Chest</item>
-        <item>Lower Chest</item>
+        <item>Chest</item>
         <item>Upper Chest</item>
-        <item>Lower Chest</item>
+        <item>Upper Chest</item>
+        <item>Chest</item>
         <item>Upper Chest</item>
         <item>Chest</item>
         <item>Lower Chest</item>
@@ -2023,10 +2691,10 @@
         <item>Biceps</item>
         <item>Biceps</item>
         <item>Triceps</item>
-        <item>Thighs</item>
-        <item>Thighs</item>
-        <item>Thighs</item>
-        <item>Thighs</item>
+        <item>Quads</item>
+        <item>Quads</item>
+        <item>Quads</item>
+        <item>Quads</item>
         <item>Calves</item>
         <item>Chest</item>
         <item>Lower Chest</item>
@@ -2042,14 +2710,44 @@
         <item>Abductors &amp; Adductors</item>
         <item>Abductors &amp; Adductors</item>
         <item>Abductors &amp; Adductors</item>
+        <item>Upper Chest</item>
+        <item>Hamstrings</item>
+        <item>Lats</item>
+        <item>Lats</item>
+        <item>Quads</item>
+        <item>Quads</item>
+        <item>Quads</item>
+        <item>Back</item>
+        <item>Back</item>
+        <item>Quads</item>
+        <item>Quads</item>
+        <item>Abs</item>
+        <item>Abs</item>
+        <item>Abs</item>
+        <item>Back</item>
+        <item>Front Delts</item>
+        <item>Front Delts</item>
+        <item>Front Delts</item>
+        <item>Triceps</item>
+        <item>Triceps</item>
+        <item>Triceps</item>
+        <item>Upper Back</item>
+        <item>Back</item>
+        <item>Back</item>
+        <item>Quads</item>
+        <item>Lower Back</item>
+        <item>Triceps</item>
+        <item>Back</item>
+        <item>Calves</item>
     </string-array>
     <string-array name="exercise_bodypart2_name">
         <item>Chest</item>
+        <item>Lower Chest</item>
         <item>Chest</item>
         <item>Chest</item>
-        <item>Shoulders</item>
-        <item>Shoulders</item>
-        <item></item>
+        <item>Lower Chest</item>
+        <item>Chest</item>
+        <item>Lower Chest</item>
         <item>Chest</item>
         <item>Shoulders</item>
         <item>Chest</item>
@@ -2103,14 +2801,44 @@
         <item></item>
         <item></item>
         <item></item>
+        <item></item>
+        <item>Chest</item>
+        <item>Butt</item>
+        <item>Chest</item>
+        <item>Chest</item>
+        <item>Lower Back</item>
+        <item>Lower Back</item>
+        <item>Butt</item>
+        <item>Traps</item>
+        <item>Traps</item>
+        <item>Hamstrings</item>
+        <item>Back</item>
+        <item>Obliques</item>
+        <item>Obliques</item>
+        <item>Obliques</item>
+        <item>Legs</item>
+        <item></item>
+        <item>Side Delts</item>
+        <item>Side Delts</item>
+        <item>Lower Chest</item>
+        <item>Front Delts</item>
+        <item>Front Delts</item>
+        <item>Back</item>
+        <item>Legs</item>
+        <item>Legs</item>
+        <item></item>
+        <item>Quads</item>
+        <item>Chest</item>
+        <item>Legs</item>
         <item></item>
     </string-array>
     <string-array name="exercise_bodypart3_name" >
         <item>Shoulders</item>
         <item>Shoulders</item>
         <item>Shoulders</item>
-        <item></item>
-        <item></item>
+        <item>Shoulders</item>
+        <item>Shoulders</item>
+        <item>Shoulders</item>
         <item></item>
         <item>Shoulders</item>
         <item>Triceps</item>
@@ -2166,11 +2894,41 @@
         <item></item>
         <item></item>
         <item></item>
+        <item>Shoulders</item>
+        <item>Lower Back</item>
+        <item>Obliques</item>
+        <item>Obliques</item>
+        <item>Butt</item>
+        <item>Butt</item>
+        <item></item>
+        <item>Legs</item>
+        <item>Legs</item>
+        <item>Lower Back</item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item>Shoulders</item>
+        <item></item>
+        <item>Traps</item>
+        <item>Traps</item>
+        <item></item>
+        <item>Chest</item>
+        <item>Chest</item>
+        <item>Rear Delts</item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item>Butt</item>
+        <item>Front Delts</item>
+        <item>Shoulders</item>
+        <item></item>
     </string-array>
     <string-array name="exercise_bodypart4_name">
         <item>Triceps</item>
         <item>Triceps</item>
         <item>Triceps</item>
+        <item>Triceps</item>
         <item></item>
         <item></item>
         <item></item>
@@ -2182,7 +2940,7 @@
         <item>Biceps</item>
         <item>Biceps</item>
         <item>Biceps</item>
-        <item>Thighs</item>
+        <item>Quads</item>
         <item></item>
         <item></item>
         <item></item>
@@ -2227,10 +2985,41 @@
         <item></item>
         <item></item>
         <item></item>
+        <item></item>
+        <item>Triceps</item>
+        <item></item>
+        <item>Abs</item>
+        <item>Abs</item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item>Shoulders</item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item>Triceps</item>
+        <item>Triceps</item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item>Hamstrings</item>
+        <item></item>
+        <item>Arms</item>
         <item></item>
     </string-array>
-    <integer-array name="exercise_power_rating"><item>7</item>
+    <integer-array name="exercise_power_rating">
         <item>7</item>
+        <item>7</item>
+        <item>8</item>
         <item>8</item>
         <item>6</item>
         <item>5</item>
@@ -2289,7 +3078,44 @@
         <item>4</item>
         <item>3</item>
         <item>3</item>
+        <item>8</item>
+        <item>6</item>
+        <item>6</item>
+        <item>6</item>
+        <item>9</item>
+        <item>9</item>
+        <item>9</item>
+        <item>8</item>
+        <item>9</item>
+        <item>8</item>
+        <item>8</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>6</item>
+        <item>6</item>
+        <item>6</item>
+        <item>6</item>
+        <item>6</item>
+        <item>5</item>
+        <item>6</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>6</item>
+        <item>6</item>
+        <item>8</item>
+        <item>8</item>
     </integer-array>
+    <string-array name="credits_name_array">
+        <item>Flat Icons - all icons </item>
+        <item>Chris Black - initial smartphone design and architecture</item>
+        <item>StackOverflow</item>
+        <item>Google Developers</item>
+        <item>Ulysses Data Policy</item>
+        <item>A-Track-It.com website</item>
+    </string-array>
     <string-array name="activity_types">
         <item>Walking</item>
         <item>Running</item>
@@ -2318,13 +3144,34 @@
         <item>38</item>
         <item>31</item>
     </integer-array>
+    <string-array name="resistance_types">
+        <item>Unknown</item>
+        <item>Barbell</item>
+        <item>Body</item>
+        <item>Cable</item>
+        <item>Dumbbell</item>
+        <item>Kettlebell</item>
+        <item>Machine</item>
+    </string-array>
+    <integer-array name="resistance_types_ids">
+        <item>0</item>
+        <item>1</item>
+        <item>6</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </integer-array>
     <integer-array name="region_ids">
-        <item>1</item><item>2</item><item>3</item><item>4</item><item>5</item>
+        <item>1</item><item>2</item><item>3</item><item>4</item><item>5</item><item>6</item><item>7</item>
     </integer-array>
     <string-array name="region_names">
-        <item>Torso</item><item>Legs</item><item>Shoulders</item><item>Arms</item><item>Core</item>
+        <item>Torso</item><item>Legs</item><item>Shoulders</item><item>Arms</item><item>Core</item><item>Push</item><item>Pull</item>
     </string-array>
-    <string-array name="archery_division"><item>indoor</item><item>outdoor</item><item>field</item><item>clout</item></string-array>
+    <string-array name="region_images">
+        <item>bp_torso</item><item>bp_legs</item><item>bp_shoulders</item><item>bp_arms</item><item>bp_core</item><item>bp_push</item><item>bp_pull</item>
+    </string-array>
+    <string-array name="archery_division"><item>Indoor</item><item>Outdoor</item><item>Field</item><item>Clout</item></string-array>
     <string-array name="archery_equipment"><item>Recurve</item><item>Compound</item><item>Barebow Recurve</item><item>Barebow Compound</item><item>Longbow</item><item>Crossbow</item></string-array>
     <string-array name="archery_distance_indoor"><item>5 m</item><item>10 m</item><item>15 m</item><item>20 m</item><item>25 m</item><item>30 m</item><item>45 m</item><item>40 m</item><item>45 m</item><item>50 m</item><item>55 m</item><item>60 m</item><item>70 m</item><item>90 m</item></string-array>
     <string-array name="archery_distance_field"><item>20 m</item><item>25 m</item><item>30 m</item><item>35 m</item><item>40 m</item><item>45 m</item><item>50 m</item><item>55 m</item><item>60 m</item><item>70 m</item><item>80 m</item><item>90 m</item></string-array>
@@ -2416,77 +3263,235 @@
         <item>8</item>
         <item>9</item>
         <item>10</item>
-        <item>12.5</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
         <item>15</item>
-        <item>17.5</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
         <item>20</item>
-        <item>22.5</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
         <item>25</item>
-        <item>27.5</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
         <item>30</item>
-        <item>32.5</item>
+        <item>31</item>
+        <item>32</item>
+        <item>33</item>
+        <item>34</item>
         <item>35</item>
-        <item>37.5</item>
+        <item>36</item>
+        <item>37</item>
+        <item>38</item>
+        <item>39</item>
         <item>40</item>
-        <item>42.5</item>
+        <item>41</item>
+        <item>42</item>
+        <item>43</item>
+        <item>44</item>
         <item>45</item>
-        <item>47.5</item>
+        <item>46</item>
+        <item>47</item>
+        <item>48</item>
+        <item>49</item>
         <item>50</item>
-        <item>52.5</item>
+        <item>51</item>
+        <item>52</item>
+        <item>53</item>
+        <item>54</item>
         <item>55</item>
-        <item>57.5</item>
+        <item>56</item>
+        <item>57</item>
+        <item>58</item>
+        <item>59</item>
         <item>60</item>
-        <item>62.5</item>
+        <item>61</item>
+        <item>62</item>
+        <item>63</item>
+        <item>64</item>
         <item>65</item>
-        <item>67.5</item>
+        <item>66</item>
+        <item>67</item>
+        <item>68</item>
+        <item>69</item>
         <item>70</item>
-        <item>72.5</item>
+        <item>71</item>
+        <item>72</item>
+        <item>73</item>
+        <item>74</item>
         <item>75</item>
-        <item>77.5</item>
+        <item>76</item>
+        <item>77</item>
+        <item>78</item>
+        <item>79</item>
         <item>80</item>
-        <item>82.5</item>
+        <item>81</item>
+        <item>82</item>
+        <item>83</item>
+        <item>84</item>
         <item>85</item>
-        <item>87.5</item>
+        <item>86</item>
+        <item>87</item>
+        <item>88</item>
+        <item>89</item>
         <item>90</item>
-        <item>92.5</item>
+        <item>91</item>
+        <item>92</item>
+        <item>93</item>
+        <item>94</item>
         <item>95</item>
-        <item>97.5</item>
+        <item>96</item>
+        <item>97</item>
+        <item>98</item>
+        <item>99</item>
         <item>100</item>
+        <item>101</item>
+        <item>102</item>
+        <item>103</item>
+        <item>104</item>
         <item>105</item>
+        <item>106</item>
+        <item>107</item>
+        <item>108</item>
+        <item>109</item>
         <item>110</item>
+        <item>111</item>
+        <item>112</item>
+        <item>113</item>
+        <item>114</item>
         <item>115</item>
+        <item>116</item>
+        <item>117</item>
+        <item>118</item>
+        <item>119</item>
         <item>120</item>
+        <item>121</item>
+        <item>122</item>
+        <item>123</item>
+        <item>124</item>
         <item>125</item>
+        <item>126</item>
+        <item>127</item>
+        <item>128</item>
+        <item>129</item>
         <item>130</item>
+        <item>131</item>
+        <item>132</item>
+        <item>133</item>
+        <item>134</item>
         <item>135</item>
+        <item>136</item>
+        <item>137</item>
+        <item>138</item>
+        <item>139</item>
         <item>140</item>
+        <item>141</item>
+        <item>142</item>
+        <item>143</item>
+        <item>144</item>
         <item>145</item>
+        <item>146</item>
+        <item>147</item>
+        <item>148</item>
+        <item>149</item>
         <item>150</item>
+        <item>151</item>
+        <item>152</item>
+        <item>153</item>
+        <item>154</item>
         <item>155</item>
+        <item>156</item>
+        <item>157</item>
+        <item>158</item>
+        <item>159</item>
         <item>160</item>
+        <item>161</item>
+        <item>162</item>
+        <item>163</item>
+        <item>164</item>
         <item>165</item>
+        <item>166</item>
+        <item>167</item>
+        <item>168</item>
+        <item>169</item>
         <item>170</item>
+        <item>171</item>
+        <item>172</item>
+        <item>173</item>
+        <item>174</item>
         <item>175</item>
+        <item>176</item>
+        <item>177</item>
+        <item>178</item>
+        <item>179</item>
         <item>180</item>
+        <item>181</item>
+        <item>182</item>
+        <item>183</item>
+        <item>184</item>
         <item>185</item>
+        <item>186</item>
+        <item>187</item>
+        <item>188</item>
+        <item>189</item>
         <item>190</item>
+        <item>191</item>
+        <item>192</item>
+        <item>193</item>
+        <item>194</item>
         <item>195</item>
+        <item>196</item>
+        <item>197</item>
+        <item>198</item>
+        <item>199</item>
         <item>200</item>
         <item>205</item>
         <item>210</item>
         <item>215</item>
         <item>220</item>
         <item>225</item>
+        <item>230</item>
+        <item>235</item>
+        <item>240</item>
+        <item>245</item>
         <item>250</item>
+        <item>255</item>
+        <item>260</item>
+        <item>265</item>
+        <item>270</item>
         <item>275</item>
+        <item>280</item>
+        <item>285</item>
+        <item>290</item>
+        <item>295</item>
         <item>300</item>
         <item>305</item>
         <item>310</item>
         <item>315</item>
         <item>320</item>
         <item>325</item>
+        <item>330</item>
+        <item>335</item>
+        <item>340</item>
+        <item>345</item>
         <item>350</item>
+        <item>355</item>
+        <item>360</item>
+        <item>365</item>
+        <item>370</item>
         <item>375</item>
+        <item>380</item>
+        <item>385</item>
+        <item>390</item>
+        <item>395</item>
         <item>400</item>
         <item>405</item>
         <item>410</item>
@@ -2518,65 +3523,235 @@
         <item>8</item>
         <item>9</item>
         <item>10</item>
-        <item>12.5</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
         <item>15</item>
-        <item>17.5</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
         <item>20</item>
-        <item>22.5</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
         <item>25</item>
-        <item>27.5</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
         <item>30</item>
-        <item>32.5</item>
+        <item>31</item>
+        <item>32</item>
+        <item>33</item>
+        <item>34</item>
         <item>35</item>
-        <item>37.5</item>
+        <item>36</item>
+        <item>37</item>
+        <item>38</item>
+        <item>39</item>
         <item>40</item>
-        <item>42.5</item>
+        <item>41</item>
+        <item>42</item>
+        <item>43</item>
+        <item>44</item>
         <item>45</item>
-        <item>47.5</item>
+        <item>46</item>
+        <item>47</item>
+        <item>48</item>
+        <item>49</item>
         <item>50</item>
-        <item>52.5</item>
+        <item>51</item>
+        <item>52</item>
+        <item>53</item>
+        <item>54</item>
         <item>55</item>
-        <item>57.5</item>
+        <item>56</item>
+        <item>57</item>
+        <item>58</item>
+        <item>59</item>
         <item>60</item>
-        <item>62.5</item>
+        <item>61</item>
+        <item>62</item>
+        <item>63</item>
+        <item>64</item>
         <item>65</item>
-        <item>67.5</item>
+        <item>66</item>
+        <item>67</item>
+        <item>68</item>
+        <item>69</item>
         <item>70</item>
-        <item>72.5</item>
+        <item>71</item>
+        <item>72</item>
+        <item>73</item>
+        <item>74</item>
         <item>75</item>
-        <item>77.5</item>
+        <item>76</item>
+        <item>77</item>
+        <item>78</item>
+        <item>79</item>
         <item>80</item>
-        <item>82.5</item>
+        <item>81</item>
+        <item>82</item>
+        <item>83</item>
+        <item>84</item>
         <item>85</item>
-        <item>87.5</item>
+        <item>86</item>
+        <item>87</item>
+        <item>88</item>
+        <item>89</item>
         <item>90</item>
-        <item>92.5</item>
+        <item>91</item>
+        <item>92</item>
+        <item>93</item>
+        <item>94</item>
         <item>95</item>
-        <item>97.5</item>
+        <item>96</item>
+        <item>97</item>
+        <item>98</item>
+        <item>99</item>
         <item>100</item>
+        <item>101</item>
+        <item>102</item>
+        <item>103</item>
+        <item>104</item>
         <item>105</item>
+        <item>106</item>
+        <item>107</item>
+        <item>108</item>
+        <item>109</item>
         <item>110</item>
+        <item>111</item>
+        <item>112</item>
+        <item>113</item>
+        <item>114</item>
         <item>115</item>
+        <item>116</item>
+        <item>117</item>
+        <item>118</item>
+        <item>119</item>
         <item>120</item>
+        <item>121</item>
+        <item>122</item>
+        <item>123</item>
+        <item>124</item>
         <item>125</item>
+        <item>126</item>
+        <item>127</item>
+        <item>128</item>
+        <item>129</item>
+        <item>130</item>
+        <item>131</item>
+        <item>132</item>
+        <item>133</item>
+        <item>134</item>
+        <item>135</item>
+        <item>136</item>
+        <item>137</item>
+        <item>138</item>
+        <item>139</item>
+        <item>140</item>
+        <item>141</item>
+        <item>142</item>
+        <item>143</item>
+        <item>144</item>
+        <item>145</item>
+        <item>146</item>
+        <item>147</item>
+        <item>148</item>
+        <item>149</item>
         <item>150</item>
+        <item>151</item>
+        <item>152</item>
+        <item>153</item>
+        <item>154</item>
+        <item>155</item>
+        <item>156</item>
+        <item>157</item>
+        <item>158</item>
+        <item>159</item>
+        <item>160</item>
+        <item>161</item>
+        <item>162</item>
+        <item>163</item>
+        <item>164</item>
+        <item>165</item>
+        <item>166</item>
+        <item>167</item>
+        <item>168</item>
+        <item>169</item>
+        <item>170</item>
+        <item>171</item>
+        <item>172</item>
+        <item>173</item>
+        <item>174</item>
         <item>175</item>
+        <item>176</item>
+        <item>177</item>
+        <item>178</item>
+        <item>179</item>
+        <item>180</item>
+        <item>181</item>
+        <item>182</item>
+        <item>183</item>
+        <item>184</item>
+        <item>185</item>
+        <item>186</item>
+        <item>187</item>
+        <item>188</item>
+        <item>189</item>
+        <item>190</item>
+        <item>191</item>
+        <item>192</item>
+        <item>193</item>
+        <item>194</item>
+        <item>195</item>
+        <item>196</item>
+        <item>197</item>
+        <item>198</item>
+        <item>199</item>
         <item>200</item>
         <item>205</item>
         <item>210</item>
         <item>215</item>
         <item>220</item>
         <item>225</item>
+        <item>230</item>
+        <item>235</item>
+        <item>240</item>
+        <item>245</item>
         <item>250</item>
+        <item>255</item>
+        <item>260</item>
+        <item>265</item>
+        <item>270</item>
         <item>275</item>
+        <item>280</item>
+        <item>285</item>
+        <item>290</item>
+        <item>295</item>
         <item>300</item>
         <item>305</item>
         <item>310</item>
         <item>315</item>
         <item>320</item>
         <item>325</item>
+        <item>330</item>
+        <item>335</item>
+        <item>340</item>
+        <item>345</item>
         <item>350</item>
+        <item>355</item>
+        <item>360</item>
+        <item>365</item>
+        <item>370</item>
         <item>375</item>
+        <item>380</item>
+        <item>385</item>
+        <item>390</item>
+        <item>395</item>
         <item>400</item>
         <item>405</item>
         <item>410</item>
@@ -2648,16 +3823,156 @@
         <item>48</item>
         <item>49</item>
         <item>50</item>
+        <item>51</item>
+        <item>52</item>
+        <item>53</item>
+        <item>54</item>
         <item>55</item>
+        <item>56</item>
+        <item>57</item>
+        <item>58</item>
+        <item>59</item>
         <item>60</item>
+        <item>61</item>
+        <item>62</item>
+        <item>63</item>
+        <item>64</item>
         <item>65</item>
+        <item>66</item>
+        <item>67</item>
+        <item>68</item>
+        <item>69</item>
         <item>70</item>
+        <item>71</item>
+        <item>72</item>
+        <item>73</item>
+        <item>74</item>
         <item>75</item>
+        <item>76</item>
+        <item>77</item>
+        <item>78</item>
+        <item>79</item>
         <item>80</item>
+        <item>81</item>
+        <item>82</item>
+        <item>83</item>
+        <item>84</item>
         <item>85</item>
+        <item>86</item>
+        <item>87</item>
+        <item>88</item>
+        <item>89</item>
         <item>90</item>
+        <item>91</item>
+        <item>92</item>
+        <item>93</item>
+        <item>94</item>
         <item>95</item>
+        <item>96</item>
+        <item>97</item>
+        <item>98</item>
+        <item>99</item>
         <item>100</item>
+        <item>101</item>
+        <item>102</item>
+        <item>103</item>
+        <item>104</item>
+        <item>105</item>
+        <item>106</item>
+        <item>107</item>
+        <item>108</item>
+        <item>109</item>
+        <item>110</item>
+        <item>111</item>
+        <item>112</item>
+        <item>113</item>
+        <item>114</item>
+        <item>115</item>
+        <item>116</item>
+        <item>117</item>
+        <item>118</item>
+        <item>119</item>
+        <item>120</item>
+        <item>121</item>
+        <item>122</item>
+        <item>123</item>
+        <item>124</item>
+        <item>125</item>
+        <item>126</item>
+        <item>127</item>
+        <item>128</item>
+        <item>129</item>
+        <item>130</item>
+        <item>131</item>
+        <item>132</item>
+        <item>133</item>
+        <item>134</item>
+        <item>135</item>
+        <item>136</item>
+        <item>137</item>
+        <item>138</item>
+        <item>139</item>
+        <item>140</item>
+        <item>141</item>
+        <item>142</item>
+        <item>143</item>
+        <item>144</item>
+        <item>145</item>
+        <item>146</item>
+        <item>147</item>
+        <item>148</item>
+        <item>149</item>
+        <item>150</item>
+        <item>151</item>
+        <item>152</item>
+        <item>153</item>
+        <item>154</item>
+        <item>155</item>
+        <item>156</item>
+        <item>157</item>
+        <item>158</item>
+        <item>159</item>
+        <item>160</item>
+        <item>161</item>
+        <item>162</item>
+        <item>163</item>
+        <item>164</item>
+        <item>165</item>
+        <item>166</item>
+        <item>167</item>
+        <item>168</item>
+        <item>169</item>
+        <item>170</item>
+        <item>171</item>
+        <item>172</item>
+        <item>173</item>
+        <item>174</item>
+        <item>175</item>
+        <item>176</item>
+        <item>177</item>
+        <item>178</item>
+        <item>179</item>
+        <item>180</item>
+        <item>181</item>
+        <item>182</item>
+        <item>183</item>
+        <item>184</item>
+        <item>185</item>
+        <item>186</item>
+        <item>187</item>
+        <item>188</item>
+        <item>189</item>
+        <item>190</item>
+        <item>191</item>
+        <item>192</item>
+        <item>193</item>
+        <item>194</item>
+        <item>195</item>
+        <item>196</item>
+        <item>197</item>
+        <item>198</item>
+        <item>199</item>
+        <item>200</item>
     </string-array>
     <string-array name="array_rest_duration_gym">
         <item>5</item>
@@ -2672,11 +3987,19 @@
         <item>50</item>
         <item>55</item>
         <item>60</item>
+        <item>65</item>
+        <item>70</item>
         <item>75</item>
+        <item>80</item>
         <item>90</item>
+        <item>100</item>
         <item>105</item>
+        <item>110</item>
         <item>120</item>
+        <item>140</item>
+        <item>160</item>
         <item>180</item>
+        <item>200</item>
         <item>240</item>
         <item>300</item>
         <item>360</item>

@@ -1,127 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/lighterGray"
+    android:layout_height="wrap_content"
     tools:context="com.a_track_it.fitdata.activity.AddEntryActivity">
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linear_group"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/linear_group">
-        <com.a_track_it.fitdata.model.IconTextView
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:textColor="@color/semiBlack"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/textViewAddEntry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:textSize="20sp"
-            android:text="@string/icon_target" />
+            android:text="@string/label_activity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
         <Spinner
-            android:paddingTop="25dp"
-            android:textAlignment="viewStart"
-            android:gravity="bottom|start"
-            android:paddingStart="4dp"
-            android:paddingEnd="4dp"
             android:id="@+id/activitySpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:dropDownVerticalOffset="10dp"
-            android:spinnerMode="dropdown"
             android:entries="@array/activity_types"
+            android:gravity="center|center_vertical"
+            android:paddingStart="4dp"
+            android:paddingTop="25dp"
+            android:paddingEnd="4dp"
             android:prompt="@string/activity_prompt"
-            style="@style/form_item"/>
-        
-        <View style="@style/form_divider" />
+            android:spinnerMode="dropdown"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewAddEntry" />
+
+        <View
+            android:id="@+id/view"
+            style="@style/form_divider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/activitySpinner"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
             android:id="@+id/dateTextView"
             style="@style/form_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:paddingStart="4dp"
-            android:paddingEnd="4dp"
             android:paddingTop="29dp"
+            android:paddingEnd="4dp"
             android:textAlignment="viewStart"
-            tools:text="June 22nd, 2018" />
-        <View style="@style/form_divider" />
+            tools:text="June 22nd, 2018"
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <View
+            android:id="@+id/view2"
+            style="@style/form_divider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/dateTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/editInputLayout3"
-            android:layout_width="180dp"
-            style="@style/form_item"
-            android:focusable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:clickable="true"
-            android:orientation="vertical">
-            <EditText
+            android:focusable="true"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/view2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/timeTextView"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:inputType="time"
+                style="@style/form_item"
                 android:textAlignment="viewStart"
-                tools:text="1:00 PM"
-                android:editable="false"/>
+                android:textColor="@color/primaryTextColor"
+                android:textColorHighlight="@color/secondaryColor"
+                android:textColorHint="@color/primaryTextColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="1:00 PM" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <RelativeLayout
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editInputLayout2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/editInputLayout2"
-                android:layout_width="180dp"
-                style="@style/form_item"
-                android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/editInputLayout3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
-                <EditText
-                    android:id="@+id/editTextSteps"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:textAlignment="viewStart"
-                    android:text="0">
-                    <requestFocus />
-                </EditText>
-
-            </com.google.android.material.textfield.TextInputLayout>
-            <TextView
-                android:id="@+id/labelText2"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextSteps"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="steps"
-                android:layout_marginStart="-30dp"
-                android:paddingBottom="12dp"
-                android:textSize="18sp"
-                android:paddingTop="27dp"
-
-                android:layout_toEndOf="@+id/editInputLayout2"
-                android:textColor="@color/semiBlack" />
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/editInputLayout"
-                android:layout_width="180dp"
+                android:inputType="number"
                 style="@style/form_item"
-                android:layout_below="@+id/editInputLayout2"
-                android:orientation="horizontal">
+                android:textAlignment="viewStart"
+                android:textColor="@color/primaryTextColor"
+                android:textColorHighlight="@color/secondaryColor"
+                android:textColorHint="@color/primaryTextColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="0">
 
-                <EditText
-                    android:id="@+id/editTextMinutes"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:text="30">
+                <requestFocus
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputEditText>
 
+        </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:id="@+id/labelText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="27dp"
+            android:paddingBottom="12dp"
+            android:text="steps"
+            android:textColor="@color/primaryTextColor"
+            android:textColorHighlight="@color/secondaryColor"
+            android:textColorHint="@color/primaryTextColor"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/editInputLayout2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editInputLayout3" />
 
-                </EditText>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editInputLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/labelText2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
-            </com.google.android.material.textfield.TextInputLayout>
-            <TextView
-                android:id="@+id/labelText"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextMinutes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="min"
-                android:layout_marginStart="-25dp"
-                android:paddingBottom="12dp"
-                android:textSize="18sp"
-                android:paddingTop="27dp"
-                android:layout_below="@+id/editInputLayout2"
-                android:layout_toEndOf="@+id/editInputLayout"
-                android:textColor="@color/semiBlack" />
+                android:inputType="number"
+                style="@style/form_item"
+                android:text="30"
+                android:textColor="@color/primaryTextColor"
+                android:textColorHighlight="@color/secondaryColor"
+                android:textColorHint="@color/primaryTextColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        </RelativeLayout>
-    </LinearLayout>
+        <TextView
+            android:id="@+id/labelText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="27dp"
+            android:paddingBottom="12dp"
+            android:scrollbarThumbHorizontal="@color/primaryTextColor"
+            android:text="min"
+            android:textColor="@color/primaryTextColor"
+            android:textColorHighlight="@color/secondaryColor"
+            android:textColorHint="@color/primaryTextColor"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/editInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/editInputLayout" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

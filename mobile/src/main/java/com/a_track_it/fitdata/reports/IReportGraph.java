@@ -14,6 +14,7 @@ public interface IReportGraph {
     void clearData();
     void addWorkout(int series, int data, int position);
     void updateRenderer();
+    void setType(int reportType);
     void setGoal(int goalValue);
     void setDisplayMetrics(int dpi);
     void addRenderer(int series, Activity activity, int color);

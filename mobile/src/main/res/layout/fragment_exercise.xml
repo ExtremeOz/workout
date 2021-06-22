@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    style="@style/Widget.CardContent"
+    tools:context="com.a_track_it.fitdata.activity.ExerciseActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/pendingCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_cardview">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView android:id="@+id/labelList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textSize="@dimen/home_title_text_size"
+                android:textAlignment="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/label_edit_exercise" />
+
+            <TextView
+                android:id="@+id/labelList1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_exercise"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.MyTheme.Subtitle1"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/labelList" />
+
+            <TextView
+                android:id="@+id/labelList2"
+                android:textAppearance="@style/TextAppearance.MyTheme.Subtitle1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Possible Matches"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@id/labelList" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/editInputLayoutFindPossible"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:completionThreshold="3"
+                android:hint="@string/exercise_find_name_prompt"
+                android:importantForAutofill="no"
+                android:orientation="horizontal"
+                android:padding="@dimen/small_padding"
+                app:boxStrokeColor="@color/primaryTextColor"
+                app:endIconMode="clear_text"
+                app:helperText="@string/exercise_find_name_helper"
+                app:helperTextTextColor="@color/primaryLightColor"
+                app:hintEnabled="true"
+                app:hintTextColor="@color/primaryLightColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/labelList2">
+
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteFindTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:completionThreshold="3"
+                    android:inputType="textCapWords|textAutoCorrect"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listExercise"
+                android:layout_width="0dp"
+                android:layout_height="240dp"
+                android:minWidth="140dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editInputLayoutFindPossible" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listPossibleExercise"
+                android:layout_width="0dp"
+                android:layout_height="240dp"
+                android:minWidth="140dp"
+                android:orientation="vertical"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@id/editInputLayoutFindPossible" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnExerciseUseMatch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apply Match"
+                style="@style/Widget.MyApp.MyIconButton"
+                android:visibility="invisible"
+                app:icon="@drawable/ic_checkbox_white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:iconSize="@dimen/home_button_icon_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/listExercise" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editorCard"
+        android:layout_margin="@dimen/margin_cardview">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            <TextView
+                android:id="@+id/labelEditExercise"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/label_new_exercise"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textSize="@dimen/home_title_text_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewName"
+                style="@style/form_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:labelFor="@id/autoCompleteTextView"
+                android:layout_marginTop="@dimen/big_padding"
+                android:text="@string/label_name"
+                app:drawableLeftCompat="@drawable/ic_microphone_outline_white"
+                app:layout_constraintBottom_toBottomOf="@id/labelEditExercise"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/labelEditExercise" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/editInputLayoutExerciseName"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:completionThreshold="3"
+                android:hint="@string/exercise_name_prompt"
+                android:importantForAutofill="no"
+                android:orientation="horizontal"
+                android:padding="@dimen/small_padding"
+                app:boxStrokeColor="@color/secondaryTextColor"
+                app:endIconMode="clear_text"
+                app:helperText="@string/exercise_name_helper"
+                app:helperTextTextColor="@color/primaryLightColor"
+                app:hintEnabled="true"
+                app:hintTextColor="@color/primaryLightColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/labelEditExercise">
+
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:completionThreshold="3"
+                    style="@style/form_edit"
+                    android:inputType="textCapWords|textAutoCorrect"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/editInputLayoutWorkoutExercise"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:completionThreshold="3"
+                android:hint="@string/exercise_workname_prompt"
+                android:importantForAutofill="no"
+                android:orientation="horizontal"
+                android:padding="@dimen/small_padding"
+                android:labelFor="@id/autoCompleteWorkoutExerciseTextView"
+                app:boxStrokeColor="@color/primaryTextColor"
+                app:endIconMode="clear_text"
+                app:hintEnabled="true"
+                app:hintTextColor="@color/primaryLightColor"
+                app:layout_constraintTop_toBottomOf="@id/editInputLayoutExerciseName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteWorkoutExerciseTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:completionThreshold="3"
+                    style="@style/form_edit"
+                    android:inputType="text|textAutoComplete"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+                </AutoCompleteTextView>
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/textViewResistanceType"
+                style="@style/form_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_resistance_type"
+                android:textSize="14sp"
+                android:labelFor="@id/spinnerResistanceType"
+                app:layout_constraintBottom_toBottomOf="@id/spinnerResistanceType"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/spinnerResistanceType" />
+
+            <Spinner
+                android:id="@+id/spinnerResistanceType"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:dropDownVerticalOffset="10dp"
+                android:gravity="center|center_vertical"
+                android:padding="4dp"
+                android:entries="@array/resistance_types"
+                android:spinnerMode="dropdown"
+                style="@style/Widget.MyFormSpinnerLook"
+                android:popupBackground="?attr/colorPrimary"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guideline3"
+                app:layout_constraintTop_toBottomOf="@id/editInputLayoutWorkoutExercise" />
+
+
+            <View
+                android:id="@+id/divider1"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="@dimen/small_padding"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="@color/secondaryTextColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spinnerResistanceType" />
+
+            <TextView
+                android:id="@+id/textViewBodypart1"
+                style="@style/form_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:labelFor="@id/spinnerBodypartPrimary"
+                android:text="@string/label_primary_bodypart"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/spinnerBodypartPrimary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/spinnerBodypartPrimary" />
+
+            <Spinner
+                android:id="@+id/spinnerBodypartPrimary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:dropDownVerticalOffset="10dp"
+                android:entries="@array/bodypart_shortnames"
+                android:gravity="center|center_vertical"
+                android:layout_marginBottom="@dimen/small_padding"
+                style="@style/Widget.MyFormSpinnerLook"
+                android:popupBackground="?attr/colorPrimary"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+                android:padding="4dp"
+                android:prompt="@string/bodypart_primary_prompt"
+                android:spinnerMode="dropdown"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guideline3"
+                app:layout_constraintTop_toBottomOf="@id/divider1" />
+
+            <TextView
+                android:id="@+id/textViewBodypart2"
+                style="@style/form_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:labelFor="@id/spinnerBodypartSecondary"
+                android:text="@string/label_secondary_bodypart"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/spinnerBodypartSecondary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/spinnerBodypartSecondary" />
+
+            <Spinner
+                android:id="@+id/spinnerBodypartSecondary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:dropDownVerticalOffset="10dp"
+                android:entries="@array/bodypart_shortnames"
+                android:gravity="center|center_vertical"
+                style="@style/Widget.MyFormSpinnerLook"
+                android:popupBackground="?attr/colorPrimary"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+                android:padding="4dp"
+                android:layout_marginBottom="@dimen/small_padding"
+                android:prompt="@string/bodypart_secondary_prompt"
+                android:spinnerMode="dropdown"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guideline3"
+                app:layout_constraintTop_toBottomOf="@id/spinnerBodypartPrimary" />
+
+            <TextView
+                android:id="@+id/textViewBodypart3"
+                style="@style/form_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:labelFor="@id/spinnerBodypartThird"
+                android:text="@string/label_third_bodypart"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/spinnerBodypartThird"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/spinnerBodypartThird" />
+
+            <Spinner
+                android:id="@+id/spinnerBodypartThird"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:dropDownVerticalOffset="10dp"
+                android:entries="@array/bodypart_shortnames"
+                style="@style/Widget.MyFormSpinnerLook"
+                android:popupBackground="?attr/colorPrimary"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+                android:gravity="center|center_vertical"
+                android:minWidth="140dp"
+                android:padding="4dp"
+                android:layout_marginBottom="@dimen/small_padding"
+                android:prompt="@string/bodypart_third_prompt"
+                android:spinnerMode="dropdown"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guideline3"
+                app:layout_constraintTop_toBottomOf="@id/spinnerBodypartSecondary" />
+
+            <TextView
+                android:id="@+id/textViewBodypart4"
+                style="@style/form_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:labelFor="@id/spinnerBodypartFourth"
+                android:text="@string/label_fourth_bodypart"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/spinnerBodypartFourth"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/spinnerBodypartFourth" />
+
+            <Spinner
+                android:id="@+id/spinnerBodypartFourth"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:dropDownVerticalOffset="10dp"
+                android:entries="@array/bodypart_shortnames"
+                android:gravity="center|center_vertical"
+                style="@style/Widget.MyFormSpinnerLook"
+                android:popupBackground="?attr/colorPrimary"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+                android:padding="4dp"
+                android:layout_marginBottom="@dimen/small_padding"
+                android:prompt="@string/bodypart_fourth_prompt"
+                android:spinnerMode="dropdown"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guideline3"
+                app:layout_constraintTop_toBottomOf="@id/spinnerBodypartThird" />
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/small_padding"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="@color/secondaryTextColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spinnerBodypartFourth" />
+            <TextView
+                android:id="@+id/textViewLabelMaxHistory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:labelFor="@id/textViewMaxHistoryText"
+                style="@style/form_label"
+                android:text="@string/exercise_max_label"
+                app:layout_constraintBottom_toBottomOf="@id/textViewMaxHistoryText"
+                app:layout_constraintEnd_toStartOf="@id/guideline3"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewMaxHistoryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guideline3"
+                app:layout_constraintTop_toBottomOf="@id/divider2"
+                tools:text="30 Kg for 10 reps " />
+            <TextView
+                android:id="@+id/textViewLabelLastTrained"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/form_label"
+                android:labelFor="@id/textViewLastTrained"
+                android:text="@string/label_exercise_last_trained"
+                app:layout_constraintEnd_toStartOf="@id/guideline3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/textViewLastTrained" />
+
+            <TextView
+                android:id="@+id/textViewLastTrained"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/form_label"
+                android:textSize="@dimen/home_title_text_size5"
+                android:layout_marginTop="14dp"
+                android:text="@string/exercise_last_trained_none"
+                app:layout_constraintStart_toStartOf="@id/guideline3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewMaxHistoryText" />
+
+            <TextView
+                android:id="@+id/textViewLastSets"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:labelFor="@id/editTextLastSets"
+                style="@style/form_label"
+                android:text="@string/label_exercise_last_sets"
+                app:layout_constraintBottom_toBottomOf="@id/editInputLayoutLastSets"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/editInputLayoutLastSets" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/editInputLayoutLastSets"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/small_padding"
+                app:helperText="@string/exercise_number_helper"
+                app:helperTextTextColor="@color/primaryLightColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline3"
+                app:layout_constraintTop_toBottomOf="@id/textViewLastTrained">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextLastSets"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:textAlignment="center"
+                    android:textColor="@color/primaryTextColor"
+                    android:textColorHighlight="@color/secondaryColor"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="0">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/textViewLastReps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:labelFor="@id/editTextLastReps"
+                style="@style/form_label"
+                android:text="@string/label_exercise_last_reps"
+                app:layout_constraintBottom_toBottomOf="@id/editInputLayoutLastReps"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/editInputLayoutLastReps" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/editInputLayoutLastReps"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/small_padding"
+                app:helperText="@string/exercise_number_helper"
+                app:helperTextTextColor="@color/primaryLightColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline3"
+                app:layout_constraintTop_toBottomOf="@id/editInputLayoutLastSets">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextLastReps"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:textAlignment="center"
+                    android:textColor="@color/primaryTextColor"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="0" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/textViewLastWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/form_label"
+                android:text="@string/label_exercise_last_weight"
+                android:labelFor="@id/editTextLastWeight"
+                app:layout_constraintBottom_toBottomOf="@id/editInputLayoutLastWeight"
+                app:layout_constraintEnd_toStartOf="@id/guideline3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/editInputLayoutLastWeight" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/editInputLayoutLastWeight"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/small_padding"
+                app:helperText="@string/exercise_number_helper"
+                app:helperTextTextColor="@color/primaryLightColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guideline3"
+                app:layout_constraintTop_toBottomOf="@+id/editInputLayoutLastReps"
+                app:suffixText="Kg">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextLastWeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:textAlignment="center"
+                    android:textColor="@color/primaryTextColor"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="0" />
+            </com.google.android.material.textfield.TextInputLayout>
+                <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+</ScrollView>

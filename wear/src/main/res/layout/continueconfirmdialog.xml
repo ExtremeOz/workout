@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView_top_confirm"
+        style="@style/Widget.MyApp.MyHomeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:layout_marginStart="@dimen/home_edge_margin"
+        android:layout_marginEnd="@dimen/home_edge_margin"
+        tools:text="@string/action_continue"
+        android:drawablePadding="@dimen/small_padding"
+        app:drawableRightCompat="@drawable/ic_question_mark_button"
+        app:drawableTint="@color/primaryTextColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_resume_confirm"
+        style="@style/Widget.MyApp.MyRightIconButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginStart="@dimen/live_image_view_padding"
+        android:text="@string/action_resume"
+        app:icon="@drawable/ic_play_button_white"
+        app:layout_constraintEnd_toStartOf="@+id/button_resume_stop_confirm"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_top_confirm" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_resume_stop_confirm"
+        style="@style/Widget.MyApp.MyIconButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="@dimen/live_image_view_padding"
+        android:text="@string/action_finish"
+        app:icon="@drawable/ic_stop_circle_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/button_resume_confirm"
+        app:layout_constraintTop_toBottomOf="@+id/textView_top_confirm" />
+
+    <Chronometer
+        android:id="@+id/Chronometer_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/live_image_view_padding"
+        android:textColor="@color/primaryTextColor"
+        style="@style/Widget.MyApp.MyHomeText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_resume_stop_confirm" />
+</androidx.constraintlayout.widget.ConstraintLayout>

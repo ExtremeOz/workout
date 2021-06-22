@@ -27,7 +27,7 @@
         android:layout_marginStart="@dimen/wear_itemrow_leftspace2"
         android:layout_marginEnd="16dp"
         android:layout_width="fill_parent"
-        android:textColor="@color/semiBlack"
+        android:textColor="@android:color/black"
         android:textStyle="bold"
         android:textSize="16sp"/>
 </LinearLayout>

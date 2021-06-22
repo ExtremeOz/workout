@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.SessionReportFragment"
+
     android:scrollbars="vertical">
     <LinearLayout
         android:id="@+id/linear_report"
@@ -19,7 +19,7 @@
         android:padding="@dimen/live_image_view_padding"
         android:textAppearance="@style/TextAppearance.Wearable.Medium"
         android:layout_gravity="center_horizontal"
-        android:textColor="@color/semiWhite"
+        android:textColor="@color/primaryTextColor"
         tools:text="Lunch Strength Training"
         android:layout_height="wrap_content" />
     <TextView android:id="@+id/set1_text_report"
@@ -28,7 +28,7 @@
         android:layout_gravity="center_horizontal"
         android:textAppearance="@style/TextAppearance.Wearable.Small"
         android:padding="@dimen/live_image_view_padding"
-        android:textColor="@color/semiWhite"
+        android:textColor="@color/primaryTextColor"
         tools:text="Incline Bench Press 15 reps 100 kg"/>
     </LinearLayout>
 </ScrollView>

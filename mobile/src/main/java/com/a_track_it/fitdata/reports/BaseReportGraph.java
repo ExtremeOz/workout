@@ -8,7 +8,7 @@ import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import java.io.Serializable;
 
 /**
- * Created by Chris BLack
+ * Created by Chris BLack/ Daniel Haywood
  *
  * Base class for report graphs
  */
@@ -18,7 +18,7 @@ public abstract class BaseReportGraph implements IReportGraph, Serializable {
     double maxData = 15;
     double minData = 10;
     int mGoal = 0;
-
+    int mReportType = 0;   // 0 by activityID  // 1 by Workout._id
     /** The main data set that includes all the series that go into a_track_it.com chart. */
     protected XYMultipleSeriesDataset mDataset = new XYMultipleSeriesDataset();
     /** The main renderer that includes all the renderer customizing a_track_it.com chart. */
@@ -46,5 +46,10 @@ public abstract class BaseReportGraph implements IReportGraph, Serializable {
     @Override
     public void setGoal(int goalValue) {
         mGoal = goalValue;
+    }
+
+    @Override
+    public void setType(int reportType) {
+        mReportType = reportType;
     }
 }

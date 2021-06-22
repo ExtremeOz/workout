@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.CollapsingToolbarLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/collapsing_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/detail_backdrop_height"
+    app:layout_scrollFlags="scroll|exitUntilCollapsed"
+    android:fitsSystemWindows="true"
+    android:animateLayoutChanges="true"
+    app:contentScrim="?attr/colorPrimary"
+    app:titleEnabled="false"
+    app:collapsedTitleTextAppearance="@style/TitleCollapsedStyle"
+    app:expandedTitleTextAppearance="@style/TitleExpandedStyle"
+    app:expandedTitleMarginStart="48dp"
+    app:expandedTitleMarginEnd="64dp">
+    <FrameLayout android:id="@+id/frame_drop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:background="@color/my_app_surface_color"
+        app:layout_collapseMode="parallax" />
+    <ImageView
+        android:id="@+id/image_drop"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/action_review"
+        android:src="@drawable/back_workouts_for_men_the_6_best_routines"
+        android:scaleType="centerCrop"
+        android:fitsSystemWindows="true"
+        app:layout_collapseMode="parallax" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/ToolbarAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+        app:layout_collapseMode="pin">
+
+        <Spinner
+            android:id="@+id/spinnerMetrics"
+            style="@style/Widget.MySpinnerLook"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="15dp"
+            android:dropDownVerticalOffset="25dp"
+            android:entries="@array/graph_gym_metrics"
+            android:gravity="start"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:popupBackground="@color/secondaryColor"
+            android:spinnerMode="dropdown"
+            android:textAlignment="textStart"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark" />
+    </androidx.appcompat.widget.Toolbar>
+</com.google.android.material.appbar.CollapsingToolbarLayout>

@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2015 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+-->
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:fitsSystemWindows="true">
+        <include layout="@layout/chart_coordinator_layout_header" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="24dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/card_margin">
+
+                <LinearLayout
+                    style="@style/Widget.CardContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView android:id="@+id/session_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_active_session"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+                    <TextView android:id="@+id/session_text"
+                        android:minLines="1"
+                        android:maxLines="10"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="false"
+                        tools:text="@string/cheese_ipsum" />
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/card_sets"
+                android:layout_marginBottom="@dimen/card_margin"
+                android:layout_marginLeft="@dimen/card_margin"
+                android:layout_marginRight="@dimen/card_margin">
+
+                <LinearLayout android:id="@+id/sets_linear"
+                    style="@style/Widget.CardContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView android:id="@+id/sets_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_workout_sets_history"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                    <FrameLayout android:id="@+id/sets_frame_layout"
+                        android:layout_width="match_parent"
+                        android:visibility="gone"
+                        android:background="@color/primaryDarkColor"
+                        android:layout_height="@dimen/medium_card_height" />
+
+                    <TextView android:id="@+id/sets_text"
+                        android:minLines="1"
+                        android:maxLines="10"
+                        android:singleLine="false"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="@string/cheese_ipsum" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/card_exercise"
+                android:layout_marginBottom="@dimen/card_margin"
+                android:layout_marginLeft="@dimen/card_margin"
+                android:layout_marginRight="@dimen/card_margin">
+
+                <LinearLayout android:id="@+id/exercise_linear"
+                    style="@style/Widget.CardContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView android:id="@+id/exercise_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_exercise"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                    <FrameLayout android:id="@+id/exercise_frame_layout"
+                        android:layout_width="match_parent"
+                        android:visibility="gone"
+                        android:background="@color/primaryDarkColor"
+                        android:layout_height="@dimen/medium_card_height" />
+                    <TextView android:id="@+id/exercise_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="@string/cheese_ipsum" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/card_bodypart"
+                android:layout_marginBottom="@dimen/card_margin"
+                android:layout_marginLeft="@dimen/card_margin"
+                android:layout_marginRight="@dimen/card_margin">
+
+                <LinearLayout android:id="@+id/bodypart_linear"
+                    style="@style/Widget.CardContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView android:id="@+id/bodypart_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_bodypart"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                    <FrameLayout android:id="@+id/bodypart_frame_layout"
+                        android:layout_width="match_parent"
+                        android:visibility="gone"
+                        android:background="@color/primaryDarkColor"
+                        android:layout_height="@dimen/medium_card_height" />
+
+                    <TextView android:id="@+id/bodypart_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="@string/cheese_ipsum" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_gravity="bottom|end"
+        app:layout_anchor="@id/appbar"
+        app:layout_anchorGravity="bottom|right"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin">
+        <com.google.android.material.button.MaterialButton
+            android:layout_gravity="left"
+            android:id="@+id/toggle_expand_collapsible"
+            style="@style/Widget.MyApp.MyToggleExpand"
+            app:icon="@drawable/ic_down_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_template"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/fab_device"
+            app:shapeAppearanceOverlay="@style/fab_3_rounded"
+            android:src="@drawable/ic_heart_add"
+            app:fab_title="@string/action_save_template"
+            app:rippleColor="@color/primaryLightColor"
+            app:elevation="@dimen/item_elevation"
+            android:layout_marginHorizontal="@dimen/fab_margin"
+            android:tooltipText="@string/action_save"
+            android:contentDescription="@string/action_save"
+            android:clickable="true"
+            android:focusable="true" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_device"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:shapeAppearanceOverlay="@style/fab_3_rounded"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/fab_start"
+            android:src="@drawable/ic_phone_receive_white"
+            android:layout_marginHorizontal="@dimen/fab_margin"
+            android:tooltipText="@string/action_template_device"
+            app:fab_title="@string/action_template_device"
+            app:elevation="@dimen/item_elevation"
+            app:rippleColor="@color/primaryLightColor"
+            android:contentDescription="@string/action_template_device"
+            android:clickable="true"
+            android:focusable="true" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_start"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/fab_3_rounded"
+            android:src="@drawable/ic_play_button_white"
+            app:fab_title="@string/action_go"
+            app:rippleColor="@color/primaryLightColor"
+            app:elevation="@dimen/item_elevation"
+            android:tooltipText="@string/action_go"
+            android:contentDescription="@string/action_go"
+            android:clickable="true"
+            android:focusable="true" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

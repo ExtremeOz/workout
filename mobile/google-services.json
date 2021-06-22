@@ -23,30 +23,31 @@
           }
         },
         {
+          "client_id": "720698840782-gmeimsgl0tkucopkaa5sah24bodmjss9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.a_track_it.fitdata",
+            "certificate_hash": "642d27be515de278bb7df9188ec48fcaec155904"
+          }
+        },
+        {
           "client_id": "720698840782-ds1bdc9fh23i9ua7tj3d5rafk0i0r1vf.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCiCfOZJBbDkCJJPT3tnlv0jf9aQR_7hCI"
+          "current_key": "AIzaSyBhUy_BLYw-DJeMcRS34xJ0qXIV_DBiCPQ"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "720698840782-ds1bdc9fh23i9ua7tj3d5rafk0i0r1vf.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }

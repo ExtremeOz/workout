@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="android_wear_capabilities" translatable="false">
+        <!-- declaring the provided capabilities -->
+        <item>camera_capture</item>
+        <item>storage</item>
+        <item>phone_capable</item>
+    </string-array>
+</resources>

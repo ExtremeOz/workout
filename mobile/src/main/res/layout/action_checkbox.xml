@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.checkbox.MaterialCheckBox
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:contentDescription="@string/confirm_location_toggle_prompt"
+    android:paddingStart="@dimen/live_image_view_padding"
+    android:paddingEnd="@dimen/live_image_view_padding"
+    android:checked="false"
+    android:id="@+id/action_item_checkbox"/>

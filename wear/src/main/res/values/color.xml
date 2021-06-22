@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="my_app_surface_color">#4DA118</color>
+    <color name="my_app_night_surface_color">#003300</color>
+    <color name="white_50">#E1F2F2F2</color>
+    <color name="red_600">#b00020</color> <!--Color error (light)-->
+    <color name="black_900">#000000</color>
+    <color name="colorAccent">#54CC59</color>
+    <color name="colorSplash">#AEEA00</color>
+    <color name="ambientBackground">#042505</color>
+    <color name="ambientForeground">#B8A91F</color>
+</resources>

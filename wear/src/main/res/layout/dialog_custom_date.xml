@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
+    <TextView
+        android:id="@+id/textViewDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/live_image_view_padding"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="@dimen/live_image_view_padding"
+        android:text="@string/label_day_selector"
+        android:textColor="@color/primaryTextColor"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_horiz"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vert"
+        app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:id="@+id/textViewMonthTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="@dimen/live_image_view_padding"
+        android:layout_marginBottom="@dimen/live_image_view_padding"
+        android:text="@string/label_month_selector"
+        android:textColor="@color/primaryTextColor"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_horiz"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline_vert" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnDateOk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MyApp.MyOutlinedButton"
+        android:text="@string/action_okay"
+        app:icon="@drawable/ic_ok_circle"
+        app:iconTint="@color/primaryTextColor"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horiz"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.wear.widget.WearableRecyclerView
+        android:id="@+id/day_list1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingEnd="@dimen/action_drawer_item_icon_padding"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toStartOf="@id/guideline_vert"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horiz"/>
+
+    <androidx.wear.widget.WearableRecyclerView
+        android:id="@+id/month_list1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/live_image_view_padding"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/action_drawer_item_icon_padding"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline_vert"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horiz" />
+</androidx.constraintlayout.widget.ConstraintLayout>

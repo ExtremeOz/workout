@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/row_single_container"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/recycler_simplest_row_height"
+    android:layout_gravity="center"
+    android:background="@drawable/bg_selector_recycleview"
+    android:orientation="horizontal"
+    android:paddingTop="3dp"
+    android:paddingBottom="3dp">
+    <TextView
+        android:id="@+id/single_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:paddingLeft="@dimen/recycler_row_padding"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="@dimen/recycler_weight_text_size"
+        tools:text="this has been a nice item" />
+</LinearLayout>

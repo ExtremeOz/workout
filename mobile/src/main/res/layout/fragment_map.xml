@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/map_container"
+    android:layout_height="match_parent">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/map_toolbar"
+        android:elevation="4dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        style="@style/ToolbarAppearance"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+    <fragment
+        android:id="@+id/map_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        class="com.google.android.gms.maps.SupportMapFragment"
+        map:cameraTargetLat="16.92"
+        map:cameraTargetLng="145.78"
+        map:cameraZoom="18" />
+</LinearLayout>
