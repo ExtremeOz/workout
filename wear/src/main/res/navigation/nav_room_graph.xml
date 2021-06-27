@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.a_track_it.fitdata.fragment.RoomFragment"
+        android:name="com.a_track_it.workout.fragment.RoomFragment"
         android:label="home_layout">
         <action
             android:id="@+id/action_homeRoomFragment_to_entryRoomFragment"
@@ -53,32 +53,32 @@
     </fragment>
     <fragment
         android:id="@+id/entryRoomFragment"
-        android:name="com.a_track_it.fitdata.fragment.EntryRoomFragment"
+        android:name="com.a_track_it.workout.fragment.EntryRoomFragment"
         android:label="gym_entry"
         tools:layout="@layout/fragment_entry" />
     <dialog
         android:id="@+id/customActivityListDialog"
-        android:name="com.a_track_it.fitdata.fragment.CustomActivityListDialog"
+        android:name="com.a_track_it.workout.fragment.CustomActivityListDialog"
         android:label="fragment_customactivitylist"
         tools:layout="@layout/fragment_customactivitylist" />
     <dialog
         android:id="@+id/settingsDialog"
-        android:name="com.a_track_it.fitdata.fragment.SettingsDialog"
+        android:name="com.a_track_it.workout.fragment.SettingsDialog"
         android:label="dialog_settings"
         tools:layout="@layout/dialog_settings" />
     <dialog
         android:id="@+id/customConfirmDialog"
-        android:name="com.a_track_it.fitdata.fragment.CustomConfirmDialog"
+        android:name="com.a_track_it.workout.fragment.CustomConfirmDialog"
         android:label="customconfirmdialog"
         tools:layout="@layout/continueconfirmdialog" />
     <dialog
         android:id="@+id/customListFragment"
-        android:name="com.a_track_it.fitdata.fragment.CustomListFragment"
+        android:name="com.a_track_it.workout.fragment.CustomListFragment"
         android:label="dialog_customlist"
         tools:layout="@layout/dialog_customlist" />
     <fragment
         android:id="@+id/gymConfirmFragment"
-        android:name="com.a_track_it.fitdata.fragment.GymConfirmFragment"
+        android:name="com.a_track_it.workout.fragment.GymConfirmFragment"
         android:label="gym_confirm"
         tools:layout="@layout/fragment_gymconfirm" />
 </navigation>

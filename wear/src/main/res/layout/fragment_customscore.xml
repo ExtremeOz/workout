@@ -9,7 +9,7 @@
     app:boxedEdges="all"
     android:paddingStart="@dimen/inner_frame_layout_padding"
     android:paddingEnd="@dimen/inner_frame_layout_padding"
-    tools:context="com.a_track_it.fitdata.fragment.CustomListFragment">
+    tools:context="com.a_track_it.workout.fragment.CustomListFragment">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linear_score_vertical"
         android:orientation="vertical"

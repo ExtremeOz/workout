@@ -1,50 +1,66 @@
 {
   "project_info": {
-    "project_number": "720698840782",
-    "firebase_url": "https://a-track-it-fitdata1.firebaseio.com",
-    "project_id": "a-track-it-fitdata1",
-    "storage_bucket": "a-track-it-fitdata1.appspot.com"
+    "project_number": "550125154478",
+    "firebase_url": "https://atrackit-214908.firebaseio.com",
+    "project_id": "atrackit-214908",
+    "storage_bucket": "atrackit-214908.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:720698840782:android:e540125f1a5f0a19",
+        "mobilesdk_app_id": "1:550125154478:android:148d73e123b63e86",
         "android_client_info": {
-          "package_name": "com.a_track_it.fitdata"
+          "package_name": "com.a_track_it.workout"
         }
       },
       "oauth_client": [
         {
-          "client_id": "720698840782-4s28370pto7l41t9a8aoignohvf6en6t.apps.googleusercontent.com",
+          "client_id": "550125154478-4nepdovlhqmd9egdge78gejusunktfqk.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.a_track_it.fitdata",
-            "certificate_hash": "546aba4ff2db7db4a90c10c289adfbbfb9bd80ba"
-          }
-        },
-        {
-          "client_id": "720698840782-gmeimsgl0tkucopkaa5sah24bodmjss9.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.a_track_it.fitdata",
+            "package_name": "com.a_track_it.workout",
             "certificate_hash": "642d27be515de278bb7df9188ec48fcaec155904"
           }
         },
         {
-          "client_id": "720698840782-ds1bdc9fh23i9ua7tj3d5rafk0i0r1vf.apps.googleusercontent.com",
+          "client_id": "550125154478-7tnd2hcdagcvocl0b1trtij5m1ts2nqo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.a_track_it.workout",
+            "certificate_hash": "c3c5c36d8c4f11c01b7546711d7e38c70f15f49d"
+          }
+        },
+        {
+          "client_id": "550125154478-i9b0cnj1u99a3767c99g7lg8an3kedkr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.a_track_it.workout",
+            "certificate_hash": "546aba4ff2db7db4a90c10c289adfbbfb9bd80ba"
+          }
+        },
+        {
+          "client_id": "550125154478-vu33ds50j1bevfmclvtfgkmdbos5pvb1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.a_track_it.workout",
+            "certificate_hash": "24c5492728de2637145703d79c2aba16e49ab691"
+          }
+        },
+        {
+          "client_id": "550125154478-fclhtg3gjm974vn0lk8rvvmshn4ht40b.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBhUy_BLYw-DJeMcRS34xJ0qXIV_DBiCPQ"
+          "current_key": "AIzaSyCZIMVirl2a4Uqkcr2n1rK21rZ92B_2ULc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "720698840782-ds1bdc9fh23i9ua7tj3d5rafk0i0r1vf.apps.googleusercontent.com",
+              "client_id": "550125154478-fclhtg3gjm974vn0lk8rvvmshn4ht40b.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

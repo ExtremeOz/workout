@@ -5,7 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     style="@style/Widget.CardContent"
-    tools:context="com.a_track_it.fitdata.activity.ExerciseActivity">
+    tools:context="com.a_track_it.workout.activity.ExerciseActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

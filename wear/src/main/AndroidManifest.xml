@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.a_track_it.fitdata">
+    package="com.a_track_it.workout">
     <uses-feature android:name="android.hardware.type.watch" />
     <uses-feature android:name="android.hardware.location.gps" android:required="false" />
     <uses-feature android:name="android.hardware.sensor.heartrate" android:required="false" />
@@ -38,21 +38,21 @@
         android:appCategory="productivity"
         android:theme="@style/Theme.MyApp">
         <activity
-            android:name="com.a_track_it.fitdata.activity.ReportActivity"
+            android:name="com.a_track_it.workout.activity.ReportActivity"
             android:label="@string/label_routine"
-            android:parentActivityName=".activity.RoomActivity"
+            android:parentActivityName="com.a_track_it.workout.activity.RoomActivity"
             android:theme="@style/Theme.MyApp"
             android:launchMode="singleTask"
             android:excludeFromRecents="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.a_track_it.fitdata.activity.RoomActivity" />
+                android:value="com.a_track_it.workout.activity.RoomActivity" />
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.a_track_it.fitdata.activity.RoomActivity"
+            android:name="com.a_track_it.workout.activity.RoomActivity"
             android:launchMode="singleInstance"
             android:taskAffinity=""
             android:documentLaunchMode="intoExisting"
@@ -81,21 +81,21 @@
                 <data android:scheme="wear" android:host="*" android:pathPrefix="/start-activity"/>
             </intent-filter>
             <intent-filter> <!-- implicit to start app -->
-                <action android:name="com.a_track_it.com.fitdata.LOGIN" />
+                <action android:name="com.a_track_it.com.workout.LOGIN" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>  <!-- explicit from wear service -->
-                <action android:name="com.a_track_it.com.fitdata.workout.START" />
-                <action android:name="com.a_track_it.com.fitdata.workout.STOP" />
-                <action android:name="com.a_track_it.com.fitdata.workoutset.START" />
-                <action android:name="com.a_track_it.com.fitdata.workoutset.STOP" />
-                <action android:name="com.a_track_it.com.fitdata.TOTALS" />
+                <action android:name="com.a_track_it.com.workout.workout.START" />
+                <action android:name="com.a_track_it.com.workout.workout.STOP" />
+                <action android:name="com.a_track_it.com.workout.workoutset.START" />
+                <action android:name="com.a_track_it.com.workout.workoutset.STOP" />
+                <action android:name="com.a_track_it.com.workout.TOTALS" />
             </intent-filter>
 
 
         </activity>
         <activity
-            android:name="com.a_track_it.fitdata.activity.SplasherActivity"
+            android:name="com.a_track_it.workout.activity.SplasherActivity"
             android:launchMode="singleTop"
             android:label="@string/app_said_name"
             android:theme="@style/AppTheme.Launcher"
@@ -118,7 +118,7 @@
         <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
              notification message. See README(https://goo.gl/6BKBk7) for more.
         -->
-        <!--
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_a_outlined" />
@@ -130,35 +130,35 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
-        -->
+
         <receiver
-            android:name=".service.CustomIntentReceiver"
+            android:name="com.a_track_it.workout.service.CustomIntentReceiver"
             android:enabled="true">
             <intent-filter>
-                <action android:name="com.a_track_it.fitdata.EXER_RECOG" />
-                <action android:name="com.a_track_it.fitdata.ACT_RECOG" />
-                <action android:name="com.a_track_it.fitdata.ACT_DAILY" />
-                <action android:name="com.a_track_it.fitdata.message.TOAST" />
-                <action android:name="com.a_track_it.fitdata.message.VIBRATE" />
-                <action android:name="com.a_track_it.com.fitdata.START_REFRESH" />
+                <action android:name="com.a_track_it.workout.EXER_RECOG" />
+                <action android:name="com.a_track_it.workout.ACT_RECOG" />
+                <action android:name="com.a_track_it.workout.ACT_DAILY" />
+                <action android:name="com.a_track_it.workout.message.TOAST" />
+                <action android:name="com.a_track_it.workout.message.VIBRATE" />
+                <action android:name="com.a_track_it.com.workout.START_REFRESH" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".service.BootCompleteReceiver">
+        <receiver android:name="com.a_track_it.workout.service.BootCompleteReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <!-- [START FireBase_service]
+        <!-- [START FireBase_service]  -->
         <service
-            android:name=".service.FCMService"
+            android:name="com.a_track_it.workout.service.FCMService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-         [END firebase_service] -->
+        <!-- [END firebase_service] -->
         <service
-            android:name=".service.CustomWearListenerService" >
+            android:name="com.a_track_it.workout.service.CustomWearListenerService" >
             <intent-filter>
                 <!-- listeners receive events that match the action and data filters -->
                 <action android:name="com.google.android.gms.wearable.CAPABILITY_CHANGED" />
@@ -185,34 +185,34 @@
             </intent-filter>
         </service>
         <service
-            android:name=".common.service.ActivityRecognizedService"
+            android:name="com.a_track_it.workout.common.service.ActivityRecognizedService"
             android:enabled="true"
             android:exported="false" />
         <service
-            android:name=".common.service.ExerciseDetectedService"
+            android:name="com.a_track_it.workout.common.service.ExerciseDetectedService"
             android:enabled="true"
             android:exported="false" />
         <service
-            android:name=".common.service.DailySummaryJobIntentService"
+            android:name="com.a_track_it.workout.common.service.DailySummaryJobIntentService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
         <service
-            android:name=".common.data_model.SkuJobIntentService"
+            android:name="com.a_track_it.workout.common.data_model.SkuJobIntentService"
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE" />
         <service
-            android:name=".common.data_model.LicenceJobIntentService"
+            android:name="com.a_track_it.workout.common.data_model.LicenceJobIntentService"
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE" />
         <service
-            android:name=".common.data_model.FitSyncJobIntentService"
+            android:name="com.a_track_it.workout.common.data_model.FitSyncJobIntentService"
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE" />
         <service
-            android:name=".common.data_model.FitSessionJobIntentService"
+            android:name="com.a_track_it.workout.common.data_model.FitSessionJobIntentService"
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE" />
         <service
-            android:name=".common.data_model.FitPopulateJobIntentService"
+            android:name="com.a_track_it.workout.common.data_model.FitPopulateJobIntentService"
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 

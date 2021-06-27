@@ -7,9 +7,9 @@
         android:shortcutShortLabel="@string/add_new_activity_short"
         android:shortcutLongLabel="@string/add_new_activity" >
         <intent
-            android:action="com.a_track_it.fitdata.ADD_ACTIVITY"
-            android:targetPackage="com.a_track_it.fitdata"
-            android:targetClass="com.a_track_it.fitdata.activity.MainActivity">
+            android:action="com.a_track_it.workout.ADD_ACTIVITY"
+            android:targetPackage="com.a_track_it.workout"
+            android:targetClass="com.a_track_it.workout.activity.MainActivity">
             <extra android:name="ARG_ACTIVITY_ID"  android:value="0" /></intent>
     </shortcut>
     <shortcut
@@ -19,9 +19,9 @@
         android:shortcutShortLabel="@string/add_new_cardio_short"
         android:shortcutLongLabel="@string/add_new_cardio" >
         <intent
-            android:action="com.a_track_it.fitdata.ADD_ACTIVITY"
-            android:targetPackage="com.a_track_it.fitdata"
-            android:targetClass="com.a_track_it.fitdata.activity.MainActivity">
+            android:action="com.a_track_it.workout.ADD_ACTIVITY"
+            android:targetPackage="com.a_track_it.workout"
+            android:targetClass="com.a_track_it.workout.activity.MainActivity">
             <extra android:name="ARG_ACTIVITY_ID"  android:value="56" /></intent>
     </shortcut>
     <shortcut
@@ -31,9 +31,9 @@
         android:shortcutShortLabel="@string/add_new_workout_short"
         android:shortcutLongLabel="@string/add_new_workout" >
         <intent
-            android:action="com.a_track_it.fitdata.ADD_ACTIVITY"
-            android:targetPackage="com.a_track_it.fitdata"
-            android:targetClass="com.a_track_it.fitdata.activity.MainActivity">
+            android:action="com.a_track_it.workout.ADD_ACTIVITY"
+            android:targetPackage="com.a_track_it.workout"
+            android:targetClass="com.a_track_it.workout.activity.MainActivity">
             <extra android:name="ARG_ACTIVITY_ID"  android:value="80" /></intent>
     </shortcut>
     <shortcut
@@ -43,8 +43,8 @@
             android:shortcutShortLabel="@string/add_new_exercise_short"
             android:shortcutLongLabel="@string/add_new_exercise" >
             <intent
-                android:action="com.a_track_it.fitdata.ADD_EXERCISE"
-                android:targetPackage="com.a_track_it.fitdata"
-                android:targetClass="com.a_track_it.fitdata.activity.MainActivity" />
+                android:action="com.a_track_it.workout.ADD_EXERCISE"
+                android:targetPackage="com.a_track_it.workout"
+                android:targetClass="com.a_track_it.workout.activity.MainActivity" />
     </shortcut>
 </shortcuts>

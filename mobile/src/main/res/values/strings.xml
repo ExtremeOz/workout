@@ -30,9 +30,7 @@
     <string name="confirm_auto_start_toggle_prompt">Auto start next set on rest countdown</string>
     <string name="confirm_start_toggle_prompt">Confirm start of session</string>
 -->
-    <!-- PageFragment -->
-    <string name="active_label">Active:</string>
-    <string name="step_label">steps</string>
+
 
     <!-- SettingsFragment -->
     <string name="step_counter_text">Step counter</string>

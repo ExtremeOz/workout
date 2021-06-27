@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scrollViewEntry"
-    tools:context="com.a_track_it.fitdata.fragment.RoutineFragment"
+    tools:context="com.a_track_it.workout.fragment.RoutineFragment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <androidx.constraintlayout.widget.ConstraintLayout

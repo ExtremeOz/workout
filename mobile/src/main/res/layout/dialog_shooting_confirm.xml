@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
-    tools:context="com.a_track_it.fitdata.fragment.ShootingConfirmFragment"
+    tools:context="com.a_track_it.workout.fragment.ShootingConfirmFragment"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container">
     <androidx.appcompat.widget.Toolbar

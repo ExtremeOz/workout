@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.a_track_it.fitdata.activity.DetailActivity">
+    tools:context="com.a_track_it.workout.activity.DetailActivity">
     <item android:id="@+id/action_page_period_spinner"
         app:showAsAction="never"
         app:actionViewClass="android.widget.Spinner"

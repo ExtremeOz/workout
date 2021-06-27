@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context="com.a_track_it.fitdata.fragment.GymConfirmFragment"
+    tools:context="com.a_track_it.workout.fragment.GymConfirmFragment"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/primaryDarkColor"
     android:id="@+id/container">

@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.a_track_it.fitdata.activity.RoutineActivity">
+    tools:context="com.a_track_it.workout.activity.RoutineActivity">
     <item
         android:id="@+id/search_exercise"
         android:icon="@drawable/ic_search"
         android:title="@string/action_search"
-        app:actionViewClass="com.a_track_it.fitdata.adapter.ArrayAdapterSearchView"
+        app:actionViewClass="com.a_track_it.workout.adapter.ArrayAdapterSearchView"
         app:showAsAction="collapseActionView|always"/>
     <item android:id="@+id/menu_new_exercise"
         android:title="@string/action_new_exercise"

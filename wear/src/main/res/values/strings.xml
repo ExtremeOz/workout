@@ -10,7 +10,7 @@
     <string name="a_track_it_url">https://a-track-it.com</string>
     <string name="label_offline">Offline</string>
     <string name="label_requested">Requested...</string>
-
+    <string name="activity_icon_desc">Activity icon</string>
     <string name="signing_in_google">Signing in to Google</string>
     <string name="connecting_google">Connecting to Google Fit</string>
     <string name="requesting_data">Finding information...</string>

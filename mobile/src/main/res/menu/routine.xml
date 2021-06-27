@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.a_track_it.fitdata.activity.RoutineActivity">
+    tools:context="com.a_track_it.workout.activity.RoutineActivity">
     <item android:id="@+id/action_template"
         android:title="@string/action_save"
         android:orderInCategory="100"

@@ -5,7 +5,7 @@ apply plugin: 'com.google.firebase.crashlytics'
 android {
     compileSdkVersion 29
     defaultConfig {
-        applicationId "com.a_track_it.fitdata"
+        applicationId "com.a_track_it.workout"
         renderscriptTargetApi 11
         renderscriptSupportModeEnabled true
         vectorDrawables {
@@ -29,7 +29,7 @@ android {
     }
     productFlavors {
     }
-    buildToolsVersion = '29.0.2'
+ //   buildToolsVersion = '29.0.2'
 }
 
 dependencies {
@@ -47,10 +47,12 @@ dependencies {
     implementation 'com.google.android.gms:play-services-fitness:20.0.0'
     // Add the Firebase Crashlytics SDK.
     implementation platform('com.google.firebase:firebase-bom:26.8.0')    
-    implementation 'com.google.firebase:firebase-crashlytics:18.0.1'
-    implementation 'com.google.firebase:firebase-analytics:19.0.0'
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-messaging'
     // Add the Google Services Gradle plugin (if it's not there already).
-    implementation 'com.google.gms:google-services:4.3.8'
+    compileOnly 'com.google.android.wearable:wearable:2.8.1'
     implementation 'com.google.android.support:wearable:2.8.1'
     implementation 'androidx.wear:wear:1.1.0'
     implementation 'androidx.work:work-runtime:2.5.0'

@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.a_track_it.fitdata.fragment.CustomActivityListDialog">
+    tools:context="com.a_track_it.workout.fragment.CustomActivityListDialog">
     <TextView
         android:id="@+id/activity_title"
         android:layout_width="match_parent"

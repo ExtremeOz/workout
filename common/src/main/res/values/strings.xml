@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">A-Track-It</string>
-    <string name="app_package">com.a-track-it.fitdata</string>
+    <string name="app_package">com.a-track-it.workout</string>
     <string name="app_said_name">ATrackIt</string>
     <string name="imageCD">activity image</string>
     <string name="bodypartCD">bodypart image</string>
@@ -486,6 +486,11 @@
         "You can review and re-run your previous Google Fit data at any time from the Options menu. \n\n"
         "Do you have historic data to review?"
     </string>
+    <string name="ask_user_storage">
+        "\n"
+        "ATrackIt wants to save and access images between devices and for workouts.\n\n"
+        "Click positive to allow the app access fr storage of your images.\n\n"
+    </string>
     <string name="ask_user_age">
         "\n"
         "ATrackIt follows Google\'s Families Policy and Designed for Families requirements.\n\n"
@@ -578,6 +583,9 @@
     <string name="action_new_misc">Misc.</string>
     <string name="action_new_shoot">Target Shooting</string>
     <string name="action_new_detected">Detected Activity</string>
+    <!-- PageFragment -->
+    <string name="active_label">Active:</string>
+    <string name="step_label">steps</string>
     <string-array name="minutes_list">
         <item>0 - off</item>
         <item>1</item>
